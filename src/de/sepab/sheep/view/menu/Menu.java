@@ -130,7 +130,6 @@ public class Menu implements IMenu{
 			  	
 			    obMinus.setFont(basicFont);
 			  	obPlus.setFont(basicFont);
-			  	
 			  	obBack.setFont(basicFont);
 			}
 			
@@ -195,10 +194,9 @@ public class Menu implements IMenu{
 			  	
 			  	hsbback.setBounds(10,10,10,10);
 			  	
-			    obMinus.setBounds(10,10,10,10);
-			  	obPlus.setBounds(10,10,10,10);
-			  	
-			  	obBack.setBounds(10,10,10,10);
+			    obMinus.setBounds((width)/2 ,100,50,20);
+			  	obPlus.setBounds((width)/2 + 50,100,50,20);
+			  	obBack.setBounds((width)/2 ,150,100,20);
 			}
 			
 		  	{//alle tf Positionen
@@ -228,9 +226,9 @@ public class Menu implements IMenu{
 				hstfONplayer2points.setBounds(0,0,0,0);
 				hstfONplayer3points.setBounds(0,0,0,0);
 			
-				otfOptions.setBounds(0,0,0,0);
-				otfMusic.setBounds(0,0,0,0);
-				otfMusicField.setBounds(0,0,0,0);
+				otfOptions.setBounds((width-40)/2,0,200,50);
+				otfMusic.setBounds((width)/2 - 50,100,50,20);
+				otfMusicField.setBounds((width)/2 + 100,100,50,20);
 				
 				htfHelp.setBounds(0,0,0,0);
 		  	}
@@ -261,6 +259,11 @@ public class Menu implements IMenu{
 			mptfMap.setEditable(false);
 			mptfMap.setBorder(BorderFactory.createEmptyBorder());
 			
+			otfOptions.setEditable(false);
+			otfOptions.setBorder(BorderFactory.createEmptyBorder());
+			otfMusic.setEditable(false);
+//			otfMusic.setBorder(BorderFactory.createEmptyBorder());
+			
 		}
 		
 		{//alle Button actionListener
@@ -275,6 +278,18 @@ public class Menu implements IMenu{
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(lMultiPlayer);
+					}
+				});
+				mmbOption.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lOptions);
+					}
+				});
+				mmbExit.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						System.exit(0);
 					}
 				});
 			}
@@ -302,6 +317,27 @@ public class Menu implements IMenu{
 					}
 				});
 				mpbBack.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMainMenu);
+					}
+				});
+			}
+			
+			{//o
+				obMinus.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				obPlus.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				obBack.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(lMainMenu);
@@ -348,17 +384,30 @@ public class Menu implements IMenu{
 				lMultiPlayer.add(mpcbMap);
 			}
 			
+			{
+				lOptions.add(obMinus);
+				lOptions.add(obPlus);
+				lOptions.add(obBack);
+				
+				lOptions.add(otfOptions);
+				lOptions.add(otfMusic);
+				lOptions.add(otfMusicField);
+			}
+			
 		}
 		
 		{//Label einstellen
 			lMainMenu.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lSinglePlayer.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			lMultiPlayer.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
 			jf.add(lMainMenu);
 			jf.add(lSinglePlayer);
 			jf.add(lMultiPlayer);
+			jf.add(lOptions);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);
