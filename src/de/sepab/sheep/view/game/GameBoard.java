@@ -56,13 +56,13 @@ public class GameBoard extends JPanel implements IGameBoard{
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
     	g.setColor(Color.BLACK);
-    	g.fill(g.getClipBounds());
-    	g.drawImage(img, 0, 0, null);
+//    	g.fill(g.getClipBounds());
+    	g.drawImage(img, 0, 0, 640,480,null);
     }
     
     public GameBoard() {
     	this.setFocusable(true);
-    	img = optimize(load(""));
+    	img = optimize(load("/de/sepab/sheep/model/gfx/singlePlayerPrototyp.png"));
     	setLayout(null);
     	this.setPreferredSize(new Dimension(640, 480));
     }

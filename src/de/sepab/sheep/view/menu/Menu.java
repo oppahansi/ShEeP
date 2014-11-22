@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -18,13 +19,12 @@ import de.sepab.sheep.view.game.GameBoard;
 public class Menu implements IMenu{
 	private static JFrame jf = new JFrame ("ShEeP version pre-pre-alpha 0.0.0"); // das Fenster
 	// alle menue screens
-	public static JLabel lMainMenu = new JLabel(), 
-						 lSinglePlayer = new JLabel(), 
-						 lMultiPlayer = new JLabel(), 
-						 lHighscore = new JLabel(), 
-						 lOptions = new JLabel(),
-						 lHelp = new JLabel(),
-						 lGame = new JLabel();
+	public static JPanel lMainMenu = new JPanel(), 
+						 lSinglePlayer = new JPanel(), 
+						 lMultiPlayer = new JPanel(), 
+						 lHighscore = new JPanel(), 
+						 lOptions = new JPanel(),
+						 lHelp = new JPanel();
 	
 	public static GameBoard gb = new GameBoard();
 	//alle buttons
@@ -114,20 +114,30 @@ public class Menu implements IMenu{
 							height = 480;
 	
 	//Methode zum swtichen der screens
-	public static void setCurrentLabel(JLabel label) {
+	public static void setCurrentLabel(JPanel panel) {
 		lMainMenu.setVisible(false);
 		lHelp.setVisible(false);
 		lHighscore.setVisible(false);
 		lMultiPlayer.setVisible(false);
 		lOptions.setVisible(false);
 		lSinglePlayer.setVisible(false);
-		label.setVisible(true);
+		gb.setVisible(false);
+		panel.setVisible(true);
 	}
 	
 	public static void run() {
 		jf.setFocusable(false);
 		jf.setSize(width, height); //größe des screens
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		
+		{
+			lMainMenu.setLayout(null);
+			lSinglePlayer.setLayout(null);
+			lMultiPlayer.setLayout(null);
+			lOptions.setLayout(null);
+			lHighscore.setLayout(null);
+			lHelp.setLayout(null);
+		}
 		
 		{//alle Font Deklarationen
 			{//alle Button Fonts
@@ -379,7 +389,7 @@ public class Menu implements IMenu{
 				spbStart.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						setCurrentLabel(lGame);
+						setCurrentLabel(gb);
 						gb.repaint();
 					}
 				});
@@ -524,7 +534,6 @@ public class Menu implements IMenu{
 				lHelp.add(htfHelp);
 				lHelp.add(htaHelp);
 			}
-			lGame.add(gb);
 			
 		}
 		
@@ -535,7 +544,7 @@ public class Menu implements IMenu{
 			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHighscore.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHelp.setBounds(0,0,jf.getWidth(),jf.getHeight());
-			lGame.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
@@ -545,6 +554,7 @@ public class Menu implements IMenu{
 			jf.add(lOptions);
 			jf.add(lHighscore);
 			jf.add(lHelp);
+			jf.add(gb);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);
