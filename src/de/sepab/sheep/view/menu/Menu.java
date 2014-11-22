@@ -1,5 +1,6 @@
 package de.sepab.sheep.view.menu;
 
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import de.sepab.sheep.view.game.GameBoard;
+
 public class Menu implements IMenu{
 	private static JFrame jf = new JFrame ("ShEeP version pre-pre-alpha 0.0.0"); // das Fenster
 	// alle menue screens
@@ -20,7 +23,10 @@ public class Menu implements IMenu{
 						 lMultiPlayer = new JLabel(), 
 						 lHighscore = new JLabel(), 
 						 lOptions = new JLabel(),
-						 lHelp = new JLabel();
+						 lHelp = new JLabel(),
+						 lGame = new JLabel();
+	
+	public static GameBoard gb = new GameBoard();
 	//alle buttons
 	public static JButton mmbSinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
 						  	mmbMultiPlayer = new JButton("Mehrspieler"),
@@ -373,7 +379,8 @@ public class Menu implements IMenu{
 				spbStart.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						
+						setCurrentLabel(lGame);
+						gb.repaint();
 					}
 				});
 				spbBack.addActionListener(new ActionListener() {
@@ -517,6 +524,7 @@ public class Menu implements IMenu{
 				lHelp.add(htfHelp);
 				lHelp.add(htaHelp);
 			}
+			lGame.add(gb);
 			
 		}
 		
@@ -527,6 +535,7 @@ public class Menu implements IMenu{
 			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHighscore.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHelp.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			lGame.setBounds(0,0,jf.getWidth(),jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
