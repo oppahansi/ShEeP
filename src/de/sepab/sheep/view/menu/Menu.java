@@ -35,7 +35,7 @@ public class Menu implements IMenu{
 						  spbStart = new JButton("Start"), //sp = singleplayer
 						  	spbBack = new JButton("Zurück"),
 						  	
-						  hsbback = new JButton("Zurück"), //hs = highscore
+						  hsbBack = new JButton("Zurück"), //hs = highscore
 						  
 						  obMinus = new JButton("-"),//o = options
 						  	obPlus = new JButton("+"),
@@ -53,19 +53,19 @@ public class Menu implements IMenu{
 							 	
 							 hstfHighscore = new JTextField("Highscore"),
 							 	hstfOnTime = new JTextField("Auf Zeit:"),
-							 	hstfOTplayer1 = new JTextField(),
-							 	hstfOTplayer2 = new JTextField(),
-							 	hstfOTplayer3 = new JTextField(),
-							 	hstfOTplayer1points = new JTextField(),
-								hstfOTplayer2points = new JTextField(),
-								hstfOTplayer3points = new JTextField(),
+							 	hstfOTplayer1 = new JTextField("The_Dude"),
+							 	hstfOTplayer2 = new JTextField("Pickachu"),
+							 	hstfOTplayer3 = new JTextField("G. Newell"),
+							 	hstfOTplayer1points = new JTextField("999 Punkte"),
+								hstfOTplayer2points = new JTextField("998 Punkte"),
+								hstfOTplayer3points = new JTextField("997 Punkte"),
 								hstfOnNumber = new JTextField("Auf Anzahl:"),
-								hstfONplayer1 = new JTextField(),
-								hstfONplayer2 = new JTextField(),
-								hstfONplayer3 = new JTextField(),
-								hstfONplayer1points = new JTextField(),
-								hstfONplayer2points = new JTextField(),
-								hstfONplayer3points = new JTextField(),
+								hstfONplayer1 = new JTextField("The_Dude"),
+								hstfONplayer2 = new JTextField("Pickachu"),
+								hstfONplayer3 = new JTextField("G. Newell"),
+								hstfONplayer1points = new JTextField("999 Punkte"),
+								hstfONplayer2points = new JTextField("998 Punkte"),
+								hstfONplayer3points = new JTextField("997 Punkte"),
 							
 							otfOptions = new JTextField("Optionen"),
 								otfMusic = new JTextField("Musik:"),
@@ -88,12 +88,14 @@ public class Menu implements IMenu{
 								spcbDifficulty = new JComboBox(spDifficulty),
 								spcbModus = new JComboBox(spModus),
 							
-							mpcbMap = new JComboBox(mpMap);
+							mpcbMap = new JComboBox(mpMap),
+							
+							hscbMap = new JComboBox(spMap);
 							
 		
 	
-	public static final int height = 640,
-							width = 480;
+	public static final int width = 640,
+							height = 480;
 	
 	//Methode zum swtichen der screens
 	public static void setCurrentLabel(JLabel label) {
@@ -108,7 +110,7 @@ public class Menu implements IMenu{
 	
 	public static void run() {
 		jf.setFocusable(false);
-		jf.setSize(height, width); //größe des screens
+		jf.setSize(width, height); //größe des screens
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		
 		{//alle Font Deklarationen
@@ -126,7 +128,7 @@ public class Menu implements IMenu{
 			  	mpbStart.setFont(basicFont);
 			  	mpbBack.setFont(basicFont);
 			  	
-			  	hsbback.setFont(basicFont);
+			  	hsbBack.setFont(basicFont);
 			  	
 			    obMinus.setFont(basicFont);
 			  	obPlus.setFont(basicFont);
@@ -173,76 +175,79 @@ public class Menu implements IMenu{
 				spcbModus.setFont(basicFont);
 				
 				mpcbMap.setFont(basicFont);
+				hscbMap.setFont(basicFont);
 			}
 			
 		}
 		
 		{//alle Positionen im Fenster
 			{//alle b Positionen
-				mmbSinglePlayer.setBounds((width-40)/2,105,200,40);
-			  	mmbMultiPlayer.setBounds((width-40)/2,150,200,40);
-			  	mmbOption.setBounds((width-40)/2,195,200,40);
-			  	mmbHighscore.setBounds((width-40)/2,240,200,40);
-			  	mmbHelp.setBounds((width-40)/2,285,200,40);
-			  	mmbExit.setBounds((width-40)/2,330,200,40);
+				mmbSinglePlayer.setBounds((width)/2 - 100,105,200,40);
+			  	mmbMultiPlayer.setBounds((width)/2 - 100,150,200,40);
+			  	mmbOption.setBounds((width)/2 - 100,195,200,40);
+			  	mmbHighscore.setBounds((width)/2 - 100,240,200,40);
+			  	mmbHelp.setBounds((width)/2 - 100,285,200,40);
+			  	mmbExit.setBounds((width)/2 - 100,330,200,40);
 			  	
-			  	spbStart.setBounds((width-40)/2,300,100,25);
-			  	spbBack.setBounds((width-40)/2 + 100,300,100,25);
+			  	spbStart.setBounds((width)/2 - 100,300,100,25);
+			  	spbBack.setBounds((width)/2 - 100 + 100,300,100,25);
 			  	
-			  	mpbStart.setBounds((width-40)/2,150,100,25);
-			  	mpbBack.setBounds((width-40)/2 + 100,150,100,25);
+			  	mpbStart.setBounds((width)/2 - 100,150,100,25);
+			  	mpbBack.setBounds((width)/2 - 100 + 100,150,100,25);
 			  	
-			  	hsbback.setBounds(10,10,10,10);
+			  	hsbBack.setBounds(10,10,10,10);
 			  	
-			    obMinus.setBounds((width)/2 ,100,50,20);
-			  	obPlus.setBounds((width)/2 + 50,100,50,20);
-			  	obBack.setBounds((width)/2 ,150,100,20);
+			    obMinus.setBounds((width)/2 - 50 ,100,50,20);
+			  	obPlus.setBounds((width)/2,100,50,20);
+			  	obBack.setBounds((width)/2 - 50 ,150,100,20);
 			}
 			
 		  	{//alle tf Positionen
-		  		sptfSingleplayer.setBounds((width-40)/2,0,200,50);
-			 	sptfMap.setBounds((width-40)/2 - 40,100,40,20);
-			 	sptfdifficulty.setBounds((width-40)/2 - 85,150,85,20);
-			 	sptfName.setBounds((width-40)/2 - 45,200,45,20);
-			 	sptfNameField.setBounds((width-40)/2,200,200,20);
-			 	sptfModus.setBounds((width-40)/2 - 50,250,50,20);
+		  		sptfSingleplayer.setBounds((width)/2 - 100,0,200,50);
+			 	sptfMap.setBounds((width)/2 - 100 - 40,100,40,20);
+			 	sptfdifficulty.setBounds((width)/2 - 100 - 85,150,85,20);
+			 	sptfName.setBounds((width)/2 - 100 - 45,200,45,20);
+			 	sptfNameField.setBounds((width)/2 - 100,200,200,20);
+			 	sptfModus.setBounds((width)/2 - 100 - 50,250,50,20);
 			 	
-			 	mptfMultiplayer.setBounds((width-40)/2,0,200,50);
-			 	mptfMap.setBounds((width-40)/2 - 40,100,40,20);
+			 	mptfMultiplayer.setBounds((width)/2 - 100,0,200,50);
+			 	mptfMap.setBounds((width)/2 - 100 - 40,100,40,20);
 			 	
-			 	hstfHighscore.setBounds(0,0,0,0);
-			 	hstfOnTime.setBounds(0,0,0,0);
-			 	hstfOTplayer1.setBounds(0,0,0,0);
-			 	hstfOTplayer2.setBounds(0,0,0,0);
-			 	hstfOTplayer3.setBounds(0,0,0,0);
-			 	hstfOTplayer1points.setBounds(0,0,0,0);
-				hstfOTplayer2points.setBounds(0,0,0,0);
-				hstfOTplayer3points.setBounds(0,0,0,0);
-				hstfOnNumber.setBounds(0,0,0,0);
-				hstfONplayer1.setBounds(0,0,0,0);
-				hstfONplayer2.setBounds(0,0,0,0);
-				hstfONplayer3.setBounds(0,0,0,0);
-				hstfONplayer1points.setBounds(0,0,0,0);
-				hstfONplayer2points.setBounds(0,0,0,0);
-				hstfONplayer3points.setBounds(0,0,0,0);
+			 	hstfHighscore.setBounds((width)/2 - 100,0,200,50);
+			 	hstfOnTime.setBounds((width)/2 - 100 - 100, 100, 100, 20);
+			 	hstfOTplayer1.setBounds((width)/2 - 100 - 100, 130, 100, 20);
+			 	hstfOTplayer2.setBounds((width)/2 - 100 - 100, 150, 100, 20);
+			 	hstfOTplayer3.setBounds((width)/2 - 100 - 100, 170, 100, 20);
+			 	hstfOTplayer1points.setBounds((width)/2, 130, 100, 20);
+				hstfOTplayer2points.setBounds((width)/2, 150, 100, 20);
+				hstfOTplayer3points.setBounds((width)/2, 170, 100, 20);
+				hstfOnNumber.setBounds((width)/2 - 100 - 100, 220, 100, 20);
+				hstfONplayer1.setBounds((width)/2 - 100 - 100, 250, 100, 20);
+				hstfONplayer2.setBounds((width)/2 - 100 - 100, 270, 100, 20);
+				hstfONplayer3.setBounds((width)/2 - 100 - 100, 290, 100, 20);
+				hstfONplayer1points.setBounds((width)/2, 250, 100, 20);
+				hstfONplayer2points.setBounds((width)/2, 270, 100, 20);
+				hstfONplayer3points.setBounds((width)/2, 290, 100, 20);
 			
-				otfOptions.setBounds((width-40)/2,0,200,50);
-				otfMusic.setBounds((width)/2 - 50,100,50,20);
-				otfMusicField.setBounds((width)/2 + 100,100,50,20);
+				otfOptions.setBounds((width)/2 - 100,0,200,50);
+				otfMusic.setBounds((width)/2 - 100,100,50,20);
+				otfMusicField.setBounds((width)/2 + 50,100,50,20);
 				
 				htfHelp.setBounds(0,0,0,0);
 		  	}
 		  	
-		  	{
-		  		spcbMap.setBounds((width-40)/2, 100, 200, 20);
-		  		spcbDifficulty.setBounds((width-40)/2, 150, 200, 20);
-		  		spcbModus.setBounds((width-40)/2, 250, 200, 20);
+		  	{//cb
+		  		spcbMap.setBounds((width)/2 - 100, 100, 200, 20);
+		  		spcbDifficulty.setBounds((width)/2 - 100, 150, 200, 20);
+		  		spcbModus.setBounds((width)/2 - 100, 250, 200, 20);
 		  		
-		  		mpcbMap.setBounds((width-40)/2, 100, 200, 20);
+		  		mpcbMap.setBounds((width)/2 - 100, 100, 200, 20);
+		  		
+		  		hscbMap.setBounds((width)/2 - 100 + 100, 80, 100, 20);
 		  	}
 		}
 		
-		{
+		{//tf einstellungen
 			sptfSingleplayer.setEditable(false);
 			sptfSingleplayer.setBorder(BorderFactory.createEmptyBorder());
 			sptfMap.setEditable(false);
@@ -262,8 +267,38 @@ public class Menu implements IMenu{
 			otfOptions.setEditable(false);
 			otfOptions.setBorder(BorderFactory.createEmptyBorder());
 			otfMusic.setEditable(false);
-//			otfMusic.setBorder(BorderFactory.createEmptyBorder());
+			otfMusic.setBorder(BorderFactory.createEmptyBorder());
 			
+			hstfHighscore.setEditable(false);
+			hstfHighscore.setBorder(BorderFactory.createEmptyBorder());
+			hstfOnTime.setEditable(false);
+			hstfOnTime.setBorder(BorderFactory.createEmptyBorder());
+		 	hstfOTplayer1.setEditable(false);
+		 	hstfOTplayer1.setBorder(BorderFactory.createEmptyBorder());
+		 	hstfOTplayer2.setEditable(false);
+		 	hstfOTplayer2.setBorder(BorderFactory.createEmptyBorder());
+		 	hstfOTplayer3.setEditable(false);
+		 	hstfOTplayer3.setBorder(BorderFactory.createEmptyBorder());
+		 	hstfOTplayer1points.setEditable(false);
+		 	hstfOTplayer1points.setBorder(BorderFactory.createEmptyBorder());
+			hstfOTplayer2points.setEditable(false);
+			hstfOTplayer2points.setBorder(BorderFactory.createEmptyBorder());
+			hstfOTplayer3points.setEditable(false);
+			hstfOTplayer3points.setBorder(BorderFactory.createEmptyBorder());
+			hstfOnNumber.setEditable(false);
+			hstfOnNumber.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer1.setEditable(false);
+			hstfONplayer1.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer2.setEditable(false);
+			hstfONplayer2.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer3.setEditable(false);
+			hstfONplayer3.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer1points.setEditable(false);
+			hstfONplayer1points.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer2points.setEditable(false);
+			hstfONplayer2points.setBorder(BorderFactory.createEmptyBorder());
+			hstfONplayer3points.setEditable(false);
+			hstfONplayer3points.setBorder(BorderFactory.createEmptyBorder());
 		}
 		
 		{//alle Button actionListener
@@ -284,6 +319,12 @@ public class Menu implements IMenu{
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(lOptions);
+					}
+				});
+				mmbHighscore.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lHighscore);
 					}
 				});
 				mmbExit.addActionListener(new ActionListener() {
@@ -345,6 +386,15 @@ public class Menu implements IMenu{
 				});
 			}
 			
+			{//hs
+				hsbBack.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMainMenu);
+					}
+				});
+			}
+			
 			
 		}
 		
@@ -384,7 +434,7 @@ public class Menu implements IMenu{
 				lMultiPlayer.add(mpcbMap);
 			}
 			
-			{
+			{//o
 				lOptions.add(obMinus);
 				lOptions.add(obPlus);
 				lOptions.add(obBack);
@@ -394,6 +444,28 @@ public class Menu implements IMenu{
 				lOptions.add(otfMusicField);
 			}
 			
+			{//hs
+				lHighscore.add(hstfHighscore);
+				lHighscore.add(hstfOnTime);
+				lHighscore.add(hstfOnNumber);
+				lHighscore.add(hstfOTplayer1);
+				lHighscore.add(hstfOTplayer2);
+				lHighscore.add(hstfOTplayer3);
+				lHighscore.add(hstfOTplayer1points);
+				lHighscore.add(hstfOTplayer2points);
+				lHighscore.add(hstfOTplayer3points);
+				lHighscore.add(hstfONplayer1);
+				lHighscore.add(hstfONplayer2);
+				lHighscore.add(hstfONplayer3);
+				lHighscore.add(hstfONplayer1points);
+				lHighscore.add(hstfONplayer2points);
+				lHighscore.add(hstfONplayer3points);
+				
+				lHighscore.add(hscbMap);
+				
+				
+			}
+			
 		}
 		
 		{//Label einstellen
@@ -401,6 +473,7 @@ public class Menu implements IMenu{
 			lSinglePlayer.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lMultiPlayer.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			lHighscore.setBounds(0,0,jf.getWidth(),jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
@@ -408,6 +481,7 @@ public class Menu implements IMenu{
 			jf.add(lSinglePlayer);
 			jf.add(lMultiPlayer);
 			jf.add(lOptions);
+			jf.add(lHighscore);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);
