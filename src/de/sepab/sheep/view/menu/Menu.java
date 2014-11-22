@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Menu implements IMenu{
-	private static JFrame jf = new JFrame ("ShEeP version 0.0.0"); // das Fenster
+	private static JFrame jf = new JFrame ("ShEeP version pre-pre-alpha 0.0.0"); // das Fenster
 	// alle menue screens
 	public static JLabel lMainMenu = new JLabel(), 
 						 lSinglePlayer = new JLabel(), 
@@ -29,6 +29,9 @@ public class Menu implements IMenu{
 						  	mmbHelp = new JButton("Hilfe"),
 						  	mmbExit = new JButton("Beenden"),
 						  	
+						  mpbStart = new JButton("Start"), //sp = singleplayer
+							mpbBack = new JButton("Zurück"),
+									  	
 						  spbStart = new JButton("Start"), //sp = singleplayer
 						  	spbBack = new JButton("Zurück"),
 						  	
@@ -76,12 +79,18 @@ public class Menu implements IMenu{
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
 	
 	public static String[] spMap = {"Karte1","Karte2","Karte3"},
-						   spDifficulty ={"Einfach","Mittel","Schwer"},
-						   spModus = {"Auf Zeit", "Auf Anzahl"};
+						   		spDifficulty ={"Einfach","Mittel","Schwer"},
+						   		spModus = {"Auf Zeit", "Auf Anzahl"},
+						   
+						   mpMap = {"Karte1", "Karte2"};
 	
 	public static JComboBox spcbMap = new JComboBox(spMap),
-							spcbDifficulty = new JComboBox(spDifficulty),
-							spcbModus = new JComboBox(spModus);
+								spcbDifficulty = new JComboBox(spDifficulty),
+								spcbModus = new JComboBox(spModus),
+							
+							mpcbMap = new JComboBox(mpMap);
+							
+		
 	
 	public static final int height = 640,
 							width = 480;
@@ -113,6 +122,9 @@ public class Menu implements IMenu{
 			  	
 			  	spbStart.setFont(basicFont);
 			  	spbBack.setFont(basicFont);
+			  	
+			  	mpbStart.setFont(basicFont);
+			  	mpbBack.setFont(basicFont);
 			  	
 			  	hsbback.setFont(basicFont);
 			  	
@@ -160,6 +172,8 @@ public class Menu implements IMenu{
 				spcbMap.setFont(basicFont);
 				spcbDifficulty.setFont(basicFont);
 				spcbModus.setFont(basicFont);
+				
+				mpcbMap.setFont(basicFont);
 			}
 			
 		}
@@ -175,6 +189,9 @@ public class Menu implements IMenu{
 			  	
 			  	spbStart.setBounds((width-40)/2,300,100,25);
 			  	spbBack.setBounds((width-40)/2 + 100,300,100,25);
+			  	
+			  	mpbStart.setBounds((width-40)/2,150,100,25);
+			  	mpbBack.setBounds((width-40)/2 + 100,150,100,25);
 			  	
 			  	hsbback.setBounds(10,10,10,10);
 			  	
@@ -192,8 +209,8 @@ public class Menu implements IMenu{
 			 	sptfNameField.setBounds((width-40)/2,200,200,20);
 			 	sptfModus.setBounds((width-40)/2 - 50,250,50,20);
 			 	
-			 	mptfMultiplayer.setBounds(0,0,0,0);
-			 	mptfMap.setBounds(0,0,0,0);
+			 	mptfMultiplayer.setBounds((width-40)/2,0,200,50);
+			 	mptfMap.setBounds((width-40)/2 - 40,100,40,20);
 			 	
 			 	hstfHighscore.setBounds(0,0,0,0);
 			 	hstfOnTime.setBounds(0,0,0,0);
@@ -222,6 +239,8 @@ public class Menu implements IMenu{
 		  		spcbMap.setBounds((width-40)/2, 100, 200, 20);
 		  		spcbDifficulty.setBounds((width-40)/2, 150, 200, 20);
 		  		spcbModus.setBounds((width-40)/2, 250, 200, 20);
+		  		
+		  		mpcbMap.setBounds((width-40)/2, 100, 200, 20);
 		  	}
 		}
 		
@@ -236,33 +255,60 @@ public class Menu implements IMenu{
 			sptfName.setBorder(BorderFactory.createEmptyBorder());
 			sptfModus.setEditable(false);
 			sptfModus.setBorder(BorderFactory.createEmptyBorder());
+			
+			mptfMultiplayer.setEditable(false);
+			mptfMultiplayer.setBorder(BorderFactory.createEmptyBorder());
+			mptfMap.setEditable(false);
+			mptfMap.setBorder(BorderFactory.createEmptyBorder());
+			
 		}
 		
 		{//alle Button actionListener
-			mmbSinglePlayer.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent arg0) {
-					setCurrentLabel(lSinglePlayer);
-				}
-			});
-			mmbMultiPlayer.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent arg0) {
-					setCurrentLabel(lMultiPlayer);
-				}
-			});
-			spbStart.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent arg0) {
+			{//mm
+				mmbSinglePlayer.addActionListener(new ActionListener() {
 					
-				}
-			});
-			spbBack.addActionListener(new ActionListener() {
-				
-				public void actionPerformed(ActionEvent arg0) {
-					setCurrentLabel(lMainMenu);
-				}
-			});
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lSinglePlayer);
+					}
+				});
+				mmbMultiPlayer.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMultiPlayer);
+					}
+				});
+			}
+			
+			{//sp
+				spbStart.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				spbBack.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMainMenu);
+					}
+				});
+			}
+			
+			{//mp
+				mpbStart.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				mpbBack.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMainMenu);
+					}
+				});
+			}
+			
 			
 		}
 		
@@ -292,6 +338,16 @@ public class Menu implements IMenu{
 				lSinglePlayer.add(spcbModus);
 			}
 			
+			{//mp
+				lMultiPlayer.add(mpbStart);
+				lMultiPlayer.add(mpbBack);
+				
+				lMultiPlayer.add(mptfMultiplayer);
+				lMultiPlayer.add(mptfMap);
+				
+				lMultiPlayer.add(mpcbMap);
+			}
+			
 		}
 		
 		{//Label einstellen
@@ -302,6 +358,7 @@ public class Menu implements IMenu{
 		{//Labels einfügen in das Fenster
 			jf.add(lMainMenu);
 			jf.add(lSinglePlayer);
+			jf.add(lMultiPlayer);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);
