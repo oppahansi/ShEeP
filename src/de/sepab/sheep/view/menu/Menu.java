@@ -4,7 +4,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -39,9 +41,9 @@ public class Menu implements IMenu{
 	public static JTextField sptfSingleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	sptfMap = new JTextField("Karte:"),
 							 	sptfdifficulty = new JTextField("Schwierigkeit:"),
-							 	sptfName = new JTextField("Name :"),
+							 	sptfName = new JTextField("Name:"),
 							 	sptfNameField = new JTextField(),
-							 	sptfModus = new JTextField("Modus"),
+							 	sptfModus = new JTextField("Modus:"),
 							 	
 							 mptfMultiplayer = new JTextField("Mehrspieler"),// mp = multiplayer
 							 	mptfMap = new JTextField("Karte:"),
@@ -73,6 +75,16 @@ public class Menu implements IMenu{
 	public static Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
 	
+	public static String[] spMap = {"Karte1","Karte2","Karte3"},
+						   spDifficulty ={"Einfach","Mittel","Schwer"},
+						   spModus = {"Auf Zeit", "Auf Anzahl"};
+	
+	public static JComboBox spcbMap = new JComboBox(spMap),
+							spcbDifficulty = new JComboBox(spDifficulty),
+							spcbModus = new JComboBox(spModus);
+	
+	public static final int height = 640,
+							width = 480;
 	
 	//Methode zum swtichen der screens
 	public static void setCurrentLabel(JLabel label) {
@@ -85,10 +97,9 @@ public class Menu implements IMenu{
 		label.setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		
+	public static void run() {
 		jf.setFocusable(false);
-		jf.setSize(640, 480); //größe des screens
+		jf.setSize(height, width); //größe des screens
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		
 		{//alle Font Deklarationen
@@ -145,19 +156,25 @@ public class Menu implements IMenu{
 				htfHelp.setFont(headingFont);
 			}
 			
+			{
+				spcbMap.setFont(basicFont);
+				spcbDifficulty.setFont(basicFont);
+				spcbModus.setFont(basicFont);
+			}
+			
 		}
 		
 		{//alle Positionen im Fenster
 			{//alle b Positionen
-				mmbSinglePlayer.setBounds(220,105,200,40);
-			  	mmbMultiPlayer.setBounds(220,150,200,40);
-			  	mmbOption.setBounds(220,195,200,40);
-			  	mmbHighscore.setBounds(220,240,200,40);
-			  	mmbHelp.setBounds(220,285,200,40);
-			  	mmbExit.setBounds(220,330,200,40);
+				mmbSinglePlayer.setBounds((width-40)/2,105,200,40);
+			  	mmbMultiPlayer.setBounds((width-40)/2,150,200,40);
+			  	mmbOption.setBounds((width-40)/2,195,200,40);
+			  	mmbHighscore.setBounds((width-40)/2,240,200,40);
+			  	mmbHelp.setBounds((width-40)/2,285,200,40);
+			  	mmbExit.setBounds((width-40)/2,330,200,40);
 			  	
-			  	spbStart.setBounds(10,10,10,10);
-			  	spbBack.setBounds(10,10,10,10);
+			  	spbStart.setBounds((width-40)/2,300,100,25);
+			  	spbBack.setBounds((width-40)/2 + 100,300,100,25);
 			  	
 			  	hsbback.setBounds(10,10,10,10);
 			  	
@@ -168,12 +185,12 @@ public class Menu implements IMenu{
 			}
 			
 		  	{//alle tf Positionen
-		  		sptfSingleplayer.setBounds(220,0,200,50);
-			 	sptfMap.setBounds(0,0,0,0);
-			 	sptfdifficulty.setBounds(0,0,0,0);
-			 	sptfName.setBounds(0,0,0,0);
-			 	sptfNameField.setBounds(0,0,0,0);
-			 	sptfModus.setBounds(0,0,0,0);
+		  		sptfSingleplayer.setBounds((width-40)/2,0,200,50);
+			 	sptfMap.setBounds((width-40)/2 - 40,100,40,20);
+			 	sptfdifficulty.setBounds((width-40)/2 - 85,150,85,20);
+			 	sptfName.setBounds((width-40)/2 - 45,200,45,20);
+			 	sptfNameField.setBounds((width-40)/2,200,200,20);
+			 	sptfModus.setBounds((width-40)/2 - 50,250,50,20);
 			 	
 			 	mptfMultiplayer.setBounds(0,0,0,0);
 			 	mptfMap.setBounds(0,0,0,0);
@@ -200,10 +217,25 @@ public class Menu implements IMenu{
 				
 				htfHelp.setBounds(0,0,0,0);
 		  	}
+		  	
+		  	{
+		  		spcbMap.setBounds((width-40)/2, 100, 200, 20);
+		  		spcbDifficulty.setBounds((width-40)/2, 150, 200, 20);
+		  		spcbModus.setBounds((width-40)/2, 250, 200, 20);
+		  	}
 		}
 		
 		{
 			sptfSingleplayer.setEditable(false);
+			sptfSingleplayer.setBorder(BorderFactory.createEmptyBorder());
+			sptfMap.setEditable(false);
+			sptfMap.setBorder(BorderFactory.createEmptyBorder());
+			sptfdifficulty.setEditable(false);
+			sptfdifficulty.setBorder(BorderFactory.createEmptyBorder());
+			sptfName.setEditable(false);
+			sptfName.setBorder(BorderFactory.createEmptyBorder());
+			sptfModus.setEditable(false);
+			sptfModus.setBorder(BorderFactory.createEmptyBorder());
 		}
 		
 		{//alle Button actionListener
@@ -219,6 +251,19 @@ public class Menu implements IMenu{
 					setCurrentLabel(lMultiPlayer);
 				}
 			});
+			spbStart.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent arg0) {
+					
+				}
+			});
+			spbBack.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent arg0) {
+					setCurrentLabel(lMainMenu);
+				}
+			});
+			
 		}
 		
 		{//das einfügen der elemente in die Labels
@@ -233,6 +278,18 @@ public class Menu implements IMenu{
 			
 			{//sp
 				lSinglePlayer.add(sptfSingleplayer);
+				lSinglePlayer.add(sptfMap);
+				lSinglePlayer.add(sptfdifficulty);
+				lSinglePlayer.add(sptfName);
+				lSinglePlayer.add(sptfNameField);
+				lSinglePlayer.add(sptfModus);
+				
+				lSinglePlayer.add(spbStart);
+				lSinglePlayer.add(spbBack);
+				
+				lSinglePlayer.add(spcbMap);
+				lSinglePlayer.add(spcbDifficulty);
+				lSinglePlayer.add(spcbModus);
 			}
 			
 		}
