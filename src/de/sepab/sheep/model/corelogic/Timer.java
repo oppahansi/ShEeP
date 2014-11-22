@@ -5,10 +5,10 @@ import java.util.Date;
 
 public class Timer  implements ITimer{
 
-	private Date StartTime;
-	private Date StopTime;
-	private SimpleDateFormat FormatSec = new SimpleDateFormat("ss");
-	private SimpleDateFormat FormatMin = new SimpleDateFormat("mm");
+	private Date startTime;
+	private Date stopTime;
+	private SimpleDateFormat formatSec = new SimpleDateFormat("ss");
+	private SimpleDateFormat formatMin = new SimpleDateFormat("mm");
 	
 	public Timer() {
 		this.reset();
@@ -16,32 +16,32 @@ public class Timer  implements ITimer{
 	
 	@Override
 	public void reset() {
-		this.StartTime = new Date();
-		this.StopTime = this.StartTime;
+		this.startTime = new Date();
+		this.stopTime = this.startTime;
 	}
 
 	@Override
 	public void start() {
-		this.StartTime = new Date();
+		this.startTime = new Date();
 	}
 
 	@Override
 	public void stop() {
-		this.StopTime = new Date(); 
+		this.stopTime = new Date(); 
 	}
 
 	@Override
 	public int getTime() {
 		return ((
-				(60*Integer.parseInt(this.FormatMin.format(this.StopTime)))
+				(60*Integer.parseInt(this.formatMin.format(this.stopTime)))
 				+
-				(Integer.parseInt(this.FormatSec.format(this.StopTime)))
+				(Integer.parseInt(this.formatSec.format(this.stopTime)))
 				)
 				-
 				(
-				(60*Integer.parseInt(this.FormatMin.format(this.StartTime)))
+				(60*Integer.parseInt(this.formatMin.format(this.startTime)))
 				+
-				(Integer.parseInt(this.FormatSec.format(this.StartTime)))
+				(Integer.parseInt(this.formatSec.format(this.startTime)))
 				));
 	}
 }
