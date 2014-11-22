@@ -39,7 +39,9 @@ public class Menu implements IMenu{
 						  
 						  obMinus = new JButton("-"),//o = options
 						  	obPlus = new JButton("+"),
-						  	obBack = new JButton("Zurück");
+						  	obBack = new JButton("Zurück"),
+						  	
+						  hbBack = new JButton("Zurück");//h = help
 	//alle textfields
 	public static JTextField sptfSingleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	sptfMap = new JTextField("Karte:"),
@@ -71,9 +73,17 @@ public class Menu implements IMenu{
 								otfMusic = new JTextField("Musik:"),
 								otfMusicField = new JTextField("50"),
 								
-							htfHelp = new JTextField("Hilfe"); //h = help
+							htfHelp = new JTextField("Hilfe"); 
 	//alle textareas
-	public static JTextArea htaHelp = new JTextArea();
+	public static JTextArea htaHelp = new JTextArea(
+			"Auf Zeit: \r\n"
+			+ "In diesem Modus versucht der Spieler soviele Schafe wie möglich in \r\n"
+			+ "einer gewissen Zeit einzufangen \r\n"
+			+ "\r\n"
+			+ "Auf Anzahl: \r\n"
+			+ "In diesem Modus versucht der Spieler so schnell wie möglich eine \r\n"
+			+ "gewisse Anzahl an schafen einzufangen"
+			);
 	//alle fonts
 	public static Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
@@ -133,6 +143,8 @@ public class Menu implements IMenu{
 			    obMinus.setFont(basicFont);
 			  	obPlus.setFont(basicFont);
 			  	obBack.setFont(basicFont);
+			  	
+			  	hbBack.setFont(basicFont);
 			}
 			
 			{//alle tf Fonts
@@ -169,13 +181,18 @@ public class Menu implements IMenu{
 				htfHelp.setFont(headingFont);
 			}
 			
-			{
+			{//cb
 				spcbMap.setFont(basicFont);
 				spcbDifficulty.setFont(basicFont);
 				spcbModus.setFont(basicFont);
 				
 				mpcbMap.setFont(basicFont);
+				
 				hscbMap.setFont(basicFont);
+			}
+			
+			{//ta
+				htaHelp.setFont(basicFont);
 			}
 			
 		}
@@ -195,11 +212,13 @@ public class Menu implements IMenu{
 			  	mpbStart.setBounds((width)/2 - 100,150,100,25);
 			  	mpbBack.setBounds((width)/2 - 100 + 100,150,100,25);
 			  	
-			  	hsbBack.setBounds(10,10,10,10);
+			  	hsbBack.setBounds((width)/2 - 100, 350, 100, 20);
 			  	
 			    obMinus.setBounds((width)/2 - 50 ,100,50,20);
 			  	obPlus.setBounds((width)/2,100,50,20);
 			  	obBack.setBounds((width)/2 - 50 ,150,100,20);
+			  	
+			  	hbBack.setBounds((width/2) -50, 350, 100, 50);
 			}
 			
 		  	{//alle tf Positionen
@@ -233,7 +252,7 @@ public class Menu implements IMenu{
 				otfMusic.setBounds((width)/2 - 100,100,50,20);
 				otfMusicField.setBounds((width)/2 + 50,100,50,20);
 				
-				htfHelp.setBounds(0,0,0,0);
+				htfHelp.setBounds((width)/2 - 100,0,200,50);
 		  	}
 		  	
 		  	{//cb
@@ -244,6 +263,10 @@ public class Menu implements IMenu{
 		  		mpcbMap.setBounds((width)/2 - 100, 100, 200, 20);
 		  		
 		  		hscbMap.setBounds((width)/2 - 100 + 100, 80, 100, 20);
+		  	}
+		  	
+		  	{//ta
+		  		htaHelp.setBounds((width)/2 - 200, 100, 400, 200);
 		  	}
 		}
 		
@@ -299,6 +322,11 @@ public class Menu implements IMenu{
 			hstfONplayer2points.setBorder(BorderFactory.createEmptyBorder());
 			hstfONplayer3points.setEditable(false);
 			hstfONplayer3points.setBorder(BorderFactory.createEmptyBorder());
+			
+			htfHelp.setEditable(false);
+			htfHelp.setBorder(BorderFactory.createEmptyBorder());
+			htaHelp.setEditable(false);
+			htaHelp.setBorder(BorderFactory.createEmptyBorder());
 		}
 		
 		{//alle Button actionListener
@@ -325,6 +353,12 @@ public class Menu implements IMenu{
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(lHighscore);
+					}
+				});
+				mmbHelp.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lHelp);
 					}
 				});
 				mmbExit.addActionListener(new ActionListener() {
@@ -395,6 +429,15 @@ public class Menu implements IMenu{
 				});
 			}
 			
+			{//h
+				hbBack.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(lMainMenu);
+					}
+				});
+			}
+			
 			
 		}
 		
@@ -445,6 +488,8 @@ public class Menu implements IMenu{
 			}
 			
 			{//hs
+				lHighscore.add(hsbBack);
+				
 				lHighscore.add(hstfHighscore);
 				lHighscore.add(hstfOnTime);
 				lHighscore.add(hstfOnNumber);
@@ -466,6 +511,13 @@ public class Menu implements IMenu{
 				
 			}
 			
+			{//h
+				lHelp.add(hbBack);
+				
+				lHelp.add(htfHelp);
+				lHelp.add(htaHelp);
+			}
+			
 		}
 		
 		{//Label einstellen
@@ -474,6 +526,7 @@ public class Menu implements IMenu{
 			lMultiPlayer.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHighscore.setBounds(0,0,jf.getWidth(),jf.getHeight());
+			lHelp.setBounds(0,0,jf.getWidth(),jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
@@ -482,6 +535,7 @@ public class Menu implements IMenu{
 			jf.add(lMultiPlayer);
 			jf.add(lOptions);
 			jf.add(lHighscore);
+			jf.add(lHelp);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);
