@@ -1,4 +1,4 @@
-package de.sepab.sheep.controller.mgnt;
+package de.sepab.sheep.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

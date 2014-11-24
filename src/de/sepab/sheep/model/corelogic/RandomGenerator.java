@@ -3,11 +3,11 @@ package de.sepab.sheep.model.corelogic;
 import java.util.Random;
 
 /*
- * Habe Namen von Random zu RandomHandler geändert aufgrud von Überladung mit der
+ * Habe Namen von Random zu RandomGenerator geändert aufgrud von Überladung mit der
  * Built-In-Class Random.
  */
 
-public class RandomHandler {
+public class RandomGenerator implements IRandomGenerator {
 	
 	/*
 	 * Gibt ein zufälliges positives oder negatives Int zurück. 

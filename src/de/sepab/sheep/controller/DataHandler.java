@@ -1,4 +1,4 @@
-package de.sepab.sheep.controller.mgnt;
+package de.sepab.sheep.controller;
 
 import de.sepab.sheep.model.corelogic.IJukeBox;
 
