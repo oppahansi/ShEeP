@@ -20,4 +20,10 @@ public class PowerUpSpawner  extends Entity{
 
 	@Override
 	public void event() {}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 }
