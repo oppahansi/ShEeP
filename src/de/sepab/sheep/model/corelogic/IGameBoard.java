@@ -1,5 +1,11 @@
 package de.sepab.sheep.model.corelogic;
 
-public interface IGameBoard {
+import java.util.LinkedList;
 
+import de.sepab.sheep.model.entities.IEntity;
+
+public interface IGameBoard {
+	
+	public LinkedList<IEntity> getGameBoard();
+	
 }
