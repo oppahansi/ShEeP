@@ -8,4 +8,5 @@ public interface IEntity {
 
     public void event();
     public void move();
+
 }

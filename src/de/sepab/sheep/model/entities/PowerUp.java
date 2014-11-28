@@ -1,6 +1,6 @@
 package de.sepab.sheep.model.entities;
 
-public class PowerUpSpawner  extends Entity{
+public class PowerUp extends Entity{
 
 	@Override
 	public int getPosX() {
