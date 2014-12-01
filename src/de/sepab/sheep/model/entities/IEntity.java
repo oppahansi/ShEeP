@@ -7,4 +7,6 @@ public interface IEntity {
     public void setPosY();
 
     public void event();
+    public void move();
+
 }

@@ -1,0 +1,9 @@
+Tim -> View, GameBoard
+
+Mario -> Entities, Counter
+
+Stefan -> Jukebox, MovementCalculator, CollisionDetector
+
+Alex -> DataLoader(Save / Load Highscores), PowerUpCreator
+
+David -> AI, InputHandler, Timer, RondomGenerator

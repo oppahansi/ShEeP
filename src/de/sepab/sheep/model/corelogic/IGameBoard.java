@@ -1,4 +1,4 @@
-package de.sepab.sheep.view.game;
+package de.sepab.sheep.model.corelogic;
 
 import java.util.LinkedList;
 
@@ -6,6 +6,6 @@ import de.sepab.sheep.model.entities.IEntity;
 
 public interface IGameBoard {
 	
-	public void setGameBoard(LinkedList<IEntity> gameBoard);
+	public LinkedList<IEntity> getGameBoard();
 	
 }

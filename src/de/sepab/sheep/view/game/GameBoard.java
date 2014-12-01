@@ -1,5 +1,6 @@
 package de.sepab.sheep.view.game;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,13 +15,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import de.sepab.sheep.model.corelogic.IPowerUpHandler;
+
+
+import java.util.LinkedList;
+
+
 import de.sepab.sheep.model.entities.IEntity;
-import de.sepab.sheep.model.entities.Player;
+
 
 public class GameBoard extends JPanel implements IGameBoard{
 	
-    private IPowerUpHandler powerUpHandler;
+	
     private BufferedImage img;
     
     public static BufferedImage load(String str) {
@@ -36,23 +41,6 @@ public class GameBoard extends JPanel implements IGameBoard{
     	return null;		
     }
     
-    public BufferedImage optimize(BufferedImage img) {
-    	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    	GraphicsDevice gd = ge.getScreenDevices()[0];
-      	GraphicsConfiguration gc = gd.getDefaultConfiguration();
-    	BufferedImage img2 = gc.createCompatibleImage(
-    	    			img.getWidth(),
-    	    			img.getHeight(),
-    	    			Transparency.TRANSLUCENT
-    	    			);
-    	Graphics2D gra = img2.createGraphics();
-    	gra.drawImage(img, 0, 0, null);
-    	gra.dispose();
-    	img = img2;
-    	return img;
-    	
-    }
-    
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
     	g.setColor(Color.BLACK);
@@ -62,8 +50,13 @@ public class GameBoard extends JPanel implements IGameBoard{
     
     public GameBoard() {
     	this.setFocusable(true);
-    	img = optimize(load("/de/sepab/sheep/model/gfx/singlePlayerPrototyp.png"));
     	setLayout(null);
     	this.setPreferredSize(new Dimension(640, 480));
     }
+    
+    @Override
+	public void setGameBoard(LinkedList<IEntity> gameBoard) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,6 +1,6 @@
 package de.sepab.sheep.model.entities;
 
-public class PowerUp  extends Entity{
+public class PowerUp extends Entity{
 
 	@Override
 	public int getPosX() {
@@ -20,4 +20,10 @@ public class PowerUp  extends Entity{
 
 	@Override
 	public void event() {}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 }
