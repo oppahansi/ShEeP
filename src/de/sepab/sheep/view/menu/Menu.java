@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import de.sepab.sheep.model.corelogic.IDataLoader;
+import de.sepab.sheep.model.corelogic.IRandomGenerator;
 import de.sepab.sheep.view.game.GameBoard;
 
 public class Menu implements IMenu{
@@ -26,7 +28,7 @@ public class Menu implements IMenu{
 						 lOptions = new JPanel(),
 						 lHelp = new JPanel();
 	
-	public static GameBoard gb = new GameBoard();
+	public static GameBoard gb;
 	//alle buttons
 	public static JButton mmbSinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
 						  	mmbMultiPlayer = new JButton("Mehrspieler"),
@@ -113,6 +115,9 @@ public class Menu implements IMenu{
 	public static final int width = 640,
 							height = 480;
 	
+	private static de.sepab.sheep.model.corelogic.IGameBoard igb;
+	private static IDataLoader dl;
+	private static IRandomGenerator rg;
 	//Methode zum swtichen der screens
 	public static void setCurrentLabel(JPanel panel) {
 		lMainMenu.setVisible(false);
@@ -121,11 +126,20 @@ public class Menu implements IMenu{
 		lMultiPlayer.setVisible(false);
 		lOptions.setVisible(false);
 		lSinglePlayer.setVisible(false);
-		gb.setVisible(false);
+		if (gb != null) {
+			gb.setVisible(false);
+		}
 		panel.setVisible(true);
 	}
 	
-	public static void run() {
+	public static void run(de.sepab.sheep.model.corelogic.IGameBoard igb2, IDataLoader dl2, IRandomGenerator rg2) {
+		
+		igb = igb2;
+		dl = dl2;
+		rg = rg2;
+		
+		gb = new GameBoard(igb, dl, rg);
+		
 		jf.setFocusable(false);
 		jf.setSize(width, height); //größe des screens
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -405,7 +419,8 @@ public class Menu implements IMenu{
 				mpbStart.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						
+						setCurrentLabel(gb);
+						gb.repaint();
 					}
 				});
 				mpbBack.addActionListener(new ActionListener() {
@@ -544,7 +559,8 @@ public class Menu implements IMenu{
 			lOptions.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHighscore.setBounds(0,0,jf.getWidth(),jf.getHeight());
 			lHelp.setBounds(0,0,jf.getWidth(),jf.getHeight());
-			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
+			
+//			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
 		}
 		
 		{//Labels einfügen in das Fenster
@@ -555,6 +571,7 @@ public class Menu implements IMenu{
 			jf.add(lHighscore);
 			jf.add(lHelp);
 			jf.add(gb);
+//			jf.add(gb);
 		}
 		//startLabel initialisieren
 		setCurrentLabel(lMainMenu);

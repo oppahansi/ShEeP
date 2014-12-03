@@ -33,4 +33,10 @@ public class Sheep extends Entity implements ISheep {
     public boolean scared() {
         return false;
     }
+
+	@Override
+	public int[] getSprite() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

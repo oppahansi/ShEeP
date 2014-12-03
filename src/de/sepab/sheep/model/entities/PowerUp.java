@@ -26,4 +26,10 @@ public class PowerUp extends Entity{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int[] getSprite() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
