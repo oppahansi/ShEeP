@@ -1,9 +1,9 @@
-Tim -> View, GameBoard
+Tim -> Display, Menu, Level, GameBoard
 
 Mario -> Entities, Counter
 
-Stefan -> Jukebox, MovementCalculator, CollisionDetector
+Stefan -> Jukebox, MovementHandler, CollisionHandler
 
-Alex -> DataLoader(Save / Load Highscores), PowerUpCreator
+Alex -> DataBitch, GameData, EntitySpawner
 
 David -> AI, InputHandler, Timer, RondomGenerator
