@@ -1,4 +1,4 @@
-package de.sepab.sheep.display;
+package de.sepab.sheep.handler;
 
 import java.util.LinkedList;
 
@@ -8,7 +8,7 @@ import de.sepab.sheep.entities.Obstacle;
 import de.sepab.sheep.entities.PowerUp;
 import de.sepab.sheep.entities.Sheep;
 
-public class Level {
+public class Level implements ILevel {
 	
 	
 	
