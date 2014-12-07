@@ -1,16 +1,31 @@
 package de.sepab.sheep.handler;
 
-public class RandomGenerator {
+import java.util.Random;
+
+public class RandomGenerator implements IRandomGenerator{
 	
+	/*
+	 * Gibt ein zufälliges positives oder negatives Int zurück. 
+	 */
+	@Override
 	public int getRandomNumber() {
-		return 0;
+		return new Random().nextInt();
 	}
 	
+	/*
+	 * Gibt ein zufälliges Int zurück, welches innerhalb des Intervalls liegt, welches übergeben wurde.
+	 */
+	@Override
 	public int getRandomNumber(int start, int end) {
-		return 0;
+		return start+(new Random().nextInt(end-start+1));
 	}
 	
+	/*
+	 * Gibt ein zufälliges Int zurück welches sich an der gaussichen Verteilung orientiert.
+	 * Für eine normale Distribution wird ein Hauptwert von 100 und eine Varianz von 5 benötigt.
+	 */
+	@Override
 	public int getRandomNumberDistrubution(int mean, int variance) {
-		return 0;
+		return (int)((float)mean+new Random().nextGaussian()*(float)variance);
 	}
 }
