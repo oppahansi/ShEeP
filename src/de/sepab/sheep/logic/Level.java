@@ -2,15 +2,11 @@ package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
 
-import de.sepab.sheep.entities.Cage;
-import de.sepab.sheep.entities.Dog;
-import de.sepab.sheep.entities.Obstacle;
-import de.sepab.sheep.entities.PowerUp;
-import de.sepab.sheep.entities.Sheep;
+import de.sepab.sheep.entities.*;
+import de.sepab.sheep.handler.EntitySpawner;
+import de.sepab.sheep.handler.IEntitySpawner;
 
 public class Level implements ILevel {
-	
-	
 	
 	public LinkedList<Dog> getDogList() {
 		return new LinkedList<Dog>();
@@ -31,9 +27,13 @@ public class Level implements ILevel {
 	public LinkedList<Cage> getCageList() {
 		return new LinkedList<Cage>();
 	}
-	
-	public void addDog(Dog dog) {
-		
+
+	public Level() {
+
+	}
+
+	public void addDog(int x, int y, int sprite) {
+
 	}
 	
 	public void addSheep(Sheep sheep){

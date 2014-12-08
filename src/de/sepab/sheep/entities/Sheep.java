@@ -4,7 +4,11 @@ public class Sheep implements IEntity, ISheep {
 	
 	private int[] thoughts = new int[5];
 	private boolean scared = false;
-	
+
+	public Sheep (int posX, int posY, int spritePos) {
+
+	}
+
 	@Override
 	public int[] getThoughts() {
 		return this.thoughts;

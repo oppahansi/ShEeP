@@ -3,19 +3,19 @@ package de.sepab.sheep.handler;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.Constants;
 
-public class EntitySpawner {
+public class EntitySpawner implements IEntitySpawner{
 
-    public IEntity spawn(String entityName) {
+    public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
         if (entityName == Constants.DOG) {
-            return new Dog();
+            return new Dog(posX, posY, spritePos);
         } else if (entityName == Constants.SHEEP) {
-            return new Sheep();
+            return new Sheep(posX, posY, spritePos);
         } else if (entityName == Constants.POWER_UP) {
-            return new PowerUp();
+            return new PowerUp(posX, posY, spritePos);
         } else if (entityName == Constants.OBSTACLE) {
-            return new Obstacle();
+            return new Obstacle(posX, posY, spritePos);
         } else if (entityName == Constants.CAGE) {
-            return new Cage();
+            return new Cage(posX, posY, spritePos);
         } else {
             return null;
         }

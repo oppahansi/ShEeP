@@ -1,7 +1,16 @@
 package de.sepab.sheep.entities;
 
 public class Entity implements IEntity {
-	
+	private int posX;
+	private int posY;
+	private int spritePos;
+
+	public Entity(int posX, int posY, int spritePos) {
+		this.posX = posX;
+		this.posY = posY;
+		this.spritePos = spritePos;
+	}
+
 	@Override
 	public int getX(){
 		return 0;
