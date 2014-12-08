@@ -4,43 +4,45 @@ public class Entity implements IEntity {
 	private int posX;
 	private int posY;
 	private int spritePos;
+	private float speed;
 
 	public Entity(int posX, int posY, int spritePos) {
 		this.posX = posX;
 		this.posY = posY;
 		this.spritePos = spritePos;
+		speed = 1.0f;
 	}
 
-	@Override
-	public int getX(){
-		return 0;
+	public int getPosX() {
+		return posX;
 	}
-	
-	@Override
-	public void setX(int x){}
-	
-	@Override
-	public int getY() {
-		return 0;
+
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
-	
-	@Override
-	public void setY(int y){}
-	
-	@Override
-	public int getSprite(){
-		return 0;
+
+	public int getPosY() {
+		return posY;
 	}
-	
-	@Override
-	public void setSprite(int sprite){}
-	
-	@Override
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public int getSpritePos() {
+		return spritePos;
+	}
+
+	public void setSpritePos(int spritePos) {
+		this.spritePos = spritePos;
+	}
+
 	public float getSpeed() {
-		return 0f;
+		return speed;
 	}
-	
-	@Override
-	public void setSpeed(float speed){}
-	
-}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+}	
