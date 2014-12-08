@@ -99,5 +99,4 @@ public class Input implements KeyListener, IInput {
             this.locked = true;
         }
     }
-
 }

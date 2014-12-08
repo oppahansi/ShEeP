@@ -70,14 +70,14 @@ public class AI {
 			tmpX=-1;
 			break;
 		}
-		if(!this.collisionHandler.calcCollision(sheep, sheep.getX()+tmpX, sheep.getY()+tmpY)) {
+		if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()+tmpX, sheep.getPosY()+tmpY)) {
 			step = ((ISheep)sheep).getThoughts()[0];
 		}
 		else {
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getX(), sheep.getY()+1)) possibleSteps[0]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getX()+1, sheep.getY())) possibleSteps[1]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getX(), sheep.getY()-1)) possibleSteps[2]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getX()-1, sheep.getY())) possibleSteps[3]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()+1)) possibleSteps[0]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()+1, sheep.getPosY())) possibleSteps[1]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()-1)) possibleSteps[2]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()-1, sheep.getPosY())) possibleSteps[3]=true;
 			for(int i=0; i<possibleSteps.length;i++) {
 				if(possibleSteps[i]) n++;
 			}
@@ -95,7 +95,7 @@ public class AI {
 			}
 		}
 		if(((ISheep)sheep).isScared()) {
-			int chance = this.randomGenerator.getRandomNumberDistrubution(this.iq, this.loss);
+			int chance = this.randomGenerator.getRandomNumberDistribution(this.iq, this.loss);
 			if(!(chance > -this.loss && chance < this.loss)) {
 				step=0;
 			}
@@ -105,7 +105,7 @@ public class AI {
 	
 	private void checkPath(int[] thoughts) {
 		if(thoughts[4] == 0) {
-			int chance = this.randomGenerator.getRandomNumberDistrubution(this.iq, this.loss);
+			int chance = this.randomGenerator.getRandomNumberDistribution(this.iq, this.loss);
 			if(!(chance > -this.loss && chance < this.loss)) {
 				for(int i=0; i<5; i++) {
 					thoughts[i] = this.randomGenerator.getRandomNumber(1, 4);

@@ -1,9 +1,8 @@
 package de.sepab.sheep.handler;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 
-public class DataLoader implements IDataLoader{
+public class DataLoader implements IDataLoader {
 
     private static GameData GAMEDATA;
 
@@ -46,14 +45,6 @@ public class DataLoader implements IDataLoader{
         saveHighscore();
     }
 
-    public int[] getSpritePosition() {
-        return new int[0];
-    }
-
-    public BufferedImage getSprite(String path) {
-        return new BufferedImage(0, 0, 0);
-    }
-    
     public int[] getCountHighscores() {
         return GAMEDATA.getCountHighscores();
     }
