@@ -7,8 +7,13 @@ public interface IDataLoader {
     public void saveHighscore();
 
     public void loadHighscore();
+    
+    public int[] getCountHighscores();
 
-    public int[] getSpritePosition();
+    public int[] getTimeHighscores();
 
-    public BufferedImage getSprite(String path);
+    public String[] getCountNames();
+
+    public String[] getTimeNames();
+
 }
