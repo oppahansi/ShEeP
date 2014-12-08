@@ -1,4 +1,4 @@
-package de.sepab.sheep.main;
+package de.sepab.sheep.handler;
 
 public class Constants {
     public static final int TIME_MOD = 1;

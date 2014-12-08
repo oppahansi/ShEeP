@@ -1,6 +1,5 @@
 package de.sepab.sheep.handler;
 
-import de.sepab.sheep.main.Constants;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

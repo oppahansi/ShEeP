@@ -1,7 +1,5 @@
 package de.sepab.sheep.handler;
 
-import de.sepab.sheep.main.Constants;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -9,7 +7,7 @@ public class DataBitch {
 
     private static GameData GAMEDATA;
 
-    public DataBitch () {
+    public DataBitch() {
         GAMEDATA = new GameData();
     }
 
@@ -32,11 +30,7 @@ public class DataBitch {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("highscores.sav"));
             GAMEDATA = (GameData) in.readObject();
             in.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -58,23 +52,5 @@ public class DataBitch {
 
     public BufferedImage getSprite(String path) {
         return new BufferedImage(0, 0, 0);
-    }
-
-    public static void main(String[] args) {
-        DataBitch dataBitch = new DataBitch();
-        GAMEDATA.addHighscore("FirstIn", 4, Constants.COUNT_MOD);
-        GAMEDATA.addHighscore("SecondIn", 2, Constants.COUNT_MOD);
-        GAMEDATA.addHighscore("LastIn", 3, Constants.COUNT_MOD);
-
-        dataBitch.saveHighscore();
-        dataBitch.loadHighscore();
-
-        int[] scores = GAMEDATA.getCountHighscores();
-        String[] names = GAMEDATA.getCountNames();
-
-        for (int i = 0; i < 3; i++) {
-            System.out.println(names[i] + " " + scores[i]);
-        }
-
     }
 }

@@ -1,10 +1,10 @@
 package de.sepab.sheep.handler;
 
-import de.sepab.sheep.main.Constants;
-
 import java.io.Serializable;
 
 public class GameData implements Serializable {
+
+    private static final long serialVersionUID = 1;
 
     private static final int MAX_RECORDS = 3;
 
@@ -36,53 +36,35 @@ public class GameData implements Serializable {
                 countNames[0] = name;
                 sortHighscores(countNames, countHighscores);
             }
-        }else if (gameMod == Constants.TIME_MOD) {
+        } else if (gameMod == Constants.TIME_MOD) {
             if (isNewTimeHighscore(newHighscore)) {
                 timeHighscores[MAX_RECORDS - 1] = newHighscore;
                 timeNames[MAX_RECORDS - 1] = name;
-                sortTimeHighscores();
+                sortHighscores(timeNames, timeHighscores);
             }
         }
     }
 
     private boolean isNewCountHighscore(int newHighscore) {
-        return newHighscore > countHighscores[MAX_RECORDS - 1];
+        return newHighscore > countHighscores[0];
     }
 
     private boolean isNewTimeHighscore(int newHighscore) {
-        return newHighscore > timeHighscores[MAX_RECORDS - 1];
+        return newHighscore > timeHighscores[0];
     }
 
     private void sortHighscores(String[] names, int[] highscores) {
-        for (int i= 1; i < highscores.length; i++)
-        {
+        for (int i = 1; i < highscores.length; i++) {
             int index = highscores[i];
             String indexName = names[i];
             int j = i;
-            while (j > 0 && highscores[j - 1] > index)
-            {
+            while (j > 0 && highscores[j - 1] > index) {
                 highscores[j] = highscores[j - 1];
                 names[j] = names[j - 1];
                 j--;
             }
             highscores[j] = index;
             names[j] = indexName;
-        }
-    }
-
-    private void sortTimeHighscores() {
-        for (int i = 0; i < MAX_RECORDS; i++) {
-            int score = timeHighscores[i];
-            String name = timeNames[i];
-
-            int j;
-            for (j = i - 1; j >= 0 && timeHighscores[i] < score; j--) {
-                timeHighscores[j + 1] = timeHighscores[j];
-                timeNames[j + 1] = timeNames[j];
-            }
-
-            timeHighscores[j + 1] = score;
-            timeNames[j + 1] = name;
         }
     }
 
