@@ -1,5 +1,5 @@
 package de.sepab.sheep.entities;
 
-public class Obstacle {
+public class Obstacle extends Entity{
 
 }
