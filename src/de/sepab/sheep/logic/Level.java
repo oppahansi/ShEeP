@@ -1,4 +1,4 @@
-package de.sepab.sheep.handler.logic;
+package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
 

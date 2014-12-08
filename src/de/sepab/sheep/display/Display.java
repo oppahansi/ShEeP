@@ -1,10 +1,10 @@
 package de.sepab.sheep.display;
 
-import de.sepab.sheep.handler.logic.InputHandler;
+import de.sepab.sheep.handler.Input;
 
 public class Display {
 	
-	public void attach(InputHandler inputHandler){}
+	public void attach(Input inputHandler){}
 	
 	public void switchPanel(boolean visible) {}
 

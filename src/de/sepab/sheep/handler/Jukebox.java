@@ -1,4 +1,4 @@
-package de.sepab.sheep.handler.data;
+package de.sepab.sheep.handler;
 
 public class Jukebox {
 	

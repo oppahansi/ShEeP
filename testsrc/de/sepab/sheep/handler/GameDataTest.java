@@ -1,7 +1,5 @@
 package de.sepab.sheep.handler;
 
-import de.sepab.sheep.handler.data.Constants;
-import de.sepab.sheep.handler.data.GameData;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

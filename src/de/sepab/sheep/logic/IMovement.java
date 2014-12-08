@@ -1,8 +1,8 @@
-package de.sepab.sheep.handler.movement;
+package de.sepab.sheep.logic;
 
 import de.sepab.sheep.entities.IEntity;
 
-public interface IMovementHandler {
+public interface IMovement {
 	
 	public void move(IEntity entity, int direction);
 	
