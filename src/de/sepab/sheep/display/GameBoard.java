@@ -1,6 +1,5 @@
 package de.sepab.sheep.display;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,27 +14,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-
-
-
-
-
-
-
-
-
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IRandomGenerator;
-
-
-
-
-
-
-
-
-
 
 @SuppressWarnings("serial")
 public class GameBoard extends JPanel {
@@ -125,7 +106,7 @@ public class GameBoard extends JPanel {
     public void paintSheep(Graphics2D g) {
     	if (modelLvl.getSheepList() != null) {
     		for (IEntity sheep : modelLvl.getSheepList()) {
-        		g.drawImage(IMAGESHEEP.getSubimage(COORDSSHEEP[sheep.getSprite()][0], COORDSSHEEP[sheep.getSprite()][1], tl, tl), sheep.getX(), sheep.getY(), tl, tl, null);		
+        		g.drawImage(IMAGESHEEP.getSubimage(COORDSSHEEP[sheep.getSpritePos()][0], COORDSSHEEP[sheep.getSpritePos()][1], tl, tl), sheep.getPosX(), sheep.getPosY(), tl, tl, null);
     		}
 		}
     }
@@ -133,7 +114,7 @@ public class GameBoard extends JPanel {
     public void paintObstacle(Graphics2D g) {
     	if (modelLvl.getObstacleList() != null) {
     		for (IEntity obstacle : modelLvl.getObstacleList()) {
-        		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[obstacle.getSprite()][0], COORDSOBSTACLE[obstacle.getSprite()][1], tl, tl), obstacle.getX(), obstacle.getY(), tl, tl, null);		
+        		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[obstacle.getSpritePos()][0], COORDSOBSTACLE[obstacle.getSpritePos()][1], tl, tl), obstacle.getPosX(), obstacle.getPosY(), tl, tl, null);
     		}
 		}
     }
@@ -141,7 +122,7 @@ public class GameBoard extends JPanel {
     public void paintDog(Graphics2D g) {
     	if (modelLvl.getDogList() != null) {
     		for (IEntity dog : modelLvl.getDogList()) {
-        		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSprite()][0], COORDSDOGE[dog.getSprite()][1], tl, tl), dog.getX(), dog.getY(), tl, tl, null);		
+        		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos()][0], COORDSDOGE[dog.getSpritePos()][1], tl, tl), dog.getPosX(), dog.getPosY(), tl, tl, null);
     		}
 		}
     }
@@ -149,7 +130,7 @@ public class GameBoard extends JPanel {
     public void paintPowerUp(Graphics2D g) {
     	if (modelLvl.getPowerUpList() != null) {
     		for (IEntity powerUp : modelLvl.getPowerUpList()) {
-        		g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSprite()][0], COORDSPOWERUP[powerUp.getSprite()][1], tl, tl), powerUp.getX(), powerUp.getY(), tl, tl, null);		
+        		g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSpritePos()][0], COORDSPOWERUP[powerUp.getSpritePos()][1], tl, tl), powerUp.getPosX(), powerUp.getPosY(), tl, tl, null);
     		}
 		}
     }

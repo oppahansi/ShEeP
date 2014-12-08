@@ -5,6 +5,14 @@ import java.awt.event.KeyListener;
 
 public class Input implements KeyListener, IInput {
 
+	/*
+	 * Mitte:	0
+	 * Oben:	1
+	 * Rechts:	2
+	 * Unten:	3
+	 * Links:	4
+	 */
+	
     private int[] buffer = new int[2];
     boolean locked = false;
 
@@ -91,5 +99,4 @@ public class Input implements KeyListener, IInput {
             this.locked = true;
         }
     }
-
 }

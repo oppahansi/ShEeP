@@ -8,4 +8,5 @@ public class Cage  extends Entity{
 	public int countSheep(){
 		return 0;
 	}
+
 }
