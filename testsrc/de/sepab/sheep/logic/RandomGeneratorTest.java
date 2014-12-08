@@ -5,12 +5,12 @@ import org.junit.Test;
 import de.sepab.sheep.logic.RandomGenerator;
 
 public class RandomGeneratorTest {
-	
+
 	RandomGenerator tester = new RandomGenerator();
-	
+
 	/*
 	 * Erzeugt ein Array aus 1000 mit GenerateRandomNumber() erzeugten Zahlen.
-	 * Anschließend wird geprüft, ob irgendeine Zahl mehrfach vorkommt. 
+	 * Anschlieï¿½end wird geprï¿½ft, ob irgendeine Zahl mehrfach vorkommt.
 	 * Ist dies der Fall, ist der Test nicht bestanden.
 	 */
 	@Test
@@ -23,18 +23,18 @@ public class RandomGeneratorTest {
 				if (array[i]==array[j]) noRepeat = false;
 			}
 		}
-		
+
 		for (int i=0; i < 1000; i++) {
 		System.out.println (i+1 +". "+ "" + array[i]);
 		assertEquals ("Bei 1000 Zahlen keine Wiederholung", true, noRepeat);
 		}
 	}
-	
+
 	
 	/*
-	 * Testet die GenerateRandomNumber() Methode für ein Intervall von 1-10.
-	 * Da für jede Zahl eine Chance von 1/10 besteht, muss sich bei einer Stichprobe von 1000 die relative Häufigkeit
-	 * jeder Zahl 100 annähern. Als erwarteten Wert habe ich für jede Zahl mindestens 75 gewählt.
+	 * Testet die GenerateRandomNumber() Methode fï¿½r ein Intervall von 1-10.
+	 * Da fï¿½r jede Zahl eine Chance von 1/10 besteht, muss sich bei einer Stichprobe von 1000 die relative Hï¿½ufigkeit
+	 * jeder Zahl 100 annï¿½hern. Als erwarteten Wert habe ich fï¿½r jede Zahl mindestens 75 gewï¿½hlt.
 	 */
 	@Test
 	public void getRandomNumberIntervalTest() {
@@ -56,16 +56,16 @@ public class RandomGeneratorTest {
 			case 10:count[9]++; break;
 			}
 		}
-		System.out.println ("Häufigkeit 1: " +count[0]);
-		System.out.println ("Häufigkeit 2: " +count[1]);
-		System.out.println ("Häufigkeit 3: " +count[2]);
-		System.out.println ("Häufigkeit 4: " +count[3]);
-		System.out.println ("Häufigkeit 5: " +count[4]);
-		System.out.println ("Häufigkeit 6: " +count[5]);
-		System.out.println ("Häufigkeit 7: " +count[6]);
-		System.out.println ("Häufigkeit 8: " +count[7]);
-		System.out.println ("Häufigkeit 9: " +count[8]);
-		System.out.println ("Häufigkeit 10: "+count[9]);
+		System.out.println ("Hï¿½ufigkeit 1: " +count[0]);
+		System.out.println ("Hï¿½ufigkeit 2: " +count[1]);
+		System.out.println ("Hï¿½ufigkeit 3: " +count[2]);
+		System.out.println ("Hï¿½ufigkeit 4: " +count[3]);
+		System.out.println ("Hï¿½ufigkeit 5: " +count[4]);
+		System.out.println ("Hï¿½ufigkeit 6: " +count[5]);
+		System.out.println ("Hï¿½ufigkeit 7: " +count[6]);
+		System.out.println ("Hï¿½ufigkeit 8: " +count[7]);
+		System.out.println ("Hï¿½ufigkeit 9: " +count[8]);
+		System.out.println ("Hï¿½ufigkeit 10: "+count[9]);
 		
 		boolean relVert = true;
 		for (int i=0; i<10; i++) {
@@ -76,11 +76,11 @@ public class RandomGeneratorTest {
 	
 	
 	
-	/*Testet die Methode 1000 mal mit Erwarungswert 100 und Varianz 5 und überpüft die Abweichung der Zufallswerte.
-	 * Dabei werden die Abweichungen um höchstens 5, höchstens 10 und größer als 10 gezählt.
-	 * Mindestens 60%  dürfen maximal um 5 abweichen und höchstens 10% dürfen um mehr als 10 abweichen.
+	/*Testet die Methode 1000 mal mit Erwarungswert 100 und Varianz 5 und ï¿½berpï¿½ft die Abweichung der Zufallswerte.
+	 * Dabei werden die Abweichungen um hï¿½chstens 5, hï¿½chstens 10 und grï¿½ï¿½er als 10 gezï¿½hlt.
+	 * Mindestens 60%  dï¿½rfen maximal um 5 abweichen und hï¿½chstens 10% dï¿½rfen um mehr als 10 abweichen.
 	 */
-	
+
 	@Test
 	public void generateRandomNumberDistributionTest() {
 		int [] array = new int [1000];
@@ -95,16 +95,16 @@ public class RandomGeneratorTest {
 			else if (array [i] > 110 || array [i] < 90 ) devMoreThan10++;
 			else dev0++;
 		}
-		
-		System.out.println("Abweichungen um höchstens 5: " + (devMax5 + dev0));
-		System.out.println("Abweichungen um höchstens 10: " + devMax10);
+
+		System.out.println("Abweichungen um hï¿½chstens 5: " + (devMax5 + dev0));
+		System.out.println("Abweichungen um hï¿½chstens 10: " + devMax10);
 		System.out.println("Abweichungen um mehr als 10: " + devMoreThan10);
 		
 		boolean deviation = true;
 		if (devMax5 < 600) deviation = false;
 		if (devMoreThan10 > 100) deviation = false;
 	
-		assertEquals ("Die Verteilung der generierten Zahlen ähnelt der der Normalverteilung", true, deviation);
+		assertEquals ("Die Verteilung der generierten Zahlen ï¿½hnelt der der Normalverteilung", true, deviation);
 	}
 
 }
