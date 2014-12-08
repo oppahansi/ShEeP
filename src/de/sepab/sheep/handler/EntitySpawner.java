@@ -1,7 +1,7 @@
-package de.sepab.sheep.handler.logic;
+package de.sepab.sheep.handler;
 
 import de.sepab.sheep.entities.*;
-import de.sepab.sheep.handler.data.Constants;
+import de.sepab.sheep.handler.Constants;
 
 public class EntitySpawner {
 

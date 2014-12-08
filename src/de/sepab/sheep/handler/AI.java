@@ -1,22 +1,24 @@
-package de.sepab.sheep.handler.movement;
+package de.sepab.sheep.handler;
 
 import java.util.LinkedList;
 
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.ISheep;
-import de.sepab.sheep.handler.data.IRandomGenerator;
-import de.sepab.sheep.handler.data.RandomGenerator;
+import de.sepab.sheep.logic.ICollision;
+import de.sepab.sheep.logic.IMovement;
+import de.sepab.sheep.logic.IRandomGenerator;
+import de.sepab.sheep.logic.RandomGenerator;
 
 public class AI {
 	
 	private int iq;
 	private int loss;
 	private LinkedList<IEntity> sheeps;
-	private IMovementHandler movementHandler;
-	private ICollisionHandler collisionHandler;
+	private IMovement movementHandler;
+	private ICollision collisionHandler;
 	private IRandomGenerator randomGenerator = new RandomGenerator();
 	
-	public AI(int iq, int loss, LinkedList<IEntity> sheeps, IMovementHandler movementHandler, ICollisionHandler collisionHandler) {
+	public AI(int iq, int loss, LinkedList<IEntity> sheeps, IMovement movementHandler, ICollision collisionHandler) {
 		this.iq = iq;
 		this.loss = loss;
 		this.sheeps = sheeps;

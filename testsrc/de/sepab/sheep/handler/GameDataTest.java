@@ -1,7 +1,5 @@
 package de.sepab.sheep.handler;
 
-import de.sepab.sheep.handler.data.Constants;
-import de.sepab.sheep.handler.data.GameData;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -52,10 +50,10 @@ public class GameDataTest {
 
         assertEquals("Player One should have the score 123", expectedOneHighscore, actualOneHighscore);
         assertEquals("Player One should have the name One", expectedOneName, actualOneName);
-        assertEquals("Player Two should have the score 12", expectedOneHighscore, actualOneHighscore);
-        assertEquals("Player Two should have the name Two", expectedOneName, actualOneName);
-        assertEquals("Player Three should have the score 1", expectedOneHighscore, actualOneHighscore);
-        assertEquals("Player Three should have the name Three", expectedOneName, actualOneName);
+        assertEquals("Player Two should have the score 12", expectedTwoHighscore, actualTwoHighscore);
+        assertEquals("Player Two should have the name Two", expectedTwoName, actualTwoName);
+        assertEquals("Player Three should have the score 1", expectedThreeHighscore, actualThreeHighscore);
+        assertEquals("Player Three should have the name Three", expectedThreeName, actualThreeName);
     }
 
 }
