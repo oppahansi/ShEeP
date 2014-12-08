@@ -153,7 +153,6 @@ public class Menu{
 		hstfONplayer1.setText(onCountName[0]);
 		hstfONplayer2.setText(onCountName[1]);
 		hstfONplayer3.setText(onCountName[2]);
-		
 	}
 	
 	public static void run(ILevel iLvl2, IRandomGenerator rg2) {
