@@ -1,6 +1,6 @@
 package de.sepab.sheep.entities;
 
-public class Sheep extends Entity, ISheep {
+public class Sheep extends Entity implements ISheep {
 	
 	private int[] thoughts = new int[5];
 	private boolean scared = false;
@@ -22,8 +22,9 @@ public class Sheep extends Entity, ISheep {
 	}
 
 	public void setScared(boolean status) {
-		this.scared = scared;
+		this.scared = status;
 	}
+	
 
 	
 }

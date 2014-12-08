@@ -7,5 +7,6 @@ public class Dog extends Entity {
     }
 
     public void bark() {
+    	
     }
 }
