@@ -26,15 +26,34 @@ public class GameDataTest {
     }
 
     @Test
-    public void testAddHighscore() {
+    public void testAddCountHighscore() {
         GameData gameData = new GameData();
         gameData.init();
-        gameData.addHighscore("Test", 123, Constants.COUNT_MOD);
+        gameData.addHighscore("Two", 12, Constants.COUNT_MOD);
+        gameData.addHighscore("One", 123, Constants.COUNT_MOD);
+        gameData.addHighscore("Three", 1, Constants.COUNT_MOD);
 
-        int expectedHighscore = 123;
-        String expectedName = "Test";
-        String actualName = gameData.getCountNames()[2];
+        int expectedOneHighscore = 123;
+        String expectedOneName = "One";
+        int actualOneHighscore = gameData.getCountHighscores()[2];
+        String actualOneName = gameData.getCountNames()[2];
 
-        assertEquals("First Player should have the name Test", expectedName, actualName);
+        int expectedTwoHighscore = 12;
+        String expectedTwoName = "Two";
+        int actualTwoHighscore = gameData.getCountHighscores()[1];
+        String actualTwoName = gameData.getCountNames()[1];
+
+        int expectedThreeHighscore = 1;
+        String expectedThreeName = "Three";
+        int actualThreeHighscore = gameData.getCountHighscores()[0];
+        String actualThreeName = gameData.getCountNames()[0];
+
+        assertEquals("Player One should have the score 123", expectedOneHighscore, actualOneHighscore);
+        assertEquals("Player One should have the name One", expectedOneName, actualOneName);
+        assertEquals("Player Two should have the score 12", expectedOneHighscore, actualOneHighscore);
+        assertEquals("Player Two should have the name Two", expectedOneName, actualOneName);
+        assertEquals("Player Three should have the score 1", expectedOneHighscore, actualOneHighscore);
+        assertEquals("Player Three should have the name Three", expectedOneName, actualOneName);
     }
+
 }
