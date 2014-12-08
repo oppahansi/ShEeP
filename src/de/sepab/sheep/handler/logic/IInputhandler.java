@@ -1,4 +1,4 @@
-package de.sepab.sheep.handler;
+package de.sepab.sheep.handler.logic;
 
 public interface IInputhandler {
 

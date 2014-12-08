@@ -1,9 +1,9 @@
-package de.sepab.sheep.handler;
+package de.sepab.sheep.handler.data;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-public class DataLoader {
+public class DataLoader implements IDataLoader{
 
     private static GameData GAMEDATA;
 
@@ -11,7 +11,7 @@ public class DataLoader {
         GAMEDATA = new GameData();
     }
 
-    public static void saveHighscore() {
+    public void saveHighscore() {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("highscores.sav"));
             out.writeObject(GAMEDATA);
@@ -21,7 +21,7 @@ public class DataLoader {
         }
     }
 
-    public static void loadHighscore() {
+    public void loadHighscore() {
         try {
             if (!saveFileExist()) {
                 initGameData();
@@ -35,12 +35,12 @@ public class DataLoader {
         }
     }
 
-    private static boolean saveFileExist() {
+    private boolean saveFileExist() {
         File saveFile = new File("highscores.sav");
         return saveFile.exists();
     }
 
-    private static void initGameData() {
+    private void initGameData() {
         GAMEDATA = new GameData();
         GAMEDATA.init();
         saveHighscore();
