@@ -53,4 +53,20 @@ public class DataLoader implements IDataLoader{
     public BufferedImage getSprite(String path) {
         return new BufferedImage(0, 0, 0);
     }
+    
+    public int[] getCountHighscores() {
+        return GAMEDATA.getCountHighscores();
+    }
+
+    public int[] getTimeHighscores() {
+        return GAMEDATA.getTimeHighscores();
+    }
+
+    public String[] getCountNames() {
+        return GAMEDATA.getCountNames();
+    }
+
+    public String[] getTimeNames() {
+        return GAMEDATA.getTimeNames();
+    }
 }
