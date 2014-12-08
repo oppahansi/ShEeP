@@ -18,7 +18,7 @@ public class Collision {
 		List.addAll(getPowerUpList());
 		List.addAll(getObstacleList());
 		
-		 if(0<y<1281 && 0<x<961)	//abfrage des Spielfeldrandes
+		 if(31<y<1281 && 0<x<929)	//abfrage des Spielfeldrandes
 		 {
 		 	//Koordinatennetz
 		  	int Y[2];
