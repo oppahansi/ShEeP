@@ -25,7 +25,7 @@ public class RandomGenerator implements IRandomGenerator {
 	 * F�r eine normale Distribution wird ein Hauptwert von 100 und eine Varianz von 5 ben�tigt.
 	 */
 	@Override
-	public int getRandomNumberDistrubution(int mean, int variance) {
-		return (int)((float)mean+new Random().nextGaussian()*(float)variance);
+	public int getRandomNumberDistribution(int mean, int deviation) {
+		return (int)((float)mean+new Random().nextGaussian()*(float)deviation);
 	}
 }
