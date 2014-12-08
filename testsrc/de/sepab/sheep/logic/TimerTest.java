@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class TimerTest extends Thread {
 
     @Test
-    public void tesGetTime() {
+    public void testGetTime() {
         Timer timer = new Timer();
 
         int expectedTime = 10;
