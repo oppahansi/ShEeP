@@ -3,11 +3,11 @@ package de.sepab.sheep.logic;
 import de.sepab.sheep.entities.IEntity;
 
 public class Movement implements IMovement {
-	//1=hoch,2=rechts,3=runter,4=links,0=nix
+
 	@Override
 	public void move(IEntity entity, int direction) {
 		// TODO Auto-generated method stub
-			
+		//0=nix,1=hoch,2=rechts,3=runter,4=links,
 			switch(direction)
 				case(0)
 					if(collision.isoccupied(entiry.getX(),entity.getY()))

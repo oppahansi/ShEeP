@@ -5,34 +5,44 @@ import de.sepab.sheep.entities.ILevel;
 
 public class Collision {
 	public boolean calCollision(Entity entity, int x, int y){
-		//Wäre echt nicer wenn das ne Entity zurüch gibt.
+		//Möglicherweise platzhalter
 		return false;
 	}
-	puplic boolean isoccupied(int x,int y)
+	public boolean isoccupied(int x,int y)
 	{
-		//getDogList();getSheepList();getPowerUpList();getObstacleList()
-		/*
-		 * if(0<x<1281 && 0<y<961)
-		 * {
-		 	liste mit allen entitys finden
-		 	for(int i=0;i<getDogList().size;i++)
+		
+		 //Große Liste erstellen
+		LinkedList<IEntity> List = new LinkedList<>();
+		List.addAll(getDogList());
+		List.addAll(getSheepList());
+		List.addAll(getPowerUpList());
+		List.addAll(getObstacleList());
+		
+		 if(0<y<1281 && 0<x<961)	//abfrage des Spielfeldrandes
+		 {
+		 	//Koordinatennetz
+		  	int Y[2];
+			int X[2];
+			X[0]=entity.getX()-32;
+			X[1]=entity.getX()+32;
+			Y[0]=entity.getY()-32;
+			Y[1]=entity.getY()+32;
+			
+		 	for(int i=0;i<List.size;i++)
 		 	{
-				int Y[2];
-				int X[2];
-				x[0]=entity.getX()-32;
-				x[1]=entity.getX()+32;
-				y[0]=entity.getY()-32;
-				y[1]=entity.getY()+32;
-
-			if(x[0]<List[i].getX()<x[1] && y[0]<list[i].getY()<y[1])
-			{//COLLISION
-			return false;}
+				if(X[0]<List.get(i).getX()<X[1] && Y[0]<List.get(i).getY()<Y[1])	//punkt im koordinatennetz?
+				{
+				//COLLISION
+					return false;
+				}
 		 	}
-		 	else{return true;}
+		 	else
+		 	{
+		 		return true;
 		 	}
-		 	}
+		 }
 		 	return false;
-		*/
+		
 	}
 }
 
@@ -40,9 +50,6 @@ public class Collision {
 /*
 Sprite auflösung abfragen?kann ich das? - nein muss hardegecodet werden
 sind die koordinaten der entity links unten vom bild? oder z.b. zentral mitte? - links oben
-hunde sind 64x64
-schafe sind 64x64
-hindernis immer 32x32?
 ALLES IST 32x32
 
 */
