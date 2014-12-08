@@ -10,7 +10,6 @@ public class Entity implements IEntity {
 		this.posX = posX;
 		this.posY = posY;
 		this.spritePos = spritePos;
-		speed = 1.0f;
 	}
 
 	public int getPosX() {
@@ -44,5 +43,4 @@ public class Entity implements IEntity {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
-
 }	
