@@ -2,6 +2,10 @@ package de.sepab.sheep.handler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
+
+import de.sepab.sheep.entities.Dog;
+import de.sepab.sheep.logic.IMovement;
 
 public class Input implements KeyListener, IInput {
 
@@ -14,18 +18,26 @@ public class Input implements KeyListener, IInput {
 	 */
 	
     private int[] buffer = new int[2];
-    boolean locked = false;
+    private boolean locked = false;
+    private IMovement movement;
+    private LinkedList<Dog> dogList;
+    
+    public Input(IMovement movement, LinkedList<Dog> dogList) {
+    	this.movement = movement;
+    	this.dogList = dogList;
+    }
 
-    public int[] getBuffer() {
+	public void makeTurns() {
         int bufferPlayerA = this.buffer[0];
         int bufferPlayerB = this.buffer[1];
         this.buffer[0] = 0;
         this.buffer[1] = 0;
-        this.locked = false;
         int[] tmpBuffer = {bufferPlayerA, bufferPlayerB};
-        return tmpBuffer;
-    }
-
+        this.movement.move(this.dogList.getFirst(), tmpBuffer[0]);
+        this.movement.move(this.dogList.getLast(), tmpBuffer[1]);
+        this.locked = false;
+	}
+    
     @Override
     public void keyPressed(KeyEvent e) {
         if (this.locked == false) {
@@ -99,4 +111,5 @@ public class Input implements KeyListener, IInput {
             this.locked = true;
         }
     }
+
 }
