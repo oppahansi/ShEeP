@@ -6,4 +6,6 @@ public interface ICollision {
 	
 	public boolean calcCollision(IEntity entitiy, int posX, int posY);
 	
+	public boolean isoccupied(int x,int y);
+
 }
