@@ -25,10 +25,8 @@ public class Collision implements ICollision{
 	public boolean isoccupied(int x,int y)
 	{
 		
-		 
-		
-		
 		if(0<y && y<928 && 0<x && x<1248)//abfrage des Spielfeldrandes
+
 		 {
 		 	//Koordinatennetz
 		  	int Y[]=new int[2];
