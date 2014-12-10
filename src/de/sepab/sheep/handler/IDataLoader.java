@@ -1,6 +1,5 @@
 package de.sepab.sheep.handler;
 
-import java.awt.image.BufferedImage;
 
 public interface IDataLoader {
 

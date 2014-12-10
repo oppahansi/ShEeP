@@ -126,7 +126,7 @@ public class Menu{
 		
 	
 	public static final int width = 1280,
-							height = 960;
+							height = 960	;
 	
 	private static ILevel level;
 	private static IRandomGenerator randomGenerator;
@@ -195,7 +195,7 @@ public class Menu{
 
 		
 		gameBoard = new GameBoard(level, randomGenerator, input);
-//		jFrame.setFocusable(false);
+		jFrame.setFocusable(false);
 		jFrame.setSize(width, height); //größe des screens
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		jFrame.setUndecorated(true);
@@ -463,12 +463,13 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						gameBoard.requestFocus(true);
+//						gameBoard.setFocusable(true);
 						level.getReferences(ai, gameBoard, timer, input);
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
+						gameBoard.requestFocus();
 					}
 				});
 				singlePlayerButton_Back.addActionListener(new ActionListener() {
