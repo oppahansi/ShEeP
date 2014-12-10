@@ -28,7 +28,7 @@ public class Collision implements ICollision{
 		 
 		
 		
-		 if(31<y && y<1281 && 0<x && x<929)	//abfrage des Spielfeldrandes
+		if(0<y && y<1248 && 0<x && x<928)//abfrage des Spielfeldrandes
 		 {
 		 	//Koordinatennetz
 		  	int Y[]=new int[2];
@@ -54,9 +54,9 @@ public class Collision implements ICollision{
 		 		
 		 	
 		 	}
-		 	
-		 }
 		 	return true;
+		 }
+		 	return false;
 		
 	}
 
