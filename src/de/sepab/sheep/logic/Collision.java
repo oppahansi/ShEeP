@@ -12,7 +12,7 @@ public class Collision implements ICollision{
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList) {
 		//Groﬂe Liste erstellen
 		List = new LinkedList<>();
-		List.addAll(DogList);
+		//List.addAll(DogList);
 		List.addAll(SheepList);
 		List.addAll(PowerUpList);
 		List.addAll(ObstacleList);
@@ -25,10 +25,8 @@ public class Collision implements ICollision{
 	public boolean isoccupied(int x,int y)
 	{
 		
-		 
-		
-		
-		 if(31<y && y<1281 && 0<x && x<929)	//abfrage des Spielfeldrandes
+		if(0<y && y<928 && 0<x && x<1248)//abfrage des Spielfeldrandes
+
 		 {
 		 	//Koordinatennetz
 		  	int Y[]=new int[2];
@@ -54,9 +52,9 @@ public class Collision implements ICollision{
 		 		
 		 	
 		 	}
-		 	
-		 }
 		 	return true;
+		 }
+		 	return false;
 		
 	}
 
