@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
 import de.sepab.sheep.entities.Dog;
+import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.logic.IMovement;
 
 public class Input implements KeyListener, IInput {
@@ -20,9 +21,9 @@ public class Input implements KeyListener, IInput {
     private int[] buffer = new int[2];
     private boolean locked = false;
     private IMovement movement;
-    private LinkedList<Dog> dogList;
+    private LinkedList<IEntity> dogList;
     
-    public Input(IMovement movement, LinkedList<Dog> dogList) {
+    public Input(IMovement movement, LinkedList<IEntity> dogList) {
     	this.movement = movement;
     	this.dogList = dogList;
     }
