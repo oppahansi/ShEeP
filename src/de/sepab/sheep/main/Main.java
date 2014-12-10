@@ -2,14 +2,11 @@ package de.sepab.sheep.main;
 
 import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.handler.DataLoader;
+import de.sepab.sheep.handler.Input;
 import de.sepab.sheep.logic.Level;
 import de.sepab.sheep.logic.RandomGenerator;
 
-public class main {
-
-	public main() {
-		// TODO Auto-generated constructor stub
-	}
+public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -17,7 +14,8 @@ public class main {
 		
 		DataLoader dl = new DataLoader();
 		dl.loadHighscore();
-		Menu menu = new Menu(dl);
+		Input input = new Input();
+		Menu menu = new Menu(dl, input);
 		RandomGenerator rg = new RandomGenerator();
 		Level lvl = new Level();
 		menu.run(lvl, rg);
