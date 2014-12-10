@@ -30,6 +30,7 @@ public class Level implements ILevel, ActionListener{
 	javax.swing.Timer swingTimer;
 	ITimer timer;
 	IInput input;
+	int time = 60, count = 0;
 	
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input) {
 		this.ai = ai;
@@ -59,7 +60,7 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	public Level() {
-		swingTimer = new javax.swing.Timer(16, this);
+		swingTimer = new javax.swing.Timer(33, this);
 		swingTimer.stop();
 		timer = new Timer();
 		timer.stop();
@@ -91,13 +92,15 @@ public class Level implements ILevel, ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 //		System.out.print("test");
+		timer.start();
 //		System.out.print(timer.getTime() + "");
 		switch (gameModus) {
 		case ONTIME:
-//			if (timer.getTime() >= 60) {
-//				swingTimer.stop();
-//				timer.stop();
-//			}
+			if ((timer.getTime() + time) <= 0) {
+				swingTimer.stop();
+				timer.stop();
+				System.out.print("ende");
+			}
 			break;
 		case ONCOUNT:
 			break;
@@ -107,16 +110,18 @@ public class Level implements ILevel, ActionListener{
 		default:
 			break;
 		}
+		
 		ai.makeTurns();
 		input.makeTurns();
 		gameBoard.repaint();
-		
+//		count++;
+//		if(timer)
 	}
 
 	@Override
 	public void TimerStart() {
 		swingTimer.start();
-		timer.start();
+		timer.reset()	;
 		// TODO Auto-generated method stub
 		
 	}

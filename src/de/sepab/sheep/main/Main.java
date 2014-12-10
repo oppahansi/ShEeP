@@ -33,7 +33,7 @@ public class Main {
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
 		level.addDog(32, 32, 0);
-		level.addSheep(128, 128, 0);
+		level.addSheep(128, 32, 0);
 		ITimer timer = new Timer();
 		timer.stop();
 
