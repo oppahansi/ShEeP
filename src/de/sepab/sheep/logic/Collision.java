@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import de.sepab.sheep.entities.IEntity;
 
 
-public class Collision {
+public class Collision implements ICollision{
 	
 	LinkedList<IEntity> List;
 	
@@ -59,6 +59,13 @@ public class Collision {
 		 	return true;
 		
 	}
+
+	@Override
+	public boolean calcCollision(IEntity entitiy, int posX, int posY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
 
 

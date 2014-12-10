@@ -15,14 +15,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.IEntity;
+import de.sepab.sheep.handler.IInput;
+import de.sepab.sheep.handler.Input;
 import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IRandomGenerator;
 
 @SuppressWarnings("serial")
 public class GameBoard extends JPanel{
 	
-	private static final String SHEEP = "/de/sepab/sheep/model/gfx/sheep_walk.png";
-	private static final String DOGE = "/de/sepab/sheep/model/gfx/wolf.png";
+	private static final String SHEEP = "/de/sepab/sheep/model/gfx/sheep_walk32x32.png";
+	private static final String DOGE = "/de/sepab/sheep/model/gfx/wolf32x32.png";
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/wolf.png";
@@ -33,7 +35,7 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
 	    
-	private static final int COORDSSHEEP[][] = {{0,0}};
+	private static final int COORDSSHEEP[][] = {{16,16}};
 	private static final int COORDSDOGE[][] = {{0,0}};
 	private static final int COORDSOBSTACLE[][] = {{0,0},{32,0},{64,0},
 	    										  {0,32},{32,32},{64,32},
@@ -48,7 +50,7 @@ public class GameBoard extends JPanel{
 	
 	
 	private int textureLength = 32; //tl = texture length
-	private int background[][][] = new int[20][15][2];
+	private int background[][][] = new int[40][30][2];
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
@@ -66,18 +68,18 @@ public class GameBoard extends JPanel{
     	this.level = level;
     }
     
-    public GameBoard(ILevel level, IRandomGenerator randomGenerator) {
+    public GameBoard(ILevel level, IRandomGenerator randomGenerator, IInput input) {
+    	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
-    	this.setPreferredSize(new Dimension(640, 480));
+    	this.setPreferredSize(new Dimension(1280, 960));
     	this.randomGenerator = randomGenerator;
     	this.level = level;
-    	shuffle();
     }
     
-    private void shuffle() {
-    	for (int x = 0; x < 20; x++) {
-			for (int y = 0; y < 15; y++) {
+    public void shuffle() {
+    	for (int x = 0; x < background.length; x++) {
+			for (int y = 0; y < background[0].length; y++) {
 				int i = randomGenerator.getRandomNumber(0, 2);//2 ist die anzahl an floor texturen
 				background[x][y][0] = COORDSFLOOR[i][0];
 				background[x][y][1] = COORDSFLOOR[i][1];

@@ -10,18 +10,19 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
+import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IDataLoader;
 import de.sepab.sheep.handler.IInput;
 import de.sepab.sheep.handler.Input;
+import de.sepab.sheep.logic.ICollision;
 import de.sepab.sheep.logic.ILevel;
+import de.sepab.sheep.logic.IMovement;
 import de.sepab.sheep.logic.IRandomGenerator;
+import de.sepab.sheep.logic.ITimer;
 
 
 
@@ -114,6 +115,7 @@ public class Menu{
 						   
 						   multiPlayerSelection_Map = {"Karte1", "Karte2"};
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static JComboBox singlePlayerComboBox_Map = new JComboBox(singlePlayerSelection_Map),
 								singlePlayerComboBox_Difficulty = new JComboBox(singlePlayerSelection_Difficulty),
 								singlePlayerComboBox_Modus = new JComboBox(singlePlayerSelection_Modus),
@@ -123,12 +125,23 @@ public class Menu{
 							
 		
 	
-	public static final int width = 640,
-							height = 480;
+	public static final int width = 1280,
+							height = 960;
 	
 	private static ILevel level;
 	private static IRandomGenerator randomGenerator;
 	private static IDataLoader dataLoader;
+	
+	@SuppressWarnings("unused")
+	private static ICollision collision;
+	@SuppressWarnings("unused")
+	private static IMovement movement;
+	public static IInput input;
+	@SuppressWarnings("unused")
+	private static Menu menu;
+	public static javax.swing.Timer swingTimer;
+	public static  ITimer timer;
+	public static AI ai;
 	//Methode zum swtichen der screens
 	public static void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
@@ -143,9 +156,10 @@ public class Menu{
 		panel.setVisible(true);
 	}
 	
-	public Menu(IDataLoader idl, Input input) {
+	@SuppressWarnings("static-access")
+	public Menu(IDataLoader idl) {
 		this.dataLoader = idl;
-		jFrame.addKeyListener(input);
+		
 	}
 	
 	public static void setHighscore(){
@@ -166,15 +180,22 @@ public class Menu{
 		HighscoreTextField_ONplayer3.setText(onCountName[2]);
 	}
 	
-	public static void run(ILevel ilevel, IRandomGenerator irandomGenerator) {
+	public static void run(ILevel ilevel, IRandomGenerator irandomGenerator, ICollision collision2, IMovement movement2, IInput input2, AI ai2, ITimer timer2) {
 		
 		
 		
 		level = ilevel;
 		randomGenerator = irandomGenerator;
+		collision = collision2;
+		movement = movement2;
+		input = input2;
+		ai = ai2;
+		timer = timer2;
 		
-		gameBoard = new GameBoard(level, randomGenerator);
-		jFrame.setFocusable(false);
+
+		
+		gameBoard = new GameBoard(level, randomGenerator, input);
+//		jFrame.setFocusable(false);
 		jFrame.setSize(width, height); //größe des screens
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		jFrame.setUndecorated(true);
@@ -442,8 +463,12 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
+						gameBoard.requestFocus(true);
+						level.getReferences(ai, gameBoard, timer, input);
+						gameBoard.Update(level, randomGenerator);
+						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
-						gameBoard.repaint();
+						level.TimerStart();
 					}
 				});
 				singlePlayerButton_Back.addActionListener(new ActionListener() {
@@ -612,6 +637,8 @@ public class Menu{
 		//startLabel initialisieren
 		setCurrentLabel(panelMainMenu);
 		
+//		jFrame.addKeyListener((Input) input);
+//		jFrame.requestFocus();
 		 
 		 jFrame.setVisible(true);
 	}

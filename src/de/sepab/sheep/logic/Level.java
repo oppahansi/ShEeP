@@ -6,11 +6,12 @@ import de.sepab.sheep.display.GameBoard;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IInput;
+import de.sepab.sheep.main.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Level implements ILevel, ActionListener {
+public class Level implements ILevel, ActionListener{
 	
 	public enum GameModus {
 		ONTIME, ONCOUNT, MULTIPLAYER
@@ -23,13 +24,19 @@ public class Level implements ILevel, ActionListener {
 	LinkedList<IEntity> cageList = new LinkedList<>();
 	
 	
-	GameModus gameModus;
+	GameModus gameModus = GameModus.ONTIME;
 	AI ai;
 	GameBoard gameBoard;
 	javax.swing.Timer swingTimer;
 	ITimer timer;
-	IMovement movement;
 	IInput input;
+	
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input) {
+		this.ai = ai;
+		this.gameBoard = gameBoard;
+		this.timer = timer;
+		this.input = input;
+	}
 	
 	public LinkedList<IEntity> getDogList() {
 		return dogList;
@@ -52,10 +59,10 @@ public class Level implements ILevel, ActionListener {
 	}
 
 	public Level() {
-		this.swingTimer = new javax.swing.Timer(16, this);
-		this.swingTimer.stop();
-		this.timer = new Timer();
-		this.timer.stop();
+		swingTimer = new javax.swing.Timer(16, this);
+		swingTimer.stop();
+		timer = new Timer();
+		timer.stop();
 	}
 
 	public void addDog(int x, int y, int sprite) {
@@ -81,18 +88,16 @@ public class Level implements ILevel, ActionListener {
 	public void getGameBaord(GameBoard gameBoard){
 		this.gameBoard = gameBoard;
 	}
-
-	@Override
+	
 	public void actionPerformed(ActionEvent arg0) {
+//		System.out.print("test");
+//		System.out.print(timer.getTime() + "");
 		switch (gameModus) {
 		case ONTIME:
-			if (timer.getTime() >= 60) {
-				stopTimers();
-			} else {
-				ai.makeTurns();
-				int[] i = input.getBuffer();
-				movement.move(dogList.getFirst(), i[0]);
-			}
+//			if (timer.getTime() >= 60) {
+//				swingTimer.stop();
+//				timer.stop();
+//			}
 			break;
 		case ONCOUNT:
 			break;
@@ -102,22 +107,19 @@ public class Level implements ILevel, ActionListener {
 		default:
 			break;
 		}
-		
+		ai.makeTurns();
+		input.makeTurns();
 		gameBoard.repaint();
 		
 	}
-	
-	public void startTimers() {
+
+	@Override
+	public void TimerStart() {
 		swingTimer.start();
 		timer.start();
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void stopTimers() {
-		swingTimer.stop();
-		timer.stop();
-	}
-	
-	
 }
 
 
