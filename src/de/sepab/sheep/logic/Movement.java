@@ -20,20 +20,20 @@ private ICollision collision;
 					{}
 					break;
 				case(1):
-					if(collision.isoccupied(entity.getPosX(),entity.getPosY()-2))
-					{entity.setPosY(entity.getPosY()-2);}
+					if(collision.isoccupied(entity.getPosX(),entity.getPosY()-4))
+					{entity.setPosY(entity.getPosY()-4);}
 					break;
 				case(2):
-					if(collision.isoccupied(entity.getPosX()+2,entity.getPosY()))
-					{entity.setPosX(entity.getPosX()+2);}
+					if(collision.isoccupied(entity.getPosX()+4,entity.getPosY()))
+					{entity.setPosX(entity.getPosX()+4);}
 					break;
 				case(3):
-					if(collision.isoccupied(entity.getPosX(),entity.getPosY()+2))
-					{entity.setPosY(entity.getPosY()+2);}
+					if(collision.isoccupied(entity.getPosX(),entity.getPosY()+4))
+					{entity.setPosY(entity.getPosY()+4);}
 					break;
 				case(4):
-					if(collision.isoccupied(entity.getPosX()-2,entity.getPosY()))
-					{entity.setPosX(entity.getPosX()-2);}
+					if(collision.isoccupied(entity.getPosX()-4,entity.getPosY()))
+					{entity.setPosX(entity.getPosX()-4);}
 					break;
 			}
 	}
