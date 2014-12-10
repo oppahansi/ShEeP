@@ -50,7 +50,7 @@ public class GameBoard extends JPanel{
 	
 	
 	private int textureLength = 32; //tl = texture length
-	private int background[][][] = new int[20][15][2];
+	private int background[][][] = new int[40][30][2];
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
@@ -72,7 +72,7 @@ public class GameBoard extends JPanel{
     	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
-    	this.setPreferredSize(new Dimension(640, 480));
+    	this.setPreferredSize(new Dimension(1280, 960));
     	this.randomGenerator = randomGenerator;
     	this.level = level;
     }

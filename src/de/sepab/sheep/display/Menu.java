@@ -125,8 +125,8 @@ public class Menu{
 							
 		
 	
-	public static final int width = 640,
-							height = 480;
+	public static final int width = 1280,
+							height = 960	;
 	
 	private static ILevel level;
 	private static IRandomGenerator randomGenerator;
