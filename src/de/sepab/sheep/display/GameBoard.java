@@ -36,7 +36,7 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
 	    
 	private static final int COORDSSHEEP[][] = {{16,16}};
-	private static final int COORDSDOGE[][] = {{0,0}};
+	private static final int COORDSDOGE[][] = {{0,16}};
 	private static final int COORDSOBSTACLE[][] = {{0,0},{32,0},{64,0},
 	    										  {0,32},{32,32},{64,32},
 	    										  {0,64},{32,64},{64,64},
@@ -92,6 +92,7 @@ public class GameBoard extends JPanel{
     private void paintBackground(Graphics2D g) {
     	for (int x = 0; x < background.length; x++) {
 			for (int y = 0; y < background[0].length; y++) {
+				g.
 				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
 			}
 		}
