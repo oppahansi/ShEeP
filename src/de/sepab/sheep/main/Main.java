@@ -33,14 +33,15 @@ public class Main {
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
 		level.addDog(32, 32, 0);
-		level.addSheep(128, 64, 0);
-		level.addSheep(160,64,0);
+		level.addObstacle(65, 65, 0);
+		level.addSheep(228, 64, 0);
+		level.addSheep(260,64,0);
 		ITimer timer = new Timer();
 		timer.stop();
 
 		
 		
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getPowerUpList(),960,1280);
+		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getObstacleList(),960,1280);
 		IMovement movement = new Movement(collision);
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);

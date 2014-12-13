@@ -16,7 +16,7 @@ public class Collision implements ICollision{
 		hight=y;
 		List = new LinkedList<>();
 		List.addAll(DogList);
-		//List.addAll(SheepList);
+		List.addAll(SheepList);
 		List.addAll(PowerUpList);
 		List.addAll(ObstacleList);
 	}
@@ -28,10 +28,14 @@ public class Collision implements ICollision{
 		 	//Koordinatennetz
 		  	int Y[]=new int[2];
 			int X[]=new int[2];
-			X[0]=entity.getPosX()-32;
-			X[1]=entity.getPosX()+32;
-			Y[0]=entity.getPosY()-32;
-			Y[1]=entity.getPosY()+32;
+			//X[0]=entity.getPosX()-32;
+			//X[1]=entity.getPosX()+32;
+			//Y[0]=entity.getPosY()-32;
+			//Y[1]=entity.getPosY()+32;
+			X[0]=x-32;
+			X[1]=x+32;
+			Y[0]=y-32;
+			Y[1]=y+32;
 			
 		 	for(int i=0;i<List.size();i++)
 		 	{
