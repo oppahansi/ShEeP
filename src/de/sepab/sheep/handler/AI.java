@@ -48,7 +48,13 @@ public class AI {
 		this.checkPath(sheep.getThoughts());
 		return nextStep;
 		*/
-		return this.randomGenerator.getRandomNumber(0, 4);
+		//return this.randomGenerator.getRandomNumber(0, 4);
+		if(((ISheep)entity).isScared()) {
+			return 2;
+		}
+		else {
+			return this.randomGenerator.getRandomNumber(0, 4);
+		}
 	}
 	
 	private int sanityCheck(IEntity sheep) {

@@ -20,18 +20,22 @@ private ICollision collision;
 					{}
 					break;
 				case(1):
+					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX(),entity.getPosY()-entity.getSpeed()))
 					{entity.setPosY(entity.getPosY()-entity.getSpeed());}
 					break;
 				case(2):
+					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX()+entity.getSpeed(),entity.getPosY()))
 					{entity.setPosX(entity.getPosX()+entity.getSpeed());}
 					break;
 				case(3):
+					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX(),entity.getPosY()+entity.getSpeed()))
 					{entity.setPosY(entity.getPosY()+entity.getSpeed());}
 					break;
-				case(4):
+				case(4):					
+					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX()-entity.getSpeed(),entity.getPosY()))
 					{entity.setPosX(entity.getPosX()-entity.getSpeed());}
 					break;

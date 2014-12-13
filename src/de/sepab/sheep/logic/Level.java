@@ -67,7 +67,7 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	public void addDog(int x, int y, int sprite) {
-		dogList.add(new Dog(x, y, sprite));
+		dogList.add(new Dog(x, y, sprite, this.sheepList, 100));
 	}
 	
 	public void addSheep(int x, int y, int sprite){
