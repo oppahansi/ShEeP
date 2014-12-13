@@ -18,8 +18,6 @@ public class Input implements KeyListener, IInput {
 	 * Links:	4
 	 */
 	
-    private int[] buffer = new int[2];
-    private boolean locked = false;
     private IMovement movement;
     private LinkedList<IEntity> dogList;
     
@@ -28,49 +26,35 @@ public class Input implements KeyListener, IInput {
     	this.dogList = dogList;
     }
 
-	public void makeTurns() {
-        int bufferPlayerA = this.buffer[0];
-        int bufferPlayerB = this.buffer[1];
-        this.buffer[0] = 0;
-        this.buffer[1] = 0;
-        int[] tmpBuffer = {bufferPlayerA, bufferPlayerB};
-        this.movement.move(this.dogList.getFirst(), tmpBuffer[0]);
-        this.movement.move(this.dogList.getLast(), tmpBuffer[1]);
-        this.locked = false;
-	}
-    
     @Override
     public void keyPressed(KeyEvent e) {
-        if (this.locked == false) {
-            int key = e.getKeyCode();
-            switch (key) {
-                case (KeyEvent.VK_UP):
-                    this.buffer[0] = 1;
-                    break;
-                case (KeyEvent.VK_RIGHT):
-                    this.buffer[0] = 2;
-                    break;
-                case (KeyEvent.VK_DOWN):
-                    this.buffer[0] = 3;
-                    break;
-                case (KeyEvent.VK_LEFT):
-                    this.buffer[0] = 4;
-                    break;
-                case (KeyEvent.VK_W):
-                    this.buffer[1] = 1;
-                    break;
-                case (KeyEvent.VK_D):
-                    this.buffer[1] = 2;
-                    break;
-                case (KeyEvent.VK_S):
-                    this.buffer[1] = 3;
-                    break;
-                case (KeyEvent.VK_A):
-                    this.buffer[1] = 4;
-                    break;
-            }
-            this.locked = true;
-        }
+    	switch (e.getKeyCode()) {
+    	case (KeyEvent.VK_UP):
+    		this.movement.move(this.dogList.getFirst(), 1);
+    	break;
+    	case (KeyEvent.VK_RIGHT):
+    		this.movement.move(this.dogList.getFirst(), 2);
+    	break;
+    	case (KeyEvent.VK_DOWN):
+    		this.movement.move(this.dogList.getFirst(), 3);
+    	break;
+    	case (KeyEvent.VK_LEFT):
+    		this.movement.move(this.dogList.getFirst(), 4);
+    	break;
+    	case (KeyEvent.VK_W):
+    		this.movement.move(this.dogList.getLast(), 1);
+    	break;
+    	case (KeyEvent.VK_D):
+    		this.movement.move(this.dogList.getLast(), 2);
+    	break;
+    	case (KeyEvent.VK_S):
+    		this.movement.move(this.dogList.getLast(), 3);
+    	break;
+    	case (KeyEvent.VK_A):
+    		this.movement.move(this.dogList.getLast(), 4);
+    	break;
+    	}
+    	this.movement.move(this.dogList.getFirst(), 0);
     }
 
     @Override
@@ -81,36 +65,8 @@ public class Input implements KeyListener, IInput {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (this.locked == false) {
-            int key = e.getKeyCode();
-            switch (key) {
-                case (KeyEvent.VK_UP):
-                    this.buffer[0] = 1;
-                    break;
-                case (KeyEvent.VK_RIGHT):
-                    this.buffer[0] = 2;
-                    break;
-                case (KeyEvent.VK_DOWN):
-                    this.buffer[0] = 3;
-                    break;
-                case (KeyEvent.VK_LEFT):
-                    this.buffer[0] = 4;
-                    break;
-                case (KeyEvent.VK_W):
-                    this.buffer[1] = 1;
-                    break;
-                case (KeyEvent.VK_D):
-                    this.buffer[1] = 2;
-                    break;
-                case (KeyEvent.VK_S):
-                    this.buffer[1] = 3;
-                    break;
-                case (KeyEvent.VK_A):
-                    this.buffer[1] = 4;
-                    break;
-            }
-            this.locked = true;
-        }
+    	// TODO Auto-generated method stub
+    	
     }
 
 }
