@@ -7,7 +7,7 @@ public class Sheep extends Entity implements ISheep {
 
 	public Sheep (int posX, int posY, int spritePos) {
 		super(posX, posY, spritePos);
-		this.setSpeed(1);
+		this.setSpeed(2);
 	}
 
 	public int[] getThoughts() {

@@ -33,7 +33,8 @@ public class Main {
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
 		level.addDog(32, 32, 0);
-		level.addSheep(128, 32, 0);
+		level.addSheep(128, 64, 0);
+		level.addSheep(160,64,0);
 		ITimer timer = new Timer();
 		timer.stop();
 
@@ -44,7 +45,7 @@ public class Main {
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);
 		IRandomGenerator randomGenerator = new RandomGenerator();
-		AI ai = new AI(1, 1, level.getSheepList(), movement, collision);
+		AI ai = new AI(100, 5, level.getSheepList(), movement, collision);
 		
 		
 		menu.run(level, randomGenerator, collision, movement, input, ai, timer);

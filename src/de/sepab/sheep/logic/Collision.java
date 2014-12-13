@@ -16,12 +16,12 @@ public class Collision implements ICollision{
 		hight=y;
 		List = new LinkedList<>();
 		List.addAll(DogList);
-		List.addAll(SheepList);
+		//List.addAll(SheepList);
 		List.addAll(PowerUpList);
 		List.addAll(ObstacleList);
 	}
 	
-	public boolean calCollision(IEntity entity, int x, int y){
+	public boolean calcCollision(IEntity entity, int x, int y){
 		if(0<y && y<hight-32 && 0<x && x<lenght-32)//abfrage des Spielfeldrandes
 
 		 {
@@ -36,10 +36,12 @@ public class Collision implements ICollision{
 		 	for(int i=0;i<List.size();i++)
 		 	{
 		 		if(entity!=List.get(i))
+		 		{
 				if(X[0]<List.get(i).getPosX() && List.get(i).getPosX()<X[1] && Y[0]<List.get(i).getPosY() && List.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 				{
 				//COLLISION
 					return false;
+				}
 				}
 		 	}
 		 	return true;
@@ -78,11 +80,6 @@ public class Collision implements ICollision{
 		
 	}
 
-	@Override
-	public boolean calcCollision(IEntity entitiy, int posX, int posY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
 
