@@ -21,25 +21,31 @@ public class Collision implements ICollision{
 		List.addAll(ObstacleList);
 	}
 	
-	public boolean calCollision(IEntity entity, int x, int y){
+	public boolean calcCollision(IEntity entity, int x, int y){
 		if(0<y && y<hight-32 && 0<x && x<lenght-32)//abfrage des Spielfeldrandes
 
 		 {
 		 	//Koordinatennetz
 		  	int Y[]=new int[2];
 			int X[]=new int[2];
-			X[0]=entity.getPosX()-32;
-			X[1]=entity.getPosX()+32;
-			Y[0]=entity.getPosY()-32;
-			Y[1]=entity.getPosY()+32;
+			//X[0]=entity.getPosX()-32;
+			//X[1]=entity.getPosX()+32;
+			//Y[0]=entity.getPosY()-32;
+			//Y[1]=entity.getPosY()+32;
+			X[0]=x-32;
+			X[1]=x+32;
+			Y[0]=y-32;
+			Y[1]=y+32;
 			
 		 	for(int i=0;i<List.size();i++)
 		 	{
 		 		if(entity!=List.get(i))
+		 		{
 				if(X[0]<List.get(i).getPosX() && List.get(i).getPosX()<X[1] && Y[0]<List.get(i).getPosY() && List.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 				{
 				//COLLISION
 					return false;
+				}
 				}
 		 	}
 		 	return true;
@@ -78,11 +84,6 @@ public class Collision implements ICollision{
 		
 	}
 
-	@Override
-	public boolean calcCollision(IEntity entitiy, int posX, int posY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
 
