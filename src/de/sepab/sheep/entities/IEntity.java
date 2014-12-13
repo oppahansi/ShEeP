@@ -8,7 +8,7 @@ public interface IEntity {
 	public void setPosY(int y);
 	public int getSpritePos();
 	public void setSpritePos(int sprite);
-	public float getSpeed();
-	public void setSpeed(float speed);
+	public int getSpeed();
+	public void setSpeed(int speed);
 	
 }

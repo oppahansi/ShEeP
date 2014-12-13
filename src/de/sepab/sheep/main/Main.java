@@ -39,7 +39,7 @@ public class Main {
 
 		
 		
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getPowerUpList());
+		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getPowerUpList(),960,1280);
 		IMovement movement = new Movement(collision);
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);
