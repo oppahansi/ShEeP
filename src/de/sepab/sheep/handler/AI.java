@@ -42,10 +42,13 @@ public class AI {
 	}
 	
 	private int calcNextStep(IEntity entity) {
+		/*
 		ISheep sheep = (ISheep)entity;
 		int nextStep = this.sanityCheck(entity);
 		this.checkPath(sheep.getThoughts());
 		return nextStep;
+		*/
+		return this.randomGenerator.getRandomNumber(0, 4);
 	}
 	
 	private int sanityCheck(IEntity sheep) {
@@ -74,10 +77,10 @@ public class AI {
 			step = ((ISheep)sheep).getThoughts()[0];
 		}
 		else {
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()+1)) possibleSteps[0]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()+1, sheep.getPosY())) possibleSteps[1]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()-1)) possibleSteps[2]=true;
-			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()-1, sheep.getPosY())) possibleSteps[3]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()+sheep.getSpeed())) possibleSteps[0]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()+sheep.getSpeed(), sheep.getPosY())) possibleSteps[1]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX(), sheep.getPosY()-sheep.getSpeed())) possibleSteps[2]=true;
+			if(!this.collisionHandler.calcCollision(sheep, sheep.getPosX()-sheep.getSpeed(), sheep.getPosY())) possibleSteps[3]=true;
 			for(int i=0; i<possibleSteps.length;i++) {
 				if(possibleSteps[i]) n++;
 			}
