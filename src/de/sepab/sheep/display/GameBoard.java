@@ -9,9 +9,11 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.IEntity;
@@ -34,6 +36,7 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEOBSTACLE = optimize(load(OBSTACLE));
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
+	private BufferedImage imageBackground;
 	    
 	private static final int COORDSSHEEP[][] = {{16,16}};
 	private static final int COORDSDOGE[][] = {{0,0}};
@@ -50,7 +53,9 @@ public class GameBoard extends JPanel{
 	
 	
 	private int textureLength = 32; //tl = texture length
-	private int background[][][] = new int[40][30][2];
+	private int x = 40, y=30;
+	private int background[][][] = new int[x][y][2];
+	
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
@@ -59,7 +64,10 @@ public class GameBoard extends JPanel{
 //    	
 //    	g.drawImage(imgSheep, 0, 0, 640,480,null);
     	
-    	paintBackground(g);
+//    	paintBackground(g);
+    	if (imageBackground != null) {
+    		g.drawImage(imageBackground,0,0, null);
+		}
     	paintEntities(g);
     }
     
@@ -78,24 +86,31 @@ public class GameBoard extends JPanel{
     }
     
     public void shuffle() {
-    	for (int x = 0; x < background.length; x++) {
-			for (int y = 0; y < background[0].length; y++) {
+    	try{
+    		
+    	imageBackground = new BufferedImage(1280, 960, BufferedImage.TYPE_INT_RGB);
+    	Graphics g = imageBackground.getGraphics();
+    	for (int x = 0; x < this.x; x++) {
+			for (int y = 0; y < this.y; y++) {
 				int i = randomGenerator.getRandomNumber(0, 2);//2 ist die anzahl an floor texturen
-				background[x][y][0] = COORDSFLOOR[i][0];
-				background[x][y][1] = COORDSFLOOR[i][1];
+				g.drawImage(IMAGEFLOOR.getSubimage(COORDSFLOOR[i][0], COORDSFLOOR[i][1], textureLength, textureLength), x*32, x*32, null);
 			}
+		}
+    		ImageIO.write(imageBackground, "png", new File("./Hintergrund.png"));
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
     }
     
     
     
-    private void paintBackground(Graphics2D g) {
-    	for (int x = 0; x < background.length; x++) {
-			for (int y = 0; y < background[0].length; y++) {
-				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
-			}
-		}
-    }
+//    private void paintBackground(Graphics2D g) {
+//    	for (int x = 0; x < background.length; x++) {
+//			for (int y = 0; y < background[0].length; y++) {
+//				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
+//			}
+//		}
+//    }
     
     private void paintEntities(Graphics2D g) {
     	paintObstacle(g);
