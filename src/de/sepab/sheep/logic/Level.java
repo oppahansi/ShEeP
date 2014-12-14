@@ -112,7 +112,6 @@ public class Level implements ILevel, ActionListener{
 		}
 		
 		ai.makeTurns();
-		input.makeTurns();
 		gameBoard.repaint();
 //		count++;
 //		if(timer)
