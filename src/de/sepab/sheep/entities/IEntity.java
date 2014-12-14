@@ -10,5 +10,7 @@ public interface IEntity {
 	public void setSpritePos(int sprite);
 	public float getSpeed();
 	public void setSpeed(float speed);
+	public int getRotation();
+	public void setRotation(int rotation);
 	
 }

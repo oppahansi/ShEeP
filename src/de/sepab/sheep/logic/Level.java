@@ -66,24 +66,24 @@ public class Level implements ILevel, ActionListener{
 		timer.stop();
 	}
 
-	public void addDog(int x, int y, int sprite) {
-		dogList.add(new Dog(x, y, sprite));
+	public void addDog(int x, int y) {
+		dogList.add(new Dog(x, y));
 	}
 	
-	public void addSheep(int x, int y, int sprite){
-		sheepList.add(new Sheep(x, y, sprite));
+	public void addSheep(int x, int y){
+		sheepList.add(new Sheep(x, y));
 	}
 	
-	public void addPowerUp(int x, int y, int sprite) {
-		powerUpList.add(new PowerUp(x, y, sprite));
+	public void addPowerUp(int x, int y) {
+		powerUpList.add(new PowerUp(x, y));
 	}
 	
-	public void addObstacle(int x, int y, int sprite) {
-		obstacleList.add(new Obstacle(x, y, sprite));
+	public void addObstacle(int x, int y) {
+		obstacleList.add(new Obstacle(x, y));
 	}
 	
-	public void addCage(int x, int y, int sprite) {
-		cageList.add(new Cage(x, y, sprite));
+	public void addCage(int x, int y) {
+		cageList.add(new Cage(x, y));
 	}
 	
 	public void getGameBaord(GameBoard gameBoard){
@@ -96,11 +96,11 @@ public class Level implements ILevel, ActionListener{
 //		System.out.print(timer.getTime() + "");
 		switch (gameModus) {
 		case ONTIME:
-			if ((timer.getTime() + time) <= 0) {
-				swingTimer.stop();
-				timer.stop();
-				System.out.print("ende");
-			}
+//			if ((timer.getTime() + time) <= 0) {
+//				swingTimer.stop();
+//				timer.stop();
+//				System.out.print("ende");
+//			}
 			break;
 		case ONCOUNT:
 			break;

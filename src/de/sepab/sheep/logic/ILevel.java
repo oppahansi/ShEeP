@@ -27,15 +27,15 @@ public interface ILevel {
 
 	
 
-	public void addDog(int x, int y, int sprite);
+	public void addDog(int x, int y);
 	
-	public void addSheep(int x, int y, int sprite);
+	public void addSheep(int x, int y);
 	
-	public void addPowerUp(int x, int y, int sprite);
+	public void addPowerUp(int x, int y);
 	
-	public void addObstacle(int x, int y, int sprite);
+	public void addObstacle(int x, int y);
 	
-	public void addCage(int x, int y, int sprite);
+	public void addCage(int x, int y);
 	
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input);
 	
