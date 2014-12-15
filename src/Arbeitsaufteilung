@@ -4,6 +4,6 @@ Mario -> Entities, Counter
 
 Stefan -> Jukebox, MovementHandler, CollisionHandler
 
-Alex -> DataBitch, GameData, EntitySpawner
+Alex -> DataLoader, GameData, EntitySpawner, PowerUps
 
 David -> AI, InputHandler, Timer, RondomGenerator

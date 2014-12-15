@@ -1,9 +1,13 @@
 package de.sepab.sheep.handler;
 
 import de.sepab.sheep.entities.*;
-import de.sepab.sheep.handler.Constants;
+import de.sepab.sheep.logic.Timer;
 
 public class EntitySpawner implements IEntitySpawner{
+
+    public EntitySpawner() {
+        Timer timer = new Timer();
+    }
 
     public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
         if (entityName == Constants.DOG) {
@@ -20,4 +24,5 @@ public class EntitySpawner implements IEntitySpawner{
             return null;
         }
     }
+
 }
