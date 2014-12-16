@@ -5,6 +5,7 @@ import de.sepab.sheep.logic.Timer;
 
 public class EntitySpawner implements IEntitySpawner{
 
+
 	
     public EntitySpawner() {
         Timer timer = new Timer();

@@ -3,6 +3,7 @@ package de.sepab.sheep.entities;
 import java.util.LinkedList;
 
 
+
 public class Dog extends Entity implements IDog {
 	
 	private LinkedList<IEntity> sheeps;
@@ -14,6 +15,7 @@ public class Dog extends Entity implements IDog {
         this.sheeps = sheeps;
         this.barkLength = barkLength;
     }
+   
 
     public void bark() {
     	int x=0;
@@ -73,7 +75,6 @@ public class Dog extends Entity implements IDog {
     		break;
     	}
     }
-
     
     public void changeSprite(int rotation){
     	switch (rotation) {
