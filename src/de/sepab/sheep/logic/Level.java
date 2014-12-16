@@ -5,14 +5,17 @@ import java.util.LinkedList;
 import de.sepab.sheep.display.GameBoard;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.AI;
+import de.sepab.sheep.handler.EntitySpawner;
+import de.sepab.sheep.handler.IEntitySpawner;
 import de.sepab.sheep.handler.IInput;
-import de.sepab.sheep.main.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Level implements ILevel, ActionListener{
-	
+
+	private IEntitySpawner entitySpawner;
+
 	public enum GameModus {
 		ONTIME, ONCOUNT, MULTIPLAYER
 	}
@@ -60,6 +63,7 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	public Level() {
+		entitySpawner = new EntitySpawner();
 		swingTimer = new javax.swing.Timer(33, this);
 		swingTimer.stop();
 		timer = new Timer();
@@ -75,8 +79,9 @@ public class Level implements ILevel, ActionListener{
 		sheepList.add(new Sheep(x, y));
 	}
 	
-	public void addPowerUp(int x, int y) {
-		powerUpList.add(new PowerUp(x, y));
+
+	public void addPowerUp() {
+		powerUpList.add(entitySpawner.createPowerUp());
 	}
 	
 	public void addObstacle(int x, int y) {

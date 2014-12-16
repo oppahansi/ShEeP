@@ -9,10 +9,6 @@ public class PowerUp extends Entity{
 		this.type = type;
 	}
 
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	public int getType() {
 		return type;
 	}

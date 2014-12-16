@@ -1,20 +1,19 @@
 package de.sepab.sheep.handler;
 
 import de.sepab.sheep.entities.Cage;
-import de.sepab.sheep.entities.Dog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.Obstacle;
 import de.sepab.sheep.entities.PowerUp;
 import de.sepab.sheep.entities.Sheep;
+import de.sepab.sheep.logic.IRandomGenerator;
 import de.sepab.sheep.logic.RandomGenerator;
 
 public class EntitySpawner implements IEntitySpawner {
 
-   private int random;
-   private RandomGenerator randomGenerator;
+   private IRandomGenerator randomGenerator;
 
-   public EntitySpawner(int gameMod) {
-
+   public EntitySpawner() {
+      randomGenerator = new RandomGenerator();
    }
 
    public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
@@ -32,21 +31,23 @@ public class EntitySpawner implements IEntitySpawner {
       }
    }
 
-   public PowerUp spawnPowerUp() {
+   public PowerUp createPowerUp() {
       int x = randomGenerator.getRandomNumber(1, 1280);
       int y = randomGenerator.getRandomNumber(1, 960);
-      random = randomGenerator.getRandomNumber(1, 6);
+      int random = randomGenerator.getRandomNumber(1, 6);
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
-         return createPowerUp(x, y, random);
+         return new PowerUp(x, y, 0, random);
       } else if (random == Constants.POWERUP_TYPE_SLOW) {
-         return createPowerUp(x, y, random);
+         return new PowerUp(x, y, 0, random);
       } else if (random == Constants.POWERUP_TYPE_BARK) {
-         return createPowerUp(x, y, random);
-      } else if (random == )
-   }
-
-   private PowerUp createPowerUp(int x, int y, int type) {
-      return new PowerUp(x, y, 0, type);
+         return new PowerUp(x, y, 0, random);
+      } else if (random == Constants.POWERUP_TYPE_TELEPORT) {
+         return new PowerUp(x, y, 0, random);
+      } else if (random == Constants.POWERUP_TYPE_CONFUSION) {
+         return new PowerUp(x, y, 0, random);
+      } else {
+         return new PowerUp(x, y, 0, random);
+      }
    }
 }
