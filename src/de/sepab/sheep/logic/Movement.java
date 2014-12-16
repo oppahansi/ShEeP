@@ -23,7 +23,6 @@ private ICollision collision;
 					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX(),entity.getPosY()-entity.getSpeed()))
 					{entity.setPosY(entity.getPosY()-entity.getSpeed());}
-					break;
 				case(2):
 					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX()+entity.getSpeed(),entity.getPosY()))
@@ -38,6 +37,7 @@ private ICollision collision;
 					entity.setRotation(direction);
 					if(collision.calcCollision(entity,entity.getPosX()-entity.getSpeed(),entity.getPosY()))
 					{entity.setPosX(entity.getPosX()-entity.getSpeed());}
+
 					break;
 			}
 	}

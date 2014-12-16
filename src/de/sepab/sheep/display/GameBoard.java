@@ -9,9 +9,11 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.IEntity;
@@ -28,15 +30,21 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/wolf.png";
+	private static final String SINGLEPLAYERMAP1 = ""; //<--
 
 	private static final BufferedImage IMAGESHEEP = optimize(load(SHEEP));
 	private static final BufferedImage IMAGEDOGE = optimize(load(DOGE));
 	private static final BufferedImage IMAGEOBSTACLE = optimize(load(OBSTACLE));
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
+	private BufferedImage IMAGEMAP;
+	private BufferedImage imageBackground;
 	    
 	private static final int COORDSSHEEP[][] = {{16,16}};
-	private static final int COORDSDOGE[][] = {{0,16}};
+	private static final int COORDSDOGE[][] = {{0,8}, {32,8}, {64, 8}, {96,8},
+											   {0,96}, {32,96}, {64, 96}, {96,96},
+											   {0,136}, {32,136}, {64, 136}, {96,136},
+											   {0,224}, {32,224}, {64, 224}, {96,224},};
 	private static final int COORDSOBSTACLE[][] = {{0,0},{32,0},{64,0},
 	    										  {0,32},{32,32},{64,32},
 	    										  {0,64},{32,64},{64,64},
@@ -50,7 +58,9 @@ public class GameBoard extends JPanel{
 	
 	
 	private int textureLength = 32; //tl = texture length
-	private int background[][][] = new int[40][30][2];
+	private int x = 40, y=30;
+//	private int background[][][] = new int[x][y][2];
+	
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
@@ -59,7 +69,10 @@ public class GameBoard extends JPanel{
 //    	
 //    	g.drawImage(imgSheep, 0, 0, 640,480,null);
     	
-    	paintBackground(g);
+//    	paintBackground(g);
+    	if (imageBackground != null) {
+    		g.drawImage(imageBackground,0,0, null);
+		}
     	paintEntities(g);
     }
     
@@ -78,24 +91,52 @@ public class GameBoard extends JPanel{
     }
     
     public void shuffle() {
-    	for (int x = 0; x < background.length; x++) {
-			for (int y = 0; y < background[0].length; y++) {
+    	try{
+    		
+    	imageBackground = new BufferedImage(1280, 960, BufferedImage.TYPE_INT_RGB);
+    	Graphics g = imageBackground.getGraphics();
+    	for (int x = 0; x < this.x; x++) {
+			for (int y = 0; y < this.y; y++) {
 				int i = randomGenerator.getRandomNumber(0, 2);//2 ist die anzahl an floor texturen
-				background[x][y][0] = COORDSFLOOR[i][0];
-				background[x][y][1] = COORDSFLOOR[i][1];
+				g.drawImage(IMAGEFLOOR.getSubimage(COORDSFLOOR[i][0], COORDSFLOOR[i][1], textureLength, textureLength), x*32, y*32, null);
+			}
+		}
+    		ImageIO.write(imageBackground, "png", new File("./Hintergrund.png"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    
+    public void loadMap(int map) {
+    	switch (map) {
+		case 1:
+			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
+			break;
+
+		default:
+			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
+			break;
+		}
+    	for (int x = 0; x < this.x; x++) {
+			for (int y = 0; y < this.y; y++) {
+				 int rgb = IMAGEMAP.getRGB(y, x);
+				 Color c = new Color(rgb);
+				 if (c.getBlue() == 0 && c.getRed() == 0 && c.getGreen() == 0) {
+					
+				}
+	               
 			}
 		}
     }
     
     
-    
-    private void paintBackground(Graphics2D g) {
-    	for (int x = 0; x < background.length; x++) {
-			for (int y = 0; y < background[0].length; y++) {
-				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
-			}
-		}
-    }
+//    private void paintBackground(Graphics2D g) {
+//    	for (int x = 0; x < background.length; x++) {
+//			for (int y = 0; y < background[0].length; y++) {
+//				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
+//			}
+//		}
+//    }
     
     private void paintEntities(Graphics2D g) {
     	paintObstacle(g);

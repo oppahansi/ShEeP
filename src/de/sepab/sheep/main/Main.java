@@ -32,10 +32,8 @@ public class Main {
 		IDataLoader dataLoader = new DataLoader();
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
-		level.addDog(32, 32, 0);
-		level.addObstacle(65, 65, 0);
-		level.addSheep(228, 64, 0);
-		level.addSheep(260,64,0);
+		level.addDog(32, 32);
+		level.addSheep(128, 32);
 		ITimer timer = new Timer();
 		timer.stop();
 
