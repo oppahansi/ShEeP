@@ -5,11 +5,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class AudioPlayer implements IAudioPlayer {
+public class JukeBox implements IJukeBox {
 
    private Clip clip;
 
-   public AudioPlayer(String filePath) {
+   public JukeBox(String filePath) {
 
       try {
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(filePath));

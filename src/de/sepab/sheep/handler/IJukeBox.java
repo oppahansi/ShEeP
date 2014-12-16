@@ -1,6 +1,6 @@
 package de.sepab.sheep.handler;
 
-public interface IAudioPlayer {
+public interface IJukeBox {
 
    public void play();
    public void stop();
