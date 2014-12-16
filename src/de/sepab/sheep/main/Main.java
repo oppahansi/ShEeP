@@ -33,18 +33,20 @@ public class Main {
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
 		level.addDog(32, 32, 0);
-		level.addSheep(128, 32, 0);
+		level.addObstacle(65, 65, 0);
+		level.addSheep(228, 64, 0);
+		level.addSheep(260,64,0);
 		ITimer timer = new Timer();
 		timer.stop();
 
 		
 		
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getPowerUpList());
+		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getObstacleList(),960,1280);
 		IMovement movement = new Movement(collision);
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);
 		IRandomGenerator randomGenerator = new RandomGenerator();
-		AI ai = new AI(1, 1, level.getSheepList(), movement, collision);
+		AI ai = new AI(100, 5, level.getSheepList(), movement, collision);
 		
 		
 		menu.run(level, randomGenerator, collision, movement, input, ai, timer);

@@ -7,7 +7,7 @@ public class EntitySpawner implements IEntitySpawner{
 
     public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
         if (entityName == Constants.DOG) {
-            return new Dog(posX, posY, spritePos);
+            return new Dog(posX, posY, spritePos, null, 5);	//damm
         } else if (entityName == Constants.SHEEP) {
             return new Sheep(posX, posY, spritePos);
         } else if (entityName == Constants.POWER_UP) {

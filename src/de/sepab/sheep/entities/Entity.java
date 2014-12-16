@@ -4,7 +4,8 @@ public class Entity implements IEntity {
 	private int posX;
 	private int posY;
 	private int spritePos;
-	private float speed;
+	private int speed;
+	private int rotation = 1;
 
 	public Entity(int posX, int posY, int spritePos) {
 		this.posX = posX;
@@ -36,11 +37,20 @@ public class Entity implements IEntity {
 		this.spritePos = spritePos;
 	}
 
-	public float getSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(float speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+	
+	public int getRotation() {
+		return this.rotation;
+	}
+	
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+	
 }	

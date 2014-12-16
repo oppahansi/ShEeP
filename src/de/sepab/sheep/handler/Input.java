@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
-import de.sepab.sheep.entities.Dog;
+import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.logic.IMovement;
 
@@ -16,6 +16,7 @@ public class Input implements KeyListener, IInput {
 	 * Rechts:	2
 	 * Unten:	3
 	 * Links:	4
+	 * Bellen:	5
 	 */
 	
     private IMovement movement;
@@ -41,6 +42,9 @@ public class Input implements KeyListener, IInput {
     	case (KeyEvent.VK_LEFT):
     		this.movement.move(this.dogList.getFirst(), 4);
     	break;
+    	case (KeyEvent.VK_B):
+    		((IDog)this.dogList.getFirst()).bark();
+    	break;
     	case (KeyEvent.VK_W):
     		this.movement.move(this.dogList.getLast(), 1);
     	break;
@@ -52,6 +56,9 @@ public class Input implements KeyListener, IInput {
     	break;
     	case (KeyEvent.VK_A):
     		this.movement.move(this.dogList.getLast(), 4);
+    	break;
+    	case (KeyEvent.VK_ENTER):
+    		((IDog)this.dogList.getLast()).bark();
     	break;
     	}
     	this.movement.move(this.dogList.getFirst(), 0);
