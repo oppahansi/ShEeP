@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.IEntity;
@@ -40,7 +39,11 @@ public class GameBoard extends JPanel{
 	private BufferedImage IMAGEMAP;
 	private BufferedImage imageBackground;
 	    
-	private static final int COORDSSHEEP[][] = {{16,16}};
+	private static final int COORDSSHEEP[][] = {{16,16},{80,16}, {144, 16},{208,16},
+												{16,80},{80,80}, {144, 80},{208,80},
+												{16,144},{80,144}, {144, 144},{208,144},
+												{16,208},{80,208}, {144, 208},{208,208},
+												};
 	private static final int COORDSDOGE[][] = {{0,8}, {32,8}, {64, 8}, {96,8},
 											   {0,96}, {32,96}, {64, 96}, {96,96},
 											   {0,136}, {32,136}, {64, 136}, {96,136},

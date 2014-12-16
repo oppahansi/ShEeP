@@ -14,6 +14,8 @@ public class Dog extends Entity implements IDog {
         this.setSpeed(4);
         this.sheeps = sheeps;
         this.barkLength = barkLength;
+        this.spritePeriod = 6;
+        this.setSpriteQuarters();
     }
    
 
@@ -81,60 +83,16 @@ public class Dog extends Entity implements IDog {
 		case 0:
 			break;
 		case 1:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(4);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(5);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(6);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(7);
-			}
+			this.calculateSprite(4, 5, 6, 7);
 			break;
 		case 2:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(8);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(9);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(10);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(11);
-			}
+			this.calculateSprite(8, 9, 10, 11);
 			break;
 		case 3:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(12);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(13);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(14);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(15);
-			}
+			this.calculateSprite(12, 13, 14, 15);
 			break;
 		case 4:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(0);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(1);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(2);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(3);
-			}
+			this.calculateSprite(0, 1, 2, 3);
 			break;
 		default:
 			break;
