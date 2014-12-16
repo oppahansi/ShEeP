@@ -44,7 +44,8 @@ public class Entity implements IEntity {
 		spriteQuarter3 = spritePeriod*3;
 		spriteQuarter4 = spritePeriod*4;
 	}
-	
+
+
 	public Entity(int posX, int posY, int speed, int PowerUpLife) {
 		this.posX = posX;
 		this.posY = posY;
@@ -113,6 +114,7 @@ public class Entity implements IEntity {
 	public boolean isConfused() {
 		return this.confused;
 	}
+
 
 	public void calculateSprite(int sprite1, int sprite2, int sprite3, int sprite4){
 		if (spriteCount >= 0 && spriteCount < spriteQuarter1) {

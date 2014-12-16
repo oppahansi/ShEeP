@@ -32,7 +32,9 @@ public class Main {
 		IDataLoader dataLoader = new DataLoader();
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
+
 		level.addDog(32*15, 64, 5, 3);
+
 //		level.addSheep(128, 32);
 //		level.addSheep(128, 96);
 //		level.addSheep(128, 144);
@@ -42,11 +44,7 @@ public class Main {
 //				level.addSheep(128 + x*32, 32 + y*32);
 //			}
 //		}
-		
-		level.addSheep(32*3, 0, 3, 3);
-		level.addSheep(32*4, 0, 3, 3);
-		level.addSheep(32*5, 0, 3, 3);
-		
+
 		ITimer timer = new Timer();
 
 
@@ -63,7 +61,5 @@ public class Main {
 		menu.run(level, randomGenerator, collision, movement, input, ai, timer);
 			
 	}
-	
-	
 
 }

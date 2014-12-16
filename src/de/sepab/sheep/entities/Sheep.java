@@ -5,6 +5,7 @@ public class Sheep extends Entity implements ISheep {
 	private int[] thoughts = new int[5];
 	private boolean scared = false;
 	private int x=0, y=0;
+
 	private boolean deaf = false;
 
 	public Sheep (int posX, int posY, int speed, int powerUpLife) {
@@ -14,6 +15,7 @@ public class Sheep extends Entity implements ISheep {
 		this.setSpriteQuarters();
 	}
 
+	@Override
 	public int[] getThoughts() {
 		return thoughts;
 	}
