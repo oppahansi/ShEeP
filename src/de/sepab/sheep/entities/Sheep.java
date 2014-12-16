@@ -9,6 +9,8 @@ public class Sheep extends Entity implements ISheep {
 	public Sheep (int posX, int posY) {
 		super(posX, posY);
 		this.setSpeed(1);
+		this.spritePeriod = 6;
+		this.setSpriteQuarters();
 	}
 
 	public int[] getThoughts() {
@@ -40,4 +42,25 @@ public class Sheep extends Entity implements ISheep {
 		return this.y;
 	}
 	
+	public void changeSprite(int rotation){
+    	switch (rotation) {
+		case 0:
+			break;
+		case 1:
+			this.calculateSprite(0, 1, 2, 3);
+			break;
+		case 2:
+			this.calculateSprite(12, 13, 14, 15);
+			
+			break;
+		case 3:
+			this.calculateSprite(8, 9, 10, 11);
+			break;
+		case 4:
+			this.calculateSprite(4, 5, 6, 7);
+			break;
+		default:
+			break;
+		}
+    }
 }
