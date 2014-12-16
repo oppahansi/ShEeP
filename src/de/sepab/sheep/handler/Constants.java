@@ -13,7 +13,7 @@ public class Constants {
     public static final String CAGE = "cage";
 
     public static final String FILE_PATH_SOUND_BARK = "/sfx/bark.wav";
-    public static final String FILE_PATH_SOUND_BACKGROUND = "/sfx/background.mid";
+    public static final String FILE_PATH_SOUND_BACKGROUND = "/music/background.mid";
     public static final String SOUND_NAME_BARK = "bark";
     public static final String SOUND_NAME_BACKGROUND = "background";
 
