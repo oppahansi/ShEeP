@@ -30,13 +30,13 @@ public class GameData implements Serializable {
     }
 
     public void addHighscore(String name, int newHighscore, int gameMod) {
-        if (gameMod == Constants.COUNT_MOD) {
+        if (gameMod == Constants.MPLAYER) {
             if (isNewCountHighscore(newHighscore)) {
                 countHighscores[0] = newHighscore;
                 countNames[0] = name;
                 sortHighscores(countNames, countHighscores);
             }
-        } else if (gameMod == Constants.TIME_MOD) {
+        } else if (gameMod == Constants.SPLAYER) {
             if (isNewTimeHighscore(newHighscore)) {
                 timeHighscores[MAX_RECORDS - 1] = newHighscore;
                 timeNames[MAX_RECORDS - 1] = name;
