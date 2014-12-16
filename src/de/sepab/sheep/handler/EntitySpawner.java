@@ -38,15 +38,20 @@ public class EntitySpawner implements IEntitySpawner {
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
          return new PowerUp(x, y, 0, random);
-      } else if (random == Constants.POWERUP_TYPE_SLOW) {
+      }
+      else if (random == Constants.POWERUP_TYPE_SLOW) {
          return new PowerUp(x, y, 0, random);
-      } else if (random == Constants.POWERUP_TYPE_BARK) {
+      }
+      else if (random == Constants.POWERUP_TYPE_BARK) {
          return new PowerUp(x, y, 0, random);
-      } else if (random == Constants.POWERUP_TYPE_TELEPORT) {
+      }
+      else if (random == Constants.POWERUP_TYPE_TELEPORT) {
          return new PowerUp(x, y, 0, random);
-      } else if (random == Constants.POWERUP_TYPE_CONFUSION) {
+      }
+      else if (random == Constants.POWERUP_TYPE_CONFUSION) {
          return new PowerUp(x, y, 0, random);
-      } else {
+      }
+      else {
          return new PowerUp(x, y, 0, random);
       }
    }
