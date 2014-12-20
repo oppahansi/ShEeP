@@ -85,7 +85,8 @@ public class Level implements ILevel, ActionListener{
 		powerUpList.add(entitySpawner.createPowerUp());
 	}
 
-	public void addObstacle(int x, int y) {
+	@Override
+	public void addObstacle(final int x, final int y, final int sprite) {
 		obstacleList.add(new Obstacle(x, y));
 	}
 
@@ -141,6 +142,9 @@ public class Level implements ILevel, ActionListener{
 			break;
 		}
 
+
+		input.makeTurn();
+
 		ai.makeTurns();
 		gameBoard.repaint();
 //		count++;
@@ -153,6 +157,17 @@ public class Level implements ILevel, ActionListener{
 		timer.reset()	;
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void resetLists() {
+		this.dogList = new LinkedList<>();
+		this.sheepList = new LinkedList<>();
+		this.obstacleList = new LinkedList<>();
+		this.powerUpList = new LinkedList<>();
+		this.cageList = new LinkedList<>();
+		// TODO Auto-generated method stub
+		
 	}
 }
 

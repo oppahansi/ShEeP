@@ -63,7 +63,6 @@ public class Sheep extends Entity implements ISheep {
 			break;
 		case 2:
 			this.calculateSprite(12, 13, 14, 15);
-			
 			break;
 		case 3:
 			this.calculateSprite(8, 9, 10, 11);
