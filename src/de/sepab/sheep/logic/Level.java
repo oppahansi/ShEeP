@@ -33,8 +33,10 @@ public class Level implements ILevel, ActionListener{
 	javax.swing.Timer swingTimer;
 	ITimer timer;
 	IInput input;
-	int time = 60, count = 0;
 
+	int time = 10, count = 0;
+	boolean locked = false;
+	
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
@@ -67,16 +69,15 @@ public class Level implements ILevel, ActionListener{
 		swingTimer = new javax.swing.Timer(33, this);
 		swingTimer.stop();
 		timer = new Timer();
-		timer.stop();
 	}
 
 
-	public void addDog(int x, int y) {
-		dogList.add(new Dog(x, y, this.sheepList, 100));
+	public void addDog(int x, int y, int speed, int powerUpLife) {
+		dogList.add(new Dog(x, y, speed, powerUpLife, this.sheepList, 100));
 	}
 
-	public void addSheep(int x, int y){
-		sheepList.add(new Sheep(x, y));
+	public void addSheep(int x, int y, int speed, int powerUplIfe){
+		sheepList.add(new Sheep(x, y, speed, powerUplIfe));
 	}
 
 
@@ -96,10 +97,32 @@ public class Level implements ILevel, ActionListener{
 		this.gameBoard = gameBoard;
 	}
 
+	private void reducePowerUpTime() {
+		if((this.timer.getTime() % 10 == 0) && !(this.locked) && (this.timer.getTime() != 0)) {
+			this.locked = true;
+			for (IEntity i : this.dogList) {
+				i.decrementPowerUpLife();
+			}
+			for (IEntity i : this.sheepList) {
+				i.decrementPowerUpLife();
+			}
+		}
+		else if(this.timer.getTime() % 11 == 0) {
+			this.locked=false;
+		}
+		for (IEntity i : this.dogList) {
+			((IDog)i).checkPowerUpLife();
+		}
+		for (IEntity i : this.sheepList) {
+			((ISheep)i).checkPowerUpLife();
+		}
+	}
+	
+
 	public void actionPerformed(ActionEvent arg0) {
-//		System.out.print("test");
+		//System.out.print("test");
 		timer.start();
-//		System.out.print(timer.getTime() + "");
+		//System.out.print(timer.getTime() + "");
 		switch (gameModus) {
 		case ONTIME:
 //			if ((timer.getTime() + time) <= 0) {
@@ -107,6 +130,7 @@ public class Level implements ILevel, ActionListener{
 //				timer.stop();
 //				System.out.print("ende");
 //			}
+			this.reducePowerUpTime();
 			break;
 		case ONCOUNT:
 			break;

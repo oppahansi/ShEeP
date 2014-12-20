@@ -27,9 +27,9 @@ public interface ILevel {
 
 	
 
-	public void addDog(int x, int y);
+	public void addDog(int x, int y, int speed, int powerUpLife);
 	
-	public void addSheep(int x, int y);
+	public void addSheep(int x, int y, int speed, int powerUpLife);
 	
 	public void addPowerUp();
 	

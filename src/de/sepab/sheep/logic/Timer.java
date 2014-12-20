@@ -26,13 +26,8 @@ public class Timer implements ITimer {
 	}
 
 	@Override
-	public void stop() {
-		this.stopTime = new Date(); 
-	}
-
-	@Override
 	public int getTime() {
-		return ((
+		return (-1)*((
 				(60*Integer.parseInt(this.formatMin.format(this.stopTime)))
 				+
 				(Integer.parseInt(this.formatSec.format(this.stopTime)))
@@ -44,5 +39,15 @@ public class Timer implements ITimer {
 				(Integer.parseInt(this.formatSec.format(this.startTime)))
 				));
 	}
-	
+
+	@Override
+	public void setTime(Date time) {
+		this.startTime = time;
+	}
+
+	@Override
+	public void changeTime(int seconds) {
+		this.startTime.setTime(((long)this.getTime())*60 + ((long)seconds));
+	}
+
 }

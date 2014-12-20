@@ -18,7 +18,7 @@ public class EntitySpawner implements IEntitySpawner {
 
    public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
       if (entityName == Constants.SHEEP) {
-         return new Sheep(posX, posY);
+         return new Sheep(posX, posY, 3, 0);
       }
       else if (entityName == Constants.OBSTACLE) {
          return new Obstacle(posX, posY);
@@ -37,22 +37,23 @@ public class EntitySpawner implements IEntitySpawner {
       int random = randomGenerator.getRandomNumber(1, 6);
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y,  random);
       }
       else if (random == Constants.POWERUP_TYPE_SLOW) {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y, random);
       }
       else if (random == Constants.POWERUP_TYPE_BARK) {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y, random);
       }
       else if (random == Constants.POWERUP_TYPE_TELEPORT) {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y, random);
       }
       else if (random == Constants.POWERUP_TYPE_CONFUSION) {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y, random);
       }
       else {
-         return new PowerUp(x, y, 0, random);
+         return new PowerUp(x, y, random);
       }
    }
+
 }
