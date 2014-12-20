@@ -19,7 +19,7 @@ public class EntitySpawner implements IEntitySpawner{
         } else if (entityName == Constants.POWER_UP) {
             return new PowerUp(posX, posY);
         } else if (entityName == Constants.OBSTACLE) {
-            return new Obstacle(posX, posY);
+            return new Obstacle(posX, posY, 1);
         } else if (entityName == Constants.CAGE) {
             return new Cage(posX, posY);
         } else {

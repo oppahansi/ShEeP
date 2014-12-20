@@ -25,7 +25,7 @@ public interface ILevel {
 	
 	public LinkedList<IEntity> getCageList();
 
-	
+	public void resetLists();
 
 	public void addDog(int x, int y);
 	
@@ -33,7 +33,7 @@ public interface ILevel {
 	
 	public void addPowerUp(int x, int y);
 	
-	public void addObstacle(int x, int y);
+	public void addObstacle(int x, int y, int sprite);
 	
 	public void addCage(int x, int y);
 	

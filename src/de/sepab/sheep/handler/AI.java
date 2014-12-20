@@ -35,6 +35,7 @@ public class AI {
 	}
 	
 	public void makeTurns() {
+		
 		for(IEntity i : this.sheeps)
 		{
 			this.movementHandler.move(i, this.calcNextStep(i));
