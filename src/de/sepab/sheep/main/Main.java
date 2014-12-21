@@ -32,15 +32,27 @@ public class Main {
 		IDataLoader dataLoader = new DataLoader();
 		dataLoader.loadHighscore();
 		ILevel level = new Level();
-		level.addDog(32, 32);
-		level.addSheep(128, 32);
+		level.addDog(32*15, 64, 5, 3);
+//		level.addSheep(128, 32);
+//		level.addSheep(128, 96);
+//		level.addSheep(128, 144);
+//		level.addSheep(128, 240);
+//		for (int x = 0; x < 25; x++) {
+//			for (int y = 0; y < 15; y++) {
+//				level.addSheep(128 + x*32, 32 + y*32);
+//			}
+//		}
+		
+		level.addSheep(32*3, 0, 3, 3);
+		level.addSheep(32*4, 0, 3, 3);
+		level.addSheep(32*5, 0, 3, 3);
+		
 		ITimer timer = new Timer();
-		timer.stop();
 
-		
-		
+
 		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level
 			.getObstacleList(),1280, 960);
+
 		IMovement movement = new Movement(collision);
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);

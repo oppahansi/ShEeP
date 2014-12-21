@@ -7,17 +7,21 @@ import java.util.LinkedList;
 public class Dog extends Entity implements IDog {
 	
 	private LinkedList<IEntity> sheeps;
-	private int barkLength = 0;
+	private static int fixBarkLength = 0;
+	private int barkLength = this.fixBarkLength;
 
-    public Dog(int posX, int posY, LinkedList<IEntity> sheeps, int barkLength) {
-        super(posX, posY);
+    public Dog(int posX, int posY, int speed, int  PowerUpLife, LinkedList<IEntity> sheeps, int barkLength) {
+        super(posX, posY, speed, PowerUpLife);
         this.setSpeed(4);
         this.sheeps = sheeps;
         this.barkLength = barkLength;
+        this.spritePeriod = 6;
+        this.setSpriteQuarters();
     }
    
 
     public void bark() {
+		this.setSpeed(25);
     	int x=0;
     	int y=0;
     	switch(this.getRotation()) {
@@ -28,7 +32,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -41,7 +45,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -54,7 +58,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -67,7 +71,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -81,63 +85,29 @@ public class Dog extends Entity implements IDog {
 		case 0:
 			break;
 		case 1:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(4);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(5);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(6);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(7);
-			}
+			this.calculateSprite(4, 5, 6, 7);
 			break;
 		case 2:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(8);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(9);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(10);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(11);
-			}
+			this.calculateSprite(8, 9, 10, 11);
 			break;
 		case 3:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(12);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(13);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(14);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(15);
-			}
+			this.calculateSprite(12, 13, 14, 15);
 			break;
 		case 4:
-			if (spriteCount >= 0 && spriteCount < 8) {
-				this.setSpritePos(0);
-			}
-			if (spriteCount >= 8 && spriteCount < 16) {
-				this.setSpritePos(1);
-			}
-			if (spriteCount >= 16 && spriteCount < 24) {
-				this.setSpritePos(2);
-			}
-			if (spriteCount >= 24 && spriteCount < 32) {
-				this.setSpritePos(3);
-			}
+			this.calculateSprite(0, 1, 2, 3);
 			break;
 		default:
 			break;
 		}
     }
+
+	public void checkPowerUpLife() {
+		if(this.getPowerUpLife() <= 0) {
+			this.resetPowerUpLife();
+			this.resetSpeed();
+			this.confuse(false);
+			this.barkLength = this.fixBarkLength;
+		}
+	}
+
 }

@@ -8,8 +8,14 @@ public interface IEntity {
 	public void setPosY(int y);
 	public int getSpritePos();
 	public void setSpritePos(int sprite);
+	public int getPowerUpLife();
+	public void decrementPowerUpLife();
+	public void resetPowerUpLife();
 	public int getSpeed();
 	public void setSpeed(int speed);
+	public void resetSpeed();
+	public void confuse(boolean state);
+	public boolean isConfused();
 	public int getRotation();
 	public void setRotation(int rotation);
 	

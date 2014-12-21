@@ -15,7 +15,6 @@ public class TimerTest extends Thread {
         try {
             timer.start();
             Thread.sleep(10000);
-            timer.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
