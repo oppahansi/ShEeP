@@ -244,14 +244,8 @@ public class Main {
 
 		
 		
-<<<<<<< HEAD
+		
 		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getObstacleList(),1280,960);
-||||||| merged common ancestors
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getObstacleList(),960,1280);
-=======
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level
-			.getObstacleList(),1280, 960);
->>>>>>> master
 		IMovement movement = new Movement(collision);
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);

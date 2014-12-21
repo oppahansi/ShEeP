@@ -53,17 +53,31 @@ public class GameBoard extends JPanel{
 											   {0,96}, {32,96}, {64, 96}, {96,96},
 											   {0,136}, {32,136}, {64, 136}, {96,136},
 											   {0,224}, {32,224}, {64, 224}, {96,224},};
-	private static final int COORDSOBSTACLE[][] = {{0,0},{32,0},{64,0},
+	
+	
+	
+	private static final int COORDSOBSTACLE[][] = {{0,0},{32,0},{64,0}, //fence
 	    										  {0,32},{32,32},{64,32},
 	    										  {0,64},{32,64},{64,64},
 	    										  {0,96},{32,96},{64,96},
-	    										  {0,128},{32,128},{64,128},};
+	    										  {0,128},{32,128},{64,128},
+	    										  
+	    										  {96,0},{128,0},{160,0},
+	    										  {96,32},{128,32},{160,32},
+	    										  {96,64},{128,64},{160,64},
+	    										  {96,96},{128,96},{160,96},
+	    										  {96,128},{128,128},{160,128},
+												  };
 	private static final int COORDSFLOOR[][] = {{0,160},{32,160},{64,160}};
 	private static final int COORDSPOWERUP[][] = {{0,0}};
 	
 	private static final int SHEEPCOLOR[][] = {{255,255,255}};
 	private static final int DOGCOLOR[][] = {{105,65,20}};
-	private static final int OBSTACLECOLOR[][] = {{145,110,30}};
+	private static final int OBSTACLECOLOR[][] = {{145,110,30}, //fence
+												   {215,205,0}, //wheat
+												   	{0,30,215}, //water
+												 {205,200,180}, //1x1 obstacles
+												   	};
 
 	private IRandomGenerator randomGenerator;
 	private ILevel level;
@@ -151,19 +165,48 @@ public class GameBoard extends JPanel{
 				 if (c.getRed() == OBSTACLECOLOR[0][0] && c.getGreen() == OBSTACLECOLOR[0][1] && c.getBlue() == OBSTACLECOLOR[0][2]) {
 					 boolean top = false, right = false, bottom = false, left = false;
 					if (y - 1 >= 0) {
-						top = checkForObstacleCage(x, y - 1);
+						top = checkForColor(x, y - 1, OBSTACLECOLOR, 0);
 					}
 					if (x + 1 <= this.x) {
-						right = checkForObstacleCage(x + 1, y);
+						right = checkForColor(x + 1, y, OBSTACLECOLOR, 0);
 					}
 					if (y + 1 <= this.y) {
-						bottom = checkForObstacleCage(x, y + 1);
+						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 0);
 					}
 					if (x - 1 >= 0) {
-						left = checkForObstacleCage(x - 1, y);
+						left = checkForColor(x - 1, y, OBSTACLECOLOR, 0);
 					}
 					addObstacleCage(x, y, top, right, bottom, left);
 				}
+				 if (c.getRed() == OBSTACLECOLOR[1][0] && c.getGreen() == OBSTACLECOLOR[1][1] && c.getBlue() == OBSTACLECOLOR[1][2]) {
+					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
+					if (y - 1 >= 0) {
+						top = checkForColor(x, y - 1, OBSTACLECOLOR, 1);
+					}
+					if (x + 1 <= this.x && y - 1 >= 0) {
+						topRight = checkForColor(x + 1, y - 1, OBSTACLECOLOR, 1);
+					}
+					if (x + 1 <= this.x) {
+						right = checkForColor(x + 1, y, OBSTACLECOLOR, 1);
+					}
+					if (x + 1 <= this.x && y + 1 <= this.y) {
+						bottomRight = checkForColor(x + 1, y + 1, OBSTACLECOLOR, 1);
+					}
+					if (y + 1 <= this.y) {
+						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 1);
+					}
+					if (x - 1 >= 0 && y + 1 <= this.y) {
+						bottomLeft = checkForColor(x - 1, y + 1, OBSTACLECOLOR, 1);
+					}
+					if (x - 1 >= 0) {
+						left = checkForColor(x - 1, y, OBSTACLECOLOR, 1);
+					}
+					if (x - 1 >= 0 && y - 1 >= 0) {
+						topLeft = checkForColor(x - 1, y - 1, OBSTACLECOLOR, 1);
+					}
+					addObstacleCage(x, y, top, right, bottom, left);
+				}
+				 
 			}
 		}
     	Menu.level = level;
@@ -174,6 +217,30 @@ public class GameBoard extends JPanel{
     	this.addKeyListener((Input) Menu.input);
     	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input);
 
+    }
+    
+    public void addObstaclesWheat(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
+    	if (top == false && right == false && bottom == false && left == false) {
+			System.out.print("ERROR:There must be at least 2 wheat near each other.");
+		}else
+		if (top == true && right == true && bottom == false && left == false) {
+			level.addObstacle(x*32, y*32, 27);
+		}else
+		if (top == false && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 21);
+		}else
+		if (top == false && right == true && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 22);
+		}else
+		if (top == false && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 23);
+		}else
+		if (top == true && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 24);
+		}else
+		if (top == true && right == true && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 25);
+		}
     }
     
     public void addObstacleCage(int x, int y, boolean top, boolean right, boolean bottom, boolean left){
@@ -229,10 +296,12 @@ public class GameBoard extends JPanel{
 			
     }
     
-    private boolean checkForObstacleCage(int x, int y){
+    
+    
+    private boolean checkForColor(int x, int y, int[][] color, int position){
     	int temprgb = IMAGEMAP.getRGB(x, y);
     	Color tempColor = new Color(temprgb);
-		if (tempColor.getRed() == OBSTACLECOLOR[0][0] && tempColor.getGreen() == OBSTACLECOLOR[0][1] && tempColor.getBlue() == OBSTACLECOLOR[0][2]) {
+		if (tempColor.getRed() == color[position][0] && tempColor.getGreen() == color[position][1] && tempColor.getBlue() == color[position][2]) {
 			return true;
 		}
     	return false;
