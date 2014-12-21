@@ -1,8 +1,17 @@
 package de.sepab.sheep.handler;
 
 public class Constants {
-    public static final int TIME_MOD = 1;
-    public static final int COUNT_MOD = 2;
+    public static final int SPLAYER = 1;
+    public static final int MPLAYER = 2;
+    public static final int SPLAYER_COUNT = 3;
+    public static final int SPLAYER_TIME = 4;
+
+    public static final int POWERUP_TYPE_SPEED = 1;
+    public static final int POWERUP_TYPE_SLOW = 2;
+    public static final int POWERUP_TYPE_BARK = 3;
+    public static final int POWERUP_TYPE_TELEPORT = 4;
+    public static final int POWERUP_TYPE_CONFUSION = 5;
+    public static final int POWERUP_TYPE_TIME = 6;
 
     public static final String HIGHSCORE_FILE_NAME = "highscores.sav";
 

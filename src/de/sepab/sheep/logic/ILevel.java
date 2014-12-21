@@ -31,7 +31,7 @@ public interface ILevel {
 	
 	public void addSheep(int x, int y);
 	
-	public void addPowerUp(int x, int y);
+	public void addPowerUp();
 	
 	public void addObstacle(int x, int y);
 	
