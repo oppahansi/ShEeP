@@ -6,13 +6,18 @@ public class Sheep extends Entity implements ISheep {
 	private boolean scared = false;
 	private int x=0, y=0;
 
-	public Sheep (int posX, int posY) {
-		super(posX, posY);
+
+
+	private boolean deaf = false;
+
+	public Sheep (int posX, int posY, int speed, int powerUpLife) {
+		super(posX, posY, speed, powerUpLife);
 		this.setSpeed(1);
 		this.spritePeriod = 6;
 		this.setSpriteQuarters();
 	}
 
+	@Override
 	public int[] getThoughts() {
 		return thoughts;
 	}
@@ -26,20 +31,29 @@ public class Sheep extends Entity implements ISheep {
 	}
 
 	@Override
-	public void scare(int x, int y) {
-		this.scared = true;
+	public void scare(boolean state, int x, int y) {
+		this.scared = state;
 		this.x = x;
 		this.y = y;
 	}
 
 	@Override
-	public int getX() {
-		return this.x;
+	public boolean isDeaf() {
+		return this.deaf;
 	}
 
 	@Override
-	public int getY() {
-		return this.y;
+	public void deafy(boolean state) {
+		this.deaf = state;
+	}
+
+	public void checkPowerUpLife() {
+		if(this.getPowerUpLife() <= 0) {
+			this.resetPowerUpLife();
+			this.resetSpeed();
+			this.confuse(false);
+			this.deafy(false);
+		}
 	}
 	
 	public void changeSprite(int rotation){

@@ -7,10 +7,11 @@ import java.util.LinkedList;
 public class Dog extends Entity implements IDog {
 	
 	private LinkedList<IEntity> sheeps;
-	private int barkLength = 0;
+	private static int fixBarkLength = 0;
+	private int barkLength = this.fixBarkLength;
 
-    public Dog(int posX, int posY, LinkedList<IEntity> sheeps, int barkLength) {
-        super(posX, posY);
+    public Dog(int posX, int posY, int speed, int  PowerUpLife, LinkedList<IEntity> sheeps, int barkLength) {
+        super(posX, posY, speed, PowerUpLife);
         this.setSpeed(4);
         this.sheeps = sheeps;
         this.barkLength = barkLength;
@@ -20,6 +21,7 @@ public class Dog extends Entity implements IDog {
    
 
     public void bark() {
+		this.setSpeed(25);
     	int x=0;
     	int y=0;
     	switch(this.getRotation()) {
@@ -30,7 +32,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -43,7 +45,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -56,7 +58,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -69,7 +71,7 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(this.getPosX(), this.getPosY());
+        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
         				}
         			}
         		}
@@ -98,4 +100,14 @@ public class Dog extends Entity implements IDog {
 			break;
 		}
     }
+
+	public void checkPowerUpLife() {
+		if(this.getPowerUpLife() <= 0) {
+			this.resetPowerUpLife();
+			this.resetSpeed();
+			this.confuse(false);
+			this.barkLength = this.fixBarkLength;
+		}
+	}
+
 }

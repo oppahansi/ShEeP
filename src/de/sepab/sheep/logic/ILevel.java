@@ -27,11 +27,11 @@ public interface ILevel {
 
 	public void resetLists();
 
-	public void addDog(int x, int y);
+	public void addDog(int x, int y, int speed, int powerUpLife);
 	
-	public void addSheep(int x, int y);
+	public void addSheep(int x, int y, int speed, int powerUpLife);
 	
-	public void addPowerUp(int x, int y);
+	public void addPowerUp();
 	
 	public void addObstacle(int x, int y, int sprite);
 	
