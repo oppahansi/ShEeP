@@ -16,10 +16,15 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.IEntity;
+import de.sepab.sheep.entities.Obstacle;
+import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IInput;
 import de.sepab.sheep.handler.Input;
+import de.sepab.sheep.logic.Collision;
 import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IRandomGenerator;
+import de.sepab.sheep.logic.Level;
+import de.sepab.sheep.logic.Movement;
 
 @SuppressWarnings("serial")
 public class GameBoard extends JPanel{
@@ -29,7 +34,7 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/wolf.png";
-	private static final String SINGLEPLAYERMAP1 = ""; //<--
+	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png"; //<--
 
 	private static final BufferedImage IMAGESHEEP = optimize(load(SHEEP));
 	private static final BufferedImage IMAGEDOGE = optimize(load(DOGE));
@@ -55,6 +60,10 @@ public class GameBoard extends JPanel{
 	    										  {0,128},{32,128},{64,128},};
 	private static final int COORDSFLOOR[][] = {{0,160},{32,160},{64,160}};
 	private static final int COORDSPOWERUP[][] = {{0,0}};
+	
+	private static final int SHEEPCOLOR[][] = {{255,255,255}};
+	private static final int DOGCOLOR[][] = {{105,65,20}};
+	private static final int OBSTACLECOLOR[][] = {{145,110,30}};
 
 	private IRandomGenerator randomGenerator;
 	private ILevel level;
@@ -104,13 +113,22 @@ public class GameBoard extends JPanel{
 				g.drawImage(IMAGEFLOOR.getSubimage(COORDSFLOOR[i][0], COORDSFLOOR[i][1], textureLength, textureLength), x*32, y*32, null);
 			}
 		}
+    	addObstaclesToBackground(g);
     		ImageIO.write(imageBackground, "png", new File("./Hintergrund.png"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
     }
     
+    public void addObstaclesToBackground(Graphics g){
+    	for (IEntity o : this.level.getObstacleList()) {
+			g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[o.getSpritePos()][0], COORDSOBSTACLE[o.getSpritePos()][1], textureLength, textureLength), o.getPosX(), o.getPosY(), null);
+		}
+    }
+    
     public void loadMap(int map) {
+    	Menu.level = new Level();
+    	this.level = Menu.level;
     	switch (map) {
 		case 1:
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
@@ -122,14 +140,102 @@ public class GameBoard extends JPanel{
 		}
     	for (int x = 0; x < this.x; x++) {
 			for (int y = 0; y < this.y; y++) {
-				 int rgb = IMAGEMAP.getRGB(y, x);
+				 int rgb = IMAGEMAP.getRGB(x, y);
 				 Color c = new Color(rgb);
-				 if (c.getBlue() == 0 && c.getRed() == 0 && c.getGreen() == 0) {
-					
+				 if (c.getRed() == DOGCOLOR[0][0] && c.getGreen() == DOGCOLOR[0][1] && c.getBlue() == DOGCOLOR[0][2]) {
+					level.addDog(x*32, y*32);
+				 }
+				 if (c.getRed() == SHEEPCOLOR[0][0] && c.getGreen() == SHEEPCOLOR[0][1] && c.getBlue() == SHEEPCOLOR[0][2]) {
+					level.addSheep(x*32, y*32);	
+				 }
+				 if (c.getRed() == OBSTACLECOLOR[0][0] && c.getGreen() == OBSTACLECOLOR[0][1] && c.getBlue() == OBSTACLECOLOR[0][2]) {
+					 boolean top = false, right = false, bottom = false, left = false;
+					if (y - 1 >= 0) {
+						top = checkForObstacleCage(x, y - 1);
+					}
+					if (x + 1 <= this.x) {
+						right = checkForObstacleCage(x + 1, y);
+					}
+					if (y + 1 <= this.y) {
+						bottom = checkForObstacleCage(x, y + 1);
+					}
+					if (x - 1 >= 0) {
+						left = checkForObstacleCage(x - 1, y);
+					}
+					addObstacleCage(x, y, top, right, bottom, left);
 				}
-	               
 			}
 		}
+    	Menu.level = level;
+    	Menu.collision = new Collision(Menu.level.getDogList(), Menu.level.getSheepList(), Menu.level.getPowerUpList(), Menu.level.getObstacleList(), 1280, 960);
+    	Menu.movement = new Movement(Menu.collision);
+    	Menu.ai = new AI(100, 5, Menu.level.getSheepList(), Menu.movement, Menu.collision);
+    	Menu.input = new Input(Menu.movement, Menu.level.getDogList());
+    	this.addKeyListener((Input) Menu.input);
+    	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input);
+
+    }
+    
+    public void addObstacleCage(int x, int y, boolean top, boolean right, boolean bottom, boolean left){
+    	if (top == false && right == false && bottom == false && left == false) {
+			System.out.print("ERROR:There must be at least 2 fences near each other.");
+		}else
+		if (top == false && right == true && bottom == false && left == false) {
+			level.addObstacle(x*32, y*32, 0);
+		}else
+		if (top == false && right == true && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 1);	
+		}else	
+		if (top == false && right == false && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 2);	
+		}else	
+		if (top == true && right == false && bottom == false && left == false) {
+			level.addObstacle(x*32, y*32, 3);
+		}else
+		if (top == true && right == false && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 4);
+		}else
+		if (top == false && right == false && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 5);
+		}else
+		if (top == false && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 6);
+		}else
+		if (top == false && right == true && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 7);
+		}else
+		if (top == false && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 8);
+		}else
+		if (top == true && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 9);
+		}else
+		if (top == true && right == true && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 10);
+		}else
+		if (top == true && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 11);
+		}else
+		if (top == true && right == true && bottom == false && left == false) {
+			level.addObstacle(x*32, y*32, 12);
+		}else
+		if (top == true && right == true && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 13);
+		}else
+		if (top == true && right == false && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 14);
+		}
+    	
+			
+    }
+    
+    private boolean checkForObstacleCage(int x, int y){
+    	int temprgb = IMAGEMAP.getRGB(x, y);
+    	Color tempColor = new Color(temprgb);
+		if (tempColor.getRed() == OBSTACLECOLOR[0][0] && tempColor.getGreen() == OBSTACLECOLOR[0][1] && tempColor.getBlue() == OBSTACLECOLOR[0][2]) {
+			return true;
+		}
+    	return false;
     }
     
     
@@ -142,7 +248,7 @@ public class GameBoard extends JPanel{
 //    }
     
     private void paintEntities(Graphics2D g) {
-    	paintObstacle(g);
+//    	paintObstacle(g);
     	paintSheep(g);
     	paintDog(g);
     	paintPowerUp(g);

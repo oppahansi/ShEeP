@@ -128,14 +128,14 @@ public class Menu{
 	public static final int width = 1280,
 							height = 960	;
 	
-	private static ILevel level;
+	public static ILevel level;
 	private static IRandomGenerator randomGenerator;
 	private static IDataLoader dataLoader;
 	
 	@SuppressWarnings("unused")
-	private static ICollision collision;
+	public static ICollision collision;
 	@SuppressWarnings("unused")
-	private static IMovement movement;
+	public static IMovement movement;
 	public static IInput input;
 	@SuppressWarnings("unused")
 	private static Menu menu;
@@ -466,6 +466,7 @@ public class Menu{
 //						gameBoard.setFocusable(true);
 						level.getReferences(ai, gameBoard, timer, input);
 						gameBoard.Update(level, randomGenerator);
+						gameBoard.loadMap(1);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
