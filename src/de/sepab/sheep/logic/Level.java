@@ -36,7 +36,7 @@ public class Level implements ILevel, ActionListener{
 
 	int time = 10, count = 0;
 	boolean locked = false;
-	
+
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
