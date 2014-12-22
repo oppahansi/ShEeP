@@ -6,6 +6,8 @@ public class Sheep extends Entity implements ISheep {
 	private boolean scared = false;
 	private int x=0, y=0;
 
+
+
 	private boolean deaf = false;
 
 	public Sheep (int posX, int posY, int speed, int powerUpLife) {

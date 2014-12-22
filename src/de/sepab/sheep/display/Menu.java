@@ -23,6 +23,7 @@ import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IMovement;
 import de.sepab.sheep.logic.IRandomGenerator;
 import de.sepab.sheep.logic.ITimer;
+import de.sepab.sheep.logic.Level.GameModus;
 
 
 
@@ -129,8 +130,9 @@ public class Menu{
 							height = 960	;
 	
 	public static ILevel level;
-	private static IRandomGenerator randomGenerator;
+	public static IRandomGenerator randomGenerator;
 	private static IDataLoader dataLoader;
+	public static GameModus gameModus;
 	
 	@SuppressWarnings("unused")
 	public static ICollision collision;
@@ -463,10 +465,9 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-//						gameBoard.setFocusable(true);
 						level.getReferences(ai, gameBoard, timer, input);
+						gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
 						gameBoard.Update(level, randomGenerator);
-						gameBoard.loadMap(1);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
@@ -485,8 +486,13 @@ public class Menu{
 				multiPlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
+						level.getReferences(ai, gameBoard, timer, input);
+						gameBoard.Update(level, randomGenerator);
+						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
+						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
-						gameBoard.repaint();
+						level.TimerStart();
+						gameBoard.requestFocus();
 					}
 				});
 				multiPlayerButton_Back.addActionListener(new ActionListener() {

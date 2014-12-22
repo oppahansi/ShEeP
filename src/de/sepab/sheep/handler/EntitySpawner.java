@@ -1,5 +1,10 @@
 package de.sepab.sheep.handler;
 
+
+import de.sepab.sheep.entities.*;
+import de.sepab.sheep.logic.Timer;
+
+
 import de.sepab.sheep.entities.Cage;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.Obstacle;
@@ -21,7 +26,7 @@ public class EntitySpawner implements IEntitySpawner {
          return new Sheep(posX, posY, 3, 0);
       }
       else if (entityName == Constants.OBSTACLE) {
-         return new Obstacle(posX, posY);
+         return new Obstacle(posX, posY, 0);
       }
       else if (entityName == Constants.CAGE) {
          return new Cage(posX, posY);

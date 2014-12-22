@@ -84,12 +84,11 @@ public class Level implements ILevel, ActionListener{
 	public void addPowerUp() {
 		powerUpList.add(entitySpawner.createPowerUp());
 	}
-
-	@Override
-	public void addObstacle(final int x, final int y, final int sprite) {
-		obstacleList.add(new Obstacle(x, y));
+	
+	public void addObstacle(int x, int y, int sprite) {
+		obstacleList.add(new Obstacle(x, y, sprite));
 	}
-
+	
 	public void addCage(int x, int y) {
 		cageList.add(new Cage(x, y));
 	}
@@ -143,8 +142,8 @@ public class Level implements ILevel, ActionListener{
 		}
 
 
-		input.makeTurn();
 
+		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
 //		count++;
