@@ -34,7 +34,11 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/wolf.png";
-	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png"; //<--
+	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP3 = "/de/sepab/sheep/model/gfx/map3SinglePlayer.png"; 
+	private static final String MULTIPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1MultiPlayer.png"; 
+	private static final String MULTIPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2MultiPlayer.png"; 
 
 	private static final BufferedImage IMAGESHEEP = optimize(load(SHEEP));
 	private static final BufferedImage IMAGEDOGE = optimize(load(DOGE));
@@ -62,12 +66,21 @@ public class GameBoard extends JPanel{
 	    										  {0,96},{32,96},{64,96},
 	    										  {0,128},{32,128},{64,128},
 	    										  
-	    										  {96,0},{128,0},{160,0},
+	    										  {96,0},{128,0},{160,0}, //weat
 	    										  {96,32},{128,32},{160,32},
 	    										  {96,64},{128,64},{160,64},
 	    										  {96,96},{128,96},{160,96},
 	    										  {96,128},{128,128},{160,128},
-												  };
+												  
+	    										  {192,0},{224,0},{256,0}, //water
+	    										  {192,32},{224,32},{256,32},
+	    										  {192,64},{224,64},{256,64},
+	    										  {192,96},{224,96},{256,96},
+	    										  {192,128},{224,128},{256,128},	
+	    										  {192,160},{224,160},{256,160},
+	    										  
+	    										  {96,160},{128,160},{160,160}, //1x1 obstacles
+	};
 	private static final int COORDSFLOOR[][] = {{0,160},{32,160},{64,160}};
 	private static final int COORDSPOWERUP[][] = {{0,0}};
 
@@ -77,7 +90,7 @@ public class GameBoard extends JPanel{
 	private static final int OBSTACLECOLOR[][] = {{145,110,30}, //fence
 												   {215,205,0}, //wheat
 												   	{0,30,215}, //water
-												 {205,200,180}, //1x1 obstacles
+												 {185,180,160}, //1x1 obstacles
 												   	};
 
 	private IRandomGenerator randomGenerator;
@@ -141,14 +154,25 @@ public class GameBoard extends JPanel{
 		}
     }
     
-    public void loadMap(int map) {
+    public void loadMap(int map, int modus) {
     	Menu.level = new Level();
     	this.level = Menu.level;
     	switch (map) {
-		case 1:
+		case 0:
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
 			break;
-
+		case 1:
+			IMAGEMAP = optimize(load(SINGLEPLAYERMAP2));
+			break;
+		case 2:
+			IMAGEMAP = optimize(load(SINGLEPLAYERMAP3));
+			break;
+		case 3:
+			IMAGEMAP = optimize(load(MULTIPLAYERMAP1));
+			break;
+		case 4:
+			IMAGEMAP = optimize(load(MULTIPLAYERMAP2));
+			break;
 		default:
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
 			break;
@@ -205,8 +229,52 @@ public class GameBoard extends JPanel{
 					if (x - 1 >= 0 && y - 1 >= 0) {
 						topLeft = checkForColor(x - 1, y - 1, OBSTACLECOLOR, 1);
 					}
-					addObstacleCage(x, y, top, right, bottom, left);
+					addObstaclesWheat(x, y, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }
+				 if (c.getRed() == OBSTACLECOLOR[2][0] && c.getGreen() == OBSTACLECOLOR[2][1] && c.getBlue() == OBSTACLECOLOR[2][2]) {
+					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
+					if (y - 1 >= 0) {
+						top = checkForColor(x, y - 1, OBSTACLECOLOR, 2);
+					}
+					if (x + 1 <= this.x && y - 1 >= 0) {
+						topRight = checkForColor(x + 1, y - 1, OBSTACLECOLOR, 2);
+					}
+					if (x + 1 <= this.x) {
+						right = checkForColor(x + 1, y, OBSTACLECOLOR, 2);
+					}
+					if (x + 1 <= this.x && y + 1 <= this.y) {
+						bottomRight = checkForColor(x + 1, y + 1, OBSTACLECOLOR, 2);
+					}
+					if (y + 1 <= this.y) {
+						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 2);
+					}
+					if (x - 1 >= 0 && y + 1 <= this.y) {
+						bottomLeft = checkForColor(x - 1, y + 1, OBSTACLECOLOR, 2);
+					}
+					if (x - 1 >= 0) {
+						left = checkForColor(x - 1, y, OBSTACLECOLOR, 2);
+					}
+					if (x - 1 >= 0 && y - 1 >= 0) {
+						topLeft = checkForColor(x - 1, y - 1, OBSTACLECOLOR, 2);
+					}
+					addObstaclesWater(x, y, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
+				 }
+				 if (c.getRed() == OBSTACLECOLOR[3][0] && c.getGreen() == OBSTACLECOLOR[3][1] && c.getBlue() == OBSTACLECOLOR[3][2]) {
+					 int i = randomGenerator.getRandomNumber(0, 2);
+						switch (i) {
+						case 0:
+							level.addObstacle(x*32, y*32, 48);
+							break;
+						case 1:
+							level.addObstacle(x*32, y*32, 49);
+							break;
+						case 2:
+							level.addObstacle(x*32, y*32, 50);
+							break;
+						default:
+							break;
+						}
+				}
 			}
     	}
     	Menu.level = level;
@@ -218,12 +286,77 @@ public class GameBoard extends JPanel{
     	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input);
     }
     
-    public void addObstaclesWheat(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
+    public void addObstaclesWater(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
     	if (top == false && right == false && bottom == false && left == false) {
-			System.out.print("ERROR:There must be at least 2 wheat near each other.");
+			System.out.print("ERROR:Incorrect construction.");
+		}else
+		if (top == false && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 36);
+		}else
+		if (top == false && right == true && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 37);
+		}else
+		if (top == false && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 38);
+		}else
+		if (top == true && right == true && bottom == true && left == false) {
+			level.addObstacle(x*32, y*32, 39);
+		}else
+		if (top == true && right == true && bottom == true && left == true) {
+			if (topLeft == true && topRight == true && bottomRight == true && bottomLeft == true) {
+				int i = randomGenerator.getRandomNumber(0, 3);
+				switch (i) {
+				case 0:
+					level.addObstacle(x*32, y*32, 40);
+					break;
+				case 1:
+					level.addObstacle(x*32, y*32, 45);
+					break;
+				case 2:
+					level.addObstacle(x*32, y*32, 46);
+					break;
+				case 3:
+					level.addObstacle(x*32, y*32, 47);
+					break;
+				default:
+					break;
+				}
+				
+			}else
+			if (topLeft == true && topRight == true && bottomRight == false && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 31);
+			}else
+			if (topLeft == true && topRight == true && bottomRight == true && bottomLeft == false) {
+				level.addObstacle(x*32, y*32, 32);
+			}else
+			if (topLeft == true && topRight == false && bottomRight == true && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 34);
+			}else
+			if (topLeft == false && topRight == true && bottomRight == true && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 35);
+			}else{
+				System.out.print("ERROR: Incorrect construction.");
+			}
+		}else
+		if (top == true && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 41);
 		}else
 		if (top == true && right == true && bottom == false && left == false) {
-			level.addObstacle(x*32, y*32, 27);
+			level.addObstacle(x*32, y*32, 42);
+		}else
+		if (top == true && right == true && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 43);	
+		}else
+		if (top == true && right == false && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 44);	
+		}else{
+			System.out.print("ERROR: Incorrect construction.");
+		}
+    }
+    
+    public void addObstaclesWheat(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
+    	if (top == false && right == false && bottom == false && left == false) {
+			System.out.print("ERROR:Incorrect construction.");
 		}else
 		if (top == false && right == true && bottom == true && left == false) {
 			level.addObstacle(x*32, y*32, 21);
@@ -238,7 +371,37 @@ public class GameBoard extends JPanel{
 			level.addObstacle(x*32, y*32, 24);
 		}else
 		if (top == true && right == true && bottom == true && left == true) {
-			level.addObstacle(x*32, y*32, 25);
+			if (topLeft == true && topRight == true && bottomRight == true && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 25);
+			}else
+			if (topLeft == true && topRight == true && bottomRight == false && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 16);
+			}else
+			if (topLeft == true && topRight == true && bottomRight == true && bottomLeft == false) {
+				level.addObstacle(x*32, y*32, 17);
+			}else
+			if (topLeft == true && topRight == false && bottomRight == true && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 19);
+			}else
+			if (topLeft == false && topRight == true && bottomRight == true && bottomLeft == true) {
+				level.addObstacle(x*32, y*32, 20);
+			}else{
+				System.out.print("ERROR: Incorrect construction.");
+			}
+		}else
+		if (top == true && right == false && bottom == true && left == true) {
+			level.addObstacle(x*32, y*32, 26);
+		}else
+		if (top == true && right == true && bottom == false && left == false) {
+			level.addObstacle(x*32, y*32, 27);
+		}else
+		if (top == true && right == true && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 28);	
+		}else
+		if (top == true && right == false && bottom == false && left == true) {
+			level.addObstacle(x*32, y*32, 29);	
+		}else{
+			System.out.print("ERROR: Incorrect construction.");
 		}
     }
 
