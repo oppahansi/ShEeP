@@ -12,9 +12,8 @@ public class Dog extends Entity implements IDog {
 
     public Dog(int posX, int posY, int speed, int  PowerUpLife, LinkedList<IEntity> sheeps, int barkLength) {
         super(posX, posY, speed, PowerUpLife);
-        this.setSpeed(4);
         this.sheeps = sheeps;
-        this.barkLength = barkLength;
+        this.barkLength = this.fixBarkLength = barkLength;
         this.spritePeriod = 6;
         this.setSpriteQuarters();
     }

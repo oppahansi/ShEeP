@@ -5,10 +5,10 @@ public class Entity implements IEntity {
 	private int posY;
 
 
-	private static int fixSpeed;
+	private final int fixSpeed;
 	private int speed;
 	private boolean confused = false;
-	private static int fixPowerUpLife;
+	private final int fixPowerUpLife;
 	private int powerUpLife;
 
 	protected int spritePos;

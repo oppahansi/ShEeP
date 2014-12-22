@@ -182,10 +182,10 @@ public class GameBoard extends JPanel{
 				 int rgb = IMAGEMAP.getRGB(x, y);
 				 Color c = new Color(rgb);
 				 if (c.getRed() == DOGCOLOR[0][0] && c.getGreen() == DOGCOLOR[0][1] && c.getBlue() == DOGCOLOR[0][2]) {
-					level.addDog(x*32, y*32, 1, 100);
+					level.addDog(x*32, y*32, 5, 3);
 				 }
 				 if (c.getRed() == SHEEPCOLOR[0][0] && c.getGreen() == SHEEPCOLOR[0][1] && c.getBlue() == SHEEPCOLOR[0][2]) {
-					level.addSheep(x*32, y*32, 1, 100);	
+					level.addSheep(x*32, y*32, 1, 3);
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[0][0] && c.getGreen() == OBSTACLECOLOR[0][1] && c.getBlue() == OBSTACLECOLOR[0][2]) {
 					 boolean top = false, right = false, bottom = false, left = false;
