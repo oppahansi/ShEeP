@@ -280,7 +280,7 @@ public class GameBoard extends JPanel{
     	Menu.level = level;
     	Menu.collision = new Collision(Menu.level.getDogList(), Menu.level.getSheepList(), Menu.level.getPowerUpList(), Menu.level.getObstacleList(), 1280, 960);
     	Menu.movement = new Movement(Menu.collision);
-    	Menu.ai = new AI(100, 5, Menu.level.getSheepList(), Menu.movement, Menu.collision);
+    	Menu.ai = new AI(100, 5, Menu.level, Menu.movement, Menu.collision);
     	Menu.input = new Input(Menu.movement, Menu.level.getDogList());
     	this.addKeyListener((Input) Menu.input);
     	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input);

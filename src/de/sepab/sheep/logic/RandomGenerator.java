@@ -28,4 +28,14 @@ public class RandomGenerator implements IRandomGenerator {
 	public int getRandomNumberDistribution(int mean, int deviation) {
 		return (int)((float)mean+new Random().nextGaussian()*(float)deviation);
 	}
+
+	@Override
+	public boolean getPercentDistribution(int percent, int precision) {
+		if(this.getRandomNumber(1, (int)(100*Math.pow(10, precision)) ) <= percent*Math.pow(10, precision)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
