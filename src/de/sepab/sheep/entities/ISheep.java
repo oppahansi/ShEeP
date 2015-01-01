@@ -7,4 +7,6 @@ public interface ISheep {
 	public boolean isDeaf();
 	public void deafy(boolean state);
 	public void checkPowerUpLife();
+	public int getScareX();
+	public int getScareY();
 }

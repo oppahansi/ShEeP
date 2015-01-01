@@ -40,7 +40,7 @@ public class Main {
 		Input input = new Input(movement, level.getDogList());
 		Menu menu = new Menu(dataLoader);
 		IRandomGenerator randomGenerator = new RandomGenerator();
-		AI ai = new AI(100, 5, level.getSheepList(), movement, collision);
+		AI ai = new AI(100, 5, level, movement, collision);
 		
 		
 		menu.run(level, randomGenerator, collision, movement, input, ai, timer);

@@ -35,7 +35,8 @@ public class Level implements ILevel, ActionListener{
 	IInput input;
 
 	int time = 10, count = 0;
-	boolean locked = false;
+	boolean locked_1 = false;
+	boolean locked_2 = false;
 
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input) {
 		this.ai = ai;
@@ -98,8 +99,8 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	private void reducePowerUpTime() {
-		if((this.timer.getTime() % 10 == 0) && !(this.locked) && (this.timer.getTime() != 0)) {
-			this.locked = true;
+		if((this.timer.getTime() % 10 == 0) && !(this.locked_1) && (this.timer.getTime() != 0)) {
+			this.locked_1 = true;
 			for (IEntity i : this.dogList) {
 				i.decrementPowerUpLife();
 			}
@@ -108,7 +109,7 @@ public class Level implements ILevel, ActionListener{
 			}
 		}
 		else if(this.timer.getTime() % 11 == 0) {
-			this.locked=false;
+			this.locked_1 = false;
 		}
 		for (IEntity i : this.dogList) {
 			((IDog)i).checkPowerUpLife();
@@ -117,7 +118,17 @@ public class Level implements ILevel, ActionListener{
 			((ISheep)i).checkPowerUpLife();
 		}
 	}
-	
+
+	private void unscareSheeps() {
+		if((this.timer.getTime() % ai.getScariness() == 0) && !(this.locked_2) && (this.timer.getTime() != 0)) {
+			for (IEntity i : this.sheepList) {
+				((ISheep)i).scare(false, 0, 0);
+			}
+		}
+		else if(this.timer.getTime() % ai.getScariness()+1 == 0){
+			this.locked_2 = false;
+		}
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		//System.out.print("test");
@@ -130,7 +141,6 @@ public class Level implements ILevel, ActionListener{
 //				timer.stop();
 //				System.out.print("ende");
 //			}
-			this.reducePowerUpTime();
 			break;
 		case ONCOUNT:
 			break;
@@ -141,8 +151,8 @@ public class Level implements ILevel, ActionListener{
 			break;
 		}
 
-
-
+		this.reducePowerUpTime();
+		this.unscareSheeps();
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
