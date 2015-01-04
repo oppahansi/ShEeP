@@ -7,7 +7,7 @@ import de.sepab.sheep.entities.IEntity;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> List;
+	private LinkedList<IEntity> Dogs,Sheeps,Powers,Obstacles,List;
 	private int lenght,hight;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
@@ -15,28 +15,49 @@ public class Collision implements ICollision{
 		lenght=x;
 		hight=y;
 		List = new LinkedList<>();
+		Dogs = new LinkedList<>();
+		Sheeps = new LinkedList<>();
+		Powers = new LinkedList<>();
+		Obstacles = new LinkedList<>();
 		List.addAll(DogList);
 		List.addAll(SheepList);
-		List.addAll(PowerUpList);
-		List.addAll(ObstacleList);
+		Dogs.addAll(DogList);
+		Sheeps.addAll(SheepList);
+		Powers.addAll(PowerUpList);
+		Obstacles.addAll(ObstacleList);
+		
 	}
 
+	public int Count(IEntity base,int Ax, int Ay,int Bx,int By){
+		int R=0;
+		int Y[]=new int[2];
+		int X[]=new int[2];
+		X[0]=Ax-32;
+		X[1]=Bx+32;
+		Y[0]=Ay-32;
+		Y[1]=By+32;
+		for(int i=0;i<Sheeps.size();i++){
+			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+			{
+				//COLLISION
+				R++;
+			}
+		}
+		return R;
+	}
+	
+	
 	public boolean calcCollision(IEntity entity, int x, int y){
-		if(0<y && y<hight-32 && 0<x && x<lenght-32)//abfrage des Spielfeldrandes
-
+		if(-1<y && y<hight-32 && -1<x && x<lenght-32)//abfrage des Spielfeldrandes
 		{
 			//Koordinatennetz
 			int Y[]=new int[2];
 			int X[]=new int[2];
-			//X[0]=entity.getPosX()-32;
-			//X[1]=entity.getPosX()+32;
-			//Y[0]=entity.getPosY()-32;
-			//Y[1]=entity.getPosY()+32;
 			X[0]=x-32;
 			X[1]=x+32;
 			Y[0]=y-32;
 			Y[1]=y+32;
-
+			
 			for(int i=0;i<List.size();i++)
 			{
 				if(entity!=List.get(i))
@@ -48,8 +69,72 @@ public class Collision implements ICollision{
 					}
 				}
 			}
+			for(int i=0;i<Obstacles.size();i++)
+			{
+				if(Obstacles.get(i).getSpritePos()==3||Obstacles.get(i).getSpritePos()==4||Obstacles.get(i).getSpritePos()==5)
+				{
+					if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//Obstacles.get(i).
+						//von beiden seiten 4 5 6 
+						return false;
+						
+					}
+				}
+				else{if(Obstacles.get(i).getSpritePos()==8||Obstacles.get(i).getSpritePos()==14)
+				{
+					if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//Obstacles.get(i).
+						//von rechts  9 15  
+						return false;
+						
+					}
+				}
+				else{if(Obstacles.get(i).getSpritePos()==6||Obstacles.get(i).getSpritePos()==12)
+				{
+					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//Obstacles.get(i). 
+						//von links 7 13 
+						return false;
+						
+					}
+				}
+				else{if(Obstacles.get(i).getSpritePos()==21||Obstacles.get(i).getSpritePos()==22||Obstacles.get(i).getSpritePos()==23)
+				{
+					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1]-16)	//punkt im koordinatennetz?
+					{
+						//Obstacles.get(i).
+						//COLLISION 21 22 23 
+						return false;
+						
+					}
+				}
+				else{if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//Obstacles.get(i).
+						return false;
+						
+					}}}}}
+			}
+			
+			for(int i=0;i<Powers.size();i++)
+			{
+				if(entity!=Powers.get(i))
+				{
+					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return true;
+						//MAGICLE AUFRUF DES POWERUP KILLERS Magic(entity,Powers.get(i){oder einfach nur i als index des zu verarbeitenden power ups})
+					}
+				}
+			}
+			
 			return true;
 		}
+		
 		return false;
 	}
 	public boolean isoccupied(int x,int y)
@@ -73,24 +158,25 @@ public class Collision implements ICollision{
 					//COLLISION
 					return false;
 				}
-
-
-
-
+			}
+			for(int i=0;i<Powers.size();i++)
+			{
+					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return false;
+					}
+			}
+			for(int i=0;i<Obstacles.size();i++)
+			{
+					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return false;
+					}
 			}
 			return true;
 		}
 		return false;
-
 	}
-
-
 }
-
-
-/*
-Sprite auflösung abfragen?kann ich das? - nein muss hardegecodet werden
-sind die koordinaten der entity links unten vom bild? oder z.b. zentral mitte? - links oben
-ALLES IST 32x32
-
-*/
