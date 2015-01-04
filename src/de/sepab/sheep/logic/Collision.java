@@ -81,42 +81,54 @@ public class Collision implements ICollision{
 						
 					}
 				}
-				else{if(Obstacles.get(i).getSpritePos()==8||Obstacles.get(i).getSpritePos()==14)
-				{
-					if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					else
 					{
-						//Obstacles.get(i).
-						//von rechts  9 15  
-						return false;
+						if(Obstacles.get(i).getSpritePos()==8||Obstacles.get(i).getSpritePos()==14)
+						{
+							if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+							{
+								//Obstacles.get(i).
+								//von rechts  9 15  
+								return false;
 						
+							}
+						}
+						else
+						{
+							if(Obstacles.get(i).getSpritePos()==6||Obstacles.get(i).getSpritePos()==12)
+							{
+								if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+								{
+									//Obstacles.get(i). 
+									//von links 7 13 
+									return false;
+						
+								}
+							}
+							else
+							{
+								if(Obstacles.get(i).getSpritePos()==21||Obstacles.get(i).getSpritePos()==22||Obstacles.get(i).getSpritePos()==23)
+								{
+									if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1]-16)	//punkt im koordinatennetz?
+									{
+										//Obstacles.get(i).
+										//COLLISION 21 22 23 
+										return false;
+						
+									}
+								}
+								else
+								{
+									if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+									{
+										//Obstacles.get(i).
+										return false;
+						
+									}
+								}
+							}
+						}
 					}
-				}
-				else{if(Obstacles.get(i).getSpritePos()==6||Obstacles.get(i).getSpritePos()==12)
-				{
-					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i). 
-						//von links 7 13 
-						return false;
-						
-					}
-				}
-				else{if(Obstacles.get(i).getSpritePos()==21||Obstacles.get(i).getSpritePos()==22||Obstacles.get(i).getSpritePos()==23)
-				{
-					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1]-16)	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i).
-						//COLLISION 21 22 23 
-						return false;
-						
-					}
-				}
-				else{if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i).
-						return false;
-						
-					}}}}}
 			}
 			
 			for(int i=0;i<Powers.size();i++)
