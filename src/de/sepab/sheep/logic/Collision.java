@@ -1,31 +1,26 @@
 package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
-
+import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IEntity;
 
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Sheeps,Powers,Obstacles,List;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,List;
 	private int lenght,hight;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
-		//Große Liste erstellen
+		//Listen erstellen
 		lenght=x;
 		hight=y;
 		List = new LinkedList<>();
-		Dogs = new LinkedList<>();
-		Sheeps = new LinkedList<>();
-		Powers = new LinkedList<>();
-		Obstacles = new LinkedList<>();
+		Dogs = DogList;
+		Sheeps = SheepList;
+		Powers = PowerUpList;
+		Obstacles = ObstacleList;
 		List.addAll(DogList);
 		List.addAll(SheepList);
-		Dogs.addAll(DogList);
-		Sheeps.addAll(SheepList);
-		Powers.addAll(PowerUpList);
-		Obstacles.addAll(ObstacleList);
-		
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -37,10 +32,12 @@ public class Collision implements ICollision{
 		Y[0]=Ay-32;
 		Y[1]=By+32;
 		for(int i=0;i<Sheeps.size();i++){
+			((ISheep)Sheeps.get(i)).setchained(false);
 			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 			{
 				//COLLISION
 				R++;
+				((ISheep)Sheeps.get(i)).setchained(true);
 			}
 		}
 		return R;
@@ -75,48 +72,60 @@ public class Collision implements ICollision{
 				{
 					if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
-						//Obstacles.get(i).
-						//von beiden seiten 4 5 6 
+						//
+						//von beiden seiten 3 4 5 
 						return false;
 						
 					}
 				}
-				else{if(Obstacles.get(i).getSpritePos()==8||Obstacles.get(i).getSpritePos()==14)
-				{
-					if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					else
 					{
-						//Obstacles.get(i).
-						//von rechts  9 15  
-						return false;
+						if(Obstacles.get(i).getSpritePos()==8||Obstacles.get(i).getSpritePos()==14)
+						{
+							if(X[0]+10<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+							{
+								//
+								//von rechts  8 14  
+								return false;
 						
+							}
+						}
+						else
+						{
+							if(Obstacles.get(i).getSpritePos()==6||Obstacles.get(i).getSpritePos()==12)
+							{
+								if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+								{
+									// 
+									//von links 6 12 
+									return false;
+						
+								}
+							}
+							else
+							{
+								if(Obstacles.get(i).getSpritePos()==21||Obstacles.get(i).getSpritePos()==22||Obstacles.get(i).getSpritePos()==23)
+								{
+									if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1]-16)	//punkt im koordinatennetz?
+									{
+										//
+										//COLLISION 21 22 23 
+										return false;
+						
+									}
+								}
+								else
+								{
+									if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+									{
+										//
+										return false;
+						
+									}
+								}
+							}
+						}
 					}
-				}
-				else{if(Obstacles.get(i).getSpritePos()==6||Obstacles.get(i).getSpritePos()==12)
-				{
-					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1]-10 && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i). 
-						//von links 7 13 
-						return false;
-						
-					}
-				}
-				else{if(Obstacles.get(i).getSpritePos()==21||Obstacles.get(i).getSpritePos()==22||Obstacles.get(i).getSpritePos()==23)
-				{
-					if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1]-16)	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i).
-						//COLLISION 21 22 23 
-						return false;
-						
-					}
-				}
-				else{if(X[0]<Obstacles.get(i).getPosX() && Obstacles.get(i).getPosX()<X[1] && Y[0]<Obstacles.get(i).getPosY() && Obstacles.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
-					{
-						//Obstacles.get(i).
-						return false;
-						
-					}}}}}
 			}
 			
 			for(int i=0;i<Powers.size();i++)

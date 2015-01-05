@@ -9,4 +9,6 @@ public interface ISheep {
 	public void checkPowerUpLife();
 	public int getScareX();
 	public int getScareY();
+	public void setchained(boolean b);
+	public boolean getchained();
 }

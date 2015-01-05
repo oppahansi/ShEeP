@@ -18,5 +18,6 @@ public interface IEntity {
 	public boolean isConfused();
 	public int getRotation();
 	public void setRotation(int rotation);
+
 	
 }
