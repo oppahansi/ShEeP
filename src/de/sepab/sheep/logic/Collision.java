@@ -28,7 +28,7 @@ public class Collision implements ICollision{
 		
 	}
 
-	public int Count(IEntity base,int Ax, int Ay,int Bx,int By){
+	public int Count(int Ax, int Ay,int Bx,int By){
 		int R=0;
 		int Y[]=new int[2];
 		int X[]=new int[2];

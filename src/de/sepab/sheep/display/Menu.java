@@ -52,18 +52,18 @@ public class Menu{
 						  	mainMenuButton_Exit = new JButton("Beenden"),
 						  	
 						  multiPlayerButton_Start = new JButton("Start"), //sp = singleplayer
-							multiPlayerButton_Back = new JButton("Zurück"),
+							multiPlayerButton_Back = new JButton("Zurï¿½ck"),
 									  	
 						  singlePlayerButton_Start = new JButton("Start"), //sp = singleplayer
-						  	singlePlayerButton_Back = new JButton("Zurück"),
+						  	singlePlayerButton_Back = new JButton("Zurï¿½ck"),
 						  	
-						  highscoreButton_Back = new JButton("Zurück"), //hs = highscore
+						  highscoreButton_Back = new JButton("Zurï¿½ck"), //hs = highscore
 						  
 						  optionButton_Minus = new JButton("-"),//o = options
 						  	optionButton_Plus = new JButton("+"),
-						  	optionButton_Back = new JButton("Zurück"),
+						  	optionButton_Back = new JButton("Zurï¿½ck"),
 						  	
-						  helpButton_Back = new JButton("Zurück");//h = help
+						  helpButton_Back = new JButton("Zurï¿½ck");//h = help
 	//alle textfields
 	public static JTextField singlePlayerTextField_Singleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	singlePlayerTextField_Map = new JTextField("Karte:"),
@@ -99,11 +99,11 @@ public class Menu{
 	//alle textareas
 	public static JTextArea helpTextArea_Help = new JTextArea(
 			"Auf Zeit: \r\n"
-			+ "In diesem Modus versucht der Spieler soviele Schafe wie möglich in \r\n"
+			+ "In diesem Modus versucht der Spieler soviele Schafe wie mï¿½glich in \r\n"
 			+ "einer gewissen Zeit einzufangen \r\n"
 			+ "\r\n"
 			+ "Auf Anzahl: \r\n"
-			+ "In diesem Modus versucht der Spieler so schnell wie möglich eine \r\n"
+			+ "In diesem Modus versucht der Spieler so schnell wie mï¿½glich eine \r\n"
 			+ "gewisse Anzahl an schafen einzufangen"
 			);
 	//alle fonts
@@ -198,7 +198,7 @@ public class Menu{
 		
 		gameBoard = new GameBoard(level, randomGenerator, input);
 		jFrame.setFocusable(false);
-		jFrame.setSize(width, height); //größe des screens
+		jFrame.setSize(width, height); //grï¿½ï¿½e des screens
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		jFrame.setUndecorated(true);
 		
@@ -465,7 +465,7 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input);
+						level.getReferences(ai, gameBoard, timer, input, collision);
 						gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.shuffle();
@@ -486,7 +486,7 @@ public class Menu{
 				multiPlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input);
+						level.getReferences(ai, gameBoard, timer, input, collision);
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
 						gameBoard.shuffle();
@@ -545,7 +545,7 @@ public class Menu{
 			
 		}
 		
-		{//das einfügen der elemente in die Labels
+		{//das einfï¿½gen der elemente in die Labels
 			{//mm
 				panelMainMenu.add(mainMenuButton_Exit);
 				panelMainMenu.add(mainMenuButton_Help);
@@ -632,7 +632,7 @@ public class Menu{
 //			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
 		}
 		
-		{//Labels einfügen in das Fenster
+		{//Labels einfï¿½gen in das Fenster
 			jFrame.add(panelMainMenu);
 			jFrame.add(panelSinglePlayer);
 			jFrame.add(panelMultiPlayer);

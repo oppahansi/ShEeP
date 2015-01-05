@@ -36,8 +36,8 @@ public interface ILevel {
 	public void addObstacle(int x, int y, int sprite);
 	
 	public void addCage(int x, int y);
-	
-	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input);
+
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision);
 	
 	public void TimerStart();
 }

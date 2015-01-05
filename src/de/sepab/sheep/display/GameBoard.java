@@ -283,7 +283,7 @@ public class GameBoard extends JPanel{
     	Menu.ai = new AI(100, 5, Menu.level, Menu.movement, Menu.collision);
     	Menu.input = new Input(Menu.movement, Menu.level.getDogList());
     	this.addKeyListener((Input) Menu.input);
-    	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input);
+    	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input, Menu.collision);
     }
     
     public void addObstaclesWater(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
