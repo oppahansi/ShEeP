@@ -9,7 +9,6 @@ import de.sepab.sheep.handler.EntitySpawner;
 import de.sepab.sheep.handler.IEntitySpawner;
 import de.sepab.sheep.handler.IInput;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -169,20 +168,50 @@ public class Level implements ILevel, ActionListener{
 	@Override
 	public void TimerStart() {
 		swingTimer.start();
-		timer.reset()	;
-		// TODO Auto-generated method stub
-
+		timer.reset();
 	}
 
 	@Override
 	public void resetLists() {
-		this.dogList = new LinkedList<>();
-		this.sheepList = new LinkedList<>();
-		this.obstacleList = new LinkedList<>();
-		this.powerUpList = new LinkedList<>();
-		this.cageList = new LinkedList<>();
-		// TODO Auto-generated method stub
+		this.dogList.clear();
+		this.sheepList.clear();
+		this.obstacleList.clear();
+		this.powerUpList.clear();
+		this.cageList.clear();
+	}
+
+	@Override
+	public void removeDog(IEntity entity) {
+		dogList.remove(entity);
 		
+	}
+
+	@Override
+	public void removeSheep(IEntity entity) {
+		sheepList.remove(entity);
+	}
+
+	@Override
+	public void removePowerUp(IEntity entity) {
+		powerUpList.remove(entity);
+	}
+
+	@Override
+	public void removeObstacle(IEntity entity) {
+		obstacleList.remove(entity);
+	}
+
+	@Override
+	public void removeCage(IEntity entity) {
+		cageList.remove(entity);
+	}
+
+	@Override
+	public void resetLevel() {
+		this.resetLists();
+		this.swingTimer.restart();
+		this.swingTimer.stop();
+		this.timer.reset();
 	}
 }
 
