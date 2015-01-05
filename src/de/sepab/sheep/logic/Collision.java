@@ -2,8 +2,9 @@ package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
 import de.sepab.sheep.entities.ISheep;
+import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
-
+import de.sepab.sheep.entities.PowerUp;
 
 public class Collision implements ICollision{
 
@@ -62,6 +63,11 @@ public class Collision implements ICollision{
 					if(X[0]<List.get(i).getPosX() && List.get(i).getPosX()<X[1] && Y[0]<List.get(i).getPosY() && List.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
+
+						if(entity instanceof IDog && List.get(i) instanceof PowerUp){
+							System.out.println("Collision with: " + List.get(i));
+							((PowerUp) List.get(i)).event(entity);
+						}
 						return false;
 					}
 				}

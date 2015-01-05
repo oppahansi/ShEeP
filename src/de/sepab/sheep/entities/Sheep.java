@@ -30,9 +30,11 @@ public class Sheep extends Entity implements ISheep {
 
 	@Override
 	public void scare(boolean state, int x, int y) {
-		this.scared = state;
-		this.x = x;
-		this.y = y;
+		if(!this.deaf) {
+			this.scared = state;
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 	@Override
