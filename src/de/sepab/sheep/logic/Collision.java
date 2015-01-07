@@ -41,8 +41,39 @@ public class Collision implements ICollision{
 			}
 		}
 		return R;
+		
 	}
 	
+	public int Count(int Ax, int Ay,int Bx,int By,int Cx, int Cy,int Dx,int Dy){
+		int R=0;
+		int Y[]=new int[4];
+		int X[]=new int[4];
+		X[0]=Ax-32;
+		X[1]=Bx+32;
+		Y[0]=Ay-32;
+		Y[1]=By+32;
+		X[2]=Cx-32;
+		X[3]=Dx+32;
+		Y[2]=Cy-32;
+		Y[3]=Dy+32;
+		for(int i=0;i<Sheeps.size();i++){
+			((ISheep)Sheeps.get(i)).setchained(false);
+			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+			{
+				//COLLISION
+				R=+1000;//erstes gehege zählt in 1000ner schritten damit bis zu 999 schafe im zweiten gehege sein können
+				((ISheep)Sheeps.get(i)).setchained(true);
+			}
+			if(X[2]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[3] && Y[2]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[3])	//punkt im koordinatennetz?
+			{
+				//COLLISION
+				R=+1;
+				((ISheep)Sheeps.get(i)).setchained(true);
+			}
+			
+		}
+		return R;//R ist keine eindeutige zahl mehr da nun zwei gehege vorhanden sind, sondern ein mix aus 2 zählern
+	}
 	
 	public boolean calcCollision(IEntity entity, int x, int y){
 		if(-1<y && y<hight-32 && -1<x && x<lenght-32)//abfrage des Spielfeldrandes
