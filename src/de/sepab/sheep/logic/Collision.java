@@ -19,9 +19,6 @@ public class Collision implements ICollision{
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
-		List.addAll(DogList);
-		List.addAll(SheepList);
-		List.addAll(PowerUpList);
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -105,12 +102,6 @@ public class Collision implements ICollision{
 					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
-
-						if(entity instanceof IDog && List.get(i) instanceof PowerUp){
-							System.out.println("Collision with: " + List.get(i));
-							((PowerUp) List.get(i)).event(entity);
-							List.remove(i);
-						}
 						return false;
 					}
 				}
