@@ -14,13 +14,11 @@ public class Collision implements ICollision{
 		//Listen erstellen
 		lenght=x;
 		hight=y;
-		List = new LinkedList<>();
 		Dogs = DogList;
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
-		List.addAll(DogList);
-		List.addAll(SheepList);
+		
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -86,11 +84,22 @@ public class Collision implements ICollision{
 			Y[0]=y-32;
 			Y[1]=y+32;
 			
-			for(int i=0;i<List.size();i++)
+			for(int i=0;i<Dogs.size();i++)
 			{
-				if(entity!=List.get(i))
+				if(entity!=Dogs.get(i))
 				{
-					if(X[0]<List.get(i).getPosX() && List.get(i).getPosX()<X[1] && Y[0]<List.get(i).getPosY() && List.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					if(X[0]<Dogs.get(i).getPosX() && Dogs.get(i).getPosX()<X[1] && Y[0]<Dogs.get(i).getPosY() && Dogs.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return false;
+					}
+				}
+			}
+			for(int i=0;i<Sheeps.size();i++)
+			{
+				if(entity!=Sheeps.get(i))
+				{
+					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
 						return false;
@@ -191,13 +200,21 @@ public class Collision implements ICollision{
 			Y[0]=y-32;
 			Y[1]=y+32;
 
-			for(int i=0;i<List.size();i++)
+			for(int i=0;i<Dogs.size();i++)
 			{
-				if(X[0]<List.get(i).getPosX() && List.get(i).getPosX()<X[1] && Y[0]<List.get(i).getPosY() && List.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+				if(X[0]<Dogs.get(i).getPosX() && Dogs.get(i).getPosX()<X[1] && Y[0]<Dogs.get(i).getPosY() && Dogs.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 				{
 					//COLLISION
 					return false;
 				}
+			}
+			for(int i=0;i<Sheeps.size();i++)
+			{
+					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return false;
+					}
 			}
 			for(int i=0;i<Powers.size();i++)
 			{
