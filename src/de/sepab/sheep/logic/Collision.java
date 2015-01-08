@@ -22,6 +22,7 @@ public class Collision implements ICollision{
 		Obstacles = ObstacleList;
 		List.addAll(DogList);
 		List.addAll(SheepList);
+		List.addAll(PowerUpList);
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
