@@ -5,6 +5,7 @@ import de.sepab.sheep.handler.Constants;
 public class PowerUp extends Entity{
 
 	private int type;
+	private boolean visibility = true;
 
 	public PowerUp(int posX, int posY, int type) {
 		super(posX, posY, 0, 0);
@@ -18,10 +19,12 @@ public class PowerUp extends Entity{
 	public void event(IEntity entity) {
 		switch(this.type) {
 			case Constants.POWERUP_TYPE_SPEED:
-				entity.setSpeed(entity.getSpeed() * 2);
+				entity.setSpeed(10);
+				setVisible(false);
 				break;
 			case Constants.POWERUP_TYPE_SLOW:
-				entity.setSpeed(entity.getSpeed() / 2);
+				entity.setSpeed(2);
+				setVisible(false);
 				break;
 			case Constants.POWERUP_TYPE_DEAF:
 				if(entity instanceof ISheep) {
@@ -40,5 +43,15 @@ public class PowerUp extends Entity{
 				}
 				break;
 		}
+	}
+
+	@Override
+	public void setVisible(final boolean visibility) {
+		this.visibility = visibility;
+	}
+
+	@Override
+	public boolean isVisible() {
+		return visibility;
 	}
 }

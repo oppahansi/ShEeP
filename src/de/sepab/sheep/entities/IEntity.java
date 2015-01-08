@@ -19,5 +19,8 @@ public interface IEntity {
 	public int getRotation();
 	public void setRotation(int rotation);
 
+	public void setVisible(boolean visibility);
+
+	public boolean isVisible();
 	
 }
