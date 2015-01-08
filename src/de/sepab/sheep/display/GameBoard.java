@@ -33,7 +33,7 @@ public class GameBoard extends JPanel{
 	private static final String DOGE = "/de/sepab/sheep/model/gfx/wolf32x32.png";
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
-	private static final String POWERUP = "/de/sepab/sheep/model/gfx/wolf.png";
+	private static final String POWERUP = "/de/sepab/sheep/model/gfx/powerup.png";
 	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png"; 
 	private static final String SINGLEPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2SinglePlayer.png"; 
 	private static final String SINGLEPLAYERMAP3 = "/de/sepab/sheep/model/gfx/map3SinglePlayer.png"; 
@@ -156,6 +156,8 @@ public class GameBoard extends JPanel{
     
     public void loadMap(int map, int modus) {
     	Menu.level.resetLevel();
+
+		addPowerUps();
     	switch (map) {
 		case 0:
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
@@ -276,13 +278,6 @@ public class GameBoard extends JPanel{
 				}
 			}
     	}
-//    	Menu.level = level;
-//    	Menu.collision = new Collision(Menu.level.getDogList(), Menu.level.getSheepList(), Menu.level.getPowerUpList(), Menu.level.getObstacleList(), 1280, 960);
-//    	Menu.movement = new Movement(Menu.collision);
-//    	Menu.ai = new AI(100, 5, Menu.level, Menu.movement, Menu.collision);
-//    	Menu.input = new Input(Menu.movement, Menu.level.getDogList());
-//    	this.addKeyListener((Input) Menu.input);
-//    	Menu.level.getReferences(Menu.ai, this, Menu.timer, Menu.input, Menu.collision);
     }
     
     public void addObstaclesWater(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
@@ -415,7 +410,13 @@ public class GameBoard extends JPanel{
     	return false;
 
     }
-    
+
+	public void addPowerUps() {
+		for (int i = 0; i < 1 ; i++) {
+			level.addPowerUp();
+		}
+	}
+
     public void addObstacleCage(int x, int y, boolean top, boolean right, boolean bottom, boolean left){
     	if (top == false && right == false && bottom == false && left == false) {
 			System.out.print("ERROR:There must be at least 2 fences near each other.");
@@ -500,6 +501,7 @@ public class GameBoard extends JPanel{
     		}
 		}
     }
+
     
     private void paintDog(Graphics2D g) {
     	if (level.getDogList() != null) {
@@ -512,7 +514,9 @@ public class GameBoard extends JPanel{
     private void paintPowerUp(Graphics2D g) {
     	if (level.getPowerUpList() != null) {
     		for (IEntity powerUp : level.getPowerUpList()) {
-        		g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSpritePos()][0], COORDSPOWERUP[powerUp.getSpritePos()][1], textureLength, textureLength), powerUp.getPosX(), powerUp.getPosY(), textureLength, textureLength, null);
+        		if (powerUp.isVisible()) {
+					g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSpritePos()][0], COORDSPOWERUP[powerUp.getSpritePos()][1], textureLength, textureLength), powerUp.getPosX(), powerUp.getPosY(), textureLength, textureLength, null);
+				}
     		}
 		}
     }

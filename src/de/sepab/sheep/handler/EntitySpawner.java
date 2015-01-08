@@ -1,10 +1,5 @@
 package de.sepab.sheep.handler;
 
-
-import de.sepab.sheep.entities.*;
-import de.sepab.sheep.logic.Timer;
-
-
 import de.sepab.sheep.entities.Cage;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.Obstacle;
@@ -36,29 +31,25 @@ public class EntitySpawner implements IEntitySpawner {
       }
    }
 
-   public PowerUp createPowerUp() {
-      int x = randomGenerator.getRandomNumber(1, 1280);
-      int y = randomGenerator.getRandomNumber(1, 960);
-      int random = randomGenerator.getRandomNumber(1, 6);
+   public PowerUp createPowerUp(int posX, int posY) {
+      int random = 1;//randomGenerator.getRandomNumber(1, 5);
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
-         return new PowerUp(x, y,  random);
+         return new PowerUp(posX, posY,  random);
       }
       else if (random == Constants.POWERUP_TYPE_SLOW) {
-         return new PowerUp(x, y, random);
+         return new PowerUp(posX, posY, random);
       }
-      else if (random == Constants.POWERUP_TYPE_BARK) {
-         return new PowerUp(x, y, random);
+      else if (random == Constants.POWERUP_TYPE_BEAM) {
+         return new PowerUp(posX, posY, random);
       }
-      else if (random == Constants.POWERUP_TYPE_TELEPORT) {
-         return new PowerUp(x, y, random);
-      }
-      else if (random == Constants.POWERUP_TYPE_CONFUSION) {
-         return new PowerUp(x, y, random);
+      else if (random == Constants.POWERUP_TYPE_TIME) {
+         return new PowerUp(posX, posY, random);
       }
       else {
-         return new PowerUp(x, y, random);
+         return new PowerUp(posX, posY, random);
       }
+
    }
 
 }
