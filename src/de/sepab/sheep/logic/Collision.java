@@ -19,7 +19,9 @@ public class Collision implements ICollision{
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
-		
+		List.addAll(DogList);
+		List.addAll(SheepList);
+		List.addAll(PowerUpList);
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -60,7 +62,7 @@ public class Collision implements ICollision{
 			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 			{
 				//COLLISION
-				R=R+1000;//erstes gehege zählt in 1000ner schritten damit bis zu 999 schafe im zweiten gehege sein können
+				R=R+1000;//erstes gehege zï¿½hlt in 1000ner schritten damit bis zu 999 schafe im zweiten gehege sein kï¿½nnen
 				((ISheep)Sheeps.get(i)).setchained(true);
 			}
 			if(X[2]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[3] && Y[2]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[3])	//punkt im koordinatennetz?
@@ -71,7 +73,7 @@ public class Collision implements ICollision{
 			}
 			
 		}
-		return R;//R ist keine eindeutige zahl mehr da nun zwei gehege vorhanden sind, sondern ein mix aus 2 zählern
+		return R;//R ist keine eindeutige zahl mehr da nun zwei gehege vorhanden sind, sondern ein mix aus 2 zï¿½hlern
 	}
 	
 	public boolean calcCollision(IEntity entity, int x, int y){
