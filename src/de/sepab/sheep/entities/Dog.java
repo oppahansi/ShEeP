@@ -108,5 +108,4 @@ public class Dog extends Entity implements IDog {
 			this.barkLength = this.fixBarkLength;
 		}
 	}
-
 }

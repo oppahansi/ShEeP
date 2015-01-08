@@ -34,6 +34,17 @@ public class Entity implements IEntity {
 		}
 		changeSprite(rotation);
 	}
+
+	@Override
+	public void setVisible(final boolean visibility) {
+
+	}
+
+	@Override
+	public boolean isVisible() {
+		return false;
+	}
+
 	public void setspritePeriod(int period){
 		this.spritePeriod = period;
 	}
