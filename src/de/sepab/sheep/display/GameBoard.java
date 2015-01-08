@@ -521,7 +521,9 @@ public class GameBoard extends JPanel{
     private void paintPowerUp(Graphics2D g) {
     	if (level.getPowerUpList() != null) {
     		for (IEntity powerUp : level.getPowerUpList()) {
-        		g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSpritePos()][0], COORDSPOWERUP[powerUp.getSpritePos()][1], textureLength, textureLength), powerUp.getPosX(), powerUp.getPosY(), textureLength, textureLength, null);
+        		if (powerUp.isVisible()) {
+					g.drawImage(IMAGEPOWERUP.getSubimage(COORDSPOWERUP[powerUp.getSpritePos()][0], COORDSPOWERUP[powerUp.getSpritePos()][1], textureLength, textureLength), powerUp.getPosX(), powerUp.getPosY(), textureLength, textureLength, null);
+				}
     		}
 		}
     }

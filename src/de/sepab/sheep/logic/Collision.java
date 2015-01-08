@@ -68,6 +68,7 @@ public class Collision implements ICollision{
 						if(entity instanceof IDog && List.get(i) instanceof PowerUp){
 							System.out.println("Collision with: " + List.get(i));
 							((PowerUp) List.get(i)).event(entity);
+							List.remove(i);
 						}
 						return false;
 					}
