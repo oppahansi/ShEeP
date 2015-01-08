@@ -7,12 +7,14 @@ public class Sheep extends Entity implements ISheep {
 	private int x=0, y=0;
 	private boolean deaf = false;
 	private boolean chained = false;
+	private int scareSpeed;
 
-	public Sheep (int posX, int posY, int speed, int powerUpLife) {
+	public Sheep (int posX, int posY, int speed, int powerUpLife, int scareSpeed) {
 		super(posX, posY, speed, powerUpLife);
 		this.setSpeed(1);
 		this.spritePeriod = 6;
 		this.setSpriteQuarters();
+		this.scareSpeed = scareSpeed;
 	}
 
 	@Override
@@ -30,12 +32,22 @@ public class Sheep extends Entity implements ISheep {
 
 	@Override
 	public void scare(boolean state, int x, int y) {
-		if(!this.deaf) {
+		if(!this.isScared()) {
 			this.scared = state;
 			this.x = x;
 			this.y = y;
+			super.setSpeed(super.getSpeed() + this.scareSpeed);
 		}
 	}
+
+	@Override
+	public void unscare() {
+		if(this.isScared()) {
+			this.scared = false;
+			super.setSpeed(super.getSpeed() - this.scareSpeed);
+		}
+	}
+
 
 	@Override
 	public boolean isDeaf() {
@@ -87,11 +99,11 @@ public class Sheep extends Entity implements ISheep {
 		}
     }
 	
-	public void setchained(boolean b){
-		this.chained=b;
+	public void setChained(boolean state){
+		this.chained=state;
 	}
 	
-	public boolean getchained(){
+	public boolean isChained(){
 		return chained;
 }
 }
