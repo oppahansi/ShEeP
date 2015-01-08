@@ -164,6 +164,10 @@ public class Menu{
 		
 	}
 	
+	public Menu(){
+		
+	}
+	
 	public static void setHighscore(){
 		dataLoader.loadHighscore();
 		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
@@ -182,19 +186,7 @@ public class Menu{
 		HighscoreTextField_ONplayer3.setText(onCountName[2]);
 	}
 	
-	public static void run(ILevel ilevel, IRandomGenerator irandomGenerator, ICollision collision2, IMovement movement2, IInput input2, AI ai2, ITimer timer2) {
-		
-		
-		
-		level = ilevel;
-		randomGenerator = irandomGenerator;
-		collision = collision2;
-		movement = movement2;
-		input = input2;
-		ai = ai2;
-		timer = timer2;
-		
-
+	public static void run() {
 		
 		gameBoard = new GameBoard(level, randomGenerator, input);
 		jFrame.setFocusable(false);
@@ -649,6 +641,102 @@ public class Menu{
 //		jFrame.requestFocus();
 		 
 		 jFrame.setVisible(true);
+	}
+
+	public static AI getAi() {
+		return ai;
+	}
+
+	public static void setAi(AI ai) {
+		Menu.ai = ai;
+	}
+
+	public static GameBoard getGameBoard() {
+		return gameBoard;
+	}
+
+	public static void setGameBoard(GameBoard gameBoard) {
+		Menu.gameBoard = gameBoard;
+	}
+
+	public static ILevel getLevel() {
+		return level;
+	}
+
+	public static void setLevel(ILevel level) {
+		Menu.level = level;
+	}
+
+	public static IDataLoader getDataLoader() {
+		return dataLoader;
+	}
+
+	public static void setDataLoader(IDataLoader dataLoader) {
+		Menu.dataLoader = dataLoader;
+	}
+
+	public static GameModus getGameModus() {
+		return gameModus;
+	}
+
+	public static void setGameModus(GameModus gameModus) {
+		Menu.gameModus = gameModus;
+	}
+
+	public static ICollision getCollision() {
+		return collision;
+	}
+
+	public static void setCollision(ICollision collision) {
+		Menu.collision = collision;
+	}
+
+	public static IMovement getMovement() {
+		return movement;
+	}
+
+	public static void setMovement(IMovement movement) {
+		Menu.movement = movement;
+	}
+
+	public static IInput getInput() {
+		return input;
+	}
+
+	public static void setInput(IInput input) {
+		Menu.input = input;
+	}
+
+	public static IRandomGenerator getRandomGenerator() {
+		return randomGenerator;
+	}
+
+	public static void setRandomGenerator(IRandomGenerator randomGenerator) {
+		Menu.randomGenerator = randomGenerator;
+	}
+
+	public static javax.swing.Timer getSwingTimer() {
+		return swingTimer;
+	}
+
+	public static void setSwingTimer(javax.swing.Timer swingTimer) {
+		Menu.swingTimer = swingTimer;
+	}
+
+	public static ITimer getTimer() {
+		return timer;
+	}
+
+	public static void setTimer(ITimer timer) {
+		Menu.timer = timer;
+	}
+
+	public static int getWidth() {
+		return width;
+	}
+
+	public static int getHeight() {
+		return height;
 	}
 							
 	

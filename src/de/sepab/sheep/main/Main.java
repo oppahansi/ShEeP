@@ -1,19 +1,11 @@
 package de.sepab.sheep.main;
 
 
-import de.sepab.sheep.display.GameBoard;
 import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.DataLoader;
-import de.sepab.sheep.handler.IDataLoader;
-import de.sepab.sheep.handler.IInput;
 import de.sepab.sheep.handler.Input;
 import de.sepab.sheep.logic.Collision;
-import de.sepab.sheep.logic.ICollision;
-import de.sepab.sheep.logic.ILevel;
-import de.sepab.sheep.logic.IMovement;
-import de.sepab.sheep.logic.IRandomGenerator;
-import de.sepab.sheep.logic.ITimer;
 import de.sepab.sheep.logic.Level;
 import de.sepab.sheep.logic.Movement;
 import de.sepab.sheep.logic.RandomGenerator;
@@ -29,21 +21,17 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		IDataLoader dataLoader = new DataLoader();
-		dataLoader.loadHighscore();
-		ILevel level = new Level();
-		
-		ITimer timer = new Timer();
-		
-		ICollision collision = new Collision(level.getDogList(), level.getSheepList(), level.getPowerUpList(), level.getObstacleList(),1280,960);
-		IMovement movement = new Movement(collision);
-		Input input = new Input(movement, level.getDogList());
-		Menu menu = new Menu(dataLoader);
-		IRandomGenerator randomGenerator = new RandomGenerator();
-		AI ai = new AI(100, 5, level, movement, collision);
-		
-		
-		menu.run(level, randomGenerator, collision, movement, input, ai, timer);
+
+		Menu.setDataLoader(new DataLoader());
+		Menu.getDataLoader().loadHighscore();
+		Menu.setLevel(new Level());
+		Menu.setTimer(new Timer());
+		Menu.setCollision(new Collision(Menu.level.getDogList(), Menu.level.getSheepList(), Menu.level.getPowerUpList(), Menu.level.getObstacleList(), 1280, 960));
+		Menu.setMovement(new Movement(Menu.getCollision()));
+		Menu.setInput(new Input(Menu.getMovement(), Menu.getLevel().getDogList()));
+		Menu.setRandomGenerator(new RandomGenerator());
+		Menu.setAi(new AI(100, 5, Menu.getLevel(), Menu.getMovement(), Menu.getCollision()));
+		Menu.run();
 			
 	}
 	
