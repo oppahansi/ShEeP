@@ -46,84 +46,81 @@ public class AI {
 			int z = 16;	//z ist die unschärfe
 			int x = ((ISheep)entity).getScareX() - entity.getPosX();
 			int y = ((ISheep)entity).getScareY() - entity.getPosY();
-			//0|-|+
-			if(x<z && x>-z) {
-				if(y<z && y>-z) {
-					//rnd
-					int rnd = this.randomGenerator.getRandomNumber(1, 4);
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						((ISheep)entity).getThoughts()[i] = rnd;
+			if(!((ISheep) entity).isDeaf()) {
+				//0|-|+
+				if (x < z && x > -z) {
+					if (y < z && y > -z) {
+						//rnd
+						int rnd = this.randomGenerator.getRandomNumber(1, 4);
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							((ISheep) entity).getThoughts()[i] = rnd;
+						}
+					} else if (y < 0) {
+						//unten
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							((ISheep) entity).getThoughts()[i] = 3;
+						}
+					} else if (y > 0) {
+						//oben
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							((ISheep) entity).getThoughts()[i] = 1;
+						}
 					}
-				}
-				else if(y<0) {
-					//unten
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						((ISheep)entity).getThoughts()[i] = 3;
+				} else if (x < 0) {
+					if (y < z && y > -z) {
+						//rechts
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							((ISheep) entity).getThoughts()[i] = 2;
+						}
+					} else if (y < 0) {
+						//unten rechts
+						int[] tmp = {2, 3};
+						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
+							else ((ISheep) entity).getThoughts()[i] = b;
+						}
+					} else if (y > 0) {
+						//oben rechts
+						int[] tmp = {1, 2};
+						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
+							else ((ISheep) entity).getThoughts()[i] = b;
+						}
 					}
-				}
-				else if(y>0) {
-					//oben
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						((ISheep)entity).getThoughts()[i] = 1;
-					}
-				}
-			}
-			else if(x<0) {
-				if(y<z && y>-z) {
-					//rechts
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						((ISheep)entity).getThoughts()[i] = 2;
-					}
-				}
-				else if(y<0) {
-					//unten rechts
-					int[] tmp = {2, 3};
-					int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						if(i % 2 == 0) ((ISheep)entity).getThoughts()[i] = a;
-						else ((ISheep)entity).getThoughts()[i] = b;
-					}
-				}
-				else if(y>0) {
-					//oben rechts
-					int[] tmp = {1, 2};
-					int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						if(i % 2 == 0) ((ISheep)entity).getThoughts()[i] = a;
-						else ((ISheep)entity).getThoughts()[i] = b;
-					}
-				}
-			}
-			else if(x>0) {
-				if(y<z && y>-z) {
-					//links
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						((ISheep)entity).getThoughts()[i] = 4;
-					}
-				}
-				else if(y<0) {
-					//unten links
-					int[] tmp = {3, 4};
-					int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						if(i % 2 == 0) ((ISheep)entity).getThoughts()[i] = a;
-						else ((ISheep)entity).getThoughts()[i] = b;
-					}
-				}
-				else if(y>0) {
-					//oben links
-					int[] tmp = {1, 4};
-					int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-					for(int i=0; i<((ISheep)entity).getThoughts().length/16; i++) {
-						if(i % 2 == 0) ((ISheep)entity).getThoughts()[i] = a;
-						else ((ISheep)entity).getThoughts()[i] = b;
+				} else if (x > 0) {
+					if (y < z && y > -z) {
+						//links
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							((ISheep) entity).getThoughts()[i] = 4;
+						}
+					} else if (y < 0) {
+						//unten links
+						int[] tmp = {3, 4};
+						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
+							else ((ISheep) entity).getThoughts()[i] = b;
+						}
+					} else if (y > 0) {
+						//oben links
+						int[] tmp = {1, 4};
+						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
+							else ((ISheep) entity).getThoughts()[i] = b;
+						}
 					}
 				}
 			}
+		}
+		else if(((ISheep)entity).isChained()) {
+			this.calcChainedSteps((ISheep)entity);
 		}
 		else {
 			//Normal thoughts
@@ -144,7 +141,8 @@ public class AI {
 		//Do sane shit here
 		if(sheep.getThoughts()[0] == 0) {
 			//
-			int tmp = this.randomGenerator.getRandomNumber(0, 4);
+			//Power-Up greadyness
+			int tmp = this.randomGenerator.getRandomNumber(1, 4);
 			//
 			for(int i=0; i<sheep.getThoughts().length; i++) {
 				sheep.getThoughts()[i] = tmp;
@@ -152,51 +150,64 @@ public class AI {
 		}
 	}
 
+	private void calcChainedSteps(ISheep sheep) {
+		int tmp = 0;
+		if(this.randomGenerator.getPercentDistribution(iq, 7)) {
+			if(((IEntity)sheep).getPosX() <= 640) {
+				tmp = 2;
+			}
+			else {
+				tmp = 4;
+			}
+		}
+		sheep.getThoughts()[0] = tmp;
+	}
+
 	private void checkNextStep(IEntity entity) {
-		int[] z = {0};
-		boolean t = false;
+		int[] possibleNextSteps = {0};
+		boolean collides = false;
 		switch(((ISheep)entity).getThoughts()[0]){
 			case(1):
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX(),entity.getPosY()-entity.getSpeed())))
 				{
-					z = new int[]{2, 3, 4};
-					t = true;
-					((ISheep)entity).scare(false, 0, 0);
+					possibleNextSteps = new int[]{2, 3, 4};
+					collides = true;
+					((ISheep)entity).unscare();
 				}
 				break;
 			case(2):
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()+entity.getSpeed(),entity.getPosY())))
 				{
-					z = new int[]{1, 3, 4};
-					t = true;
-					((ISheep)entity).scare(false, 0, 0);
+					possibleNextSteps = new int[]{1, 3, 4};
+					collides = true;
+					((ISheep)entity).unscare();
 				}
 				break;
 			case(3):
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX(),entity.getPosY()+entity.getSpeed())))
 				{
-					z = new int[]{1, 2, 4};;
-					t = true;
-					((ISheep)entity).scare(false, 0, 0);
+					possibleNextSteps = new int[]{1, 2, 4};;
+					collides = true;
+					((ISheep)entity).unscare();
 				}
 				break;
 			case(4):
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()-entity.getSpeed(),entity.getPosY())))
 				{
-					z = new int[]{1, 2, 3};
-					t = true;
-					((ISheep)entity).scare(false, 0, 0);
+					possibleNextSteps = new int[]{1, 2, 3};
+					collides = true;
+					((ISheep)entity).unscare();
 				}
 				break;
 		}
-		if(t) {
+		if(collides) {
 			int tmp = this.randomGenerator.getRandomNumber(0, 2);
 			for (int i = 0; i < 16; i++) {
-				((ISheep) entity).getThoughts()[i] = z[tmp];
+				((ISheep) entity).getThoughts()[i] = possibleNextSteps[tmp];
 			}
 		}
 	}

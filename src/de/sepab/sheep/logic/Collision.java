@@ -30,12 +30,12 @@ public class Collision implements ICollision{
 		Y[0]=Ay-32;
 		Y[1]=By+32;
 		for(int i=0;i<Sheeps.size();i++){
-			((ISheep)Sheeps.get(i)).setchained(false);
+			((ISheep)Sheeps.get(i)).setChained(false);
 			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 			{
 				//COLLISION
 				R++;
-				((ISheep)Sheeps.get(i)).setchained(true);
+				((ISheep)Sheeps.get(i)).setChained(true);
 			}
 		}
 		return R;
@@ -55,18 +55,18 @@ public class Collision implements ICollision{
 		Y[2]=Cy-32;
 		Y[3]=Dy+32;
 		for(int i=0;i<Sheeps.size();i++){
-			((ISheep)Sheeps.get(i)).setchained(false);
+			((ISheep)Sheeps.get(i)).setChained(false);
 			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 			{
 				//COLLISION
 				R=R+1000;//erstes gehege z�hlt in 1000ner schritten damit bis zu 999 schafe im zweiten gehege sein k�nnen
-				((ISheep)Sheeps.get(i)).setchained(true);
+				((ISheep)Sheeps.get(i)).setChained(true);
 			}
 			if(X[2]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[3] && Y[2]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[3])	//punkt im koordinatennetz?
 			{
 				//COLLISION
 				R=R+1;
-				((ISheep)Sheeps.get(i)).setchained(true);
+				((ISheep)Sheeps.get(i)).setChained(true);
 			}
 			
 		}

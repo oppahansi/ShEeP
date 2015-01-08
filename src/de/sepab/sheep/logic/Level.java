@@ -80,7 +80,7 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	public void addSheep(int x, int y, int speed, int powerUplIfe){
-		sheepList.add(new Sheep(x, y, speed, powerUplIfe));
+		sheepList.add(new Sheep(x, y, speed, powerUplIfe, 1));
 	}
 
 
@@ -124,7 +124,7 @@ public class Level implements ILevel, ActionListener{
 	private void unscareSheeps() {
 		if((this.timer.getTime() % ai.getScariness() == 0) && !(this.locked_2) && (this.timer.getTime() != 0)) {
 			for (IEntity i : this.sheepList) {
-				((ISheep)i).scare(false, 0, 0);
+				((ISheep)i).unscare();
 			}
 		}
 		else if(this.timer.getTime() % ai.getScariness()+1 == 0){
@@ -154,7 +154,7 @@ public class Level implements ILevel, ActionListener{
 		}
 
 		//
-		//System.out.println(this.collision.Count(0, 0, 32, 32));
+		//System.out.println(this.collision.Count(0, 0, 64, 64));
 		//
 		this.reducePowerUpTime();
 		this.unscareSheeps();
