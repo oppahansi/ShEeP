@@ -20,7 +20,10 @@ public class Dog extends Entity implements IDog {
    
 
     public void bark() {
-		this.setSpeed(10);
+		//
+		setSpeed(7);
+		//super.confuse(true);
+		//
     	int x=0;
     	int y=0;
     	switch(this.getRotation()) {
