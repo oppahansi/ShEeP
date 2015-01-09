@@ -21,17 +21,17 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-
-		Menu.setDataLoader(new DataLoader());
-		Menu.getDataLoader().loadHighscore();
-		Menu.setLevel(new Level());
-		Menu.setTimer(new Timer());
-		Menu.setCollision(new Collision(Menu.level.getDogList(), Menu.level.getSheepList(), Menu.level.getPowerUpList(), Menu.level.getObstacleList(), 1280, 960));
-		Menu.setMovement(new Movement(Menu.getCollision()));
-		Menu.setInput(new Input(Menu.getMovement(), Menu.getLevel().getDogList()));
-		Menu.setRandomGenerator(new RandomGenerator());
-		Menu.setAi(new AI(100, 5, Menu.getLevel(), Menu.getMovement(), Menu.getCollision()));
-		Menu.run();
+		Menu menu = new Menu();
+		menu.setDataLoader(new DataLoader());
+		menu.getDataLoader().loadHighscore();
+		menu.setLevel(new Level());
+		menu.setTimer(new Timer());
+		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(), 1280, 960));
+		menu.setMovement(new Movement(menu.getCollision()));
+		menu.setInput(new Input(menu.getMovement(), menu.getLevel().getDogList()));
+		menu.setRandomGenerator(new RandomGenerator());
+		menu.setAi(new AI(100, 5, menu.getLevel(), menu.getMovement(), menu.getCollision()));
+		menu.run();
 			
 	}
 	

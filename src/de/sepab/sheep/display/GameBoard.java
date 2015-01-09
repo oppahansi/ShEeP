@@ -45,6 +45,13 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEOBSTACLE = optimize(load(OBSTACLE));
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
+	
+	private static final BufferedImage IMAGESINGLEPLAYERMAP1 = optimize(load(SINGLEPLAYERMAP1));
+	private static final BufferedImage IMAGESINGLEPLAYERMAP2 = optimize(load(SINGLEPLAYERMAP2));
+	private static final BufferedImage IMAGESINGLEPLAYERMAP3 = optimize(load(SINGLEPLAYERMAP3));
+	private static final BufferedImage IMAGEMULTIPLAYERMAP1 = optimize(load(MULTIPLAYERMAP1));
+	private static final BufferedImage IMAGEMULTIPLAYERMAP2 = optimize(load(MULTIPLAYERMAP1));
+	
 	private BufferedImage IMAGEMAP;
 	private BufferedImage imageBackground;
 	    
@@ -104,8 +111,8 @@ public class GameBoard extends JPanel{
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
-    	g.setColor(Color.BLACK);
-//    	g.fill(g.getClipBounds());
+    	g.setColor(Color.WHITE);
+    	g.fill(g.getClipBounds());
 //    	
 //    	g.drawImage(imgSheep, 0, 0, 640,480,null);
     	
@@ -125,7 +132,7 @@ public class GameBoard extends JPanel{
     	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
-    	this.setPreferredSize(new Dimension(1280, 960));
+    	this.setPreferredSize(new Dimension(1280, 200));
     	this.randomGenerator = randomGenerator;
     	this.level = level;
     }
@@ -155,7 +162,7 @@ public class GameBoard extends JPanel{
     }
     
     public void loadMap(int map, int modus) {
-    	Menu.level.resetLevel();
+    	level.resetLevel();
 
 		addPowerUps();
     	switch (map) {
@@ -178,6 +185,7 @@ public class GameBoard extends JPanel{
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
 			break;
 		}
+    	
     	for (int x = 0; x < this.x; x++) {
 			for (int y = 0; y < this.y; y++) {
 				 int rgb = IMAGEMAP.getRGB(x, y);
@@ -549,6 +557,26 @@ public class GameBoard extends JPanel{
         img = img2;
         return img;
     }
+
+	public static BufferedImage getImagesingleplayermap1() {
+		return IMAGESINGLEPLAYERMAP1;
+	}
+
+	public static BufferedImage getImagesingleplayermap2() {
+		return IMAGESINGLEPLAYERMAP2;
+	}
+
+	public static BufferedImage getImagesingleplayermap3() {
+		return IMAGESINGLEPLAYERMAP3;
+	}
+
+	public static BufferedImage getImagemultiplayermap1() {
+		return IMAGEMULTIPLAYERMAP1;
+	}
+
+	public static BufferedImage getImagemultiplayermap2() {
+		return IMAGEMULTIPLAYERMAP2;
+	}
     
    
 }

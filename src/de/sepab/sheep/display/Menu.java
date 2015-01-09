@@ -1,5 +1,7 @@
 package de.sepab.sheep.display;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -7,12 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IDataLoader;
@@ -33,18 +40,18 @@ public class Menu{
 	
 	
 	
-	private static JFrame jFrame = new JFrame ("ShEeP version pre-pre-alpha 0.0.1"); // das Fenster
+	private  JFrame jFrame = new JFrame ("ShEeP version pre-pre-alpha 0.0.1"); // das Fenster
 	// alle menue screens
-	public static JPanel panelMainMenu = new JPanel(), 
+	public  JPanel panelMainMenu = new JPanel(), 
 						 panelSinglePlayer = new JPanel(), 
 						 panelMultiPlayer = new JPanel(), 
 						 panellHighscore = new JPanel(), 
 						 panelOptions = new JPanel(),
 						 panelHelp = new JPanel();
 	
-	public static GameBoard gameBoard;
+	public  GameBoard gameBoard;
 	//alle buttons
-	public static JButton mainMenuButton_SinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
+	public  JButton mainMenuButton_SinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
 						  	mainMenuButton_MultiPlayer = new JButton("Mehrspieler"),
 						  	mainMenuButton_Option = new JButton("Option"),
 						  	mainMenuButton_Highscore = new JButton("Highscore"),
@@ -65,7 +72,7 @@ public class Menu{
 						  	
 						  helpButton_Back = new JButton("Zur�ck");//h = help
 	//alle textfields
-	public static JTextField singlePlayerTextField_Singleplayer = new JTextField("Einzelspieler"),//tf = textfield
+	public  JTextField singlePlayerTextField_Singleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	singlePlayerTextField_Map = new JTextField("Karte:"),
 							 	singlePlayerTextField_Difficulty = new JTextField("Schwierigkeit:"),
 							 	singlePlayerTextField_Name = new JTextField("Name:"),
@@ -95,9 +102,16 @@ public class Menu{
 								optionTextField_Music = new JTextField("Musik:"),
 								optionTextfield_MusicField = new JTextField("50"),
 								
-							helpTextField_Help = new JTextField("Hilfe"); 
+							helpTextField_Help = new JTextField("Hilfe"),
+							
+							gameBoard_sheeps1 = new JTextField("Schafe:"),
+								gameBoard_sheepcounter1 = new JTextField(),
+								gameBoard_Time = new JTextField("00:00"),
+								gameBoard_sheeps2 = new JTextField("Schafe:"),
+								gameBoard_sheepcounter2 = new JTextField()
+							;
 	//alle textareas
-	public static JTextArea helpTextArea_Help = new JTextArea(
+	public  JTextArea helpTextArea_Help = new JTextArea(
 			"Auf Zeit: \r\n"
 			+ "In diesem Modus versucht der Spieler soviele Schafe wie m�glich in \r\n"
 			+ "einer gewissen Zeit einzufangen \r\n"
@@ -107,45 +121,57 @@ public class Menu{
 			+ "gewisse Anzahl an schafen einzufangen"
 			);
 	//alle fonts
-	public static Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
+	public  Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
 	
-	public static String[] singlePlayerSelection_Map = {"Karte1","Karte2","Karte3"},
+	public  String[] singlePlayerSelection_Map = {"Karte1","Karte2","Karte3"},
 						   		singlePlayerSelection_Difficulty ={"Einfach","Mittel","Schwer"},
 						   		singlePlayerSelection_Modus = {"Auf Zeit", "Auf Anzahl"},
 						   
 						   multiPlayerSelection_Map = {"Karte1", "Karte2"};
 	
+	public  ImageIcon[] singlePlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagesingleplayermap1()), 
+														 new ImageIcon(GameBoard.getImagesingleplayermap2()), 
+														 new ImageIcon(GameBoard.getImagesingleplayermap3())},
+														 
+						multiPlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagemultiplayermap1()), 
+														new ImageIcon(GameBoard.getImagemultiplayermap2())};
+	
+
+	
+
+	
+	public Integer[] singlePlayerMapArray = {0,1,2},
+					 multiPlayerMapArray = {0,1};
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static JComboBox singlePlayerComboBox_Map = new JComboBox(singlePlayerSelection_Map),
+	public  JComboBox singlePlayerComboBox_Map = new JComboBox(singlePlayerMapArray),
 								singlePlayerComboBox_Difficulty = new JComboBox(singlePlayerSelection_Difficulty),
 								singlePlayerComboBox_Modus = new JComboBox(singlePlayerSelection_Modus),
 							
-							multiPlayerComboBox_Map = new JComboBox(multiPlayerSelection_Map);
+							multiPlayerComboBox_Map = new JComboBox(multiPlayerMapArray);
 							
 							
 		
 	
-	public static final int width = 1280,
+	public  final int width = 1280,
 							height = 960	;
 	
-	public static ILevel level;
-	public static IRandomGenerator randomGenerator;
-	private static IDataLoader dataLoader;
-	public static GameModus gameModus;
+	public  ILevel level;
+	public  IRandomGenerator randomGenerator;
+	private  IDataLoader dataLoader;
+	public  GameModus gameModus;
 	
-	@SuppressWarnings("unused")
-	public static ICollision collision;
-	@SuppressWarnings("unused")
-	public static IMovement movement;
-	public static IInput input;
-	@SuppressWarnings("unused")
-	private static Menu menu;
-	public static javax.swing.Timer swingTimer;
-	public static  ITimer timer;
-	public static AI ai;
+
+	public  ICollision collision;
+	public  IMovement movement;
+	public  IInput input;
+	public  javax.swing.Timer swingTimer;
+	public   ITimer timer;
+	public  AI ai;
+	private Menu menu = this;
 	//Methode zum swtichen der screens
-	public static void setCurrentLabel(JPanel panel) {
+	public  void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
 		panelHelp.setVisible(false);
 		panellHighscore.setVisible(false);
@@ -158,7 +184,7 @@ public class Menu{
 		panel.setVisible(true);
 	}
 	
-	@SuppressWarnings("static-access")
+
 	public Menu(IDataLoader idl) {
 		this.dataLoader = idl;
 		
@@ -168,7 +194,7 @@ public class Menu{
 		
 	}
 	
-	public static void setHighscore(){
+	public  void setHighscore(){
 		dataLoader.loadHighscore();
 		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
 		String[] onTimeName = dataLoader.getTimeNames(), onCountName = dataLoader.getCountNames();
@@ -186,7 +212,22 @@ public class Menu{
 		HighscoreTextField_ONplayer3.setText(onCountName[2]);
 	}
 	
-	public static void run() {
+	@SuppressWarnings("unchecked")
+	public void run() {
+		
+		
+		
+		
+		{// ComboBox config
+			ComboBoxRenderer singlePlayerMapRenderer = new ComboBoxRenderer(singlePlayerSelection_Map, singlePlayerSelection_MapIcon);
+			singlePlayerComboBox_Map.setRenderer(singlePlayerMapRenderer);
+			singlePlayerComboBox_Map.setMaximumRowCount(3);
+			
+			ComboBoxRenderer multiPlayerMapRenderer = new ComboBoxRenderer(multiPlayerSelection_Map, multiPlayerSelection_MapIcon);
+			multiPlayerComboBox_Map.setRenderer(multiPlayerMapRenderer);
+			multiPlayerComboBox_Map.setMaximumRowCount(2);
+		}
+		
 		
 		gameBoard = new GameBoard(level, randomGenerator, input);
 		jFrame.setFocusable(false);
@@ -197,7 +238,7 @@ public class Menu{
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize()  ;
 
 		jFrame.setLocation( (d.width - jFrame.getSize().width ) / 2,
-		               (d.height- jFrame.getSize().height) / 2 );
+		               (d.height - 20 - jFrame.getSize().height ) / 2 );
 		
 		{
 			panelMainMenu.setLayout(null);
@@ -264,6 +305,12 @@ public class Menu{
 				optionTextfield_MusicField.setFont(basicFont);
 				
 				helpTextField_Help.setFont(headingFont);
+				
+				gameBoard_sheeps1.setFont(basicFont);
+				gameBoard_sheepcounter1.setFont(basicFont);
+				gameBoard_Time.setFont(basicFont);
+				gameBoard_sheeps2.setFont(basicFont);
+				gameBoard_sheepcounter2.setFont(basicFont);
 			}
 			
 			{//cb
@@ -338,14 +385,20 @@ public class Menu{
 				optionTextfield_MusicField.setBounds((width)/2 + 50,100,50,20);
 				
 				helpTextField_Help.setBounds((width)/2 - 100,0,200,50);
+				
+				gameBoard_sheeps1.setBounds(20,height,50, 20);
+				gameBoard_sheepcounter1.setBounds(70,height,50, 20);
+				gameBoard_Time.setBounds(width/2 - 100,height,200, 20);
+				gameBoard_sheeps2.setBounds(width - 120,height,50, 20);
+				gameBoard_sheepcounter2.setBounds(width - 70,height,50, 20);
 		  	}
 		  	
 		  	{//cb
-		  		singlePlayerComboBox_Map.setBounds((width)/2 - 100, 100, 200, 20);
+		  		singlePlayerComboBox_Map.setBounds((width)/2 - 100, 100, 200, 40);
 		  		singlePlayerComboBox_Difficulty.setBounds((width)/2 - 100, 150, 200, 20);
 		  		singlePlayerComboBox_Modus.setBounds((width)/2 - 100, 250, 200, 20);
 		  		
-		  		multiPlayerComboBox_Map.setBounds((width)/2 - 100, 100, 200, 20);
+		  		multiPlayerComboBox_Map.setBounds((width)/2 - 100, 100, 200, 40);
 		  	}
 		  	
 		  	{//ta
@@ -410,6 +463,23 @@ public class Menu{
 			helpTextField_Help.setBorder(BorderFactory.createEmptyBorder());
 			helpTextArea_Help.setEditable(false);
 			helpTextArea_Help.setBorder(BorderFactory.createEmptyBorder());
+			
+			gameBoard_sheeps1.setEditable(false);
+			gameBoard_sheeps1.setBackground(Color.WHITE);
+			gameBoard_sheeps1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_sheepcounter1.setEditable(false);
+			gameBoard_sheepcounter1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_sheepcounter1.setBackground(Color.WHITE);
+			gameBoard_Time.setEditable(false);
+			gameBoard_Time.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Time.setBackground(Color.WHITE);
+			gameBoard_Time.setHorizontalAlignment(SwingConstants.CENTER);
+			gameBoard_sheeps2.setEditable(false);
+			gameBoard_sheeps2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_sheeps2.setBackground(Color.WHITE);
+			gameBoard_sheepcounter2.setEditable(false);
+			gameBoard_sheepcounter2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_sheepcounter2.setBackground(Color.WHITE);
 		}
 		
 		{//alle Button actionListener
@@ -457,13 +527,14 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input, collision);
+						level.getReferences(ai, gameBoard, timer, input, collision, menu);
 						gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
 						gameBoard.requestFocus();
+						jFrame.setSize(width, height + 20);
 					}
 				});
 				singlePlayerButton_Back.addActionListener(new ActionListener() {
@@ -478,7 +549,7 @@ public class Menu{
 				multiPlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input, collision);
+						level.getReferences(ai, gameBoard, timer, input, collision, menu);
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
 						gameBoard.shuffle();
@@ -611,6 +682,14 @@ public class Menu{
 				panelHelp.add(helpTextArea_Help);
 			}
 			
+			{//gb
+				gameBoard.add(gameBoard_Time);
+				gameBoard.add(gameBoard_sheepcounter1);
+				gameBoard.add(gameBoard_sheepcounter2);
+				gameBoard.add(gameBoard_sheeps1);
+				gameBoard.add(gameBoard_sheeps2);
+			}
+			
 		}
 		
 		{//Label einstellen
@@ -643,103 +722,157 @@ public class Menu{
 		 jFrame.setVisible(true);
 	}
 
-	public static AI getAi() {
+	public  AI getAi() {
 		return ai;
 	}
 
-	public static void setAi(AI ai) {
-		Menu.ai = ai;
+	public  void setAi(AI ai) {
+		this.ai = ai;
 	}
 
-	public static GameBoard getGameBoard() {
+	public  GameBoard getGameBoard() {
 		return gameBoard;
 	}
 
-	public static void setGameBoard(GameBoard gameBoard) {
-		Menu.gameBoard = gameBoard;
+	public  void setGameBoard(GameBoard gameBoard) {
+		this.gameBoard = gameBoard;
 	}
 
-	public static ILevel getLevel() {
+	public  ILevel getLevel() {
 		return level;
 	}
 
-	public static void setLevel(ILevel level) {
-		Menu.level = level;
+	public  void setLevel(ILevel level) {
+		this.level = level;
 	}
 
-	public static IDataLoader getDataLoader() {
+	public  IDataLoader getDataLoader() {
 		return dataLoader;
 	}
 
-	public static void setDataLoader(IDataLoader dataLoader) {
-		Menu.dataLoader = dataLoader;
+	public  void setDataLoader(IDataLoader dataLoader) {
+		this.dataLoader = dataLoader;
 	}
 
-	public static GameModus getGameModus() {
+	public  GameModus getGameModus() {
 		return gameModus;
 	}
 
-	public static void setGameModus(GameModus gameModus) {
-		Menu.gameModus = gameModus;
+	public  void setGameModus(GameModus gameModus) {
+		this.gameModus = gameModus;
 	}
 
-	public static ICollision getCollision() {
+	public  ICollision getCollision() {
 		return collision;
 	}
 
-	public static void setCollision(ICollision collision) {
-		Menu.collision = collision;
+	public  void setCollision(ICollision collision) {
+		this.collision = collision;
 	}
 
-	public static IMovement getMovement() {
+	public  IMovement getMovement() {
 		return movement;
 	}
 
-	public static void setMovement(IMovement movement) {
-		Menu.movement = movement;
+	public  void setMovement(IMovement movement) {
+		this.movement = movement;
 	}
 
-	public static IInput getInput() {
+	public  IInput getInput() {
 		return input;
 	}
 
-	public static void setInput(IInput input) {
-		Menu.input = input;
+	public  void setInput(IInput input) {
+		this.input = input;
 	}
 
-	public static IRandomGenerator getRandomGenerator() {
+	public  IRandomGenerator getRandomGenerator() {
 		return randomGenerator;
 	}
 
-	public static void setRandomGenerator(IRandomGenerator randomGenerator) {
-		Menu.randomGenerator = randomGenerator;
+	public  void setRandomGenerator(IRandomGenerator randomGenerator) {
+		this.randomGenerator = randomGenerator;
 	}
 
-	public static javax.swing.Timer getSwingTimer() {
+	public  javax.swing.Timer getSwingTimer() {
 		return swingTimer;
 	}
 
-	public static void setSwingTimer(javax.swing.Timer swingTimer) {
-		Menu.swingTimer = swingTimer;
+	public  void setSwingTimer(javax.swing.Timer swingTimer) {
+		this.swingTimer = swingTimer;
 	}
 
-	public static ITimer getTimer() {
+	public  ITimer getTimer() {
 		return timer;
 	}
 
-	public static void setTimer(ITimer timer) {
-		Menu.timer = timer;
+	public  void setTimer(ITimer timer) {
+		this.timer = timer;
 	}
 
-	public static int getWidth() {
+	public  int getWidth() {
 		return width;
 	}
 
-	public static int getHeight() {
+	public  int getHeight() {
 		return height;
 	}
-							
 	
+	public void setGameBoardTime(int time){
+		gameBoard_Time.setText(time + "");
+	}
+							
+	 @SuppressWarnings({ "serial", "rawtypes" })
+	class ComboBoxRenderer extends JLabel
+     implements ListCellRenderer {
+		  private String[] listString;
+		  private ImageIcon[] images;
+
+		  public ComboBoxRenderer(String[] listString, ImageIcon[] images) {
+			  setOpaque(true);
+			  setHorizontalAlignment(CENTER);
+			  setVerticalAlignment(CENTER);
+			  this.listString = listString;
+			  this.images = images;
+		  }
+
+		  /*
+		   * This method finds the image and text corresponding
+		   * to the selected value and returns the label, set up
+		   * to display the text and image.
+		   */
+		  public Component getListCellRendererComponent(
+                     JList list,
+                     Object value,
+                     int index,
+                     boolean isSelected,
+                     boolean cellHasFocus) {
+			  //Get the selected index. (The index param isn't
+			  //always valid, so just use the value.)
+			  
+			  int selectedIndex = ((Integer)value).intValue();
+			  
+			  if (isSelected) {
+				  setBackground(list.getSelectionBackground());
+				  setForeground(list.getSelectionForeground());
+			  } else {
+				  setBackground(list.getBackground());
+				  setForeground(list.getForeground());
+			  }
+
+			  //Set the icon and text.  If icon was null, say so.
+			  ImageIcon icon = images[selectedIndex];
+			  String pet = listString[selectedIndex];
+			  setIcon(icon);
+			  if (icon != null) {
+				  setText(pet);
+				  setFont(list.getFont());
+			  } else {
+//				  setUhOhText(pet + " (no image available)",
+//    			  list.getFont());
+			  }return this;
+		  }
+	 }
 	
 	
 	

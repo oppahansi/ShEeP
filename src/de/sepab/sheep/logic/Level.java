@@ -3,6 +3,7 @@ package de.sepab.sheep.logic;
 import java.util.LinkedList;
 
 import de.sepab.sheep.display.GameBoard;
+import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.EntitySpawner;
@@ -34,17 +35,19 @@ public class Level implements ILevel, ActionListener{
 	ITimer timer;
 	IInput input;
 	ICollision collision;
+	Menu menu;
 
 	int time = 10, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 
-	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision) {
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
 		this.timer = timer;
 		this.input = input;
 		this.collision = collision;
+		this.menu = menu;
 	}
 
 	public LinkedList<IEntity> getDogList() {
@@ -156,11 +159,13 @@ public class Level implements ILevel, ActionListener{
 		//
 		//System.out.println(this.collision.Count(0, 0, 32, 32));
 		//
+		
 		this.reducePowerUpTime();
 		this.unscareSheeps();
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
+		menu.setGameBoardTime(timer.getTime());
 //		count++;
 //		if(timer)
 	}

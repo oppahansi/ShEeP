@@ -8,7 +8,7 @@ import de.sepab.sheep.entities.PowerUp;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,List;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles;
 	private int lenght,hight;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
@@ -19,9 +19,6 @@ public class Collision implements ICollision{
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
-		List.addAll(DogList);
-		List.addAll(SheepList);
-		List.addAll(PowerUpList);
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -106,11 +103,6 @@ public class Collision implements ICollision{
 					{
 						//COLLISION
 
-						if(entity instanceof IDog && List.get(i) instanceof PowerUp){
-							System.out.println("Collision with: " + List.get(i));
-							((PowerUp) List.get(i)).event(entity);
-							List.remove(i);
-						}
 						return false;
 					}
 				}
