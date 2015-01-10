@@ -194,6 +194,23 @@ public class Menu{
 		
 	}
 	
+	public void setGameModus(String gameModus){
+		switch (gameModus) {
+		case "Mehrspieler":
+			this.gameModus = GameModus.MULTIPLAYER;
+			break;
+		case "Auf Zeit":
+			this.gameModus = GameModus.ONTIME;
+			break;
+		case "Auf Anzahl":
+			this.gameModus = GameModus.ONCOUNT;
+			break;
+		default:
+			this.gameModus = GameModus.ONTIME;
+			break;
+		}
+	}
+	
 	public  void setHighscore(){
 		dataLoader.loadHighscore();
 		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
@@ -527,7 +544,10 @@ public class Menu{
 				singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input, collision, menu);
+						gameBoard_sheepcounter2.setVisible(false);
+						gameBoard_sheeps2.setVisible(false);
+						setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
+						level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_Name.getText(), getGameModus());
 						gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.shuffle();
@@ -549,13 +569,17 @@ public class Menu{
 				multiPlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						level.getReferences(ai, gameBoard, timer, input, collision, menu);
+						gameBoard_sheepcounter2.setVisible(true);
+						gameBoard_sheeps2.setVisible(true);
+						setGameModus("Mehrspieler");
+						level.getReferences(ai, gameBoard, timer, input, collision, menu, null, getGameModus());
 						gameBoard.Update(level, randomGenerator);
 						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
 						gameBoard.requestFocus();
+						jFrame.setSize(width, height + 20);
 					}
 				});
 				multiPlayerButton_Back.addActionListener(new ActionListener() {
@@ -820,6 +844,14 @@ public class Menu{
 	
 	public void setGameBoardTime(int time){
 		gameBoard_Time.setText(time + "");
+	}
+	
+	public void setGameBoardSheep1(int sheep){
+		gameBoard_sheepcounter1.setText(sheep + "");
+	}
+	
+	public void setGameBoardSheep2(int sheep){
+		gameBoard_sheepcounter2.setText(sheep + "");
 	}
 							
 	 @SuppressWarnings({ "serial", "rawtypes" })

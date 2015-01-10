@@ -21,33 +21,37 @@ public class Level implements ILevel, ActionListener{
 		ONTIME, ONCOUNT, MULTIPLAYER
 	}
 
-	LinkedList<IEntity> dogList = new LinkedList<>();
-	LinkedList<IEntity> sheepList = new LinkedList<>();
-	LinkedList<IEntity> powerUpList = new LinkedList<>();
-	LinkedList<IEntity> obstacleList = new LinkedList<>();
-	LinkedList<IEntity> cageList = new LinkedList<>();
+	private LinkedList<IEntity> dogList = new LinkedList<>();
+	private LinkedList<IEntity> sheepList = new LinkedList<>();
+	private LinkedList<IEntity> powerUpList = new LinkedList<>();
+	private LinkedList<IEntity> obstacleList = new LinkedList<>();
+	private LinkedList<IEntity> cageList = new LinkedList<>();
 
 
-	GameModus gameModus = GameModus.ONTIME;
-	AI ai;
-	GameBoard gameBoard;
-	javax.swing.Timer swingTimer;
-	ITimer timer;
-	IInput input;
-	ICollision collision;
-	Menu menu;
+	private GameModus gameModus = GameModus.ONTIME;
+	private AI ai;
+	private GameBoard gameBoard;
+	private javax.swing.Timer swingTimer;
+	private ITimer timer;
+	private IInput input;
+	private ICollision collision;
+	private Menu menu;
+	private String name;
+	
 
 	int time = 10, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 
-	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu) {
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
 		this.timer = timer;
 		this.input = input;
 		this.collision = collision;
 		this.menu = menu;
+		this.name = name;
+		this.gameModus = gameModus;
 	}
 
 	public LinkedList<IEntity> getDogList() {
@@ -139,6 +143,7 @@ public class Level implements ILevel, ActionListener{
 		//System.out.print("test");
 		timer.start();
 		//System.out.print(timer.getTime() + "");
+		menu.setGameBoardSheep1(this.collision.Count(0, 0, 32, 32));
 		switch (gameModus) {
 		case ONTIME:
 //			if ((timer.getTime() + time) <= 0) {
@@ -150,6 +155,7 @@ public class Level implements ILevel, ActionListener{
 		case ONCOUNT:
 			break;
 		case MULTIPLAYER:
+			menu.setGameBoardSheep2(this.collision.Count(0, 0, 32, 32));
 			break;
 
 		default:

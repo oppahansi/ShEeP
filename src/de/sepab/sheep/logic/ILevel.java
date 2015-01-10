@@ -7,6 +7,7 @@ import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IInput;
+import de.sepab.sheep.logic.Level.GameModus;
 
 public interface ILevel {
 	public LinkedList<IEntity> getSheepList();
@@ -45,7 +46,7 @@ public interface ILevel {
 	
 	public void removeCage(IEntity entity);
 
-	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu);
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus);
 	
 	public void TimerStart();
 }
