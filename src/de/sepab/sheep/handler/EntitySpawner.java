@@ -18,7 +18,7 @@ public class EntitySpawner implements IEntitySpawner {
 
    public IEntity spawn(String entityName, int posX, int posY, int spritePos) {
       if (entityName == Constants.SHEEP) {
-         return new Sheep(posX, posY, 3, 0);
+         return new Sheep(posX, posY, 3, 1, 1);
       }
       else if (entityName == Constants.OBSTACLE) {
          return new Obstacle(posX, posY, 0);
