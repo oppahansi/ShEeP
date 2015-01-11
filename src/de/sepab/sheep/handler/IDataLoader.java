@@ -15,6 +15,6 @@ public interface IDataLoader {
 
     public String[] getTimeNames();
     
-    public void addHighscore(String name,int newHighscore,int gameMod);
+    public void addHighscore(String name, int newHighscore, int gameMod);
 
 }

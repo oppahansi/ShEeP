@@ -10,6 +10,11 @@ public class DataLoader implements IDataLoader {
         GAMEDATA = new GameData();
     }
 
+    @Override
+    public void addHighscore(String name, int newHighscore, int gameMod) {
+        GAMEDATA.addHighscore(name, newHighscore, gameMod);
+    }
+
     public void saveHighscore() {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("highscores.sav"));
@@ -60,10 +65,4 @@ public class DataLoader implements IDataLoader {
     public String[] getTimeNames() {
         return GAMEDATA.getTimeNames();
     }
-
-	@Override
-	public void addHighscore(String name, int newHighscore, int gameMod) {
-		GAMEDATA.addHighscore(name, newHighscore, gameMod);
-		
-	}
 }
