@@ -99,12 +99,6 @@ public class Level implements ILevel, ActionListener{
         	addPowerUp();
             return;
 		}
-        for (IEntity entity : cageList) {
-            if(entity.getPosX() >= posX && posX >= ((ICage)entity).getPosX2() && entity.getPosY() >= posY  && posY >= ((ICage)entity).getPosY2()){
-            	addPowerUp();
-                return;
-            }
-        }
         powerUpList.add(entitySpawner.createPowerUp(posX, posY));
     }
 	

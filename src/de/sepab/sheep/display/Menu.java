@@ -283,8 +283,6 @@ public class Menu{
 	public void run() {
 		
 		
-		
-		
 		{// ComboBox config
 			ComboBoxRenderer singlePlayerMapRenderer = new ComboBoxRenderer(singlePlayerSelection_Map, singlePlayerSelection_MapIcon);
 			singlePlayerComboBox_Map.setRenderer(singlePlayerMapRenderer);
