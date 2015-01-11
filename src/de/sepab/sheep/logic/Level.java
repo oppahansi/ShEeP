@@ -43,7 +43,7 @@ public class Level implements ILevel, ActionListener{
 	int time = 100, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
-
+	boolean spwaned = false;
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
@@ -148,6 +148,18 @@ public class Level implements ILevel, ActionListener{
 													 this.cageList.getFirst().getPosY(),
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
+		float i = timer.getTime();	
+		if ((i/30- (timer.getTime()/30) == 0)) {
+			if (spwaned == false) {
+				this.addPowerUp();
+				spwaned = true;
+			}else{
+				spwaned = true;
+			}	
+		}else{
+			spwaned = false;
+		}
+		
 		switch (gameModus) {
 		case ONTIME:
 			if ((timer.getTime() - time) >= 0) {
