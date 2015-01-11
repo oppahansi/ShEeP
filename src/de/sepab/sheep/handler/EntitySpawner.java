@@ -6,7 +6,7 @@ import de.sepab.sheep.logic.RandomGenerator;
 public class EntitySpawner implements IEntitySpawner {
 
    public PowerUp createPowerUp(int posX, int posY) {
-      int random = Constants.POWERUP_TYPE_BEAM;//RandomGenerator.getRandomNumber(1, 6);
+      int random = RandomGenerator.getRandomNumber(1, 6);
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
          return new PowerUp(posX, posY, random);

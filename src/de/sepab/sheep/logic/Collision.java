@@ -182,10 +182,10 @@ public class Collision implements ICollision{
 								if (sheep.isChained()) {
 									sheep.setPosX(300);
 									sheep.setPosY(50);
-									Powers.remove(i);
 									break;
 								}
 							}
+							Powers.remove(i);
 						}
 						else if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof IDog){
 							System.out.println("TDog -> PowerUp");

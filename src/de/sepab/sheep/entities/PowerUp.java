@@ -34,12 +34,6 @@ public class PowerUp extends Entity {
                ((ISheep) entity).deafy(true);
             }
             break;
-         case Constants.POWERUP_TYPE_BEAM:
-            if (entity instanceof IDog) {
-               entity.setPosX(150);
-               entity.setPosY(300);
-            }
-            break;
          case Constants.POWERUP_TYPE_TIME:
             if (entity instanceof IDog) {
                // add time here
