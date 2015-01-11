@@ -44,6 +44,8 @@ public class Sheep extends Entity implements ISheep {
 	public void unscare() {
 		if(this.isScared()) {
 			this.scared = false;
+			this.x = -1;
+			this.y = -1;
 			super.setSpeed(super.getSpeed() - this.scareSpeed);
 		}
 	}

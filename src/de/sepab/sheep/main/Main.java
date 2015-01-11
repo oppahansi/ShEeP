@@ -19,8 +19,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+
 		Menu menu = new Menu();
 		menu.setDataLoader(new DataLoader());
 		menu.getDataLoader().loadHighscore();
@@ -29,8 +28,7 @@ public class Main {
 		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(), 1280, 960));
 		menu.setMovement(new Movement(menu.getCollision()));
 		menu.setInput(new Input(menu.getMovement(), menu.getLevel().getDogList()));
-		menu.setRandomGenerator(new RandomGenerator());
-		menu.setAi(new AI(100, 5, menu.getLevel(), menu.getMovement(), menu.getCollision()));
+		menu.setAi(new AI(100, 1, menu.getLevel(), menu.getMovement(), menu.getCollision()));
 		menu.run();
 			
 	}

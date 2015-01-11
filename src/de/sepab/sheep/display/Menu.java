@@ -30,7 +30,6 @@ import de.sepab.sheep.handler.Input;
 import de.sepab.sheep.logic.ICollision;
 import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IMovement;
-import de.sepab.sheep.logic.IRandomGenerator;
 import de.sepab.sheep.logic.ITimer;
 import de.sepab.sheep.logic.Level.GameModus;
 
@@ -160,7 +159,6 @@ public class Menu{
 							height = 960	;
 	
 	public  ILevel level;
-	public  IRandomGenerator randomGenerator;
 	private  IDataLoader dataLoader;
 	public  GameModus gameModus;
 	
@@ -260,7 +258,7 @@ public class Menu{
 		}
 		
 		
-		gameBoard = new GameBoard(level, randomGenerator, input);
+		gameBoard = new GameBoard(level, input);
 		jFrame.setFocusable(false);
 		jFrame.setSize(width, height); //gr��e des screens
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -565,7 +563,7 @@ public class Menu{
 							setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
 							level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_NameField.getText(), getGameModus());
 							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
-							gameBoard.Update(level, randomGenerator);
+							gameBoard.Update(level);
 							gameBoard.shuffle();
 							setCurrentLabel(gameBoard);
 							level.TimerStart();
@@ -590,7 +588,7 @@ public class Menu{
 						gameBoard_sheeps2.setVisible(true);
 						setGameModus("Mehrspieler");
 						level.getReferences(ai, gameBoard, timer, input, collision, menu, null, getGameModus());
-						gameBoard.Update(level, randomGenerator);
+						gameBoard.Update(level);
 						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
@@ -825,14 +823,6 @@ public class Menu{
 
 	public  void setInput(IInput input) {
 		this.input = input;
-	}
-
-	public  IRandomGenerator getRandomGenerator() {
-		return randomGenerator;
-	}
-
-	public  void setRandomGenerator(IRandomGenerator randomGenerator) {
-		this.randomGenerator = randomGenerator;
 	}
 
 	public  javax.swing.Timer getSwingTimer() {

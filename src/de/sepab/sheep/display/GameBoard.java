@@ -24,9 +24,9 @@ import de.sepab.sheep.handler.IInput;
 import de.sepab.sheep.handler.Input;
 import de.sepab.sheep.logic.Collision;
 import de.sepab.sheep.logic.ILevel;
-import de.sepab.sheep.logic.IRandomGenerator;
 import de.sepab.sheep.logic.Level;
 import de.sepab.sheep.logic.Movement;
+import de.sepab.sheep.logic.RandomGenerator;
 
 @SuppressWarnings("serial")
 public class GameBoard extends JPanel{
@@ -103,7 +103,6 @@ public class GameBoard extends JPanel{
 												   	};
 	private static final int CAGECOLOR[][] = {{0,200,0}};
 
-	private IRandomGenerator randomGenerator;
 	private ILevel level;
 	
 	
@@ -127,17 +126,15 @@ public class GameBoard extends JPanel{
     	paintEntities(g);
     }
     
-    public void Update(ILevel level, IRandomGenerator randomGenerator) {
-    	this.randomGenerator = randomGenerator;
+    public void Update(ILevel level) {
     	this.level = level;
     }
     
-    public GameBoard(ILevel level, IRandomGenerator randomGenerator, IInput input) {
+    public GameBoard(ILevel level, IInput input) {
     	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
     	this.setPreferredSize(new Dimension(1280, 200));
-    	this.randomGenerator = randomGenerator;
     	this.level = level;
     }
     
@@ -148,7 +145,7 @@ public class GameBoard extends JPanel{
     	Graphics g = imageBackground.getGraphics();
     	for (int x = 0; x < this.x; x++) {
 			for (int y = 0; y < this.y; y++) {
-				int i = randomGenerator.getRandomNumber(0, 2);//2 ist die anzahl an floor texturen
+				int i = RandomGenerator.getRandomNumber(0, 2);//2 ist die anzahl an floor texturen
 				g.drawImage(IMAGEFLOOR.getSubimage(COORDSFLOOR[i][0], COORDSFLOOR[i][1], textureLength, textureLength), x*32, y*32, null);
 			}
 		}
@@ -273,7 +270,7 @@ public class GameBoard extends JPanel{
 					addObstaclesWater(y, x, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[3][0] && c.getGreen() == OBSTACLECOLOR[3][1] && c.getBlue() == OBSTACLECOLOR[3][2]) {
-					 int i = randomGenerator.getRandomNumber(0, 2);
+					 int i = RandomGenerator.getRandomNumber(0, 2);
 						switch (i) {
 						case 0:
 							level.addObstacle(y*32, x*32, 48);
@@ -370,7 +367,7 @@ public class GameBoard extends JPanel{
 		}else
 		if (top == true && right == true && bottom == true && left == true) {
 			if (topLeft == true && topRight == true && bottomRight == true && bottomLeft == true) {
-				int i = randomGenerator.getRandomNumber(0, 3);
+				int i = RandomGenerator.getRandomNumber(0, 3);
 				switch (i) {
 				case 0:
 					level.addObstacle(x*32, y*32, 40);

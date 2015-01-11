@@ -5,6 +5,7 @@ import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.PowerUp;
+import de.sepab.sheep.handler.Constants;
 
 public class Collision implements ICollision{
 
@@ -175,6 +176,28 @@ public class Collision implements ICollision{
 					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
+						if (Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof ISheep) {
+							System.out.println("TSheep -> PowerUp");
+							for (IEntity sheep : Sheeps) {
+								if (sheep.isChained()) {
+									sheep.setPosX(300);
+									sheep.setPosY(50);
+									Powers.remove(i);
+									break;
+								}
+							}
+						}
+						else if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof IDog){
+							System.out.println("TDog -> PowerUp");
+							int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
+							Sheeps.get(sheepPosInList).setPosX(150);
+							Sheeps.get(sheepPosInList).setPosY(300);
+							Powers.remove(i);
+						}
+						else {
+							Powers.get(i).event(entity);
+							Powers.remove(i);
+						}
 						return true;
 						//MAGICLE AUFRUF DES POWERUP KILLERS Magic(entity,Powers.get(i){oder einfach nur i als index des zu verarbeitenden power ups})
 					}
