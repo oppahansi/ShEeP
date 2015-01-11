@@ -14,5 +14,7 @@ public interface IDataLoader {
     public String[] getCountNames();
 
     public String[] getTimeNames();
+    
+    public void addHighscore(String name,int newHighscore,int gameMod);
 
 }

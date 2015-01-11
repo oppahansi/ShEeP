@@ -3,6 +3,7 @@ package de.sepab.sheep.logic;
 import java.util.LinkedList;
 
 import de.sepab.sheep.display.GameBoard;
+import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.EntitySpawner;
@@ -20,31 +21,37 @@ public class Level implements ILevel, ActionListener{
 		ONTIME, ONCOUNT, MULTIPLAYER
 	}
 
-	LinkedList<IEntity> dogList = new LinkedList<>();
-	LinkedList<IEntity> sheepList = new LinkedList<>();
-	LinkedList<IEntity> powerUpList = new LinkedList<>();
-	LinkedList<IEntity> obstacleList = new LinkedList<>();
-	LinkedList<IEntity> cageList = new LinkedList<>();
+	private LinkedList<IEntity> dogList = new LinkedList<>();
+	private LinkedList<IEntity> sheepList = new LinkedList<>();
+	private LinkedList<IEntity> powerUpList = new LinkedList<>();
+	private LinkedList<IEntity> obstacleList = new LinkedList<>();
+	private LinkedList<IEntity> cageList = new LinkedList<>();
 
 
-	GameModus gameModus = GameModus.ONTIME;
-	AI ai;
-	GameBoard gameBoard;
-	javax.swing.Timer swingTimer;
-	ITimer timer;
-	IInput input;
-	ICollision collision;
+	private GameModus gameModus = GameModus.ONTIME;
+	private AI ai;
+	private GameBoard gameBoard;
+	private javax.swing.Timer swingTimer;
+	private ITimer timer;
+	private IInput input;
+	private ICollision collision;
+	private Menu menu;
+	private String name;
+	
 
 	int time = 10, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 
-	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision) {
+	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
 		this.timer = timer;
 		this.input = input;
 		this.collision = collision;
+		this.menu = menu;
+		this.name = name;
+		this.gameModus = gameModus;
 	}
 
 	public LinkedList<IEntity> getDogList() {
@@ -92,8 +99,8 @@ public class Level implements ILevel, ActionListener{
 		obstacleList.add(new Obstacle(x, y, sprite));
 	}
 	
-	public void addCage(int x, int y) {
-		cageList.add(new Cage(x, y));
+	public void addCage(int x, int y, int x2, int y2) {
+		cageList.add(new Cage(x, y, x2, y2));
 	}
 
 	public void getGameBaord(GameBoard gameBoard){
@@ -136,6 +143,10 @@ public class Level implements ILevel, ActionListener{
 		//System.out.print("test");
 		timer.start();
 		//System.out.print(timer.getTime() + "");
+		menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
+													 this.cageList.getFirst().getPosY(),
+													 ((ICage) this.cageList.getFirst()).getPosX2(),
+													 ((ICage)this.cageList.getFirst()).getPosY2()));
 		switch (gameModus) {
 		case ONTIME:
 //			if ((timer.getTime() + time) <= 0) {
@@ -147,6 +158,10 @@ public class Level implements ILevel, ActionListener{
 		case ONCOUNT:
 			break;
 		case MULTIPLAYER:
+			menu.setGameBoardSheep2(this.collision.Count(this.cageList.getLast().getPosX(),
+														 this.cageList.getLast().getPosY(),
+														 ((ICage) this.cageList.getLast()).getPosX2(),
+														 ((ICage)this.cageList.getLast()).getPosY2()));
 			break;
 
 		default:
@@ -156,11 +171,13 @@ public class Level implements ILevel, ActionListener{
 		//
 		//System.out.println(this.collision.Count(0, 0, 64, 64));
 		//
+		
 		this.reducePowerUpTime();
 		this.unscareSheeps();
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
+		menu.setGameBoardTime(timer.getTime());
 //		count++;
 //		if(timer)
 	}

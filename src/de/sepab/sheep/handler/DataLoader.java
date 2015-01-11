@@ -60,4 +60,10 @@ public class DataLoader implements IDataLoader {
     public String[] getTimeNames() {
         return GAMEDATA.getTimeNames();
     }
+
+	@Override
+	public void addHighscore(String name, int newHighscore, int gameMod) {
+		GAMEDATA.addHighscore(name, newHighscore, gameMod);
+		
+	}
 }

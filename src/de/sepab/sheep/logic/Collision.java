@@ -8,7 +8,7 @@ import de.sepab.sheep.entities.PowerUp;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,List;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles;
 	private int lenght,hight;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
