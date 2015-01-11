@@ -148,4 +148,14 @@ public class Entity implements IEntity {
 	public void event(IEntity entity) {
 
 	}
+
+	@Override
+	public int getType() {
+		return 0;
+	}
+
+	@Override
+	public boolean isChained() {
+		return false;
+	}
 }	

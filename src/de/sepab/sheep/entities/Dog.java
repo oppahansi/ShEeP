@@ -111,4 +111,14 @@ public class Dog extends Entity implements IDog {
 			this.barkLength = this.fixBarkLength;
 		}
 	}
+
+	@Override
+	public int getType() {
+		return 0;
+	}
+
+	@Override
+	public boolean isChained() {
+		return false;
+	}
 }

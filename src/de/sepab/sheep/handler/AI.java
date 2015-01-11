@@ -19,7 +19,6 @@ public class AI {
 	private ILevel level;
 	private IMovement movementHandler;
 	private ICollision collisionHandler;
-	private IRandomGenerator randomGenerator = new RandomGenerator();
 	
 	public AI(int iq, int scariness, ILevel level, IMovement movementHandler, ICollision collisionHandler) {
 		this.iq = iq;
@@ -51,7 +50,7 @@ public class AI {
 				if (x < z && x > -z) {
 					if (y < z && y > -z) {
 						//rnd
-						int rnd = this.randomGenerator.getRandomNumber(1, 4);
+						int rnd = RandomGenerator.getRandomNumber(1, 4);
 						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
 							((ISheep) entity).getThoughts()[i] = rnd;
 						}
@@ -75,8 +74,8 @@ public class AI {
 					} else if (y < 0) {
 						//unten rechts
 						int[] tmp = {2, 3};
-						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
@@ -84,8 +83,8 @@ public class AI {
 					} else if (y > 0) {
 						//oben rechts
 						int[] tmp = {1, 2};
-						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
@@ -100,8 +99,8 @@ public class AI {
 					} else if (y < 0) {
 						//unten links
 						int[] tmp = {3, 4};
-						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
@@ -109,8 +108,8 @@ public class AI {
 					} else if (y > 0) {
 						//oben links
 						int[] tmp = {1, 4};
-						int a = tmp[this.randomGenerator.getRandomNumber(0, 1)];
-						int b = tmp[this.randomGenerator.getRandomNumber(0, 1)];
+						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
+						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
@@ -142,7 +141,7 @@ public class AI {
 		if(sheep.getThoughts()[0] == 0) {
 			//
 			//Power-Up greadyness
-			int tmp = this.randomGenerator.getRandomNumber(1, 4);
+			int tmp = RandomGenerator.getRandomNumber(1, 4);
 			//
 			for(int i=0; i<sheep.getThoughts().length; i++) {
 				sheep.getThoughts()[i] = tmp;
@@ -151,16 +150,17 @@ public class AI {
 	}
 
 	private void calcChainedSteps(ISheep sheep) {
-		int tmp = 0;
-		if(this.randomGenerator.getPercentDistribution(iq, 7)) {
-			if(((IEntity)sheep).getPosX() <= 640) {
-				tmp = 2;
-			}
-			else {
-				tmp = 4;
-			}
-		}
-		sheep.getThoughts()[0] = tmp;
+//		int tmp = 0;
+//		if(this.randomGenerator.getPercentDistribution(iq, 7)) {
+//			if(((IEntity)sheep).getPosX() <= 640) {
+//				tmp = 2;
+//			}
+//			else {
+//				tmp = 4;
+//			}
+//		}
+//		sheep.getThoughts()[0] = tmp;
+		sheep.getThoughts()[0] = 0;
 	}
 
 	private void checkNextStep(IEntity entity) {
@@ -205,7 +205,7 @@ public class AI {
 				break;
 		}
 		if(collides) {
-			int tmp = this.randomGenerator.getRandomNumber(0, 2);
+			int tmp = RandomGenerator.getRandomNumber(0, 2);
 			for (int i = 0; i < 16; i++) {
 				((ISheep) entity).getThoughts()[i] = possibleNextSteps[tmp];
 			}
