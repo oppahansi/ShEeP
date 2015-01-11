@@ -42,6 +42,7 @@ public class PowerUp extends Entity{
 			case Constants.POWERUP_TYPE_TIME:
 				if(entity instanceof IDog) {
 					// add time here
+               setVisible(false);
 				}
 				break;
          case Constants.POWERUP_TYPE_CONFUSION:
