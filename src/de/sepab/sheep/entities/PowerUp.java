@@ -34,8 +34,8 @@ public class PowerUp extends Entity {
             break;
          case Constants.POWERUP_TYPE_BEAM:
             if (entity instanceof ISheep) {
-               entity.setPosX(15);
-               entity.setPosY(15);
+               entity.setPosX(150);
+               entity.setPosY(300);
                setVisible(false);
             }
             break;

@@ -13,7 +13,7 @@ public class EntitySpawner implements IEntitySpawner {
    }
 
    public PowerUp createPowerUp(int posX, int posY) {
-      int random = randomGenerator.getRandomNumber(1, 6);
+      int random = Constants.POWERUP_TYPE_BEAM;//randomGenerator.getRandomNumber(1, 6);
 
       if (random == Constants.POWERUP_TYPE_SPEED) {
          return new PowerUp(posX, posY, random);
@@ -25,6 +25,9 @@ public class EntitySpawner implements IEntitySpawner {
          return new PowerUp(posX, posY, random);
       }
       else if (random == Constants.POWERUP_TYPE_TIME) {
+         return new PowerUp(posX, posY, random);
+      }
+      else if (random == Constants.POWERUP_TYPE_DEAF) {
          return new PowerUp(posX, posY, random);
       }
       else {
