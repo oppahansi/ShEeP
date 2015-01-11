@@ -11,10 +11,12 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.sepab.sheep.entities.Cage;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.Obstacle;
 import de.sepab.sheep.handler.AI;
@@ -99,6 +101,7 @@ public class GameBoard extends JPanel{
 												   	{0,30,215}, //water
 												 {185,180,160}, //1x1 obstacles
 												   	};
+	private static final int CAGECOLOR[][] = {{0,200,0}};
 
 	private IRandomGenerator randomGenerator;
 	private ILevel level;
@@ -106,6 +109,7 @@ public class GameBoard extends JPanel{
 	
 	private int textureLength = 32; //tl = texture length
 	private int x = 40, y=30;
+	private int[][] cages = new int[this.x][this.y];
 //	private int background[][][] = new int[x][y][2];
 	
 	
@@ -185,108 +189,168 @@ public class GameBoard extends JPanel{
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
 			break;
 		}
-    	
-    	for (int x = 0; x < this.x; x++) {
-			for (int y = 0; y < this.y; y++) {
-				 int rgb = IMAGEMAP.getRGB(x, y);
+    	cages = new int[this.y][this.x];
+    	for (int y = 0; y < this.x; y++) {
+			for (int x = 0; x < this.y; x++) {
+				 int rgb = IMAGEMAP.getRGB(y, x);
 				 Color c = new Color(rgb);
 				 if (c.getRed() == DOGCOLOR[0][0] && c.getGreen() == DOGCOLOR[0][1] && c.getBlue() == DOGCOLOR[0][2]) {
-					level.addDog(x*32, y*32, 1, 3);
+					level.addDog(y*32, x*32, 1, 3);
 				 }
 				 if (c.getRed() == SHEEPCOLOR[0][0] && c.getGreen() == SHEEPCOLOR[0][1] && c.getBlue() == SHEEPCOLOR[0][2]) {
-					level.addSheep(x*32, y*32, 1, 3);
+					level.addSheep(y*32, x*32, 1, 3);
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[0][0] && c.getGreen() == OBSTACLECOLOR[0][1] && c.getBlue() == OBSTACLECOLOR[0][2]) {
 					 boolean top = false, right = false, bottom = false, left = false;
-					if (y - 1 >= 0) {
-						top = checkForColor(x, y - 1, OBSTACLECOLOR, 0);
-					}
-					if (x + 1 <= this.x) {
-						right = checkForColor(x + 1, y, OBSTACLECOLOR, 0);
-					}
-					if (y + 1 <= this.y) {
-						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 0);
-					}
 					if (x - 1 >= 0) {
-						left = checkForColor(x - 1, y, OBSTACLECOLOR, 0);
+						top = checkForColor(y, x - 1, OBSTACLECOLOR, 0);
 					}
-					addObstacleCage(x, y, top, right, bottom, left);
+					if (y + 1 < this.x) {
+						right = checkForColor(y + 1, x, OBSTACLECOLOR, 0);
+					}
+					if (x + 1 < this.y) {
+						bottom = checkForColor(y, x + 1, OBSTACLECOLOR, 0);
+					}
+					if (y - 1 >= 0) {
+						left = checkForColor(y - 1, x, OBSTACLECOLOR, 0);
+					}
+					addObstacleCage(y, x, top, right, bottom, left);
 				}
 				 if (c.getRed() == OBSTACLECOLOR[1][0] && c.getGreen() == OBSTACLECOLOR[1][1] && c.getBlue() == OBSTACLECOLOR[1][2]) {
 					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
-					if (y - 1 >= 0) {
-						top = checkForColor(x, y - 1, OBSTACLECOLOR, 1);
-					}
-					if (x + 1 <= this.x && y - 1 >= 0) {
-						topRight = checkForColor(x + 1, y - 1, OBSTACLECOLOR, 1);
-					}
-					if (x + 1 <= this.x) {
-						right = checkForColor(x + 1, y, OBSTACLECOLOR, 1);
-					}
-					if (x + 1 <= this.x && y + 1 <= this.y) {
-						bottomRight = checkForColor(x + 1, y + 1, OBSTACLECOLOR, 1);
-					}
-					if (y + 1 <= this.y) {
-						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 1);
-					}
-					if (x - 1 >= 0 && y + 1 <= this.y) {
-						bottomLeft = checkForColor(x - 1, y + 1, OBSTACLECOLOR, 1);
-					}
 					if (x - 1 >= 0) {
-						left = checkForColor(x - 1, y, OBSTACLECOLOR, 1);
+						top = checkForColor(y, x - 1, OBSTACLECOLOR, 1);
 					}
-					if (x - 1 >= 0 && y - 1 >= 0) {
-						topLeft = checkForColor(x - 1, y - 1, OBSTACLECOLOR, 1);
+					if (y + 1 < this.x && x - 1 >= 0) {
+						topRight = checkForColor(y + 1, x - 1, OBSTACLECOLOR, 1);
 					}
-					addObstaclesWheat(x, y, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
+					if (y + 1 < this.x) {
+						right = checkForColor(y + 1, x, OBSTACLECOLOR, 1);
+					}
+					if (y + 1 < this.x && x + 1 <= this.y) {
+						bottomRight = checkForColor(y + 1, x + 1, OBSTACLECOLOR, 1);
+					}
+					if (x + 1 < this.y) {
+						bottom = checkForColor(y, x + 1, OBSTACLECOLOR, 1);
+					}
+					if (y - 1 >= 0 && x + 1 < this.y) {
+						bottomLeft = checkForColor(y - 1, x + 1, OBSTACLECOLOR, 1);
+					}
+					if (y - 1 >= 0) {
+						left = checkForColor(y - 1, x, OBSTACLECOLOR, 1);
+					}
+					if (y - 1 >= 0 && x - 1 >= 0) {
+						topLeft = checkForColor(y - 1, x - 1, OBSTACLECOLOR, 1);
+					}
+					addObstaclesWheat(y, x, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[2][0] && c.getGreen() == OBSTACLECOLOR[2][1] && c.getBlue() == OBSTACLECOLOR[2][2]) {
 					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
-					if (y - 1 >= 0) {
-						top = checkForColor(x, y - 1, OBSTACLECOLOR, 2);
-					}
-					if (x + 1 <= this.x && y - 1 >= 0) {
-						topRight = checkForColor(x + 1, y - 1, OBSTACLECOLOR, 2);
-					}
-					if (x + 1 <= this.x) {
-						right = checkForColor(x + 1, y, OBSTACLECOLOR, 2);
-					}
-					if (x + 1 <= this.x && y + 1 <= this.y) {
-						bottomRight = checkForColor(x + 1, y + 1, OBSTACLECOLOR, 2);
-					}
-					if (y + 1 <= this.y) {
-						bottom = checkForColor(x, y + 1, OBSTACLECOLOR, 2);
-					}
-					if (x - 1 >= 0 && y + 1 <= this.y) {
-						bottomLeft = checkForColor(x - 1, y + 1, OBSTACLECOLOR, 2);
-					}
 					if (x - 1 >= 0) {
-						left = checkForColor(x - 1, y, OBSTACLECOLOR, 2);
+						top = checkForColor(y, x - 1, OBSTACLECOLOR, 2);
 					}
-					if (x - 1 >= 0 && y - 1 >= 0) {
-						topLeft = checkForColor(x - 1, y - 1, OBSTACLECOLOR, 2);
+					if (y + 1 < this.x && x - 1 >= 0) {
+						topRight = checkForColor(y + 1, x - 1, OBSTACLECOLOR, 2);
 					}
-					addObstaclesWater(x, y, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
+					if (y + 1 < this.x) {
+						right = checkForColor(y + 1, x, OBSTACLECOLOR, 2);
+					}
+					if (y + 1 < this.x && x + 1 < this.y) {
+						bottomRight = checkForColor(y + 1, x + 1, OBSTACLECOLOR, 2);
+					}
+					if (x + 1 < this.y) {
+						bottom = checkForColor(y, x + 1, OBSTACLECOLOR, 2);
+					}
+					if (y - 1 >= 0 && x + 1 < this.y) {
+						bottomLeft = checkForColor(y - 1, x + 1, OBSTACLECOLOR, 2);
+					}
+					if (y - 1 >= 0) {
+						left = checkForColor(y - 1, x, OBSTACLECOLOR, 2);
+					}
+					if (y - 1 >= 0 && x - 1 >= 0) {
+						topLeft = checkForColor(y - 1, x - 1, OBSTACLECOLOR, 2);
+					}
+					addObstaclesWater(y, x, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[3][0] && c.getGreen() == OBSTACLECOLOR[3][1] && c.getBlue() == OBSTACLECOLOR[3][2]) {
 					 int i = randomGenerator.getRandomNumber(0, 2);
 						switch (i) {
 						case 0:
-							level.addObstacle(x*32, y*32, 48);
+							level.addObstacle(y*32, x*32, 48);
 							break;
 						case 1:
-							level.addObstacle(x*32, y*32, 49);
+							level.addObstacle(y*32, x*32, 49);
 							break;
 						case 2:
-							level.addObstacle(x*32, y*32, 50);
+							level.addObstacle(y*32, x*32, 50);
 							break;
 						default:
 							break;
 						}
 				}
+				 if (c.getRed() == CAGECOLOR[0][0] && c.getGreen() == CAGECOLOR[0][1] && c.getBlue() == CAGECOLOR[0][2]) {
+						 cages[y][x] = 1;
+				 }
 			}
     	}
+    	createCages();
     }
+    
+    public void createCages(){
+    	IEntity cage = new Cage(0, 0, 0, 0);
+    	for (int y = 0; y < cages[0].length; y++) {
+			for (int x = 0; x < cages.length; x++) {
+				if (cages[x][y] == 1) {
+					cage.setPosX(x);
+					cage.setPosY(y);
+					cage = createCagesRec(x, y, cage);
+					level.addCage(cage.getPosX() * 32, cage.getPosY() * 32, (((Cage)cage).getPosX2() + 1)*32, (((Cage)cage).getPosY2() + 1)*32);
+				}
+			}
+		}
+    }
+    
+    public IEntity createCagesRec(int x, int y, IEntity cage) {
+    	if (x + 1 < this.x) {
+			if (cages[x + 1][y] == 1) {
+				cages[x][y] = 0;
+				cage = createCagesRec(x + 1, y, cage);
+			}else{
+				if (y + 1 < this.y) {
+					if (cages[x][y + 1] == 1) {
+						cages[x][y] = 0;
+						cage = createCagesRec(x, y + 1, cage);
+					} else {
+						((Cage)cage).setPosX2(x);
+						((Cage)cage).setPosY2(y);
+						return cage;
+					}
+				} else{
+					((Cage)cage).setPosX2(x);
+					((Cage)cage).setPosY2(y);
+					return cage;
+				}
+			} 
+		} else {
+			if (y + 1 < this.y) {
+				if (cages[x][y + 1] == 1) {
+					cages[x][y] = 0;
+					cage = createCagesRec(x, y + 1, cage);
+				} else {
+					((Cage)cage).setPosX2(x);
+					((Cage)cage).setPosY2(y);
+					return cage;
+				}
+			} else{
+				((Cage)cage).setPosX2(x);
+				((Cage)cage).setPosY2(y);
+				return cage;
+			}
+		}
+    	return cage;
+    }
+    
+    
     
     public void addObstaclesWater(int x, int y, boolean top, boolean topRight, boolean right, boolean bottomRight, boolean bottom, boolean bottomLeft, boolean left, boolean topLeft){
     	if (top == false && right == false && bottom == false && left == false) {

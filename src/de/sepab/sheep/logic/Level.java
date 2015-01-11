@@ -99,8 +99,8 @@ public class Level implements ILevel, ActionListener{
 		obstacleList.add(new Obstacle(x, y, sprite));
 	}
 	
-	public void addCage(int x, int y) {
-		cageList.add(new Cage(x, y));
+	public void addCage(int x, int y, int x2, int y2) {
+		cageList.add(new Cage(x, y, x2, y2));
 	}
 
 	public void getGameBaord(GameBoard gameBoard){
@@ -143,7 +143,10 @@ public class Level implements ILevel, ActionListener{
 		//System.out.print("test");
 		timer.start();
 		//System.out.print(timer.getTime() + "");
-		menu.setGameBoardSheep1(this.collision.Count(0, 0, 32, 32));
+		menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
+													 this.cageList.getFirst().getPosY(),
+													 ((ICage) this.cageList.getFirst()).getPosX2(),
+													 ((ICage)this.cageList.getFirst()).getPosY2()));
 		switch (gameModus) {
 		case ONTIME:
 //			if ((timer.getTime() + time) <= 0) {
@@ -155,7 +158,10 @@ public class Level implements ILevel, ActionListener{
 		case ONCOUNT:
 			break;
 		case MULTIPLAYER:
-			menu.setGameBoardSheep2(this.collision.Count(0, 0, 32, 32));
+			menu.setGameBoardSheep2(this.collision.Count(this.cageList.getLast().getPosX(),
+														 this.cageList.getLast().getPosY(),
+														 ((ICage) this.cageList.getLast()).getPosX2(),
+														 ((ICage)this.cageList.getLast()).getPosY2()));
 			break;
 
 		default:

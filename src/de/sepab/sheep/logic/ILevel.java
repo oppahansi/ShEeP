@@ -34,7 +34,7 @@ public interface ILevel {
 	
 	public void addObstacle(int x, int y, int sprite);
 	
-	public void addCage(int x, int y);
+	public void addCage(int x, int y, int x2, int y2);
 	
 	public void removeDog(IEntity entity);
 	

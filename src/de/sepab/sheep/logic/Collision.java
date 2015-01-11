@@ -95,28 +95,17 @@ public class Collision implements ICollision{
 					}
 				}
 			}
-//			for(int i=0;i<Sheeps.size();i++)
-//			{
-//				if(entity!=Sheeps.get(i))
-//				{
-//					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
-//					{
-//						//COLLISION
-//<<<<<<< HEAD
-//
-//||||||| merged common ancestors
-//
-//						if(entity instanceof IDog && List.get(i) instanceof PowerUp){
-//							System.out.println("Collision with: " + List.get(i));
-//							((PowerUp) List.get(i)).event(entity);
-//							List.remove(i);
-//						}
-//=======
-//>>>>>>> master
-//						return false;
-//					}
-//				}
-//			}
+			for(int i=0;i<Sheeps.size();i++)
+			{
+				if(entity!=Sheeps.get(i))
+				{
+					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
+					{
+						//COLLISION
+						return false;
+					}
+				}
+			}
 			for(int i=0;i<Obstacles.size();i++)
 			{
 				if(Obstacles.get(i).getSpritePos()==3||Obstacles.get(i).getSpritePos()==4||Obstacles.get(i).getSpritePos()==5)

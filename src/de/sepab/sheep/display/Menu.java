@@ -541,28 +541,30 @@ public class Menu{
 			}
 			
 			{//sp
-				singlePlayerButton_Start.addActionListener(new ActionListener() {
+					singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent arg0) {
-						gameBoard_sheepcounter2.setVisible(false);
-						gameBoard_sheeps2.setVisible(false);
-						setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
-						level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_Name.getText(), getGameModus());
-						gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
-						gameBoard.Update(level, randomGenerator);
-						gameBoard.shuffle();
-						setCurrentLabel(gameBoard);
-						level.TimerStart();
-						gameBoard.requestFocus();
-						jFrame.setSize(width, height + 20);
-					}
-				});
-				singlePlayerButton_Back.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							if (singlePlayerTextField_NameField.getText().length() > 0) {
+							gameBoard_sheepcounter2.setVisible(false);
+							gameBoard_sheeps2.setVisible(false);
+							setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
+							level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_NameField.getText(), getGameModus());
+							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
+							gameBoard.Update(level, randomGenerator);
+							gameBoard.shuffle();
+							setCurrentLabel(gameBoard);
+							level.TimerStart();
+							gameBoard.requestFocus();
+							jFrame.setSize(width, height + 20);
+						}
+						}
+					});
+					singlePlayerButton_Back.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent arg0) {
-						setCurrentLabel(panelMainMenu);
-					}
-				});
+						public void actionPerformed(ActionEvent arg0) {
+							setCurrentLabel(panelMainMenu);
+						}
+					});
 			}
 			
 			{//mp

@@ -24,7 +24,7 @@ public class EntitySpawner implements IEntitySpawner {
          return new Obstacle(posX, posY, 0);
       }
       else if (entityName == Constants.CAGE) {
-         return new Cage(posX, posY);
+         return new Cage(posX, posY, posX + 32, posY + 32);
       }
       else {
          return null;
