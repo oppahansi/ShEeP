@@ -158,4 +158,9 @@ public class Entity implements IEntity {
 	public boolean isChained() {
 		return false;
 	}
+
+	@Override
+	public void setPowerUpLife(int powerUpLife) {
+		this.powerUpLife = powerUpLife;
+	}
 }	

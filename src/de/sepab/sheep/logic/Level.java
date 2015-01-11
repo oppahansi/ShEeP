@@ -6,6 +6,7 @@ import de.sepab.sheep.display.GameBoard;
 import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.*;
 import de.sepab.sheep.handler.AI;
+import de.sepab.sheep.handler.Constants;
 import de.sepab.sheep.handler.EntitySpawner;
 import de.sepab.sheep.handler.IEntitySpawner;
 import de.sepab.sheep.handler.IInput;
@@ -39,7 +40,7 @@ public class Level implements ILevel, ActionListener{
 	private String name;
 	
 
-	int time = 10, count = 0;
+	int time = 100, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 
@@ -82,12 +83,12 @@ public class Level implements ILevel, ActionListener{
 	}
 
 
-	public void addDog(int x, int y, int speed, int powerUpLife) {
-		dogList.add(new Dog(x, y, speed, powerUpLife, this.sheepList, 100));
+	public void addDog(int x, int y, int speed, int powerUpLife, int barkLength) {
+		dogList.add(new Dog(x, y, speed, powerUpLife, this.sheepList, barkLength));
 	}
 
-	public void addSheep(int x, int y, int speed, int powerUplIfe){
-		sheepList.add(new Sheep(x, y, speed, powerUplIfe, 1));
+	public void addSheep(int x, int y, int speed, int powerUplIfe, int scareSpeed){
+		sheepList.add(new Sheep(x, y, speed, powerUplIfe, scareSpeed));
 	}
 
 
@@ -150,11 +151,12 @@ public class Level implements ILevel, ActionListener{
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
 		switch (gameModus) {
 		case ONTIME:
-//			if ((timer.getTime() + time) <= 0) {
-//				swingTimer.stop();
-//				timer.stop();
-//				System.out.print("ende");
-//			}
+			if ((timer.getTime() - time) >= 0) {
+				swingTimer.stop();
+				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER);
+				menu.getDataLoader().saveHighscore();
+				menu.setCurrentLabel(menu.panellHighscore);
+			}
 			break;
 		case ONCOUNT:
 			break;
@@ -181,6 +183,14 @@ public class Level implements ILevel, ActionListener{
 		menu.setGameBoardTime(timer.getTime());
 //		count++;
 //		if(timer)
+	}
+	
+	public int calcHighscore(){
+		int i = this.collision.Count(this.cageList.getFirst().getPosX(),
+				 this.cageList.getFirst().getPosY(),
+				 ((ICage) this.cageList.getFirst()).getPosX2(),
+				 ((ICage)this.cageList.getFirst()).getPosY2()) * (this.time - timer.getTime() + 10);
+				 return i;
 	}
 
 	@Override

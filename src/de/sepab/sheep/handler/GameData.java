@@ -37,6 +37,7 @@ public class GameData implements Serializable {
             sortHighscores(countNames, countHighscores);
          }
       }
+      
       else if (gameMod == Constants.SPLAYER) {
          if (isNewTimeHighscore(newHighscore)) {
             timeHighscores[MAX_RECORDS - 1] = newHighscore;

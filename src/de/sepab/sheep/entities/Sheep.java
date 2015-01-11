@@ -107,5 +107,13 @@ public class Sheep extends Entity implements ISheep {
 	
 	public boolean isChained(){
 		return chained;
-}
+	}
+	
+	public void setScareSpeed(int scareSpeed){
+		this.scareSpeed = scareSpeed;
+	}
+	
+	public int getScareSpeed(){
+		return this.scareSpeed;
+	}
 }

@@ -21,7 +21,7 @@ public class Dog extends Entity implements IDog {
 
     public void bark() {
 		//
-		setSpeed(7);
+//		setSpeed(7);
 		//super.confuse(true);
 		//
     	int x=0;
@@ -121,4 +121,14 @@ public class Dog extends Entity implements IDog {
 	public boolean isChained() {
 		return false;
 	}
+	
+	public void setBarkLength(int barkLength) {
+		this.barkLength = barkLength;
+	}
+	
+	public int getBarkLength() {
+		return this.barkLength;
+	}
+	
+	
 }
