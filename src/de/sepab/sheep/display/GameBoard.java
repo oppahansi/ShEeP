@@ -104,6 +104,7 @@ public class GameBoard extends JPanel{
 	private static final int CAGECOLOR[][] = {{0,200,0}};
 
 	private ILevel level;
+	private Menu menu;
 	
 	
 	private int textureLength = 32; //tl = texture length
@@ -130,12 +131,13 @@ public class GameBoard extends JPanel{
     	this.level = level;
     }
     
-    public GameBoard(ILevel level, IInput input) {
+    public GameBoard(ILevel level, IInput input, Menu menu) {
     	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
     	this.setPreferredSize(new Dimension(1280, 200));
     	this.level = level;
+    	this.menu = menu;
     }
     
     public void shuffle() {
@@ -192,10 +194,10 @@ public class GameBoard extends JPanel{
 				 int rgb = IMAGEMAP.getRGB(y, x);
 				 Color c = new Color(rgb);
 				 if (c.getRed() == DOGCOLOR[0][0] && c.getGreen() == DOGCOLOR[0][1] && c.getBlue() == DOGCOLOR[0][2]) {
-					level.addDog(y*32, x*32, 1, 3);
+					level.addDog(y*32, x*32, menu.getDog().getSpeed(), menu.getDog().getPowerUpLife(), menu.getDog().getBarkLength());
 				 }
 				 if (c.getRed() == SHEEPCOLOR[0][0] && c.getGreen() == SHEEPCOLOR[0][1] && c.getBlue() == SHEEPCOLOR[0][2]) {
-					level.addSheep(y*32, x*32, 1, 3);
+					level.addSheep(y*32, x*32, menu.getSheep().getSpeed(), menu.getSheep().getPowerUpLife(), menu.getSheep().getScareSpeed());
 				 }
 				 if (c.getRed() == OBSTACLECOLOR[0][0] && c.getGreen() == OBSTACLECOLOR[0][1] && c.getBlue() == OBSTACLECOLOR[0][2]) {
 					 boolean top = false, right = false, bottom = false, left = false;
@@ -301,7 +303,8 @@ public class GameBoard extends JPanel{
 					cage.setPosX(x);
 					cage.setPosY(y);
 					cage = createCagesRec(x, y, cage);
-					level.addCage(cage.getPosX() * 32, cage.getPosY() * 32, (((Cage)cage).getPosX2() + 1)*32, (((Cage)cage).getPosY2() + 1)*32);
+					System.out.println(cage.getPosX()+ " " + cage.getPosY() + " " + (((Cage)cage).getPosX2())+ " " + (((Cage)cage).getPosY2()));
+					level.addCage(cage.getPosX() * 32, cage.getPosY() * 32, (((Cage)cage).getPosX2())*32, (((Cage)cage).getPosY2())*32);
 				}
 			}
 		}
@@ -320,6 +323,7 @@ public class GameBoard extends JPanel{
 					} else {
 						((Cage)cage).setPosX2(x);
 						((Cage)cage).setPosY2(y);
+						cages[x][y] = 0;
 						return cage;
 					}
 				} else{
@@ -336,11 +340,13 @@ public class GameBoard extends JPanel{
 				} else {
 					((Cage)cage).setPosX2(x);
 					((Cage)cage).setPosY2(y);
+					cages[x][y] = 0;
 					return cage;
 				}
 			} else{
 				((Cage)cage).setPosX2(x);
 				((Cage)cage).setPosY2(y);
+				cages[x][y] = 0;
 				return cage;
 			}
 		}

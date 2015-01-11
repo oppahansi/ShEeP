@@ -26,9 +26,9 @@ public interface ILevel {
 	
 	public void resetLevel();
 
-	public void addDog(int x, int y, int speed, int powerUpLife);
+	public void addDog(int x, int y, int speed, int powerUpLife, int barkLength);
 	
-	public void addSheep(int x, int y, int speed, int powerUpLife);
+	public void addSheep(int x, int y, int speed, int powerUpLife, int scareSpeed);
 	
 	public void addPowerUp();
 	

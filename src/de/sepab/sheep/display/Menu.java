@@ -170,8 +170,8 @@ public class Menu{
 	public   ITimer timer;
 	public  AI ai;
 	private Menu menu = this;
-	private Dog dog;
-	private Sheep sheep;
+	private Dog dog = new Dog(0, 0, 1, 1, null, 1);
+	private Sheep sheep = new Sheep(0, 0, 1, 1, 1);
 	//Methode zum swtichen der screens
 	public  void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
@@ -182,6 +182,9 @@ public class Menu{
 		panelSinglePlayer.setVisible(false);
 		if (gameBoard != null) {
 			gameBoard.setVisible(false);
+		}
+		if (panel == this.panellHighscore) {
+			setHighscore();
 		}
 		panel.setVisible(true);
 	}
@@ -216,10 +219,45 @@ public class Menu{
 	public void setDifficulty(String difficulty) {
 		switch (difficulty) {
 		case "Einfach":
+			ai.setIq(50);
+			ai.setScareLength(1);
+			dog.setBarkLength(150);
+			dog.setSpeed(4);
+			dog.setPowerUpLife(5);
+			sheep.setPowerUpLife(1);
+			sheep.setScareSpeed(3);
+			sheep.setSpeed(1);
+			break;
 		case "Mittel":
+			ai.setIq(100);
+			ai.setScareLength(2);
+			dog.setBarkLength(100);
+			dog.setSpeed(2);
+			dog.setPowerUpLife(3);
+			sheep.setPowerUpLife(3);
+			sheep.setScareSpeed(1);
+			sheep.setSpeed(1);
+			break;
 		case "Schwer":
+			ai.setIq(100);
+			ai.setScareLength(4);
+			dog.setBarkLength(50);
+			dog.setSpeed(2);
+			dog.setPowerUpLife(3);
+			sheep.setPowerUpLife(5);
+			sheep.setScareSpeed(0);
+			sheep.setSpeed(2);
+			break;
 		default:
-				
+			ai.setIq(50);
+			ai.setScareLength(1);
+			dog.setBarkLength(150);
+			dog.setSpeed(4);
+			dog.setPowerUpLife(5);
+			sheep.setPowerUpLife(1);
+			sheep.setScareSpeed(3);
+			sheep.setSpeed(1);
+			break;	
 		}
 	}
 	
@@ -258,7 +296,7 @@ public class Menu{
 		}
 		
 		
-		gameBoard = new GameBoard(level, input);
+		gameBoard = new GameBoard(level, input, menu);
 		jFrame.setFocusable(false);
 		jFrame.setSize(width, height); //gr��e des screens
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -586,6 +624,7 @@ public class Menu{
 					public void actionPerformed(ActionEvent arg0) {
 						gameBoard_sheepcounter2.setVisible(true);
 						gameBoard_sheeps2.setVisible(true);
+						setDifficulty("Mehrspieler");
 						setGameModus("Mehrspieler");
 						level.getReferences(ai, gameBoard, timer, input, collision, menu, null, getGameModus());
 						gameBoard.Update(level);
@@ -861,7 +900,26 @@ public class Menu{
 		gameBoard_sheepcounter2.setText(sheep + "");
 	}
 							
-	 @SuppressWarnings({ "serial", "rawtypes" })
+	 public Dog getDog() {
+		return dog;
+	}
+
+
+	public void setDog(Dog dog) {
+		this.dog = dog;
+	}
+
+
+	public Sheep getSheep() {
+		return sheep;
+	}
+
+
+	public void setSheep(Sheep sheep) {
+		this.sheep = sheep;
+	}
+
+	@SuppressWarnings({ "serial", "rawtypes" })
 	class ComboBoxRenderer extends JLabel
      implements ListCellRenderer {
 		  private String[] listString;

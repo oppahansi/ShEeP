@@ -9,6 +9,7 @@ public interface IEntity {
 	public int getSpritePos();
 	public void setSpritePos(int sprite);
 	public int getPowerUpLife();
+	public void setPowerUpLife(int powerUpLife);
 	public void decrementPowerUpLife();
 	public void resetPowerUpLife();
 	public int getSpeed();

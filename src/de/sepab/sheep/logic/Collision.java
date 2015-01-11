@@ -98,7 +98,7 @@ public class Collision implements ICollision{
 			}
 			for(int i=0;i<Sheeps.size();i++)
 			{
-				if(entity!=Sheeps.get(i))
+				if(entity!=Sheeps.get(i)&&((ISheep)Sheeps.get(i)).isChained()==false)
 				{
 					if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
