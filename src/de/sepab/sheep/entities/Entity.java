@@ -143,4 +143,9 @@ public class Entity implements IEntity {
 
 	public void changeSprite(int rotation) {
 	}
+
+	@Override
+	public void event(IEntity entity) {
+
+	}
 }	

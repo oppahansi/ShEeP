@@ -22,5 +22,6 @@ public interface IEntity {
 	public void setVisible(boolean visibility);
 
 	public boolean isVisible();
-	
+
+	public void event(IEntity entity);
 }

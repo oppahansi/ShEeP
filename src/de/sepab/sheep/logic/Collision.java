@@ -8,7 +8,7 @@ import de.sepab.sheep.entities.PowerUp;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,List;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles;
 	private int lenght,hight;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
@@ -175,6 +175,7 @@ public class Collision implements ICollision{
 					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
+						Powers.get(i).event(entity);
 						return true;
 						//MAGICLE AUFRUF DES POWERUP KILLERS Magic(entity,Powers.get(i){oder einfach nur i als index des zu verarbeitenden power ups})
 					}
