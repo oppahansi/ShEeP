@@ -14,6 +14,8 @@ import de.sepab.sheep.handler.IInput;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javafx.geometry.Rectangle2D;
+
 public class Level implements ILevel, ActionListener{
 
 	private IEntitySpawner entitySpawner;
@@ -93,8 +95,34 @@ public class Level implements ILevel, ActionListener{
 
 
 	public void addPowerUp() {
-		powerUpList.add(entitySpawner.createPowerUp(300, 50));
-	}
+        int posX = RandomGenerator.getRandomNumber(0, 1248);
+        int posY = RandomGenerator.getRandomNumber(0, 928);
+        for (IEntity entity : dogList) {
+            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
+            	addPowerUp();
+                return;
+            }
+        }
+        for (IEntity entity : sheepList) {
+            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
+            	addPowerUp();
+                return;
+            }
+        }
+        for (IEntity entity : obstacleList) {
+            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
+            	addPowerUp();
+                return;
+            }
+        }
+        for (IEntity entity : cageList) {
+            if(entity.getPosX() >= posX && posX >= ((ICage)entity).getPosX2() && entity.getPosY() >= posY  && posY >= ((ICage)entity).getPosY2()){
+            	addPowerUp();
+                return;
+            }
+        }
+        powerUpList.add(entitySpawner.createPowerUp(posX, posY));
+    }
 	
 	public void addObstacle(int x, int y, int sprite) {
 		obstacleList.add(new Obstacle(x, y, sprite));
@@ -149,7 +177,7 @@ public class Level implements ILevel, ActionListener{
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
 		float i = timer.getTime();	
-		if ((i/30- (timer.getTime()/30) == 0)) {
+		if ((i/2- (timer.getTime()/2) == 0)) {
 			if (spwaned == false) {
 				this.addPowerUp();
 				spwaned = true;
