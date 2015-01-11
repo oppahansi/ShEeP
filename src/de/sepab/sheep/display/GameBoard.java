@@ -167,7 +167,6 @@ public class GameBoard extends JPanel{
     public void loadMap(int map, int modus) {
     	level.resetLevel();
 
-		addPowerUps();
     	switch (map) {
 		case 0:
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
@@ -485,12 +484,6 @@ public class GameBoard extends JPanel{
     	return false;
 
     }
-
-	public void addPowerUps() {
-		for (int i = 0; i < 1 ; i++) {
-			level.addPowerUp();
-		}
-	}
 
     public void addObstacleCage(int x, int y, boolean top, boolean right, boolean bottom, boolean left){
     	if (top == false && right == false && bottom == false && left == false) {
