@@ -4,7 +4,7 @@ import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.logic.*;
 
-public class AI {
+public class AI implements IAI{
 	
 	/*
 	 * Mitte:	0
@@ -15,14 +15,15 @@ public class AI {
 	 */
 	
 	private int iq;
-	private final int scariness;
+	private final int scariness = 1;
+	private int scareLength;
 	private ILevel level;
 	private IMovement movementHandler;
 	private ICollision collisionHandler;
 	
-	public AI(int iq, int scariness, ILevel level, IMovement movementHandler, ICollision collisionHandler) {
+	public AI(int iq, int scareLength, ILevel level, IMovement movementHandler, ICollision collisionHandler) {
 		this.iq = iq;
-		this.scariness = scariness;
+		this.scareLength = scareLength;
 		this.level = level;
 		this.movementHandler = movementHandler;
 		this.collisionHandler = collisionHandler;
@@ -39,7 +40,27 @@ public class AI {
 			this.movementHandler.move(i, this.execNextStep(i));
 		}
 	}
-	
+
+	@Override
+	public int getIq() {
+		return this.iq;
+	}
+
+	@Override
+	public void setIq(int iq) {
+		this.iq = iq;
+	}
+
+	@Override
+	public int getScareLength() {
+		return this.scareLength;
+	}
+
+	@Override
+	public void setScareLength(int scareLength) {
+		this.scareLength = scareLength;
+	}
+
 	private int execNextStep(IEntity entity) {
 		if(((ISheep)entity).isScared()) {
 			int z = 16;	//z ist die unschärfe
@@ -51,24 +72,24 @@ public class AI {
 					if (y < z && y > -z) {
 						//rnd
 						int rnd = RandomGenerator.getRandomNumber(1, 4);
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							((ISheep) entity).getThoughts()[i] = rnd;
 						}
 					} else if (y < 0) {
 						//unten
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							((ISheep) entity).getThoughts()[i] = 3;
 						}
 					} else if (y > 0) {
 						//oben
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							((ISheep) entity).getThoughts()[i] = 1;
 						}
 					}
 				} else if (x < 0) {
 					if (y < z && y > -z) {
 						//rechts
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							((ISheep) entity).getThoughts()[i] = 2;
 						}
 					} else if (y < 0) {
@@ -76,7 +97,7 @@ public class AI {
 						int[] tmp = {2, 3};
 						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
 						}
@@ -85,7 +106,7 @@ public class AI {
 						int[] tmp = {1, 2};
 						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
 						}
@@ -93,7 +114,7 @@ public class AI {
 				} else if (x > 0) {
 					if (y < z && y > -z) {
 						//links
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							((ISheep) entity).getThoughts()[i] = 4;
 						}
 					} else if (y < 0) {
@@ -101,7 +122,7 @@ public class AI {
 						int[] tmp = {3, 4};
 						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
 						}
@@ -110,7 +131,7 @@ public class AI {
 						int[] tmp = {1, 4};
 						int a = tmp[RandomGenerator.getRandomNumber(0, 1)];
 						int b = tmp[RandomGenerator.getRandomNumber(0, 1)];
-						for (int i = 0; i < ((ISheep) entity).getThoughts().length / 16; i++) {
+						for (int i = 0; i < ((ISheep) entity).getThoughts().length / scareLength; i++) {
 							if (i % 2 == 0) ((ISheep) entity).getThoughts()[i] = a;
 							else ((ISheep) entity).getThoughts()[i] = b;
 						}
