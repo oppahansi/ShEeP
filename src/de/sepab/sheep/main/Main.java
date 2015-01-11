@@ -22,7 +22,6 @@ public class Main {
 
 		Menu menu = new Menu();
 		menu.setDataLoader(new DataLoader());
-		menu.getDataLoader().loadHighscore();
 		menu.setLevel(new Level());
 		menu.setTimer(new Timer());
 		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(), 1280, 960));
