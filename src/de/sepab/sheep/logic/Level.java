@@ -14,8 +14,6 @@ import de.sepab.sheep.handler.IInput;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javafx.geometry.Rectangle2D;
-
 public class Level implements ILevel, ActionListener{
 
 	private IEntitySpawner entitySpawner;
@@ -97,24 +95,10 @@ public class Level implements ILevel, ActionListener{
 	public void addPowerUp() {
         int posX = RandomGenerator.getRandomNumber(0, 1248);
         int posY = RandomGenerator.getRandomNumber(0, 928);
-        for (IEntity entity : dogList) {
-            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
-            	addPowerUp();
-                return;
-            }
-        }
-        for (IEntity entity : sheepList) {
-            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
-            	addPowerUp();
-                return;
-            }
-        }
-        for (IEntity entity : obstacleList) {
-            if(entity.getPosX() / 32 == posX / 32 && entity.getPosY() / 32 == posY / 32){
-            	addPowerUp();
-                return;
-            }
-        }
+        if (!collision.isoccupied(posX, posY)) {
+        	addPowerUp();
+            return;
+		}
         for (IEntity entity : cageList) {
             if(entity.getPosX() >= posX && posX >= ((ICage)entity).getPosX2() && entity.getPosY() >= posY  && posY >= ((ICage)entity).getPosY2()){
             	addPowerUp();
