@@ -258,12 +258,12 @@ public class Collision implements ICollision{
 			}
 			for(int i=0;i<Cages.size();i++)
 			{
-					if(Cages.get(i).getPosX() >= X[0] && X[1] >= ((ICage)Cages.get(i)).getPosX2() && Cages.get(i).getPosY() >= Y[0]  && Y[1] <= ((ICage)Cages.get(i)).getPosY2())
+					
+					if(Cages.get(i).getPosX()-32<x && ((ICage)Cages.get(i)).getPosX2()+32>x &&Cages.get(i).getPosY()-32<y && ((ICage)Cages.get(i)).getPosY2()+32>y)
 					{
 					return false;
 					}
 			}
-			
 			return true;
 		}
 		return false;
