@@ -1,4 +1,5 @@
 *.class
+*.sav
 *.classpath
 .classpath/
 *.project

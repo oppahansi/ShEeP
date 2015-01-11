@@ -265,12 +265,13 @@ public class Menu{
 		dataLoader.loadHighscore();
 		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
 		String[] onTimeName = dataLoader.getTimeNames(), onCountName = dataLoader.getCountNames();
-		HighscoreTextField_OTplayer1points.setText(onTime[0] + " Punkte");
+
+		HighscoreTextField_OTplayer1points.setText(onTime[2] + " Punkte");
 		HighscoreTextField_OTplayer2points.setText(onTime[1] + " Punkte");
-		HighscoreTextField_OTplayer3points.setText(onTime[2] + " Punkte");
-		HighscoreTextField_OTplayer1.setText(onTimeName[0]);
+		HighscoreTextField_OTplayer3points.setText(onTime[0] + " Punkte");
+		HighscoreTextField_OTplayer1.setText(onTimeName[2]);
 		HighscoreTextField_OTplayer2.setText(onTimeName[1]);
-		HighscoreTextField_OTplayer3.setText(onTimeName[2]);
+		HighscoreTextField_OTplayer3.setText(onTimeName[0]);
 		HighscoreTextField_ONplayer1points.setText(onCount[0] + " Punkte");
 		HighscoreTextField_ONplayer2points.setText(onCount[1] + " Punkte");
 		HighscoreTextField_ONplayer3points.setText(onCount[2] + " Punkte");
