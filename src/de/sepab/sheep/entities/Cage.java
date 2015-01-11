@@ -38,4 +38,13 @@ public class Cage  extends Entity implements ICage{
 		this.posY2 = posY2;
 	}
 
+	@Override
+	public int getType() {
+		return 0;
+	}
+
+	@Override
+	public boolean isChained() {
+		return false;
+	}
 }

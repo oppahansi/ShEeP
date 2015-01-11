@@ -29,7 +29,6 @@ public class Main {
 		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(), 1280, 960));
 		menu.setMovement(new Movement(menu.getCollision()));
 		menu.setInput(new Input(menu.getMovement(), menu.getLevel().getDogList()));
-		menu.setRandomGenerator(new RandomGenerator());
 		menu.setAi(new AI(100, 5, menu.getLevel(), menu.getMovement(), menu.getCollision()));
 		menu.run();
 			
