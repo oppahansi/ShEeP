@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
+import de.sepab.sheep.entities.Dog;
+import de.sepab.sheep.entities.Sheep;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IDataLoader;
 import de.sepab.sheep.handler.IInput;
@@ -170,6 +172,8 @@ public class Menu{
 	public   ITimer timer;
 	public  AI ai;
 	private Menu menu = this;
+	private Dog dog;
+	private Sheep sheep;
 	//Methode zum swtichen der screens
 	public  void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
@@ -208,6 +212,16 @@ public class Menu{
 		default:
 			this.gameModus = GameModus.ONTIME;
 			break;
+		}
+	}
+	
+	public void setDifficulty(String difficulty) {
+		switch (difficulty) {
+		case "Einfach":
+		case "Mittel":
+		case "Schwer":
+		default:
+				
 		}
 	}
 	
@@ -547,6 +561,7 @@ public class Menu{
 							if (singlePlayerTextField_NameField.getText().length() > 0) {
 							gameBoard_sheepcounter2.setVisible(false);
 							gameBoard_sheeps2.setVisible(false);
+							setDifficulty((String)singlePlayerComboBox_Difficulty.getSelectedItem());
 							setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
 							level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_NameField.getText(), getGameModus());
 							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
