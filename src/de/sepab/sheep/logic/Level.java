@@ -93,6 +93,7 @@ public class Level implements ILevel, ActionListener{
 
 	public void addPowerUp() {
 		powerUpList.add(entitySpawner.createPowerUp(300, 50));
+		powerUpList.add(entitySpawner.createPowerUp(350, 50));
 	}
 	
 	public void addObstacle(int x, int y, int sprite) {

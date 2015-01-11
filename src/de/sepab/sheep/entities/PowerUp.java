@@ -16,39 +16,38 @@ public class PowerUp extends Entity {
       return type;
    }
 
+   @Override
+   public boolean isChained() {
+      return false;
+   }
+
    public void event(IEntity entity) {
       switch (this.type) {
          case Constants.POWERUP_TYPE_SPEED:
             entity.setSpeed(10);
-            setVisible(false);
             break;
          case Constants.POWERUP_TYPE_SLOW:
             entity.setSpeed(2);
-            setVisible(false);
             break;
          case Constants.POWERUP_TYPE_DEAF:
             if (entity instanceof ISheep) {
                ((ISheep) entity).deafy(true);
-               setVisible(false);
             }
             break;
          case Constants.POWERUP_TYPE_BEAM:
-            if (entity instanceof ISheep) {
+            if (entity instanceof IDog) {
                entity.setPosX(150);
                entity.setPosY(300);
-               setVisible(false);
             }
             break;
          case Constants.POWERUP_TYPE_TIME:
             if (entity instanceof IDog) {
                // add time here
-               setVisible(false);
             }
             break;
          case Constants.POWERUP_TYPE_CONFUSION:
             if (entity instanceof IDog) {
                entity.confuse(true);
-               setVisible(false);
             }
             break;
       }
