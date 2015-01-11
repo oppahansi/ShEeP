@@ -29,12 +29,14 @@ public class PowerUp extends Entity{
 			case Constants.POWERUP_TYPE_DEAF:
 				if(entity instanceof ISheep) {
 					((ISheep) entity).deafy(true);
+               setVisible(false);
 				}
 				break;
 			case Constants.POWERUP_TYPE_BEAM:
 				if(entity instanceof ISheep) {
 					entity.setPosX(15);
 					entity.setPosY(15);
+               setVisible(false);
 				}
 				break;
 			case Constants.POWERUP_TYPE_TIME:
@@ -42,6 +44,12 @@ public class PowerUp extends Entity{
 					// add time here
 				}
 				break;
+         case Constants.POWERUP_TYPE_CONFUSION:
+            if(entity instanceof IDog) {
+               entity.confuse(true);
+               setVisible(false);
+            }
+            break;
 		}
 	}
 
