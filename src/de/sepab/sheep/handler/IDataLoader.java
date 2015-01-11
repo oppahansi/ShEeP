@@ -1,20 +1,19 @@
 package de.sepab.sheep.handler;
 
-
 public interface IDataLoader {
 
-    public void saveHighscore();
+   public void saveHighscore();
 
-    public void loadHighscore();
-    
-    public int[] getCountHighscores();
+   public void loadHighscore();
 
-    public int[] getTimeHighscores();
+   public int[] getCountHighscores();
 
-    public String[] getCountNames();
+   public int[] getTimeHighscores();
 
-    public String[] getTimeNames();
-    
-    public void addHighscore(String name, int newHighscore, int gameMod);
+   public String[] getCountNames();
+
+   public String[] getTimeNames();
+
+   public void addHighscore(String name, int newHighscore, int gameMod);
 
 }
