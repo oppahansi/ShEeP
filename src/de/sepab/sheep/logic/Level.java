@@ -40,7 +40,7 @@ public class Level implements ILevel, ActionListener{
 	private String name;
 	
 
-	int time = 100, count = 0;
+	int time = 10, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 

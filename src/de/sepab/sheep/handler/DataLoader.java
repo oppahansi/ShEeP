@@ -13,6 +13,7 @@ public class DataLoader implements IDataLoader {
 
    public DataLoader() {
       GAMEDATA = new GameData();
+      loadHighscore();
    }
 
    @Override
