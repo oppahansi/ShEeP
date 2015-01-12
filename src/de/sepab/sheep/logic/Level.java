@@ -99,12 +99,6 @@ public class Level implements ILevel, ActionListener{
         	addPowerUp();
             return;
 		}
-        for (IEntity entity : cageList) {
-            if(entity.getPosX() >= posX && posX >= ((ICage)entity).getPosX2() && entity.getPosY() >= posY  && posY >= ((ICage)entity).getPosY2()){
-            	addPowerUp();
-                return;
-            }
-        }
         powerUpList.add(entitySpawner.createPowerUp(posX, posY));
     }
 	
@@ -160,8 +154,9 @@ public class Level implements ILevel, ActionListener{
 													 this.cageList.getFirst().getPosY(),
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
-		float i = timer.getTime();
-		if ((i/5 - (timer.getTime()/5) == 0)) {
+
+
+		if ((timer.getTime()%5) == 0) {
 			if (spwaned == false) {
 				this.addPowerUp();
 				spwaned = true;
@@ -178,6 +173,7 @@ public class Level implements ILevel, ActionListener{
 				swingTimer.stop();
 				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER);
 				menu.getDataLoader().saveHighscore();
+				menu.getJukeBox().stop();
 				menu.setCurrentLabel(menu.panellHighscore);
 			}
 			break;

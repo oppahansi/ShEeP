@@ -284,8 +284,6 @@ public class Menu{
 	public void run() {
 		
 		
-		
-		
 		{// ComboBox config
 			ComboBoxRenderer singlePlayerMapRenderer = new ComboBoxRenderer(singlePlayerSelection_Map, singlePlayerSelection_MapIcon);
 			singlePlayerComboBox_Map.setRenderer(singlePlayerMapRenderer);
@@ -918,6 +916,15 @@ public class Menu{
 
 	public void setSheep(Sheep sheep) {
 		this.sheep = sheep;
+	}
+
+	public IJukeBox getJukeBox() {
+		return jukeBox;
+	}
+
+
+	public void setJukeBox(IJukeBox jukeBox) {
+		this.jukeBox = jukeBox;
 	}
 
 	@SuppressWarnings({ "serial", "rawtypes" })
