@@ -161,7 +161,7 @@ public class Level implements ILevel, ActionListener{
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
 		float i = timer.getTime();
-		if ((i%5 - (timer.getTime()%5) == 0)) {
+		if ((i/5 - (timer.getTime()/5) == 0)) {
 			if (spwaned == false) {
 				this.addPowerUp();
 				spwaned = true;

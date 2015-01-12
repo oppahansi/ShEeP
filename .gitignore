@@ -1,3 +1,4 @@
+*Hintergrund.png
 *.class
 *.sav
 *.classpath
@@ -9,4 +10,3 @@
 /bin
 /out
 *out/
-Hintergrund.png
