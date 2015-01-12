@@ -23,10 +23,12 @@ public class Input implements KeyListener, IInput {
     private LinkedList<IEntity> dogList;
     private int key;
     private boolean dog1[] = new boolean[6], dog2[] = new boolean[6];
+	private IJukeBox jukeBox;
     
     public Input(IMovement movement, LinkedList<IEntity> dogList) {
     	this.movement = movement;
     	this.dogList = dogList;
+		 jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/bark.wav");
     }
     
     public void makeTurn(){
@@ -121,6 +123,7 @@ public class Input implements KeyListener, IInput {
     	break;
     	case (KeyEvent.VK_B):
     		dog1[5] = true;
+			jukeBox.play();
     	break;
     	case (KeyEvent.VK_W):
     		if (this.dogList.size()>1) {
