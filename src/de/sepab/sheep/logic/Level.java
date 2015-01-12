@@ -154,19 +154,18 @@ public class Level implements ILevel, ActionListener{
 													 this.cageList.getFirst().getPosY(),
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
-//		float i = timer.getTime();	
-//		if ((i/2- (timer.getTime()/2) == 0)) {
-//			if (spwaned == false) {
-//				this.addPowerUp();
-//				spwaned = true;
-//			}else{
-//				spwaned = true;
-//			}	
-//		}else{
-//			spwaned = false;
-//		}
-//		
-		addPowerUp();
+
+		if ((timer.getTime()%5) == 0) {
+			if (spwaned == false) {
+				this.addPowerUp();
+				spwaned = true;
+			}else{
+				spwaned = true;
+			}
+		}else{
+			spwaned = false;
+		}
+		
 		switch (gameModus) {
 		case ONTIME:
 			if ((timer.getTime() - time) >= 0) {

@@ -6,11 +6,14 @@ import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.ICage;
 import de.sepab.sheep.handler.Constants;
+import de.sepab.sheep.handler.IJukeBox;
+import de.sepab.sheep.handler.JukeBox;
 
 public class Collision implements ICollision{
 
 	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
 	private int lenght,hight;
+	private IJukeBox jukeBox;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y) {
 		//Listen erstellen
@@ -21,6 +24,7 @@ public class Collision implements ICollision{
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
 		Cages=CageList;
+		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -187,6 +191,7 @@ public class Collision implements ICollision{
 								}
 							}
 							Powers.remove(i);
+							jukeBox.play();
 						}
 						else if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof IDog){
 							System.out.println("TDog -> PowerUp");
@@ -194,10 +199,12 @@ public class Collision implements ICollision{
 							Sheeps.get(sheepPosInList).setPosX(150);
 							Sheeps.get(sheepPosInList).setPosY(300);
 							Powers.remove(i);
+							jukeBox.play();
 						}
 						else {
 							Powers.get(i).event(entity);
 							Powers.remove(i);
+							jukeBox.play();
 						}
 						return true;
 						//MAGICLE AUFRUF DES POWERUP KILLERS Magic(entity,Powers.get(i){oder einfach nur i als index des zu verarbeitenden power ups})
@@ -258,12 +265,12 @@ public class Collision implements ICollision{
 			}
 			for(int i=0;i<Cages.size();i++)
 			{
-					if(Cages.get(i).getPosX() >= X[0] && X[1] >= ((ICage)Cages.get(i)).getPosX2() && Cages.get(i).getPosY() >= Y[0]  && Y[1] <= ((ICage)Cages.get(i)).getPosY2())
+					
+					if(Cages.get(i).getPosX()-32<x && ((ICage)Cages.get(i)).getPosX2()+32>x &&Cages.get(i).getPosY()-32<y && ((ICage)Cages.get(i)).getPosY2()+32>y)
 					{
 					return false;
 					}
 			}
-			
 			return true;
 		}
 		return false;
