@@ -55,4 +55,9 @@ public class JukeBox implements IJukeBox {
       stop();
       clip.close();
    }
+
+   @Override
+   public boolean isRunning() {
+      return clip.isRunning();
+   }
 }

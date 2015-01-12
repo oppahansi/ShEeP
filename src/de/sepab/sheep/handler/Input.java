@@ -123,7 +123,9 @@ public class Input implements KeyListener, IInput {
     	break;
     	case (KeyEvent.VK_B):
     		dog1[5] = true;
-			jukeBox.play();
+			if(!jukeBox.isRunning()) {
+				jukeBox.play();
+			}
     	break;
     	case (KeyEvent.VK_W):
     		if (this.dogList.size()>1) {
@@ -148,6 +150,9 @@ public class Input implements KeyListener, IInput {
     	case (KeyEvent.VK_ENTER):
     		if (this.dogList.size()>1) {
     			dog2[5] = true;
+				if(!jukeBox.isRunning()) {
+					jukeBox.play();
+				}
 			}
     	break;
     	}

@@ -7,4 +7,6 @@ public interface IJukeBox {
    public void stop();
 
    public void close();
+
+   public boolean isRunning();
 }
