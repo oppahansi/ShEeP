@@ -155,6 +155,7 @@ public class Level implements ILevel, ActionListener{
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
 
+
 		if ((timer.getTime()%5) == 0) {
 			if (spwaned == false) {
 				this.addPowerUp();
@@ -172,6 +173,7 @@ public class Level implements ILevel, ActionListener{
 				swingTimer.stop();
 				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER);
 				menu.getDataLoader().saveHighscore();
+				menu.getJukeBox().stop();
 				menu.setCurrentLabel(menu.panellHighscore);
 			}
 			break;

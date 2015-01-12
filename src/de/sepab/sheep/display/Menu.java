@@ -26,7 +26,8 @@ import de.sepab.sheep.entities.Sheep;
 import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IDataLoader;
 import de.sepab.sheep.handler.IInput;
-import de.sepab.sheep.handler.Input;
+import de.sepab.sheep.handler.IJukeBox;
+import de.sepab.sheep.handler.JukeBox;
 import de.sepab.sheep.logic.ICollision;
 import de.sepab.sheep.logic.ILevel;
 import de.sepab.sheep.logic.IMovement;
@@ -38,9 +39,9 @@ import de.sepab.sheep.logic.Level.GameModus;
 
 
 public class Menu{
-	
-	
-	
+
+	private IJukeBox jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/background.wav");
+
 	private  JFrame jFrame = new JFrame ("ShEeP version pre-pre-alpha 0.0.1"); // das Fenster
 	// alle menue screens
 	public  JPanel panelMainMenu = new JPanel(), 
@@ -172,6 +173,7 @@ public class Menu{
 	private Menu menu = this;
 	private Dog dog = new Dog(0, 0, 1, 1, null, 1);
 	private Sheep sheep = new Sheep(0, 0, 1, 1, 1);
+
 	//Methode zum swtichen der screens
 	public  void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
@@ -192,7 +194,6 @@ public class Menu{
 
 	public Menu(IDataLoader idl) {
 		this.dataLoader = idl;
-		
 	}
 	
 	public Menu(){
@@ -592,7 +593,6 @@ public class Menu{
 					singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 						public void actionPerformed(ActionEvent arg0) {
-							if (singlePlayerTextField_NameField.getText().length() > 0) {
 							gameBoard_sheepcounter2.setVisible(false);
 							gameBoard_sheeps2.setVisible(false);
 							setDifficulty((String)singlePlayerComboBox_Difficulty.getSelectedItem());
@@ -605,7 +605,7 @@ public class Menu{
 							level.TimerStart();
 							gameBoard.requestFocus();
 							jFrame.setSize(width, height + 20);
-						}
+							jukeBox.play();
 						}
 					});
 					singlePlayerButton_Back.addActionListener(new ActionListener() {
@@ -632,6 +632,7 @@ public class Menu{
 						level.TimerStart();
 						gameBoard.requestFocus();
 						jFrame.setSize(width, height + 20);
+						jukeBox.play();
 					}
 				});
 				multiPlayerButton_Back.addActionListener(new ActionListener() {
@@ -769,9 +770,9 @@ public class Menu{
 		}
 		
 		{//Label einstellen
-			panelMainMenu.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
-			panelSinglePlayer.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
-			panelMultiPlayer.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
+			panelMainMenu.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
+			panelSinglePlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
+			panelMultiPlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
 			panelOptions.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panellHighscore.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panelHelp.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
@@ -915,6 +916,15 @@ public class Menu{
 
 	public void setSheep(Sheep sheep) {
 		this.sheep = sheep;
+	}
+
+	public IJukeBox getJukeBox() {
+		return jukeBox;
+	}
+
+
+	public void setJukeBox(IJukeBox jukeBox) {
+		this.jukeBox = jukeBox;
 	}
 
 	@SuppressWarnings({ "serial", "rawtypes" })
