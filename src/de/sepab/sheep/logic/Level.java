@@ -43,7 +43,7 @@ public class Level implements ILevel, ActionListener{
 	int time = 100, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
-
+	boolean spwaned = false;
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus) {
 		this.ai = ai;
 		this.gameBoard = gameBoard;
@@ -93,8 +93,20 @@ public class Level implements ILevel, ActionListener{
 
 
 	public void addPowerUp() {
-		powerUpList.add(entitySpawner.createPowerUp(300, 50));
-	}
+        int posX = RandomGenerator.getRandomNumber(0, 1248);
+        int posY = RandomGenerator.getRandomNumber(0, 928);
+        if (!collision.isoccupied(posX, posY)) {
+        	addPowerUp();
+            return;
+		}
+        for (IEntity entity : cageList) {
+            if(entity.getPosX() >= posX && posX >= ((ICage)entity).getPosX2() && entity.getPosY() >= posY  && posY >= ((ICage)entity).getPosY2()){
+            	addPowerUp();
+                return;
+            }
+        }
+        powerUpList.add(entitySpawner.createPowerUp(posX, posY));
+    }
 	
 	public void addObstacle(int x, int y, int sprite) {
 		obstacleList.add(new Obstacle(x, y, sprite));
@@ -148,6 +160,19 @@ public class Level implements ILevel, ActionListener{
 													 this.cageList.getFirst().getPosY(),
 													 ((ICage) this.cageList.getFirst()).getPosX2(),
 													 ((ICage)this.cageList.getFirst()).getPosY2()));
+//		float i = timer.getTime();	
+//		if ((i/2- (timer.getTime()/2) == 0)) {
+//			if (spwaned == false) {
+//				this.addPowerUp();
+//				spwaned = true;
+//			}else{
+//				spwaned = true;
+//			}	
+//		}else{
+//			spwaned = false;
+//		}
+		this.addPowerUp();
+		
 		switch (gameModus) {
 		case ONTIME:
 			if ((timer.getTime() - time) >= 0) {

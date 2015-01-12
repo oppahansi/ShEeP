@@ -4,15 +4,15 @@ import java.util.LinkedList;
 import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
-import de.sepab.sheep.entities.PowerUp;
+import de.sepab.sheep.entities.ICage;
 import de.sepab.sheep.handler.Constants;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
 	private int lenght,hight;
 
-	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,int x,int y) {
+	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y) {
 		//Listen erstellen
 		lenght=x;
 		hight=y;
@@ -20,6 +20,7 @@ public class Collision implements ICollision{
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
+		Cages=CageList;
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -253,6 +254,14 @@ public class Collision implements ICollision{
 					{
 						//COLLISION
 						return false;
+					}
+			}
+			for(int i=0;i<Cages.size();i++)
+			{
+					
+					if(Cages.get(i).getPosX()-32<x && ((ICage)Cages.get(i)).getPosX2()+32>x &&Cages.get(i).getPosY()-32<y && ((ICage)Cages.get(i)).getPosY2()+32>y)
+					{
+					return false;
 					}
 			}
 			return true;
