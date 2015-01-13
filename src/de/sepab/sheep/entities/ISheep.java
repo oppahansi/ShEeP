@@ -5,6 +5,7 @@ public interface ISheep {
 	public boolean isScared();
 	public void scare(boolean state, int x, int y);
 	public void unscare();
+	public void setAddSpeed(int addSpeed);
 	public boolean isDeaf();
 	public void deafy(boolean state);
 	public void checkPowerUpLife();

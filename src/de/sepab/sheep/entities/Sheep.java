@@ -8,13 +8,16 @@ public class Sheep extends Entity implements ISheep {
 	private boolean deaf = false;
 	private boolean chained = false;
 	private int scareSpeed;
+	private int addSpeed = 0;
+	private int speed;
+
 
 	public Sheep (int posX, int posY, int speed, int powerUpLife, int scareSpeed) {
 		super(posX, posY, speed, powerUpLife);
-		this.setSpeed(1);
 		this.spritePeriod = 6;
 		this.setSpriteQuarters();
 		this.scareSpeed = scareSpeed;
+		this.speed = speed;
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class Sheep extends Entity implements ISheep {
 			this.scared = state;
 			this.x = x;
 			this.y = y;
-			super.setSpeed(super.getSpeed() + this.scareSpeed);
+			super.setSpeed(this.scareSpeed);
 		}
 	}
 
@@ -46,10 +49,19 @@ public class Sheep extends Entity implements ISheep {
 			this.scared = false;
 			this.x = -1;
 			this.y = -1;
-			super.setSpeed(super.getSpeed() - this.scareSpeed);
+			super.setSpeed(this.speed);
 		}
 	}
 
+	@Override
+	public void setAddSpeed(int addSpeed) {
+		this.addSpeed = addSpeed;
+	}
+
+	@Override
+	public int getSpeed() {
+		return (super.getSpeed() + this.addSpeed);
+	}
 
 	@Override
 	public boolean isDeaf() {
@@ -67,6 +79,7 @@ public class Sheep extends Entity implements ISheep {
 			this.resetSpeed();
 			this.confuse(false);
 			this.deafy(false);
+			this.addSpeed = 0;
 		}
 	}
 
