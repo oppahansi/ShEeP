@@ -195,7 +195,9 @@ public class Collision implements ICollision{
 						}
 						else if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof IDog){
 							System.out.println("TDog -> PowerUp");
+							//BUG!!!! WENN NUr eiN SCHAF DANN FUCKED UP WEIl die grenzen jeglicher logikfern sind
 							int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
+							//
 							Sheeps.get(sheepPosInList).setPosX(150);
 							Sheeps.get(sheepPosInList).setPosY(300);
 							Powers.remove(i);

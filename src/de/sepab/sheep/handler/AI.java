@@ -20,7 +20,8 @@ public class AI implements IAI{
 	private ILevel level;
 	private IMovement movementHandler;
 	private ICollision collisionHandler;
-	
+
+
 	public AI(int iq, int scareLength, ILevel level, IMovement movementHandler, ICollision collisionHandler) {
 		this.iq = iq;
 		this.scareLength = scareLength;
@@ -171,20 +172,22 @@ public class AI implements IAI{
 	}
 
 	private void calcChainedSteps(ISheep sheep) {
-//		int tmp = 0;
-//		if(this.randomGenerator.getPercentDistribution(iq, 7)) {
-//			if(((IEntity)sheep).getPosX() <= 640) {
-//				tmp = 2;
-//			}
-//			else {
-//				tmp = 4;
-//			}
-//		}
-//		sheep.getThoughts()[0] = tmp;
-		sheep.getThoughts()[0] = 0;
+		int tmp = 0;
+		if(RandomGenerator.getPercentDistribution(5, 7)) {
+			if(((IEntity)sheep).getPosX() <= 640) {
+				tmp = 2;
+			}
+			else {
+				tmp = 4;
+			}
+		}
+		for(int i=0; i<16; i++) {
+			sheep.getThoughts()[i] = tmp;
+		}
 	}
 
 	private void checkNextStep(IEntity entity) {
+		int unschearfe = 64;
 		int[] possibleNextSteps = {0};
 		boolean collides = false;
 		switch(((ISheep)entity).getThoughts()[0]){
@@ -193,6 +196,11 @@ public class AI implements IAI{
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX(),entity.getPosY()-entity.getSpeed())))
 				{
 					possibleNextSteps = new int[]{2, 3, 4};
+					collides = true;
+					((ISheep)entity).unscare();
+				}
+				if(entity.getPosY() <= unschearfe) {
+					possibleNextSteps = new int[]{3, 3, 3, 3, 3, 2, 4};
 					collides = true;
 					((ISheep)entity).unscare();
 				}
@@ -205,12 +213,22 @@ public class AI implements IAI{
 					collides = true;
 					((ISheep)entity).unscare();
 				}
+				if(entity.getPosX() >= 1240-unschearfe) {
+					possibleNextSteps = new int[]{4, 4, 4, 4, 4, 1, 3};
+					collides = true;
+					((ISheep)entity).unscare();
+				}
 				break;
 			case(3):
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX(),entity.getPosY()+entity.getSpeed())))
 				{
-					possibleNextSteps = new int[]{1, 2, 4};;
+					possibleNextSteps = new int[]{1, 2, 4};
+					collides = true;
+					((ISheep)entity).unscare();
+				}
+				if(entity.getPosY() >= 960-unschearfe) {
+					possibleNextSteps = new int[]{1, 1, 1, 1, 1, 2, 4};
 					collides = true;
 					((ISheep)entity).unscare();
 				}
@@ -223,11 +241,16 @@ public class AI implements IAI{
 					collides = true;
 					((ISheep)entity).unscare();
 				}
+				if(entity.getPosX() <= unschearfe) {
+					possibleNextSteps = new int[]{2, 2, 2, 2, 2, 1, 3};
+					collides = true;
+					((ISheep)entity).unscare();
+				}
 				break;
 		}
 		if(collides) {
-			int tmp = RandomGenerator.getRandomNumber(0, 2);
-			for (int i = 0; i < 16; i++) {
+			int tmp = RandomGenerator.getRandomNumber(0, possibleNextSteps.length-1);
+			for (int i = 0; i < ((ISheep)entity).getThoughts().length; i++) {
 				((ISheep) entity).getThoughts()[i] = possibleNextSteps[tmp];
 			}
 		}
