@@ -17,13 +17,13 @@ public class Collision implements ICollision{
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y) {
 		//Listen erstellen
-		lenght=x;
-		hight=y;
+		lenght = x;
+		hight = y;
 		Dogs = DogList;
 		Sheeps = SheepList;
 		Powers = PowerUpList;
 		Obstacles = ObstacleList;
-		Cages=CageList;
+		Cages = CageList;
 		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
 	}
 
