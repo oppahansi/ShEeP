@@ -7,5 +7,6 @@ public interface ICollision {
 	public boolean calcCollision(IEntity entitiy, int posX, int posY);
 	public boolean isoccupied(int x,int y);
 	public int Count(int Ax, int Ay,int Bx,int By);
+	public int Count(int Ax, int Ay,int Bx,int By,int Cx, int Cy,int Dx,int Dy);
 
 }
