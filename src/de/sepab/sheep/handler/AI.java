@@ -173,7 +173,7 @@ public class AI implements IAI{
 
 	private void calcChainedSteps(ISheep sheep) {
 		int tmp = 0;
-		if(RandomGenerator.getPercentDistribution(5, 7)) {
+		if(RandomGenerator.getPercentDistribution(iq, 7)) {
 			if(((IEntity)sheep).getPosX() <= 640) {
 				tmp = 2;
 			}
