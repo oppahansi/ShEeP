@@ -108,7 +108,7 @@ public class GameBoard extends JPanel{
 	
 	
 	private int textureLength = 32; //tl = texture length
-	private int x = 40, y=30;
+	private int x = 30, y=20;
 	private int[][] cages = new int[this.x][this.y];
 //	private int background[][][] = new int[x][y][2];
 	
@@ -135,7 +135,7 @@ public class GameBoard extends JPanel{
     	addKeyListener((Input)input);
     	this.setFocusable(true);
     	setLayout(null);
-    	this.setPreferredSize(new Dimension(1280, 200));
+    	this.setPreferredSize(new Dimension(x*32, y*32));
     	this.level = level;
     	this.menu = menu;
     }
@@ -143,7 +143,7 @@ public class GameBoard extends JPanel{
     public void shuffle() {
     	try{
     		
-    	imageBackground = new BufferedImage(1280, 960, BufferedImage.TYPE_INT_RGB);
+    	imageBackground = new BufferedImage(x*32, y*32, BufferedImage.TYPE_INT_RGB);
     	Graphics g = imageBackground.getGraphics();
     	for (int x = 0; x < this.x; x++) {
 			for (int y = 0; y < this.y; y++) {
@@ -187,7 +187,7 @@ public class GameBoard extends JPanel{
 			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
 			break;
 		}
-    	cages = new int[this.y][this.x];
+    	cages = new int[this.x][this.y];
     	for (int y = 0; y < this.x; y++) {
 			for (int x = 0; x < this.y; x++) {
 				 int rgb = IMAGEMAP.getRGB(y, x);
@@ -218,27 +218,43 @@ public class GameBoard extends JPanel{
 					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
 					if (x - 1 >= 0) {
 						top = checkForColor(y, x - 1, OBSTACLECOLOR, 1);
+					} else {
+						top = true;
 					}
 					if (y + 1 < this.x && x - 1 >= 0) {
 						topRight = checkForColor(y + 1, x - 1, OBSTACLECOLOR, 1);
+					} else {
+						topRight = true;
 					}
 					if (y + 1 < this.x) {
 						right = checkForColor(y + 1, x, OBSTACLECOLOR, 1);
+					} else {
+						right = true;
 					}
-					if (y + 1 < this.x && x + 1 <= this.y) {
+					if (y + 1 < this.x && x + 1 < this.y) {
 						bottomRight = checkForColor(y + 1, x + 1, OBSTACLECOLOR, 1);
+					} else {
+						bottomRight = true;
 					}
 					if (x + 1 < this.y) {
 						bottom = checkForColor(y, x + 1, OBSTACLECOLOR, 1);
+					} else {
+						bottom = true;
 					}
 					if (y - 1 >= 0 && x + 1 < this.y) {
 						bottomLeft = checkForColor(y - 1, x + 1, OBSTACLECOLOR, 1);
+					} else {
+						bottomLeft = true;
 					}
 					if (y - 1 >= 0) {
 						left = checkForColor(y - 1, x, OBSTACLECOLOR, 1);
+					} else {
+						left = true;
 					}
 					if (y - 1 >= 0 && x - 1 >= 0) {
 						topLeft = checkForColor(y - 1, x - 1, OBSTACLECOLOR, 1);
+					} else {
+						topLeft = true;
 					}
 					addObstaclesWheat(y, x, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }
@@ -246,27 +262,43 @@ public class GameBoard extends JPanel{
 					 boolean top = false, topRight = false, right = false, bottomRight = false, bottom = false, bottomLeft = false, left = false, topLeft = false;
 					if (x - 1 >= 0) {
 						top = checkForColor(y, x - 1, OBSTACLECOLOR, 2);
+					} else {
+						top = true;
 					}
 					if (y + 1 < this.x && x - 1 >= 0) {
 						topRight = checkForColor(y + 1, x - 1, OBSTACLECOLOR, 2);
+					} else {
+						topRight = true;
 					}
 					if (y + 1 < this.x) {
 						right = checkForColor(y + 1, x, OBSTACLECOLOR, 2);
+					} else {
+						right = true;
 					}
 					if (y + 1 < this.x && x + 1 < this.y) {
 						bottomRight = checkForColor(y + 1, x + 1, OBSTACLECOLOR, 2);
+					} else {
+						bottomRight = true;
 					}
 					if (x + 1 < this.y) {
 						bottom = checkForColor(y, x + 1, OBSTACLECOLOR, 2);
+					} else {
+						bottom = true;
 					}
 					if (y - 1 >= 0 && x + 1 < this.y) {
 						bottomLeft = checkForColor(y - 1, x + 1, OBSTACLECOLOR, 2);
+					} else {
+						bottomLeft = true;
 					}
 					if (y - 1 >= 0) {
 						left = checkForColor(y - 1, x, OBSTACLECOLOR, 2);
+					} else {
+						left = true;
 					}
 					if (y - 1 >= 0 && x - 1 >= 0) {
 						topLeft = checkForColor(y - 1, x - 1, OBSTACLECOLOR, 2);
+					} else {
+						topLeft = true;
 					}
 					addObstaclesWater(y, x, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
 				 }

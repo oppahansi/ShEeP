@@ -24,15 +24,10 @@ public class PowerUp extends Entity {
    public void event(IEntity entity) {
       switch (this.type) {
          case Constants.POWERUP_TYPE_SPEED:
-            if(entity instanceof ISheep) {
-               ((ISheep)entity).setAddSpeed(10);
-            }
-            else {
-               entity.setSpeed(10);
-            }
+            entity.setSpeed(entity.getSpeed()*2);
             break;
          case Constants.POWERUP_TYPE_SLOW:
-            entity.setSpeed(2);
+            entity.setSpeed(entity.getSpeed()/2);
             break;
          case Constants.POWERUP_TYPE_DEAF:
             if (entity instanceof ISheep) {

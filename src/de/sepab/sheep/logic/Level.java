@@ -93,8 +93,8 @@ public class Level implements ILevel, ActionListener{
 
 
 	public void addPowerUp() {
-        int posX = RandomGenerator.getRandomNumber(0, 1248);
-        int posY = RandomGenerator.getRandomNumber(0, 928);
+        int posX = RandomGenerator.getRandomNumber(0, menu.getWidth() - 32);
+        int posY = RandomGenerator.getRandomNumber(0, menu.getHeight() - 32);
         if (!collision.isoccupied(posX, posY)) {
         	addPowerUp();
             return;
@@ -150,10 +150,7 @@ public class Level implements ILevel, ActionListener{
 		//System.out.print("test");
 		timer.start();
 		//System.out.print(timer.getTime() + "");
-		menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
-													 this.cageList.getFirst().getPosY(),
-													 ((ICage) this.cageList.getFirst()).getPosX2(),
-													 ((ICage)this.cageList.getFirst()).getPosY2()));
+		
 
 
 		if ((timer.getTime()%5) == 0) {
@@ -169,21 +166,49 @@ public class Level implements ILevel, ActionListener{
 		
 		switch (gameModus) {
 		case ONTIME:
+			menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
+					 this.cageList.getFirst().getPosY(),
+					 ((ICage) this.cageList.getFirst()).getPosX2(),
+					 ((ICage)this.cageList.getFirst()).getPosY2()));
 			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
 				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER);
 				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
-				menu.setCurrentLabel(menu.panellHighscore);
+				menu.setCurrentLabel(menu.panelHighscore);
 			}
 			break;
 		case ONCOUNT:
+			int count = this.collision.Count(this.cageList.getFirst().getPosX(),
+					 this.cageList.getFirst().getPosY(),
+					 ((ICage) this.cageList.getFirst()).getPosX2(),
+					 ((ICage)this.cageList.getFirst()).getPosY2());
+			menu.setGameBoardSheep1(count);
+			if (count >= sheepList.size()) {
+				swingTimer.stop();
+				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.MPLAYER);
+				menu.getDataLoader().saveHighscore();
+				menu.getJukeBox().stop();
+				menu.setCurrentLabel(menu.panelHighscore);
+			}
 			break;
 		case MULTIPLAYER:
-			menu.setGameBoardSheep2(this.collision.Count(this.cageList.getLast().getPosX(),
-														 this.cageList.getLast().getPosY(),
-														 ((ICage) this.cageList.getLast()).getPosX2(),
-														 ((ICage)this.cageList.getLast()).getPosY2()));
+			int sheepCount = this.collision.Count(this.cageList.getFirst().getPosX(),
+					 this.cageList.getFirst().getPosY(),
+					 ((ICage) this.cageList.getFirst()).getPosX2(),
+					 ((ICage)this.cageList.getFirst()).getPosY2(),
+					 this.cageList.getLast().getPosX(),
+					 this.cageList.getLast().getPosY(),
+					 ((ICage) this.cageList.getLast()).getPosX2(),
+					 ((ICage)this.cageList.getLast()).getPosY2());
+					 menu.setGameBoardSheep1(sheepCount/1000);
+					 menu.setGameBoardSheep2(sheepCount%1000);
+			if ((sheepCount/1000 + sheepCount%1000) >= sheepList.size()) {
+				swingTimer.stop();
+				menu.getDataLoader().saveHighscore();
+				menu.getJukeBox().stop();
+				menu.setCurrentLabel(menu.panelMainMenu);
+			}
 			break;
 
 		default:
