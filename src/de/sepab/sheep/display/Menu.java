@@ -47,7 +47,7 @@ public class Menu{
 	public  JPanel panelMainMenu = new JPanel(), 
 						 panelSinglePlayer = new JPanel(), 
 						 panelMultiPlayer = new JPanel(), 
-						 panellHighscore = new JPanel(), 
+						 panelHighscore = new JPanel(), 
 						 panelOptions = new JPanel(),
 						 panelHelp = new JPanel();
 	
@@ -156,8 +156,8 @@ public class Menu{
 							
 		
 	
-	public  final int width = 1280,
-							height = 960	;
+	public  final int width = 960,
+							height = 640;
 	
 	public  ILevel level;
 	private  IDataLoader dataLoader;
@@ -178,14 +178,14 @@ public class Menu{
 	public  void setCurrentLabel(JPanel panel) {
 		panelMainMenu.setVisible(false);
 		panelHelp.setVisible(false);
-		panellHighscore.setVisible(false);
+		panelHighscore.setVisible(false);
 		panelMultiPlayer.setVisible(false);
 		panelOptions.setVisible(false);
 		panelSinglePlayer.setVisible(false);
 		if (gameBoard != null) {
 			gameBoard.setVisible(false);
 		}
-		if (panel == this.panellHighscore) {
+		if (panel == this.panelHighscore) {
 			setHighscore();
 		}
 		panel.setVisible(true);
@@ -223,8 +223,8 @@ public class Menu{
 			ai.setIq(1);
 			ai.setScareLength(1);
 			dog.setBarkLength(150);
-			dog.setSpeed(4);
-			dog.setPowerUpLife(5);
+			dog.setSpeed(8);
+			dog.setPowerUpLife(1);
 			sheep.setPowerUpLife(1);
 			sheep.setScareSpeed(4);
 			sheep.setSpeed(1);
@@ -233,8 +233,8 @@ public class Menu{
 			ai.setIq(2);
 			ai.setScareLength(2);
 			dog.setBarkLength(100);
-			dog.setSpeed(2);
-			dog.setPowerUpLife(3);
+			dog.setSpeed(4);
+			dog.setPowerUpLife(2);
 			sheep.setPowerUpLife(3);
 			sheep.setScareSpeed(2);
 			sheep.setSpeed(1);
@@ -244,7 +244,7 @@ public class Menu{
 			ai.setScareLength(4);
 			dog.setBarkLength(50);
 			dog.setSpeed(2);
-			dog.setPowerUpLife(3);
+			dog.setPowerUpLife(2);
 			sheep.setPowerUpLife(5);
 			sheep.setScareSpeed(2);
 			sheep.setSpeed(2);
@@ -311,7 +311,7 @@ public class Menu{
 			panelSinglePlayer.setLayout(null);
 			panelMultiPlayer.setLayout(null);
 			panelOptions.setLayout(null);
-			panellHighscore.setLayout(null);
+			panelHighscore.setLayout(null);
 			panelHelp.setLayout(null);
 		}
 		
@@ -572,7 +572,7 @@ public class Menu{
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setHighscore();
-						setCurrentLabel(panellHighscore);
+						setCurrentLabel(panelHighscore);
 					}
 				});
 				mainMenuButton_Help.addActionListener(new ActionListener() {
@@ -732,23 +732,23 @@ public class Menu{
 			}
 			
 			{//hs
-				panellHighscore.add(highscoreButton_Back);
+				panelHighscore.add(highscoreButton_Back);
 				
-				panellHighscore.add(HighscoreTextField_Highscore);
-				panellHighscore.add(HighscoreTextField_OnTime);
-				panellHighscore.add(HighscoreTextField_OnNumber);
-				panellHighscore.add(HighscoreTextField_OTplayer1);
-				panellHighscore.add(HighscoreTextField_OTplayer2);
-				panellHighscore.add(HighscoreTextField_OTplayer3);
-				panellHighscore.add(HighscoreTextField_OTplayer1points);
-				panellHighscore.add(HighscoreTextField_OTplayer2points);
-				panellHighscore.add(HighscoreTextField_OTplayer3points);
-				panellHighscore.add(HighscoreTextField_ONplayer1);
-				panellHighscore.add(HighscoreTextField_ONplayer2);
-				panellHighscore.add(HighscoreTextField_ONplayer3);
-				panellHighscore.add(HighscoreTextField_ONplayer1points);
-				panellHighscore.add(HighscoreTextField_ONplayer2points);
-				panellHighscore.add(HighscoreTextField_ONplayer3points);
+				panelHighscore.add(HighscoreTextField_Highscore);
+				panelHighscore.add(HighscoreTextField_OnTime);
+				panelHighscore.add(HighscoreTextField_OnNumber);
+				panelHighscore.add(HighscoreTextField_OTplayer1);
+				panelHighscore.add(HighscoreTextField_OTplayer2);
+				panelHighscore.add(HighscoreTextField_OTplayer3);
+				panelHighscore.add(HighscoreTextField_OTplayer1points);
+				panelHighscore.add(HighscoreTextField_OTplayer2points);
+				panelHighscore.add(HighscoreTextField_OTplayer3points);
+				panelHighscore.add(HighscoreTextField_ONplayer1);
+				panelHighscore.add(HighscoreTextField_ONplayer2);
+				panelHighscore.add(HighscoreTextField_ONplayer3);
+				panelHighscore.add(HighscoreTextField_ONplayer1points);
+				panelHighscore.add(HighscoreTextField_ONplayer2points);
+				panelHighscore.add(HighscoreTextField_ONplayer3points);
 				
 			}
 			
@@ -774,7 +774,7 @@ public class Menu{
 			panelSinglePlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
 			panelMultiPlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
 			panelOptions.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
-			panellHighscore.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
+			panelHighscore.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panelHelp.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			
 //			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
@@ -785,7 +785,7 @@ public class Menu{
 			jFrame.add(panelSinglePlayer);
 			jFrame.add(panelMultiPlayer);
 			jFrame.add(panelOptions);
-			jFrame.add(panellHighscore);
+			jFrame.add(panelHighscore);
 			jFrame.add(panelHelp);
 			jFrame.add(gameBoard);
 //			jf.add(gb);
