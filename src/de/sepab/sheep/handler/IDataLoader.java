@@ -16,4 +16,6 @@ public interface IDataLoader {
 
    public void addHighscore(String name, int newHighscore, int gameMod);
 
+   public boolean isLevelUnlocked(int level);
+
 }

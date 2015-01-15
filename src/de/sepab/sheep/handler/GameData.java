@@ -6,7 +6,9 @@ public class GameData implements Serializable {
 
    private static final long serialVersionUID = 1L;
 
-   private static final int MAX_RECORDS = 3;
+   private final int MAX_RECORDS = 3;
+
+   private int exp;
 
    private int[] countHighscores;
    private int[] timeHighscores;
@@ -21,6 +23,7 @@ public class GameData implements Serializable {
    }
 
    public void init() {
+      exp = 0;
       for (int i = 0; i < MAX_RECORDS; i++) {
          countHighscores[i] = 0;
          timeHighscores[i] = 0;
@@ -30,19 +33,21 @@ public class GameData implements Serializable {
    }
 
    public void addHighscore(String name, int newHighscore, int gameMod) {
-      if (gameMod == Constants.MPLAYER) {
+      if (gameMod == Constants.SPLAYER_COUNT) {
          if (isNewCountHighscore(newHighscore)) {
             countHighscores[0] = newHighscore;
             countNames[0] = name;
             sortHighscores(countNames, countHighscores);
+            exp += newHighscore / 2;
          }
       }
 
-      else if (gameMod == Constants.SPLAYER) {
+      else if (gameMod == Constants.SPLAYER_TIME) {
          if (isNewTimeHighscore(newHighscore)) {
             timeHighscores[0] = newHighscore;
             timeNames[0] = name;
             sortHighscores(timeNames, timeHighscores);
+            exp += newHighscore / 2;
          }
       }
    }
@@ -68,6 +73,10 @@ public class GameData implements Serializable {
          highscores[j] = index;
          names[j] = indexName;
       }
+   }
+
+   public int getExp() {
+      return exp;
    }
 
    public int[] getCountHighscores() {
