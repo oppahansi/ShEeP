@@ -72,7 +72,14 @@ public class Input implements KeyListener, IInput {
 		}	
     }
 
-    @Override
+	@Override
+	public void flush() {
+		for(int i=0; i<this.dog1.length; i++) {this.dog1[i] = false;}
+		for(int i=0; i<this.dog2.length; i++) {this.dog2[i] = false;}
+	}
+
+
+	@Override
     public void keyPressed(KeyEvent e) {
     	key = e.getKeyCode();
 //    	switch (e.getKeyCode()) {
@@ -121,7 +128,7 @@ public class Input implements KeyListener, IInput {
     	case (KeyEvent.VK_LEFT):
     		dog1[4] = true;
     	break;
-    	case (KeyEvent.VK_B):
+    	case (KeyEvent.VK_ENTER):
     		dog1[5] = true;
 			if(!jukeBox.isRunning()) {
 				jukeBox.play();
@@ -147,7 +154,7 @@ public class Input implements KeyListener, IInput {
     			dog2[4] = true;
 			}
     	break;
-    	case (KeyEvent.VK_ENTER):
+    	case (KeyEvent.VK_B):
     		if (this.dogList.size()>1) {
     			dog2[5] = true;
 				if(!jukeBox.isRunning()) {
@@ -177,7 +184,7 @@ public class Input implements KeyListener, IInput {
     	case (KeyEvent.VK_LEFT):
     		dog1[4] = false;
     	break;
-    	case (KeyEvent.VK_B):
+    	case (KeyEvent.VK_ENTER):
     		dog1[5] = false;
     	break;
     	case (KeyEvent.VK_W):
@@ -192,7 +199,7 @@ public class Input implements KeyListener, IInput {
     	case (KeyEvent.VK_A):
     		dog2[4] = false;
     	break;
-    	case (KeyEvent.VK_ENTER):
+    	case (KeyEvent.VK_B):
     		dog2[5] = false;
     	break;
     	}
