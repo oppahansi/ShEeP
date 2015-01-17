@@ -52,7 +52,7 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGESINGLEPLAYERMAP2 = optimize(load(SINGLEPLAYERMAP2));
 	private static final BufferedImage IMAGESINGLEPLAYERMAP3 = optimize(load(SINGLEPLAYERMAP3));
 	private static final BufferedImage IMAGEMULTIPLAYERMAP1 = optimize(load(MULTIPLAYERMAP1));
-	private static final BufferedImage IMAGEMULTIPLAYERMAP2 = optimize(load(MULTIPLAYERMAP1));
+	private static final BufferedImage IMAGEMULTIPLAYERMAP2 = optimize(load(MULTIPLAYERMAP2));
 	
 	private BufferedImage IMAGEMAP;
 	private BufferedImage imageBackground;

@@ -250,13 +250,13 @@ public class Menu{
 			sheep.setSpeed(2);
 			break;
 		default:
-			ai.setIq(1);
+			ai.setIq(2);
 			ai.setScareLength(1);
-			dog.setBarkLength(150);
+			dog.setBarkLength(100);
 			dog.setSpeed(4);
-			dog.setPowerUpLife(5);
-			sheep.setPowerUpLife(1);
-			sheep.setScareSpeed(3);
+			dog.setPowerUpLife(2);
+			sheep.setPowerUpLife(3);
+			sheep.setScareSpeed(2);
 			sheep.setSpeed(1);
 			break;	
 		}
