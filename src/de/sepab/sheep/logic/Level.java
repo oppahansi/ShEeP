@@ -172,7 +172,7 @@ public class Level implements ILevel, ActionListener{
 					 ((ICage)this.cageList.getFirst()).getPosY2()));
 			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
-				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER);
+				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_TIME);
 				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
 				menu.setCurrentLabel(menu.panelHighscore);

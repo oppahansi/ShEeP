@@ -174,7 +174,7 @@ public class AI implements IAI{
 	private void calcChainedSteps(ISheep sheep) {
 		int tmp = 0;
 		if(RandomGenerator.getPercentDistribution(iq, 7)) {
-			if(((IEntity)sheep).getPosX() <= 640) {
+			if(((IEntity)sheep).getPosX() <= 624) {
 				tmp = 2;
 			}
 			else {
@@ -197,7 +197,7 @@ public class AI implements IAI{
 				{
 					possibleNextSteps = new int[]{2, 3, 4};
 					collides = true;
-					((ISheep)entity).unscare();
+					((ISheep) entity).unscare();
 				}
 				if(entity.getPosY() <= unschearfe) {
 					possibleNextSteps = new int[]{3, 3, 3, 3, 3, 2, 4};
@@ -209,11 +209,22 @@ public class AI implements IAI{
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()+entity.getSpeed(),entity.getPosY())))
 				{
-					possibleNextSteps = new int[]{1, 3, 4};
-					collides = true;
-					((ISheep)entity).unscare();
+					if(!entity.isChained()) {
+						possibleNextSteps = new int[]{1, 3, 4};
+						collides = true;
+						((ISheep) entity).unscare();
+					}
+					else {
+						collides = true;
+						if(entity.getPosY() <= 928/2-1) {
+							possibleNextSteps = new int[]{3};
+						}
+						else {
+							possibleNextSteps = new int[]{1};
+						}
+					}
 				}
-				if(entity.getPosX() >= 1240-unschearfe) {
+				if(entity.getPosX() >= 1248-unschearfe) {
 					possibleNextSteps = new int[]{4, 4, 4, 4, 4, 1, 3};
 					collides = true;
 					((ISheep)entity).unscare();
@@ -225,9 +236,9 @@ public class AI implements IAI{
 				{
 					possibleNextSteps = new int[]{1, 2, 4};
 					collides = true;
-					((ISheep)entity).unscare();
+					((ISheep) entity).unscare();
 				}
-				if(entity.getPosY() >= 960-unschearfe) {
+				if(entity.getPosY() >= 928-unschearfe) {
 					possibleNextSteps = new int[]{1, 1, 1, 1, 1, 2, 4};
 					collides = true;
 					((ISheep)entity).unscare();
@@ -237,9 +248,20 @@ public class AI implements IAI{
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()-entity.getSpeed(),entity.getPosY())))
 				{
-					possibleNextSteps = new int[]{1, 2, 3};
-					collides = true;
-					((ISheep)entity).unscare();
+					if(!entity.isChained()) {
+						possibleNextSteps = new int[]{1, 2, 3};
+						collides = true;
+						((ISheep) entity).unscare();
+					}
+					else {
+						collides = true;
+						if(entity.getPosY() <= 928/2-1) {
+							possibleNextSteps = new int[]{3};
+						}
+						else {
+							possibleNextSteps = new int[]{1};
+						}
+					}
 				}
 				if(entity.getPosX() <= unschearfe) {
 					possibleNextSteps = new int[]{2, 2, 2, 2, 2, 1, 3};

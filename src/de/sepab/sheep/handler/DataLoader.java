@@ -73,4 +73,26 @@ public class DataLoader implements IDataLoader {
    public String[] getTimeNames() {
       return GAMEDATA.getTimeNames();
    }
+
+   @Override
+   public boolean isLevelUnlocked(final int level) {
+      if (level == 1) {
+         return true;
+      }
+      else if (level == 2) {
+         if (GAMEDATA.getExp() >= Constants.LEVEL_TWO_CAP) {
+            return true;
+         }
+         return false;
+      }
+      else if (level == 3) {
+         if (GAMEDATA.getExp() >= Constants.LEVEL_THREE_CAP) {
+            return true;
+         }
+         return false;
+      }
+      else {
+         return false;
+      }
+   }
 }

@@ -11,21 +11,15 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.sepab.sheep.entities.Cage;
 import de.sepab.sheep.entities.IEntity;
-import de.sepab.sheep.entities.Obstacle;
-import de.sepab.sheep.handler.AI;
 import de.sepab.sheep.handler.IInput;
 import de.sepab.sheep.handler.Input;
-import de.sepab.sheep.logic.Collision;
 import de.sepab.sheep.logic.ILevel;
-import de.sepab.sheep.logic.Level;
-import de.sepab.sheep.logic.Movement;
 import de.sepab.sheep.logic.RandomGenerator;
 
 @SuppressWarnings("serial")
@@ -36,7 +30,7 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/powerup.png";
-	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png";
 	private static final String SINGLEPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2SinglePlayer.png"; 
 	private static final String SINGLEPLAYERMAP3 = "/de/sepab/sheep/model/gfx/map3SinglePlayer.png"; 
 	private static final String MULTIPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1MultiPlayer.png"; 
@@ -105,6 +99,7 @@ public class GameBoard extends JPanel{
 
 	private ILevel level;
 	private Menu menu;
+	private IInput input;
 	
 	
 	private int textureLength = 32; //tl = texture length
@@ -138,6 +133,7 @@ public class GameBoard extends JPanel{
     	this.setPreferredSize(new Dimension(x*32, y*32));
     	this.level = level;
     	this.menu = menu;
+		this.input = input;
     }
     
     public void shuffle() {
@@ -165,6 +161,7 @@ public class GameBoard extends JPanel{
     }
     
     public void loadMap(int map, int modus) {
+		this.input.flush();
     	level.resetLevel();
 
     	switch (map) {

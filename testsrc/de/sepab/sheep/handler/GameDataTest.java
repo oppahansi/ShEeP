@@ -29,9 +29,9 @@ public class GameDataTest {
     public void testAddCountHighscore() {
         GameData gameData = new GameData();
         gameData.init();
-        gameData.addHighscore("Two", 12, Constants.MPLAYER);
-        gameData.addHighscore("One", 123, Constants.MPLAYER);
-        gameData.addHighscore("Three", 1, Constants.MPLAYER);
+        gameData.addHighscore("Two", 12, Constants.SPLAYER_COUNT);
+        gameData.addHighscore("One", 123, Constants.SPLAYER_COUNT);
+        gameData.addHighscore("Three", 1, Constants.SPLAYER_COUNT);
 
         int expectedOneHighscore = 123;
         String expectedOneName = "One";
