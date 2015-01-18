@@ -24,7 +24,7 @@ public class Main {
 		menu.setDataLoader(new DataLoader());
 		menu.setLevel(new Level());
 		menu.setTimer(new Timer());
-		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(),menu.level.getCageList(), 1280, 960));
+		menu.setCollision(new Collision(menu.level.getDogList(), menu.level.getSheepList(), menu.level.getPowerUpList(), menu.level.getObstacleList(),menu.level.getCageList(), menu.getWidth(), menu.getHeight()));
 		menu.setMovement(new Movement(menu.getCollision()));
 		menu.setInput(new Input(menu.getMovement(), menu.getLevel().getDogList()));
 		menu.setAi(new AI(100, 1, menu.getLevel(), menu.getMovement(), menu.getCollision()));

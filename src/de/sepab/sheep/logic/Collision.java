@@ -12,13 +12,14 @@ import de.sepab.sheep.handler.JukeBox;
 public class Collision implements ICollision{
 
 	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
-	private int lenght,hight;
+	private int length,height;
 	private IJukeBox jukeBox;
 
 	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y) {
 		//Listen erstellen
-		lenght = x;
-		hight = y;
+
+		length=x;
+		height=y;
 		Dogs = DogList;
 		Sheeps = SheepList;
 		Powers = PowerUpList;
@@ -80,7 +81,7 @@ public class Collision implements ICollision{
 	}
 	
 	public boolean calcCollision(IEntity entity, int x, int y){
-		if(-1<y && y<hight-32 && -1<x && x<lenght-32)//abfrage des Spielfeldrandes
+		if(-1<y && y<height-32 && -1<x && x<length-32)//abfrage des Spielfeldrandes
 		{
 			//Koordinatennetz
 			int Y[]=new int[2];
@@ -185,8 +186,7 @@ public class Collision implements ICollision{
 							System.out.println("TSheep -> PowerUp");
 							for (IEntity sheep : Sheeps) {
 								if (sheep.isChained()) {
-									sheep.setPosX(300);
-									sheep.setPosY(50);
+									portSheep(sheep);
 									break;
 								}
 							}
@@ -197,9 +197,13 @@ public class Collision implements ICollision{
 							System.out.println("TDog -> PowerUp");
 							//BUG!!!! WENN NUr eiN SCHAF DANN FUCKED UP WEIl die grenzen jeglicher logikfern sind
 							int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
-							//
-							Sheeps.get(sheepPosInList).setPosX(150);
-							Sheeps.get(sheepPosInList).setPosY(300);
+							if (entity == Dogs.getFirst()) {
+								Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
+								Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
+							} else {
+								Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
+								Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
+							}
 							Powers.remove(i);
 							jukeBox.play();
 						}
@@ -219,10 +223,27 @@ public class Collision implements ICollision{
 		
 		return false;
 	}
+	
+	
+	public void portSheep(IEntity entity) {
+		int x = RandomGenerator.getRandomNumber(0, this.length -32);
+		int y = RandomGenerator.getRandomNumber(0, this.height -32);
+		if (!isoccupied(x, y)) {
+			portSheep(entity);
+			return;
+		} else {
+			entity.setPosX(x);
+			entity.setPosY(y);
+		}
+		
+	}
+	
+	
+	
 	public boolean isoccupied(int x,int y)
 	{
 
-		if(0<y && y<hight-32 && 0<x && x<lenght-32)//abfrage des Spielfeldrandes
+		if(0<y && y<height-32 && 0<x && x<length-32)//abfrage des Spielfeldrandes
 
 		{
 			//Koordinatennetz
