@@ -30,9 +30,19 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/powerup.png";
-	private static final String SINGLEPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1SinglePlayer.png";
-	private static final String SINGLEPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2SinglePlayer.png"; 
-	private static final String SINGLEPLAYERMAP3 = "/de/sepab/sheep/model/gfx/map3SinglePlayer.png"; 
+	
+	private static final String SINGLEPLAYERMAP11 = "/de/sepab/sheep/model/gfx/map11SinglePlayer.png";
+	private static final String SINGLEPLAYERMAP12 = "/de/sepab/sheep/model/gfx/map12SinglePlayer.png";
+	private static final String SINGLEPLAYERMAP13 = "/de/sepab/sheep/model/gfx/map13SinglePlayer.png";
+	
+	private static final String SINGLEPLAYERMAP21 = "/de/sepab/sheep/model/gfx/map21SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP22 = "/de/sepab/sheep/model/gfx/map22SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP23 = "/de/sepab/sheep/model/gfx/map23SinglePlayer.png"; 
+	
+	private static final String SINGLEPLAYERMAP31 = "/de/sepab/sheep/model/gfx/map31SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP32 = "/de/sepab/sheep/model/gfx/map32SinglePlayer.png"; 
+	private static final String SINGLEPLAYERMAP33 = "/de/sepab/sheep/model/gfx/map33SinglePlayer.png"; 
+	
 	private static final String MULTIPLAYERMAP1 = "/de/sepab/sheep/model/gfx/map1MultiPlayer.png"; 
 	private static final String MULTIPLAYERMAP2 = "/de/sepab/sheep/model/gfx/map2MultiPlayer.png"; 
 
@@ -42,9 +52,9 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
 	
-	private static final BufferedImage IMAGESINGLEPLAYERMAP1 = optimize(load(SINGLEPLAYERMAP1));
-	private static final BufferedImage IMAGESINGLEPLAYERMAP2 = optimize(load(SINGLEPLAYERMAP2));
-	private static final BufferedImage IMAGESINGLEPLAYERMAP3 = optimize(load(SINGLEPLAYERMAP3));
+	private static final BufferedImage[] IMAGESINGLEPLAYERMAP1 = {optimize(load(SINGLEPLAYERMAP11)), optimize(load(SINGLEPLAYERMAP12)), optimize(load(SINGLEPLAYERMAP13))};
+	private static final BufferedImage[] IMAGESINGLEPLAYERMAP2 = {optimize(load(SINGLEPLAYERMAP21)), optimize(load(SINGLEPLAYERMAP22)), optimize(load(SINGLEPLAYERMAP23))};
+	private static final BufferedImage[] IMAGESINGLEPLAYERMAP3 = {optimize(load(SINGLEPLAYERMAP31)), optimize(load(SINGLEPLAYERMAP32)), optimize(load(SINGLEPLAYERMAP33))};
 	private static final BufferedImage IMAGEMULTIPLAYERMAP1 = optimize(load(MULTIPLAYERMAP1));
 	private static final BufferedImage IMAGEMULTIPLAYERMAP2 = optimize(load(MULTIPLAYERMAP2));
 	
@@ -160,19 +170,19 @@ public class GameBoard extends JPanel{
 		}
     }
     
-    public void loadMap(int map, int modus) {
+    public void loadMap(int map, int modus, int difficulty) {
 		this.input.flush();
     	level.resetLevel();
 
     	switch (map) {
 		case 0:
-			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
+			IMAGEMAP = IMAGESINGLEPLAYERMAP1[difficulty];
 			break;
 		case 1:
-			IMAGEMAP = optimize(load(SINGLEPLAYERMAP2));
+			IMAGEMAP = IMAGESINGLEPLAYERMAP2[difficulty];
 			break;
 		case 2:
-			IMAGEMAP = optimize(load(SINGLEPLAYERMAP3));
+			IMAGEMAP = IMAGESINGLEPLAYERMAP3[difficulty];
 			break;
 		case 3:
 			IMAGEMAP = optimize(load(MULTIPLAYERMAP1));
@@ -181,7 +191,7 @@ public class GameBoard extends JPanel{
 			IMAGEMAP = optimize(load(MULTIPLAYERMAP2));
 			break;
 		default:
-			IMAGEMAP = optimize(load(SINGLEPLAYERMAP1));
+			IMAGEMAP = IMAGESINGLEPLAYERMAP1[difficulty];
 			break;
 		}
     	cages = new int[this.x][this.y];
@@ -647,16 +657,16 @@ public class GameBoard extends JPanel{
         return img;
     }
 
-	public static BufferedImage getImagesingleplayermap1() {
-		return IMAGESINGLEPLAYERMAP1;
+	public static BufferedImage getImagesingleplayermap1(int difficulty) {
+		return IMAGESINGLEPLAYERMAP1[difficulty];
 	}
 
-	public static BufferedImage getImagesingleplayermap2() {
-		return IMAGESINGLEPLAYERMAP2;
+	public static BufferedImage getImagesingleplayermap2(int difficulty) {
+		return IMAGESINGLEPLAYERMAP2[difficulty];
 	}
 
-	public static BufferedImage getImagesingleplayermap3() {
-		return IMAGESINGLEPLAYERMAP3;
+	public static BufferedImage getImagesingleplayermap3(int difficulty) {
+		return IMAGESINGLEPLAYERMAP3[difficulty];
 	}
 
 	public static BufferedImage getImagemultiplayermap1() {

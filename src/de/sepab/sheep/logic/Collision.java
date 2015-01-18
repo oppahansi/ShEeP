@@ -3,6 +3,8 @@ package de.sepab.sheep.logic;
 import java.util.LinkedList;
 
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
+import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
@@ -16,8 +18,9 @@ public class Collision implements ICollision{
 	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
 	private int length,height;
 	private IJukeBox jukeBox;
+	private Menu menu;
 
-	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y) {
+	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y, Menu menu) {
 		//Listen erstellen
 
 		length=x;
@@ -28,6 +31,7 @@ public class Collision implements ICollision{
 		Obstacles = ObstacleList;
 		Cages = CageList;
 		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
+		this.menu = menu;
 	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
@@ -186,14 +190,15 @@ public class Collision implements ICollision{
 						//COLLISION
 					   if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
 							if (entity instanceof IDog) {
-								System.out.println("Dog -> SHEEP BEAM in");
 								int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
 								if (entity == Dogs.getFirst()) {
 									Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
 									Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
+									menu.setGameBoard_PowerUpNamePlayer1Text("Schaf teleport");
 								} else {
 									Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
 									Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
+									menu.setGameBoard_PowerUpNamePlayer2Text("Schaf teleport");
 								}
 								Powers.remove(i);
 								jukeBox.play();
@@ -213,6 +218,11 @@ public class Collision implements ICollision{
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_DEAF) {
 							if(entity instanceof IDog) {
 								System.out.println("Dog -> SUPERBARK");
+								if (entity == Dogs.getFirst()) {
+									menu.setGameBoard_PowerUpNamePlayer1Text("Super bellen");
+								} else {
+									menu.setGameBoard_PowerUpNamePlayer2Text("Super bellen");
+								}
 								((IDog) entity).setBarkLength(((IDog) entity).getBarkLength() * 2);
 								Powers.remove(i);
 								jukeBox.play();
@@ -225,12 +235,22 @@ public class Collision implements ICollision{
 							}
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SPEED) {
+							if (entity == Dogs.getFirst()) {
+								menu.setGameBoard_PowerUpNamePlayer1Text("Schnelligkeit");
+							} else if (entity == Dogs.getLast()) {
+								menu.setGameBoard_PowerUpNamePlayer2Text("Schnelligkeit");
+							}
 							System.out.println("Entity -> SPEED");
 							entity.setSpeed(entity.getSpeed() * 2);
 							Powers.remove(i);
 							jukeBox.play();
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SLOW) {
+							if (entity == Dogs.getFirst()) {
+								menu.setGameBoard_PowerUpNamePlayer1Text("Verlangsamung");
+							} else if (entity == Dogs.getLast()) {
+								menu.setGameBoard_PowerUpNamePlayer2Text("Verlangsamung");
+							}
 							System.out.println("Entity -> SLOW");
 							entity.setSpeed(entity.getSpeed() * 2);
 							Powers.remove(i);
@@ -238,6 +258,11 @@ public class Collision implements ICollision{
 
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_CONFUSION) {
+							if (entity == Dogs.getFirst()) {
+								menu.setGameBoard_PowerUpNamePlayer1Text("Verwirrung");
+							} else if (entity == Dogs.getLast()) {
+								menu.setGameBoard_PowerUpNamePlayer2Text("Verwirrung");
+							}
 							System.out.println("Entity -> CONFUSED");
 							entity.confuse(true);
 							Powers.remove(i);

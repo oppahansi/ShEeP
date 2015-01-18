@@ -108,12 +108,16 @@ public class Menu{
 								
 							helpTextField_Help = new JTextField("Hilfe"),
 							
-							gameBoard_sheeps1 = new JTextField("Schafe:"),
-								gameBoard_sheepcounter1 = new JTextField(),
+							gameBoard_Sheeps1 = new JTextField("Schafe:"),
+								gameBoard_Sheepcounter1 = new JTextField(),
 								gameBoard_Time = new JTextField("00:00"),
-								gameBoard_sheeps2 = new JTextField("Schafe:"),
-								gameBoard_sheepcounter2 = new JTextField(),
-								gameboard_winner = new JTextField()
+								gameBoard_Sheeps2 = new JTextField("Schafe:"),
+								gameBoard_Sheepcounter2 = new JTextField(),
+								gameBoard_Winner = new JTextField(),
+								gameBoard_PowerUpPlayer1 = new JTextField("letztes PowerUp:"),
+								gameBoard_PowerUpNamePlayer1 = new JTextField(),
+								gameBoard_PowerUpPlayer2 = new JTextField("letztes PowerUp:"),
+								gameBoard_PowerUpNamePlayer2 = new JTextField()
 							;
 	//alle textareas
 	
@@ -146,9 +150,9 @@ public class Menu{
 						   
 						   multiPlayerSelection_Map = {"Karte1", "Karte2"};
 	
-	public  ImageIcon[] singlePlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagesingleplayermap1()), 
-														 new ImageIcon(GameBoard.getImagesingleplayermap2()), 
-														 new ImageIcon(GameBoard.getImagesingleplayermap3())},
+	public  ImageIcon[] singlePlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagesingleplayermap1(0)), 
+														 new ImageIcon(GameBoard.getImagesingleplayermap2(0)), 
+														 new ImageIcon(GameBoard.getImagesingleplayermap3(0))},
 														 
 						multiPlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagemultiplayermap1()), 
 														new ImageIcon(GameBoard.getImagemultiplayermap2())};
@@ -278,8 +282,8 @@ public class Menu{
 	
 	public void setMultiPlayerEndScreen(String winner){
 		gameBoard_Back.setVisible(true);
-		gameboard_winner.setText(winner);
-		gameboard_winner.setVisible(true);
+		gameBoard_Winner.setText(winner);
+		gameBoard_Winner.setVisible(true);
 	}
 	
 	public  void setHighscore(){
@@ -390,12 +394,16 @@ public class Menu{
 				
 				helpTextField_Help.setFont(headingFont);
 				
-				gameBoard_sheeps1.setFont(basicFont);
-				gameBoard_sheepcounter1.setFont(basicFont);
+				gameBoard_Sheeps1.setFont(basicFont);
+				gameBoard_Sheepcounter1.setFont(basicFont);
 				gameBoard_Time.setFont(basicFont);
-				gameBoard_sheeps2.setFont(basicFont);
-				gameBoard_sheepcounter2.setFont(basicFont);
-				gameboard_winner.setFont(basicFont);
+				gameBoard_Sheeps2.setFont(basicFont);
+				gameBoard_Sheepcounter2.setFont(basicFont);
+				gameBoard_Winner.setFont(basicFont);
+				gameBoard_PowerUpNamePlayer1.setFont(basicFont);
+				gameBoard_PowerUpNamePlayer2.setFont(basicFont);
+				gameBoard_PowerUpPlayer1.setFont(basicFont);
+				gameBoard_PowerUpPlayer2.setFont(basicFont);
 			}
 			
 			{//cb
@@ -470,12 +478,16 @@ public class Menu{
 				
 				helpTextField_Help.setBounds((width)/2 - 100,0,200,50);
 				
-				gameBoard_sheeps1.setBounds(20,height,50, 20);
-				gameBoard_sheepcounter1.setBounds(70,height,50, 20);
+				gameBoard_Sheeps1.setBounds(20,height,50, 20);
+				gameBoard_Sheepcounter1.setBounds(70,height,50, 20);
 				gameBoard_Time.setBounds(width/2 - 100,height,200, 20);
-				gameBoard_sheeps2.setBounds(width - 120,height,50, 20);
-				gameBoard_sheepcounter2.setBounds(width - 70,height,50, 20);
-				gameboard_winner.setBounds((width)/2 - 50 ,(height/2) - 50,100,20);
+				gameBoard_Sheeps2.setBounds(width - 120,height,50, 20);
+				gameBoard_Sheepcounter2.setBounds(width - 70,height,50, 20);
+				gameBoard_Winner.setBounds((width)/2 - 50 ,(height/2) - 50,100,20);
+				gameBoard_PowerUpNamePlayer1.setBounds(220,height,100, 20);
+				gameBoard_PowerUpNamePlayer2.setBounds(width - 220,height,100, 20);
+				gameBoard_PowerUpPlayer1.setBounds(120,height,100, 20);
+				gameBoard_PowerUpPlayer2.setBounds(width - 320,height,100, 20);
 		  	}
 		  	
 		  	{//cb
@@ -550,30 +562,42 @@ public class Menu{
 			
 			creditsTextArea_Credits.setEditable(false);
 			
-			gameBoard_sheeps1.setEditable(false);
-			gameBoard_sheeps1.setBackground(Color.WHITE);
-			gameBoard_sheeps1.setBorder(BorderFactory.createEmptyBorder());
-			gameBoard_sheepcounter1.setEditable(false);
-			gameBoard_sheepcounter1.setBorder(BorderFactory.createEmptyBorder());
-			gameBoard_sheepcounter1.setBackground(Color.WHITE);
+			gameBoard_Sheeps1.setEditable(false);
+			gameBoard_Sheeps1.setBackground(Color.WHITE);
+			gameBoard_Sheeps1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Sheepcounter1.setEditable(false);
+			gameBoard_Sheepcounter1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Sheepcounter1.setBackground(Color.WHITE);
 			gameBoard_Time.setEditable(false);
 			gameBoard_Time.setBorder(BorderFactory.createEmptyBorder());
 			gameBoard_Time.setBackground(Color.WHITE);
 			gameBoard_Time.setHorizontalAlignment(SwingConstants.CENTER);
-			gameBoard_sheeps2.setEditable(false);
-			gameBoard_sheeps2.setBorder(BorderFactory.createEmptyBorder());
-			gameBoard_sheeps2.setBackground(Color.WHITE);
-			gameBoard_sheepcounter2.setEditable(false);
-			gameBoard_sheepcounter2.setBorder(BorderFactory.createEmptyBorder());
-			gameBoard_sheepcounter2.setBackground(Color.WHITE);
-			gameboard_winner.setEditable(false);
-			gameboard_winner.setBorder(BorderFactory.createEmptyBorder());
-			gameboard_winner.setBackground(Color.WHITE);
+			gameBoard_Sheeps2.setEditable(false);
+			gameBoard_Sheeps2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Sheeps2.setBackground(Color.WHITE);
+			gameBoard_Sheepcounter2.setEditable(false);
+			gameBoard_Sheepcounter2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Sheepcounter2.setBackground(Color.WHITE);
+			gameBoard_Winner.setEditable(false);
+			gameBoard_Winner.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_Winner.setBackground(Color.WHITE);
+			gameBoard_PowerUpNamePlayer1.setEditable(false);
+			gameBoard_PowerUpNamePlayer1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_PowerUpNamePlayer1.setBackground(Color.WHITE);
+			gameBoard_PowerUpNamePlayer2.setEditable(false);
+			gameBoard_PowerUpNamePlayer2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_PowerUpNamePlayer2.setBackground(Color.WHITE);
+			gameBoard_PowerUpPlayer1.setEditable(false);
+			gameBoard_PowerUpPlayer1.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_PowerUpPlayer1.setBackground(Color.WHITE);
+			gameBoard_PowerUpPlayer2.setEditable(false);
+			gameBoard_PowerUpPlayer2.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_PowerUpPlayer2.setBackground(Color.WHITE);
 		}
 		
 		{
 			gameBoard_Back.setVisible(false);
-			gameboard_winner.setVisible(false);
+			gameBoard_Winner.setVisible(false);
 		}
 		
 		{//alle Button actionListener
@@ -581,6 +605,24 @@ public class Menu{
 				mainMenuButton_SinglePlayer.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
+						if (dataLoader.isLevelUnlocked(1)) {
+							singlePlayerComboBox_Difficulty.setMaximumRowCount(1);
+							singlePlayerComboBox_Difficulty.removeAllItems();
+							singlePlayerComboBox_Difficulty.addItem("Einfach");
+						}
+						if (dataLoader.isLevelUnlocked(2)) {
+							singlePlayerComboBox_Difficulty.setMaximumRowCount(2);
+							singlePlayerComboBox_Difficulty.removeAllItems();
+							singlePlayerComboBox_Difficulty.addItem("Einfach");
+							singlePlayerComboBox_Difficulty.addItem("Mittel");
+						}
+						if (dataLoader.isLevelUnlocked(3)) {
+							singlePlayerComboBox_Difficulty.setMaximumRowCount(3);
+							singlePlayerComboBox_Difficulty.removeAllItems();
+							singlePlayerComboBox_Difficulty.addItem("Einfach");
+							singlePlayerComboBox_Difficulty.addItem("Mittel");
+							singlePlayerComboBox_Difficulty.addItem("Schwer");
+						}
 						setCurrentLabel(panelSinglePlayer);
 					}
 				});
@@ -622,12 +664,15 @@ public class Menu{
 					
 						public void actionPerformed(ActionEvent arg0) {
 							input.flush();
-							gameBoard_sheepcounter2.setVisible(false);
-							gameBoard_sheeps2.setVisible(false);
+							gameBoard_Sheepcounter2.setVisible(false);
+							gameBoard_Sheeps2.setVisible(false);
+							gameBoard_PowerUpPlayer2.setVisible(false);
+							gameBoard_PowerUpNamePlayer2.setVisible(false);
+							gameBoard_PowerUpNamePlayer1.setText("");
 							setDifficulty((String)singlePlayerComboBox_Difficulty.getSelectedItem());
 							setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
 							level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_NameField.getText(), getGameModus());
-							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex());
+							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex(), singlePlayerComboBox_Difficulty.getSelectedIndex());
 							gameBoard.Update(level);
 							gameBoard.shuffle();
 							setCurrentLabel(gameBoard);
@@ -650,13 +695,17 @@ public class Menu{
 					
 					public void actionPerformed(ActionEvent arg0) {
 						input.flush();
-						gameBoard_sheepcounter2.setVisible(true);
-						gameBoard_sheeps2.setVisible(true);
+						gameBoard_Sheepcounter2.setVisible(true);
+						gameBoard_Sheeps2.setVisible(true);
+						gameBoard_PowerUpPlayer2.setVisible(true);
+						gameBoard_PowerUpNamePlayer2.setVisible(true);
+						gameBoard_PowerUpNamePlayer1.setText("");
+						gameBoard_PowerUpNamePlayer2.setText("");
 						setDifficulty("Mehrspieler");
 						setGameModus("Mehrspieler");
 						level.getReferences(ai, gameBoard, timer, input, collision, menu, null, getGameModus());
 						gameBoard.Update(level);
-						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2);
+						gameBoard.loadMap(multiPlayerComboBox_Map.getSelectedIndex() + 3, 2, 0);
 						gameBoard.shuffle();
 						setCurrentLabel(gameBoard);
 						level.TimerStart();
@@ -707,7 +756,7 @@ public class Menu{
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(panelMainMenu);
 						gameBoard_Back.setVisible(false);
-						gameboard_winner.setVisible(false);
+						gameBoard_Winner.setVisible(false);
 						
 					}
 				});
@@ -787,12 +836,16 @@ public class Menu{
 			
 			{//gb
 				gameBoard.add(gameBoard_Time);
-				gameBoard.add(gameBoard_sheepcounter1);
-				gameBoard.add(gameBoard_sheepcounter2);
-				gameBoard.add(gameBoard_sheeps1);
-				gameBoard.add(gameBoard_sheeps2);
+				gameBoard.add(gameBoard_Sheepcounter1);
+				gameBoard.add(gameBoard_Sheepcounter2);
+				gameBoard.add(gameBoard_Sheeps1);
+				gameBoard.add(gameBoard_Sheeps2);
 				gameBoard.add(gameBoard_Back);
-				gameBoard.add(gameboard_winner);
+				gameBoard.add(gameBoard_Winner);
+				gameBoard.add(gameBoard_PowerUpNamePlayer1);
+				gameBoard.add(gameBoard_PowerUpNamePlayer2);
+				gameBoard.add(gameBoard_PowerUpPlayer1);
+				gameBoard.add(gameBoard_PowerUpPlayer2);
 			}
 			
 		}
@@ -920,11 +973,11 @@ public class Menu{
 	}
 	
 	public void setGameBoardSheep1(int sheep){
-		gameBoard_sheepcounter1.setText(sheep + "");
+		gameBoard_Sheepcounter1.setText(sheep + "");
 	}
 	
 	public void setGameBoardSheep2(int sheep){
-		gameBoard_sheepcounter2.setText(sheep + "");
+		gameBoard_Sheepcounter2.setText(sheep + "");
 	}
 							
 	 public Dog getDog() {
@@ -954,6 +1007,21 @@ public class Menu{
 	public void setJukeBox(IJukeBox jukeBox) {
 		this.jukeBox = jukeBox;
 	}
+	
+
+
+	public void setGameBoard_PowerUpNamePlayer1Text(
+			String powerUp) {
+		this.gameBoard_PowerUpNamePlayer1.setText(powerUp);
+	}
+
+
+	public void setGameBoard_PowerUpNamePlayer2Text(
+			String powerUp) {
+		this.gameBoard_PowerUpNamePlayer2.setText(powerUp);
+	}
+
+
 
 	@SuppressWarnings({ "serial", "rawtypes" })
 	class ComboBoxRenderer extends JLabel
