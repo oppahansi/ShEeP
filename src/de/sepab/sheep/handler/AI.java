@@ -174,7 +174,7 @@ public class AI implements IAI{
 	private void calcChainedSteps(ISheep sheep) {
 		int tmp = 0;
 		if(RandomGenerator.getPercentDistribution(iq, 7)) {
-			if(((IEntity)sheep).getPosX() <= 624) {
+			if(((IEntity)sheep).getPosX() <= 480) {
 				tmp = 2;
 			}
 			else {
@@ -216,7 +216,7 @@ public class AI implements IAI{
 					}
 					else {
 						collides = true;
-						if(entity.getPosY() <= 928/2-1) {
+						if(entity.getPosY() <= 640/2) {
 							possibleNextSteps = new int[]{3};
 						}
 						else {
@@ -224,7 +224,7 @@ public class AI implements IAI{
 						}
 					}
 				}
-				if(entity.getPosX() >= 1248-unschearfe) {
+				if(entity.getPosX() >= 960-unschearfe) {
 					possibleNextSteps = new int[]{4, 4, 4, 4, 4, 1, 3};
 					collides = true;
 					((ISheep)entity).unscare();
@@ -238,7 +238,7 @@ public class AI implements IAI{
 					collides = true;
 					((ISheep) entity).unscare();
 				}
-				if(entity.getPosY() >= 928-unschearfe) {
+				if(entity.getPosY() >= 640-unschearfe) {
 					possibleNextSteps = new int[]{1, 1, 1, 1, 1, 2, 4};
 					collides = true;
 					((ISheep)entity).unscare();
@@ -255,7 +255,7 @@ public class AI implements IAI{
 					}
 					else {
 						collides = true;
-						if(entity.getPosY() <= 928/2-1) {
+						if(entity.getPosY() <= 960/2) {
 							possibleNextSteps = new int[]{3};
 						}
 						else {

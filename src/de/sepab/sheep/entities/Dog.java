@@ -121,11 +121,13 @@ public class Dog extends Entity implements IDog {
 	public boolean isChained() {
 		return false;
 	}
-	
+
+	@Override
 	public void setBarkLength(int barkLength) {
 		this.barkLength = barkLength;
 	}
-	
+
+	@Override
 	public int getBarkLength() {
 		return this.barkLength;
 	}

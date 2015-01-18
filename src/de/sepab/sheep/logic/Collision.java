@@ -1,6 +1,8 @@
 package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
@@ -182,33 +184,62 @@ public class Collision implements ICollision{
 					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
-						if (Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof ISheep) {
-							System.out.println("TSheep -> PowerUp");
-							for (IEntity sheep : Sheeps) {
-								if (sheep.isChained()) {
-									portSheep(sheep);
-									break;
+					   if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
+							if (entity instanceof IDog) {
+								System.out.println("Dog -> SHEEP BEAM in");
+								int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
+								if (entity == Dogs.getFirst()) {
+									Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
+									Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
+								} else {
+									Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
+									Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
 								}
+								Powers.remove(i);
+								jukeBox.play();
 							}
+							else {
+								System.out.println("Sheep -> SHEEP BEAM out");
+								for (IEntity sheep : Sheeps) {
+									if (sheep.isChained()) {
+										portSheep(sheep);
+										break;
+									}
+								}
+								Powers.remove(i);
+								jukeBox.play();
+							}
+						}
+						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_DEAF) {
+							if(entity instanceof IDog) {
+								System.out.println("Dog -> SUPERBARK");
+								((IDog) entity).setBarkLength(((IDog) entity).getBarkLength() * 2);
+								Powers.remove(i);
+								jukeBox.play();
+							}
+							else {
+								System.out.println("Sheep -> DEAF");
+								((ISheep) entity).deafy(true);
+								Powers.remove(i);
+								jukeBox.play();
+							}
+						}
+						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SPEED) {
+							System.out.println("Entity -> SPEED");
+							entity.setSpeed(entity.getSpeed() * 2);
 							Powers.remove(i);
 							jukeBox.play();
 						}
-						else if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM && entity instanceof IDog){
-							System.out.println("TDog -> PowerUp");
-							//BUG!!!! WENN NUr eiN SCHAF DANN FUCKED UP WEIl die grenzen jeglicher logikfern sind
-							int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
-							if (entity == Dogs.getFirst()) {
-								Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
-								Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
-							} else {
-								Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
-								Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
-							}
+						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SLOW) {
+							System.out.println("Entity -> SLOW");
+							entity.setSpeed(entity.getSpeed() * 2);
 							Powers.remove(i);
 							jukeBox.play();
+
 						}
-						else {
-							Powers.get(i).event(entity);
+						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_CONFUSION) {
+							System.out.println("Entity -> CONFUSED");
+							entity.confuse(true);
 							Powers.remove(i);
 							jukeBox.play();
 						}

@@ -145,11 +145,6 @@ public class Entity implements IEntity {
 	}
 
 	@Override
-	public void event(IEntity entity) {
-
-	}
-
-	@Override
 	public int getType() {
 		return 0;
 	}
