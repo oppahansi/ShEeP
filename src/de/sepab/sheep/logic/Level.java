@@ -186,7 +186,7 @@ public class Level implements ILevel, ActionListener{
 			menu.setGameBoardSheep1(count);
 			if (count >= sheepList.size()) {
 				swingTimer.stop();
-				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.MPLAYER);
+				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_COUNT);
 				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
 				menu.setCurrentLabel(menu.panelHighscore);
