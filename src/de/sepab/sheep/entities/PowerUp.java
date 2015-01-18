@@ -1,7 +1,5 @@
 package de.sepab.sheep.entities;
 
-import de.sepab.sheep.handler.Constants;
-
 public class PowerUp extends Entity {
 
    private int type;
@@ -19,32 +17,6 @@ public class PowerUp extends Entity {
    @Override
    public boolean isChained() {
       return false;
-   }
-
-   public void event(IEntity entity) {
-      switch (this.type) {
-         case Constants.POWERUP_TYPE_SPEED:
-            entity.setSpeed(entity.getSpeed()*2);
-            break;
-         case Constants.POWERUP_TYPE_SLOW:
-            entity.setSpeed(entity.getSpeed()/2);
-            break;
-         case Constants.POWERUP_TYPE_DEAF:
-            if (entity instanceof ISheep) {
-               ((ISheep) entity).deafy(true);
-            }
-            break;
-         case Constants.POWERUP_TYPE_TIME:
-            if (entity instanceof IDog) {
-               // add time here
-            }
-            break;
-         case Constants.POWERUP_TYPE_CONFUSION:
-            if (entity instanceof IDog) {
-               entity.confuse(true);
-            }
-            break;
-      }
    }
 
    @Override

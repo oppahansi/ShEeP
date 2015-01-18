@@ -24,8 +24,6 @@ public interface IEntity {
 
 	public boolean isVisible();
 
-	public void event(IEntity entity);
-
 	public int getType();
 
 	public boolean isChained();
