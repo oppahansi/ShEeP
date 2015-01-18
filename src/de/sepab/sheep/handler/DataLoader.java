@@ -17,8 +17,8 @@ public class DataLoader implements IDataLoader {
    }
 
    @Override
-   public void addHighscore(String name, int newHighscore, int gameMod) {
-      GAMEDATA.addHighscore(name, newHighscore, gameMod);
+   public void addHighscore(String name, int newHighscore, int gameMod, int level) {
+      GAMEDATA.addHighscore(name, newHighscore, gameMod, level);
    }
 
    public void saveHighscore() {
@@ -32,6 +32,7 @@ public class DataLoader implements IDataLoader {
       }
    }
 
+   @Override
    public void loadHighscore() {
       try {
          if (!saveFileExist()) {
@@ -58,20 +59,57 @@ public class DataLoader implements IDataLoader {
       saveHighscore();
    }
 
-   public int[] getCountHighscores() {
-      return GAMEDATA.getCountHighscores();
+   @Override
+   public int[] getCountHighscores(int level) {
+      if (level == 1) {
+         return GAMEDATA.getCountHighscoresOne();
+      }
+      else if (level == 2) {
+         return GAMEDATA.getCountHighscoresTwo();
+      }
+      else {
+         return GAMEDATA.getCountHighscoresThree();
+      }
+
    }
 
-   public int[] getTimeHighscores() {
-      return GAMEDATA.getTimeHighscores();
+   @Override
+   public int[] getTimeHighscores(int level) {
+      if (level == 1) {
+         return GAMEDATA.getTimeHighscoresOne();
+      }
+      else if (level == 2) {
+         return GAMEDATA.getTimeHighscoresTwo();
+      }
+      else {
+         return GAMEDATA.getTimeHighscoresThree();
+      }
    }
 
-   public String[] getCountNames() {
-      return GAMEDATA.getCountNames();
+   @Override
+   public String[] getCountNames(int level) {
+      if (level == 1) {
+         return GAMEDATA.getCountNamesOne();
+      }
+      else if (level == 2) {
+         return GAMEDATA.getCountNamesTwo();
+      }
+      else {
+         return GAMEDATA.getCountNamesThree();
+      }
    }
 
-   public String[] getTimeNames() {
-      return GAMEDATA.getTimeNames();
+   @Override
+   public String[] getTimeNames(int level) {
+      if (level == 1) {
+         return GAMEDATA.getTimeNamesOne();
+      }
+      else if (level == 2) {
+         return GAMEDATA.getTimeNamesTwo();
+      }
+      else {
+         return GAMEDATA.getTimeNamesThree();
+      }
    }
 
    @Override

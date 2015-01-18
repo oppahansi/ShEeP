@@ -10,7 +10,6 @@ public class JukeBox implements IJukeBox {
    private Clip clip;
 
    public JukeBox(String filePath) {
-
       try {
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(filePath));
          AudioFormat baseFormat = audioInputStream.getFormat();
@@ -30,7 +29,6 @@ public class JukeBox implements IJukeBox {
       catch (Exception e) {
          e.printStackTrace();
       }
-
    }
 
    @Override

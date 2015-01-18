@@ -10,54 +10,121 @@ public class GameData implements Serializable {
 
    private int exp;
 
-   private int[] countHighscores;
-   private int[] timeHighscores;
-   private String[] countNames;
-   private String[] timeNames;
+   private int[] countHighscoresOne;
+   private int[] timeHighscoresOne;
+   private String[] countNamesOne;
+   private String[] timeNamesOne;
+   private int[] countHighscoresTwo;
+   private int[] timeHighscoresTwo;
+   private String[] countNamesTwo;
+   private String[] timeNamesTwo;
+   private int[] countHighscoresThree;
+   private int[] timeHighscoresThree;
+   private String[] countNamesThree;
+   private String[] timeNamesThree;
 
    public GameData() {
-      this.countHighscores = new int[MAX_RECORDS];
-      this.timeHighscores = new int[MAX_RECORDS];
-      this.countNames = new String[MAX_RECORDS];
-      this.timeNames = new String[MAX_RECORDS];
+      countHighscoresOne = new int[MAX_RECORDS];
+      timeHighscoresOne = new int[MAX_RECORDS];
+      countNamesOne = new String[MAX_RECORDS];
+      timeNamesOne = new String[MAX_RECORDS];
+      countHighscoresTwo = new int[MAX_RECORDS];
+      timeHighscoresTwo = new int[MAX_RECORDS];
+      countNamesTwo = new String[MAX_RECORDS];
+      timeNamesTwo = new String[MAX_RECORDS];
+      countHighscoresThree = new int[MAX_RECORDS];
+      timeHighscoresThree = new int[MAX_RECORDS];
+      countNamesThree = new String[MAX_RECORDS];
+      timeNamesThree = new String[MAX_RECORDS];
    }
 
    public void init() {
       exp = 0;
       for (int i = 0; i < MAX_RECORDS; i++) {
-         countHighscores[i] = 0;
-         timeHighscores[i] = 0;
-         countNames[i] = "-----";
-         timeNames[i] = "-----";
+         countHighscoresOne[i] = 0;
+         timeHighscoresOne[i] = 0;
+         countNamesOne[i] = "-----";
+         timeNamesOne[i] = "-----";
+         countHighscoresTwo[i] = 0;
+         timeHighscoresTwo[i] = 0;
+         countNamesTwo[i] = "-----";
+         timeNamesTwo[i] = "-----";
+         countHighscoresThree[i] = 0;
+         timeHighscoresThree[i] = 0;
+         countNamesThree[i] = "-----";
+         timeNamesThree[i] = "-----";
       }
    }
 
-   public void addHighscore(String name, int newHighscore, int gameMod) {
+   public void addHighscore(String name, int newHighscore, int gameMod, int level) {
       if (gameMod == Constants.SPLAYER_COUNT) {
-         if (isNewCountHighscore(newHighscore)) {
-            countHighscores[0] = newHighscore;
-            countNames[0] = name;
-            sortHighscores(countNames, countHighscores);
-            exp += newHighscore / 2;
+         if (isNewCountHighscore(newHighscore, level)) {
+            if (level == 1) {
+               countHighscoresOne[0] = newHighscore;
+               countNamesOne[0] = name;
+               sortHighscores(countNamesOne, countHighscoresOne);
+               exp += newHighscore / 2;
+            }
+            else if (level == 2) {
+               countHighscoresTwo[0] = newHighscore;
+               countNamesTwo[0] = name;
+               sortHighscores(countNamesTwo, countHighscoresTwo);
+               exp += newHighscore / 2;
+            }
+            else if (level == 3) {
+               countHighscoresThree[0] = newHighscore;
+               countNamesThree[0] = name;
+               sortHighscores(countNamesThree, countHighscoresThree);
+               exp += newHighscore / 2;
+            }
          }
       }
-
       else if (gameMod == Constants.SPLAYER_TIME) {
-         if (isNewTimeHighscore(newHighscore)) {
-            timeHighscores[0] = newHighscore;
-            timeNames[0] = name;
-            sortHighscores(timeNames, timeHighscores);
-            exp += newHighscore / 2;
+         if (isNewTimeHighscore(newHighscore, level)) {
+            if (level == 1) {
+               timeHighscoresOne[0] = newHighscore;
+               timeNamesOne[0] = name;
+               sortHighscores(timeNamesOne, timeHighscoresOne);
+               exp += newHighscore / 2;
+            }
+            else if (level == 2) {
+               timeHighscoresTwo[0] = newHighscore;
+               timeNamesTwo[0] = name;
+               sortHighscores(timeNamesTwo, timeHighscoresTwo);
+               exp += newHighscore / 2;
+            }
+            else if (level == 3) {
+               timeHighscoresThree[0] = newHighscore;
+               timeNamesThree[0] = name;
+               sortHighscores(timeNamesThree, timeHighscoresThree);
+               exp += newHighscore / 2;
+            }
          }
       }
    }
 
-   private boolean isNewCountHighscore(int newHighscore) {
-      return newHighscore > countHighscores[0];
+   private boolean isNewCountHighscore(int newHighscore, int level) {
+      if (level == 1) {
+         return newHighscore > countHighscoresOne[0];
+      }
+      else if (level == 2) {
+         return newHighscore > countHighscoresTwo[0];
+      }
+      else {
+         return newHighscore > countHighscoresThree[0];
+      }
    }
 
-   private boolean isNewTimeHighscore(int newHighscore) {
-      return newHighscore > timeHighscores[0];
+   private boolean isNewTimeHighscore(int newHighscore, int level) {
+      if (level == 1) {
+         return newHighscore > timeHighscoresOne[0];
+      }
+      else if (level == 2) {
+         return newHighscore > timeHighscoresTwo[0];
+      }
+      else {
+         return newHighscore > timeHighscoresThree[0];
+      }
    }
 
    private void sortHighscores(String[] names, int[] highscores) {
@@ -79,19 +146,51 @@ public class GameData implements Serializable {
       return exp;
    }
 
-   public int[] getCountHighscores() {
-      return countHighscores;
+   public int[] getCountHighscoresOne() {
+      return countHighscoresOne;
    }
 
-   public int[] getTimeHighscores() {
-      return timeHighscores;
+   public int[] getTimeHighscoresOne() {
+      return timeHighscoresOne;
    }
 
-   public String[] getCountNames() {
-      return countNames;
+   public String[] getCountNamesOne() {
+      return countNamesOne;
    }
 
-   public String[] getTimeNames() {
-      return timeNames;
+   public String[] getTimeNamesOne() {
+      return timeNamesOne;
+   }
+
+   public int[] getCountHighscoresTwo() {
+      return countHighscoresTwo;
+   }
+
+   public int[] getTimeHighscoresTwo() {
+      return timeHighscoresTwo;
+   }
+
+   public String[] getCountNamesTwo() {
+      return countNamesTwo;
+   }
+
+   public String[] getTimeNamesTwo() {
+      return timeNamesTwo;
+   }
+
+   public int[] getCountHighscoresThree() {
+      return countHighscoresThree;
+   }
+
+   public int[] getTimeHighscoresThree() {
+      return timeHighscoresThree;
+   }
+
+   public String[] getCountNamesThree() {
+      return countNamesThree;
+   }
+
+   public String[] getTimeNamesThree() {
+      return timeNamesThree;
    }
 }

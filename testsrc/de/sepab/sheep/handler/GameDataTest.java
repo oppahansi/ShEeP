@@ -11,10 +11,10 @@ public class GameDataTest {
         GameData gameData = new GameData();
         gameData.init();
 
-        int[] actualCountHighscores = gameData.getCountHighscores();
-        int[] actualTimeHighscores = gameData.getTimeHighscores();
-        String[] actualCountNames = gameData.getCountNames();
-        String[] actualTimeNames = gameData.getTimeNames();
+        int[] actualCountHighscores = gameData.getCountHighscoresOne();
+        int[] actualTimeHighscores = gameData.getTimeHighscoresOne();
+        String[] actualCountNames = gameData.getCountNamesOne();
+        String[] actualTimeNames = gameData.getTimeNamesOne();
 
         int expectedHighscore = 0;
         String expectedName = "-----";
@@ -35,18 +35,18 @@ public class GameDataTest {
 
         int expectedOneHighscore = 123;
         String expectedOneName = "One";
-        int actualOneHighscore = gameData.getCountHighscores()[2];
-        String actualOneName = gameData.getCountNames()[2];
+        int actualOneHighscore = gameData.getCountHighscoresOne()[2];
+        String actualOneName = gameData.getCountNamesOne()[2];
 
         int expectedTwoHighscore = 12;
         String expectedTwoName = "Two";
-        int actualTwoHighscore = gameData.getCountHighscores()[1];
-        String actualTwoName = gameData.getCountNames()[1];
+        int actualTwoHighscore = gameData.getCountHighscoresOne()[1];
+        String actualTwoName = gameData.getCountNamesOne()[1];
 
         int expectedThreeHighscore = 1;
         String expectedThreeName = "Three";
-        int actualThreeHighscore = gameData.getCountHighscores()[0];
-        String actualThreeName = gameData.getCountNames()[0];
+        int actualThreeHighscore = gameData.getCountHighscoresOne()[0];
+        String actualThreeName = gameData.getCountNamesOne()[0];
 
         assertEquals("Player One should have the score 123", expectedOneHighscore, actualOneHighscore);
         assertEquals("Player One should have the name One", expectedOneName, actualOneName);

@@ -51,7 +51,8 @@ public class Collision implements ICollision{
 		
 	}
 	
-	public int Count(int Ax, int Ay,int Bx,int By,int Cx, int Cy,int Dx,int Dy){
+	public int Count(int Ax, int Ay,int Bx,int By,int Cx, int Cy,int Dx,int Dy)
+	{
 		int R=0;
 		int Y[]=new int[4];
 		int X[]=new int[4];
@@ -63,7 +64,8 @@ public class Collision implements ICollision{
 		X[3]=Dx+32;
 		Y[2]=Cy-32;
 		Y[3]=Dy+32;
-		for(int i=0;i<Sheeps.size();i++){
+		for(int i=0;i<Sheeps.size();i++)
+		{
 			((ISheep)Sheeps.get(i)).setChained(false);
 			if(X[0]<Sheeps.get(i).getPosX() && Sheeps.get(i).getPosX()<X[1] && Y[0]<Sheeps.get(i).getPosY() && Sheeps.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 			{
@@ -82,7 +84,8 @@ public class Collision implements ICollision{
 		return R;//R ist keine eindeutige zahl mehr da nun zwei gehege vorhanden sind, sondern ein mix aus 2 z�hlern
 	}
 	
-	public boolean calcCollision(IEntity entity, int x, int y){
+	public boolean calcCollision(IEntity entity, int x, int y)
+	{
 		if(-1<y && y<height-32 && -1<x && x<length-32)//abfrage des Spielfeldrandes
 		{
 			//Koordinatennetz
@@ -176,7 +179,6 @@ public class Collision implements ICollision{
 						}
 					}
 			}
-			
 			for(int i=0;i<Powers.size();i++)
 			{
 				if(entity!=Powers.get(i))
@@ -184,14 +186,15 @@ public class Collision implements ICollision{
 					if(X[0]<Powers.get(i).getPosX() && Powers.get(i).getPosX()<X[1] && Y[0]<Powers.get(i).getPosY() && Powers.get(i).getPosY()<Y[1])	//punkt im koordinatennetz?
 					{
 						//COLLISION
-					   if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
+						if (Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
 							if (entity instanceof IDog) {
 								System.out.println("Dog -> SHEEP BEAM in");
 								int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
 								if (entity == Dogs.getFirst()) {
 									Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
 									Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
-								} else {
+								}
+								else {
 									Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
 									Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
 								}
@@ -211,7 +214,7 @@ public class Collision implements ICollision{
 							}
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_DEAF) {
-							if(entity instanceof IDog) {
+							if (entity instanceof IDog) {
 								System.out.println("Dog -> SUPERBARK");
 								((IDog) entity).setBarkLength(((IDog) entity).getBarkLength() * 2);
 								Powers.remove(i);
@@ -248,15 +251,14 @@ public class Collision implements ICollision{
 					}
 				}
 			}
-			
 			return true;
 		}
-		
 		return false;
 	}
 	
 	
-	public void portSheep(IEntity entity) {
+	public void portSheep(IEntity entity)
+	{
 		int x = RandomGenerator.getRandomNumber(0, this.length -32);
 		int y = RandomGenerator.getRandomNumber(0, this.height -32);
 		if (!isoccupied(x, y)) {
@@ -266,16 +268,11 @@ public class Collision implements ICollision{
 			entity.setPosX(x);
 			entity.setPosY(y);
 		}
-		
 	}
-	
-	
-	
+
 	public boolean isoccupied(int x,int y)
 	{
-
 		if(0<y && y<height-32 && 0<x && x<length-32)//abfrage des Spielfeldrandes
-
 		{
 			//Koordinatennetz
 			int Y[]=new int[2];

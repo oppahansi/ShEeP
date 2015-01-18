@@ -1,3 +1,8 @@
+/**
+ * @Author
+ * Alexander Schellenberg
+ */
+
 package de.sepab.sheep.entities;
 
 public class PowerUp extends Entity {
@@ -10,6 +15,7 @@ public class PowerUp extends Entity {
       this.type = type;
    }
 
+   @Override
    public int getType() {
       return type;
    }

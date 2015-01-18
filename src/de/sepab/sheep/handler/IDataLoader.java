@@ -6,15 +6,15 @@ public interface IDataLoader {
 
    public void loadHighscore();
 
-   public int[] getCountHighscores();
+   public int[] getCountHighscores(int level);
 
-   public int[] getTimeHighscores();
+   public int[] getTimeHighscores(int level);
 
-   public String[] getCountNames();
+   public String[] getCountNames(int level);
 
-   public String[] getTimeNames();
+   public String[] getTimeNames(int level);
 
-   public void addHighscore(String name, int newHighscore, int gameMod);
+   public void addHighscore(String name, int newHighscore, int gameMod, int level);
 
    public boolean isLevelUnlocked(int level);
 
