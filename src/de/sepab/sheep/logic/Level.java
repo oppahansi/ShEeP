@@ -40,7 +40,7 @@ public class Level implements ILevel, ActionListener{
 	private String name;
 	
 
-	int time = 100, count = 0;
+	int time = 1, count = 0;
 	boolean locked_1 = false;
 	boolean locked_2 = false;
 	boolean spwaned = false;
@@ -186,7 +186,7 @@ public class Level implements ILevel, ActionListener{
 			menu.setGameBoardSheep1(count);
 			if (count >= sheepList.size()) {
 				swingTimer.stop();
-				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.MPLAYER);
+				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_COUNT);
 				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
 				menu.setCurrentLabel(menu.panelHighscore);
@@ -203,11 +203,18 @@ public class Level implements ILevel, ActionListener{
 					 ((ICage)this.cageList.getLast()).getPosY2());
 					 menu.setGameBoardSheep1(sheepCount/1000);
 					 menu.setGameBoardSheep2(sheepCount%1000);
-			if ((sheepCount/1000 + sheepCount%1000) >= sheepList.size()) {
+			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
-				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
-				menu.setCurrentLabel(menu.panelMainMenu);
+				String winner;
+				if (sheepCount/1000 > sheepCount%1000) {
+					winner = "Player 1 wins";
+				}else if (sheepCount/1000 < sheepCount%1000) {
+					winner = "Player 2 wins";
+				} else {
+					winner = "Draw";
+				}
+				menu.setMultiPlayerEndScreen(winner);
 			}
 			break;
 

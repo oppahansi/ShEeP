@@ -48,31 +48,35 @@ public class Menu{
 						 panelSinglePlayer = new JPanel(), 
 						 panelMultiPlayer = new JPanel(), 
 						 panelHighscore = new JPanel(), 
-						 panelOptions = new JPanel(),
+						 panelCredits = new JPanel(),
 						 panelHelp = new JPanel();
 	
 	public  GameBoard gameBoard;
 	//alle buttons
 	public  JButton mainMenuButton_SinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
 						  	mainMenuButton_MultiPlayer = new JButton("Mehrspieler"),
-						  	mainMenuButton_Option = new JButton("Option"),
+						  	mainMenuButton_Credits = new JButton("Credits"),
 						  	mainMenuButton_Highscore = new JButton("Highscore"),
 						  	mainMenuButton_Help = new JButton("Hilfe"),
 						  	mainMenuButton_Exit = new JButton("Beenden"),
 						  	
 						  multiPlayerButton_Start = new JButton("Start"), //sp = singleplayer
-							multiPlayerButton_Back = new JButton("Zurï¿½ck"),
+							multiPlayerButton_Back = new JButton("Zurück"),
 									  	
 						  singlePlayerButton_Start = new JButton("Start"), //sp = singleplayer
-						  	singlePlayerButton_Back = new JButton("Zurï¿½ck"),
+						  	singlePlayerButton_Back = new JButton("Zurück"),
 						  	
-						  highscoreButton_Back = new JButton("Zurï¿½ck"), //hs = highscore
+						  highscoreButton_Back = new JButton("Zurück"), //hs = highscore
 						  
-						  optionButton_Minus = new JButton("-"),//o = options
-						  	optionButton_Plus = new JButton("+"),
-						  	optionButton_Back = new JButton("Zurï¿½ck"),
+						 
+						  	creditsButton_Back = new JButton("Zurück"),
 						  	
-						  helpButton_Back = new JButton("Zurï¿½ck");//h = help
+						  gameBoard_Back = new JButton("Zurück"),
+						  	
+						  helpButton_Back = new JButton("Zurück");//h = help
+	
+	
+	
 	//alle textfields
 	public  JTextField singlePlayerTextField_Singleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	singlePlayerTextField_Map = new JTextField("Karte:"),
@@ -100,9 +104,7 @@ public class Menu{
 								HighscoreTextField_ONplayer2points = new JTextField("998 Punkte"),
 								HighscoreTextField_ONplayer3points = new JTextField("997 Punkte"),
 							
-							optionTextfield_Options = new JTextField("Optionen"),
-								optionTextField_Music = new JTextField("Musik:"),
-								optionTextfield_MusicField = new JTextField("50"),
+							creditsTextfield_Options = new JTextField("Credits"),
 								
 							helpTextField_Help = new JTextField("Hilfe"),
 							
@@ -110,18 +112,30 @@ public class Menu{
 								gameBoard_sheepcounter1 = new JTextField(),
 								gameBoard_Time = new JTextField("00:00"),
 								gameBoard_sheeps2 = new JTextField("Schafe:"),
-								gameBoard_sheepcounter2 = new JTextField()
+								gameBoard_sheepcounter2 = new JTextField(),
+								gameboard_winner = new JTextField()
 							;
 	//alle textareas
+	
 	public  JTextArea helpTextArea_Help = new JTextArea(
 			"Auf Zeit: \r\n"
-			+ "In diesem Modus versucht der Spieler soviele Schafe wie mï¿½glich in \r\n"
+			+ "In diesem Modus versucht der Spieler soviele Schafe wie möglich in \r\n"
 			+ "einer gewissen Zeit einzufangen \r\n"
 			+ "\r\n"
 			+ "Auf Anzahl: \r\n"
-			+ "In diesem Modus versucht der Spieler so schnell wie mï¿½glich eine \r\n"
+			+ "In diesem Modus versucht der Spieler so schnell wie möglich eine \r\n"
 			+ "gewisse Anzahl an schafen einzufangen"
-			);
+			),
+			
+			creditsTextArea_Credits = new JTextArea(
+					 "Sounds von: http://www.freesfx.co.uk \r\n"
+					+ "\r\n"
+					+ "Hund Sprites: Stephen \"Redshrike\" Challener \r\n as graphic artist and William.Thompsonj as contributor \r\n von  http://opengameart.org/content/lpc-wolf-animation \r\n"
+					+ "\r\n"
+					+ "Umgebungs Sprites: von Daniel Eddel \r\n http://lpc.opengameart.org/static/lpc-style-guide/assets.html \r\n"
+					+ "\r\n"
+					+ "Schaf Sprites : von  Daniel Eddel \r\n http://opengameart.org/content/lpc-style-farm-animals \r\n"
+					);
 	//alle fonts
 	public  Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
@@ -180,7 +194,7 @@ public class Menu{
 		panelHelp.setVisible(false);
 		panelHighscore.setVisible(false);
 		panelMultiPlayer.setVisible(false);
-		panelOptions.setVisible(false);
+		panelCredits.setVisible(false);
 		panelSinglePlayer.setVisible(false);
 		if (gameBoard != null) {
 			gameBoard.setVisible(false);
@@ -262,6 +276,12 @@ public class Menu{
 		}
 	}
 	
+	public void setMultiPlayerEndScreen(String winner){
+		gameBoard_Back.setVisible(true);
+		gameboard_winner.setText(winner);
+		gameboard_winner.setVisible(true);
+	}
+	
 	public  void setHighscore(){
 		dataLoader.loadHighscore();
 		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
@@ -310,7 +330,7 @@ public class Menu{
 			panelMainMenu.setLayout(null);
 			panelSinglePlayer.setLayout(null);
 			panelMultiPlayer.setLayout(null);
-			panelOptions.setLayout(null);
+			panelCredits.setLayout(null);
 			panelHighscore.setLayout(null);
 			panelHelp.setLayout(null);
 		}
@@ -319,7 +339,7 @@ public class Menu{
 			{//alle Button Fonts
 				mainMenuButton_SinglePlayer.setFont(basicFont);
 			  	mainMenuButton_MultiPlayer.setFont(basicFont);
-			  	mainMenuButton_Option.setFont(basicFont);
+			  	mainMenuButton_Credits.setFont(basicFont);
 			  	mainMenuButton_Highscore.setFont(basicFont);
 			  	mainMenuButton_Help.setFont(basicFont);
 			  	mainMenuButton_Exit.setFont(basicFont);
@@ -332,9 +352,9 @@ public class Menu{
 			  	
 			  	highscoreButton_Back.setFont(basicFont);
 			  	
-			    optionButton_Minus.setFont(basicFont);
-			  	optionButton_Plus.setFont(basicFont);
-			  	optionButton_Back.setFont(basicFont);
+			  	creditsButton_Back.setFont(basicFont);
+			  	
+			  	gameBoard_Back.setFont(basicFont);
 			  	
 			  	helpButton_Back.setFont(basicFont);
 			}
@@ -366,9 +386,7 @@ public class Menu{
 				HighscoreTextField_ONplayer2points.setFont(basicFont);
 				HighscoreTextField_ONplayer3points.setFont(basicFont);
 			
-				optionTextfield_Options.setFont(headingFont);
-				optionTextField_Music.setFont(basicFont);
-				optionTextfield_MusicField.setFont(basicFont);
+				creditsTextfield_Options.setFont(headingFont);
 				
 				helpTextField_Help.setFont(headingFont);
 				
@@ -377,6 +395,7 @@ public class Menu{
 				gameBoard_Time.setFont(basicFont);
 				gameBoard_sheeps2.setFont(basicFont);
 				gameBoard_sheepcounter2.setFont(basicFont);
+				gameboard_winner.setFont(basicFont);
 			}
 			
 			{//cb
@@ -391,6 +410,7 @@ public class Menu{
 			
 			{//ta
 				helpTextArea_Help.setFont(basicFont);
+				creditsTextArea_Credits.setFont(basicFont);
 			}
 			
 		}
@@ -399,7 +419,7 @@ public class Menu{
 			{//alle b Positionen
 				mainMenuButton_SinglePlayer.setBounds((width)/2 - 100,105,200,40);
 			  	mainMenuButton_MultiPlayer.setBounds((width)/2 - 100,150,200,40);
-			  	mainMenuButton_Option.setBounds((width)/2 - 100,195,200,40);
+			  	mainMenuButton_Credits.setBounds((width)/2 - 100,195,200,40);
 			  	mainMenuButton_Highscore.setBounds((width)/2 - 100,240,200,40);
 			  	mainMenuButton_Help.setBounds((width)/2 - 100,285,200,40);
 			  	mainMenuButton_Exit.setBounds((width)/2 - 100,330,200,40);
@@ -412,9 +432,9 @@ public class Menu{
 			  	
 			  	highscoreButton_Back.setBounds((width)/2 - 100, 350, 100, 20);
 			  	
-			    optionButton_Minus.setBounds((width)/2 - 50 ,100,50,20);
-			  	optionButton_Plus.setBounds((width)/2,100,50,20);
-			  	optionButton_Back.setBounds((width)/2 - 50 ,150,100,20);
+			  	creditsButton_Back.setBounds((width)/2 - 50 ,350,100,20);
+			  	
+			  	gameBoard_Back.setBounds((width)/2 - 50 ,(height/2) + 50,100,20);
 			  	
 			  	helpButton_Back.setBounds((width/2) -50, 350, 100, 50);
 			}
@@ -446,9 +466,7 @@ public class Menu{
 				HighscoreTextField_ONplayer2points.setBounds((width)/2, 270, 100, 20);
 				HighscoreTextField_ONplayer3points.setBounds((width)/2, 290, 100, 20);
 			
-				optionTextfield_Options.setBounds((width)/2 - 100,0,200,50);
-				optionTextField_Music.setBounds((width)/2 - 100,100,50,20);
-				optionTextfield_MusicField.setBounds((width)/2 + 50,100,50,20);
+				creditsTextfield_Options.setBounds((width)/2 - 100,0,200,50);
 				
 				helpTextField_Help.setBounds((width)/2 - 100,0,200,50);
 				
@@ -457,6 +475,7 @@ public class Menu{
 				gameBoard_Time.setBounds(width/2 - 100,height,200, 20);
 				gameBoard_sheeps2.setBounds(width - 120,height,50, 20);
 				gameBoard_sheepcounter2.setBounds(width - 70,height,50, 20);
+				gameboard_winner.setBounds((width)/2 - 50 ,(height/2) - 50,100,20);
 		  	}
 		  	
 		  	{//cb
@@ -469,6 +488,7 @@ public class Menu{
 		  	
 		  	{//ta
 		  		helpTextArea_Help.setBounds((width)/2 - 200, 100, 400, 200);
+		  		creditsTextArea_Credits.setBounds((width)/2 - 200, 100, 400, 200);
 		  	}
 		}
 		
@@ -489,10 +509,8 @@ public class Menu{
 			multiPlayerTextField_Map.setEditable(false);
 			multiPlayerTextField_Map.setBorder(BorderFactory.createEmptyBorder());
 			
-			optionTextfield_Options.setEditable(false);
-			optionTextfield_Options.setBorder(BorderFactory.createEmptyBorder());
-			optionTextField_Music.setEditable(false);
-			optionTextField_Music.setBorder(BorderFactory.createEmptyBorder());
+			creditsTextfield_Options.setEditable(false);
+			creditsTextfield_Options.setBorder(BorderFactory.createEmptyBorder());
 			
 			HighscoreTextField_Highscore.setEditable(false);
 			HighscoreTextField_Highscore.setBorder(BorderFactory.createEmptyBorder());
@@ -530,6 +548,8 @@ public class Menu{
 			helpTextArea_Help.setEditable(false);
 			helpTextArea_Help.setBorder(BorderFactory.createEmptyBorder());
 			
+			creditsTextArea_Credits.setEditable(false);
+			
 			gameBoard_sheeps1.setEditable(false);
 			gameBoard_sheeps1.setBackground(Color.WHITE);
 			gameBoard_sheeps1.setBorder(BorderFactory.createEmptyBorder());
@@ -546,6 +566,14 @@ public class Menu{
 			gameBoard_sheepcounter2.setEditable(false);
 			gameBoard_sheepcounter2.setBorder(BorderFactory.createEmptyBorder());
 			gameBoard_sheepcounter2.setBackground(Color.WHITE);
+			gameboard_winner.setEditable(false);
+			gameboard_winner.setBorder(BorderFactory.createEmptyBorder());
+			gameboard_winner.setBackground(Color.WHITE);
+		}
+		
+		{
+			gameBoard_Back.setVisible(false);
+			gameboard_winner.setVisible(false);
 		}
 		
 		{//alle Button actionListener
@@ -562,10 +590,10 @@ public class Menu{
 						setCurrentLabel(panelMultiPlayer);
 					}
 				});
-				mainMenuButton_Option.addActionListener(new ActionListener() {
+				mainMenuButton_Credits.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
-						setCurrentLabel(panelOptions);
+						setCurrentLabel(panelCredits);
 					}
 				});
 				mainMenuButton_Highscore.addActionListener(new ActionListener() {
@@ -593,6 +621,7 @@ public class Menu{
 					singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 						public void actionPerformed(ActionEvent arg0) {
+							input.flush();
 							gameBoard_sheepcounter2.setVisible(false);
 							gameBoard_sheeps2.setVisible(false);
 							setDifficulty((String)singlePlayerComboBox_Difficulty.getSelectedItem());
@@ -620,6 +649,7 @@ public class Menu{
 				multiPlayerButton_Start.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
+						input.flush();
 						gameBoard_sheepcounter2.setVisible(true);
 						gameBoard_sheeps2.setVisible(true);
 						setDifficulty("Mehrspieler");
@@ -644,19 +674,7 @@ public class Menu{
 			}
 			
 			{//o
-				optionButton_Minus.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent arg0) {
-						
-					}
-				});
-				optionButton_Plus.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent arg0) {
-						
-					}
-				});
-				optionButton_Back.addActionListener(new ActionListener() {
+				creditsButton_Back.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(panelMainMenu);
@@ -682,6 +700,19 @@ public class Menu{
 				});
 			}
 			
+			{
+				gameBoard_Back.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						setCurrentLabel(panelMainMenu);
+						gameBoard_Back.setVisible(false);
+						gameboard_winner.setVisible(false);
+						
+					}
+				});
+			}
+			
 			
 		}
 		
@@ -691,7 +722,7 @@ public class Menu{
 				panelMainMenu.add(mainMenuButton_Help);
 				panelMainMenu.add(mainMenuButton_Highscore);
 				panelMainMenu.add(mainMenuButton_MultiPlayer);
-				panelMainMenu.add(mainMenuButton_Option);
+				panelMainMenu.add(mainMenuButton_Credits);
 				panelMainMenu.add(mainMenuButton_SinglePlayer);
 			}
 			
@@ -721,14 +752,9 @@ public class Menu{
 				panelMultiPlayer.add(multiPlayerComboBox_Map);
 			}
 			
-			{//o
-				panelOptions.add(optionButton_Minus);
-				panelOptions.add(optionButton_Plus);
-				panelOptions.add(optionButton_Back);
-				
-				panelOptions.add(optionTextfield_Options);
-				panelOptions.add(optionTextField_Music);
-				panelOptions.add(optionTextfield_MusicField);
+			{//c
+				panelCredits.add(creditsButton_Back);
+				panelCredits.add(creditsTextArea_Credits);
 			}
 			
 			{//hs
@@ -765,6 +791,8 @@ public class Menu{
 				gameBoard.add(gameBoard_sheepcounter2);
 				gameBoard.add(gameBoard_sheeps1);
 				gameBoard.add(gameBoard_sheeps2);
+				gameBoard.add(gameBoard_Back);
+				gameBoard.add(gameboard_winner);
 			}
 			
 		}
@@ -773,7 +801,7 @@ public class Menu{
 			panelMainMenu.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
 			panelSinglePlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
 			panelMultiPlayer.setBounds(0, 0, jFrame.getWidth(), jFrame.getHeight());
-			panelOptions.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
+			panelCredits.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panelHighscore.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panelHelp.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			
@@ -784,7 +812,7 @@ public class Menu{
 			jFrame.add(panelMainMenu);
 			jFrame.add(panelSinglePlayer);
 			jFrame.add(panelMultiPlayer);
-			jFrame.add(panelOptions);
+			jFrame.add(panelCredits);
 			jFrame.add(panelHighscore);
 			jFrame.add(panelHelp);
 			jFrame.add(gameBoard);
