@@ -140,9 +140,6 @@ public class AI implements IAI{
 				}
 			}
 		}
-		else if(((ISheep)entity).isChained()) {
-			this.calcChainedSteps((ISheep)entity);
-		}
 		else {
 			//Normal thoughts
 			this.calcNextSteps((ISheep)entity);
@@ -166,23 +163,18 @@ public class AI implements IAI{
 			int tmp = RandomGenerator.getRandomNumber(1, 4);
 			//
 			for(int i=0; i<sheep.getThoughts().length; i++) {
-				sheep.getThoughts()[i] = tmp;
+				if(!sheep.isChained()) {
+					sheep.getThoughts()[i] = tmp;
+				}
+				else {
+					if(i%iq == 0) {
+						sheep.getThoughts()[i] = 0;
+					}
+					else {
+						sheep.getThoughts()[i] = tmp;
+					}
+				}
 			}
-		}
-	}
-
-	private void calcChainedSteps(ISheep sheep) {
-		int tmp = 0;
-		if(RandomGenerator.getPercentDistribution(iq, 7)) {
-			if(((IEntity)sheep).getPosX() <= 480) {
-				tmp = 2;
-			}
-			else {
-				tmp = 4;
-			}
-		}
-		for(int i=0; i<16; i++) {
-			sheep.getThoughts()[i] = tmp;
 		}
 	}
 
@@ -199,7 +191,7 @@ public class AI implements IAI{
 					collides = true;
 					((ISheep) entity).unscare();
 				}
-				if(entity.getPosY() <= unschearfe) {
+				if(entity.getPosY() <= unschearfe-8) {
 					possibleNextSteps = new int[]{3, 3, 3, 3, 3, 2, 4};
 					collides = true;
 					((ISheep)entity).unscare();
@@ -209,20 +201,9 @@ public class AI implements IAI{
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()+entity.getSpeed(),entity.getPosY())))
 				{
-					if(!entity.isChained()) {
-						possibleNextSteps = new int[]{1, 3, 4};
-						collides = true;
-						((ISheep) entity).unscare();
-					}
-					else {
-						collides = true;
-						if(entity.getPosY() <= 640/2) {
-							possibleNextSteps = new int[]{3};
-						}
-						else {
-							possibleNextSteps = new int[]{1};
-						}
-					}
+					possibleNextSteps = new int[]{1, 3, 4};
+					collides = true;
+					((ISheep) entity).unscare();
 				}
 				if(entity.getPosX() >= 960-unschearfe) {
 					possibleNextSteps = new int[]{4, 4, 4, 4, 4, 1, 3};
@@ -248,22 +229,12 @@ public class AI implements IAI{
 				entity.setRotation(((ISheep)entity).getThoughts()[0]);
 				if (!(this.collisionHandler.calcCollision(entity,entity.getPosX()-entity.getSpeed(),entity.getPosY())))
 				{
-					if(!entity.isChained()) {
-						possibleNextSteps = new int[]{1, 2, 3};
-						collides = true;
-						((ISheep) entity).unscare();
-					}
-					else {
-						collides = true;
-						if(entity.getPosY() <= 960/2) {
-							possibleNextSteps = new int[]{3};
-						}
-						else {
-							possibleNextSteps = new int[]{1};
-						}
-					}
+					possibleNextSteps = new int[]{1, 2, 3};
+					collides = true;
+					((ISheep) entity).unscare();
+
 				}
-				if(entity.getPosX() <= unschearfe) {
+				if(entity.getPosX() <= unschearfe-8) {
 					possibleNextSteps = new int[]{2, 2, 2, 2, 2, 1, 3};
 					collides = true;
 					((ISheep)entity).unscare();
