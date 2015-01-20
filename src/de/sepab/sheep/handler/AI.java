@@ -152,6 +152,13 @@ public class AI implements IAI{
 			((ISheep)entity).getThoughts()[i-1] = ((ISheep)entity).getThoughts()[i];
 			if(i+1==((ISheep)entity).getThoughts().length) ((ISheep)entity).getThoughts()[i] = 0;
 		}
+		//
+		if(((ISheep)entity).isChained()) {
+			if(RandomGenerator.getRandomNumberDistribution(100, 5) > iq) {
+				tmp = 0;
+			}
+		}
+		//
 		return tmp;
 	}
 
@@ -163,17 +170,7 @@ public class AI implements IAI{
 			int tmp = RandomGenerator.getRandomNumber(1, 4);
 			//
 			for(int i=0; i<sheep.getThoughts().length; i++) {
-				if(!sheep.isChained()) {
-					sheep.getThoughts()[i] = tmp;
-				}
-				else {
-					if(i%iq == 0) {
-						sheep.getThoughts()[i] = 0;
-					}
-					else {
-						sheep.getThoughts()[i] = tmp;
-					}
-				}
+				sheep.getThoughts()[i] = tmp;
 			}
 		}
 	}
