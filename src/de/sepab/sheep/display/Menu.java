@@ -238,7 +238,7 @@ public class Menu{
 	public void setDifficulty(String difficulty) {
 		switch (difficulty) {
 		case "Einfach":
-			ai.setIq(1);
+			ai.setIq(97);
 			ai.setScareLength(1);
 			dog.setBarkLength(150);
 			dog.setSpeed(8);
@@ -248,7 +248,7 @@ public class Menu{
 			sheep.setSpeed(1);
 			break;
 		case "Mittel":
-			ai.setIq(2);
+			ai.setIq(101);
 			ai.setScareLength(2);
 			dog.setBarkLength(100);
 			dog.setSpeed(4);
@@ -258,7 +258,7 @@ public class Menu{
 			sheep.setSpeed(1);
 			break;
 		case "Schwer":
-			ai.setIq(5);
+			ai.setIq(107);
 			ai.setScareLength(4);
 			dog.setBarkLength(50);
 			dog.setSpeed(2);
