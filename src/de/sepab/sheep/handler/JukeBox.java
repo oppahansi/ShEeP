@@ -12,7 +12,7 @@ public class JukeBox implements IJukeBox {
    public JukeBox(String filePath) {
 
       try {
-         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(filePath));
+         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(filePath));
          AudioFormat baseFormat = audioInputStream.getFormat();
          AudioFormat decodeFormat = new AudioFormat(
             AudioFormat.Encoding.PCM_SIGNED,

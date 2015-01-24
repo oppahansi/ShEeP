@@ -128,7 +128,10 @@ public class Menu{
 			+ "\r\n"
 			+ "Auf Anzahl: \r\n"
 			+ "In diesem Modus versucht der Spieler so schnell wie möglich eine \r\n"
-			+ "gewisse Anzahl an schafen einzufangen"
+			+ "gewisse Anzahl an schafen einzufangen \r\n"
+			+ "\r\n"
+			+ "Spieler1 : laufen: w,a,s,d bellen: b \r\n"
+			+ "Spieler2 : laufen: Pfeiltasten bellen: STRG \r\n"
 			),
 			
 			creditsTextArea_Credits = new JTextArea(
@@ -268,7 +271,7 @@ public class Menu{
 			sheep.setSpeed(2);
 			break;
 		default:
-			ai.setIq(2);
+			ai.setIq(97);
 			ai.setScareLength(1);
 			dog.setBarkLength(100);
 			dog.setSpeed(4);

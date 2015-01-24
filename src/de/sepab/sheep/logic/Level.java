@@ -166,6 +166,7 @@ public class Level implements ILevel, ActionListener{
 		
 		switch (gameModus) {
 		case ONTIME:
+			menu.setGameBoardTime(this.time - timer.getTime());
 			menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
 					 this.cageList.getFirst().getPosY(),
 					 ((ICage) this.cageList.getFirst()).getPosX2(),
@@ -179,6 +180,7 @@ public class Level implements ILevel, ActionListener{
 			}
 			break;
 		case ONCOUNT:
+			menu.setGameBoardTime(timer.getTime());
 			int count = this.collision.Count(this.cageList.getFirst().getPosX(),
 					 this.cageList.getFirst().getPosY(),
 					 ((ICage) this.cageList.getFirst()).getPosX2(),
@@ -193,6 +195,7 @@ public class Level implements ILevel, ActionListener{
 			}
 			break;
 		case MULTIPLAYER:
+			menu.setGameBoardTime(this.time - timer.getTime());
 			int sheepCount = this.collision.Count(this.cageList.getFirst().getPosX(),
 					 this.cageList.getFirst().getPosY(),
 					 ((ICage) this.cageList.getFirst()).getPosX2(),
@@ -231,7 +234,7 @@ public class Level implements ILevel, ActionListener{
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
-		menu.setGameBoardTime(timer.getTime());
+		
 //		count++;
 //		if(timer)
 	}

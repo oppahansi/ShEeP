@@ -50,6 +50,9 @@ public class Input implements KeyListener, IInput {
     		}
         	if (dog1[5] == true) {
         		((IDog)this.dogList.getFirst()).bark();
+        		if(!jukeBox.isRunning()) {
+    				jukeBox.play();
+    			}
     		}
         	if (dog2[1] == true) {
         		this.movement.move(this.dogList.getLast(), 1);
@@ -68,6 +71,9 @@ public class Input implements KeyListener, IInput {
     		}
         	if (dog2[5] == true) {
         		((IDog)this.dogList.getLast()).bark();
+        		if(!jukeBox.isRunning()) {
+					jukeBox.play();
+				}
     		}
 		}	
     }
@@ -116,50 +122,46 @@ public class Input implements KeyListener, IInput {
 //    	}
 //    	this.movement.move(this.dogList.getFirst(), 0);
     	switch (e.getKeyCode()) {
-    	case (KeyEvent.VK_UP):
+    	case (KeyEvent.VK_W):
     		dog1[1] = true;
     	break;
-    	case (KeyEvent.VK_RIGHT):
+    	case (KeyEvent.VK_D):
     		dog1[2] = true;
     	break;
-    	case (KeyEvent.VK_DOWN):
+    	case (KeyEvent.VK_S):
     		dog1[3] = true;
     	break;
-    	case (KeyEvent.VK_LEFT):
+    	case (KeyEvent.VK_A):
     		dog1[4] = true;
     	break;
-    	case (KeyEvent.VK_ENTER):
+    	case (KeyEvent.VK_B):
     		dog1[5] = true;
-			if(!jukeBox.isRunning()) {
-				jukeBox.play();
-			}
+			
     	break;
-    	case (KeyEvent.VK_W):
+    	case (KeyEvent.VK_UP):
     		if (this.dogList.size()>1) {
     			dog2[1] = true;
 			}
     	break;
-    	case (KeyEvent.VK_D):
+    	case (KeyEvent.VK_RIGHT):
     		if (this.dogList.size()>1) {
     			dog2[2] = true;
 			}
     	break;
-    	case (KeyEvent.VK_S):
+    	case (KeyEvent.VK_DOWN):
     		if (this.dogList.size()>1) {
     			dog2[3] = true;
 			}
     	break;
-    	case (KeyEvent.VK_A):
+    	case (KeyEvent.VK_LEFT):
     		if (this.dogList.size()>1) {
     			dog2[4] = true;
 			}
     	break;
-    	case (KeyEvent.VK_B):
+    	case (KeyEvent.VK_CONTROL):
     		if (this.dogList.size()>1) {
     			dog2[5] = true;
-				if(!jukeBox.isRunning()) {
-					jukeBox.play();
-				}
+				
 			}
     	break;
     	}
@@ -172,34 +174,34 @@ public class Input implements KeyListener, IInput {
     @Override
     public void keyReleased(KeyEvent e) {
     	switch (e.getKeyCode()) {
-    	case (KeyEvent.VK_UP):
+    	case (KeyEvent.VK_W):
     		dog1[1] = false;
     	break;
-    	case (KeyEvent.VK_RIGHT):
+    	case (KeyEvent.VK_D):
     		dog1[2] = false;
     	break;
-    	case (KeyEvent.VK_DOWN):
+    	case (KeyEvent.VK_S):
     		dog1[3] = false;
     	break;
-    	case (KeyEvent.VK_LEFT):
+    	case (KeyEvent.VK_A):
     		dog1[4] = false;
     	break;
-    	case (KeyEvent.VK_ENTER):
+    	case (KeyEvent.VK_B):
     		dog1[5] = false;
     	break;
-    	case (KeyEvent.VK_W):
+    	case (KeyEvent.VK_UP):
     		dog2[1] = false;
     	break;
-    	case (KeyEvent.VK_D):
+    	case (KeyEvent.VK_RIGHT):
     		dog2[2] = false;
     	break;
-    	case (KeyEvent.VK_S):
+    	case (KeyEvent.VK_DOWN):
     		dog2[3] = false;
     	break;
-    	case (KeyEvent.VK_A):
+    	case (KeyEvent.VK_LEFT):
     		dog2[4] = false;
     	break;
-    	case (KeyEvent.VK_B):
+    	case (KeyEvent.VK_CONTROL):
     		dog2[5] = false;
     	break;
     	}

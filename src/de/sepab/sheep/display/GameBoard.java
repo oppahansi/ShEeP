@@ -26,7 +26,7 @@ import de.sepab.sheep.logic.RandomGenerator;
 public class GameBoard extends JPanel{
 	
 	private static final String SHEEP = "/de/sepab/sheep/model/gfx/sheep_walk32x32.png";
-	private static final String DOGE = "/de/sepab/sheep/model/gfx/wolf32x32.png";
+	private static final String DOGE = "/de/sepab/sheep/model/gfx/neuwolf32x32.png";
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/powerup.png";
@@ -66,10 +66,26 @@ public class GameBoard extends JPanel{
 												{16,144},{80,144}, {144, 144},{208,144},
 												{16,208},{80,208}, {144, 208},{208,208},
 												};
-	private static final int COORDSDOGE[][] = {{0,8}, {32,8}, {64, 8}, {96,8},
-											   {0,96}, {32,96}, {64, 96}, {96,96},
-											   {0,136}, {32,136}, {64, 136}, {96,136},
-											   {0,224}, {32,224}, {64, 224}, {96,224},};
+	private static final int COORDSDOGE[][] = {{0,0}, {32,0}, {64,0}, {96,0},
+											   {0,32}, {32,32}, {64,32}, {96,32},
+											   {0,64}, {32,64}, {64,64}, {96,64},
+											   {0,96}, {32,96}, {64,96}, {96,96},
+											   
+											   {128,0}, {160,0}, {192,0}, {224,0},
+											   {128,32}, {160,32}, {192,32}, {224,32},
+											   {128,64}, {160,64}, {192,64}, {224,64},
+											   {128,96}, {160,96}, {192,96}, {224,96},
+												};
+			
+			
+			
+			
+			
+			
+//											  {{0,8}, {32,8}, {64, 8}, {96,8},
+//											   {0,96}, {32,96}, {64, 96}, {96,96},
+//											   {0,136}, {32,136}, {64, 136}, {96,136},
+//											   {0,224}, {32,224}, {64, 224}, {96,224},};
 	
 	
 	
@@ -93,6 +109,8 @@ public class GameBoard extends JPanel{
 	    										  {192,160},{224,160},{256,160},
 	    										  
 	    										  {96,160},{128,160},{160,160}, //1x1 obstacles
+	    										  
+	    										  {0,160},{32,160} //blau rot
 	};
 	private static final int COORDSFLOOR[][] = {{0,160},{32,160},{64,160}};
 	private static final int COORDSPOWERUP[][] = {{0,0}};
@@ -167,6 +185,12 @@ public class GameBoard extends JPanel{
     public void addObstaclesToBackground(Graphics g){
     	for (IEntity o : this.level.getObstacleList()) {
 			g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[o.getSpritePos()][0], COORDSOBSTACLE[o.getSpritePos()][1], textureLength, textureLength), o.getPosX(), o.getPosY(), null);
+		}
+    	if (level.getCageList().size() != 0) {
+			g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[51][0], COORDSOBSTACLE[51][1], textureLength, textureLength), level.getCageList().getFirst().getPosX(), level.getCageList().getFirst().getPosY() - 32, null);
+		}
+    	if (level.getCageList().size() > 1) {
+    		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[52][0], COORDSOBSTACLE[52][1], textureLength, textureLength), level.getCageList().getLast().getPosX(), level.getCageList().getLast().getPosY() - 32, null);
 		}
     }
     
@@ -613,7 +637,11 @@ public class GameBoard extends JPanel{
     private void paintDog(Graphics2D g) {
     	if (level.getDogList() != null) {
     		for (IEntity dog : level.getDogList()) {
-        		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos()][0], COORDSDOGE[dog.getSpritePos()][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+    			if (dog == level.getDogList().getFirst()) {
+            		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos()][0], COORDSDOGE[dog.getSpritePos()][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+				} else {
+					g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos() + 16][0], COORDSDOGE[dog.getSpritePos() + 16][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+				}
     		}
 		}
     }

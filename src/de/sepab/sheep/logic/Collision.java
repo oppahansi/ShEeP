@@ -252,7 +252,7 @@ public class Collision implements ICollision{
 								menu.setGameBoard_PowerUpNamePlayer2Text("Verlangsamung");
 							}
 							System.out.println("Entity -> SLOW");
-							entity.setSpeed(entity.getSpeed() * 2);
+							entity.setSpeed(entity.getSpeed() / 2);
 							Powers.remove(i);
 							jukeBox.play();
 
