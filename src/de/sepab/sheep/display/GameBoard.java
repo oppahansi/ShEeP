@@ -77,6 +77,11 @@ public class GameBoard extends JPanel{
 											   {128,32}, {160,32}, {192,32}, {224,32},
 											   {128,64}, {160,64}, {192,64}, {224,64},
 											   {128,96}, {160,96}, {192,96}, {224,96},
+											   
+											   {256,0}, {288,0}, {320,0}, {342,0},
+											   {256,32}, {288,32}, {320,32}, {342,32},
+											   {256,64}, {288,64}, {320,64}, {342,64},
+											   {256,96}, {288,96}, {320,96}, {342,96},
 												};
 			
 			
@@ -193,13 +198,13 @@ public class GameBoard extends JPanel{
     public void addObstaclesToBackground(Graphics g){
     	for (IEntity o : this.level.getObstacleList()) {
 			g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[o.getSpritePos()][0], COORDSOBSTACLE[o.getSpritePos()][1], textureLength, textureLength), o.getPosX(), o.getPosY(), null);
+		}if (level.getCageList().size() > 1) {
+				g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[51][0], COORDSOBSTACLE[51][1], textureLength, textureLength), level.getCageList().getFirst().getPosX(), level.getCageList().getFirst().getPosY() - 32, null);			
+	    		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[52][0], COORDSOBSTACLE[52][1], textureLength, textureLength), level.getCageList().getLast().getPosX(), level.getCageList().getLast().getPosY() - 32, null);
+		} else {
+			
 		}
-    	if (level.getCageList().size() != 0) {
-			g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[51][0], COORDSOBSTACLE[51][1], textureLength, textureLength), level.getCageList().getFirst().getPosX(), level.getCageList().getFirst().getPosY() - 32, null);
-		}
-    	if (level.getCageList().size() > 1) {
-    		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[52][0], COORDSOBSTACLE[52][1], textureLength, textureLength), level.getCageList().getLast().getPosX(), level.getCageList().getLast().getPosY() - 32, null);
-		}
+    	
     }
     
     public void loadMap(int map, int modus, int difficulty) {
@@ -646,11 +651,16 @@ public class GameBoard extends JPanel{
     private void paintDog(Graphics2D g) {
     	if (level.getDogList() != null) {
     		for (IEntity dog : level.getDogList()) {
-    			if (dog == level.getDogList().getFirst()) {
-            		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos()][0], COORDSDOGE[dog.getSpritePos()][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+    			if (level.getDogList().size() > 1) {
+    				if (dog == level.getDogList().getFirst()) {
+                		g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos() + 16][0], COORDSDOGE[dog.getSpritePos() + 16][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+    				} else {
+    					g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos() + 32][0], COORDSDOGE[dog.getSpritePos() + 32][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+    				}
 				} else {
-					g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos() + 16][0], COORDSDOGE[dog.getSpritePos() + 16][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
+					g.drawImage(IMAGEDOGE.getSubimage(COORDSDOGE[dog.getSpritePos()][0], COORDSDOGE[dog.getSpritePos()][1], textureLength, textureLength), dog.getPosX(), dog.getPosY(), textureLength, textureLength, null);
 				}
+    			
     		}
 		}
     }
