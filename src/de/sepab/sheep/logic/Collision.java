@@ -9,27 +9,31 @@ import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.ICage;
+import de.sepab.sheep.entities.PowerUpIcon;
 import de.sepab.sheep.handler.Constants;
 import de.sepab.sheep.handler.IJukeBox;
 import de.sepab.sheep.handler.JukeBox;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages,PowerUpIcons;
 	private int length,height;
 	private IJukeBox jukeBox;
 	private Menu menu;
+	private Level level;
 
-	public Collision(LinkedList<IEntity> DogList,LinkedList<IEntity> SheepList,LinkedList<IEntity> PowerUpList,LinkedList<IEntity> ObstacleList,LinkedList<IEntity> CageList,int x,int y, Menu menu) {
+	public Collision(ILevel level, int x,int y, Menu menu) {
 		//Listen erstellen
 
 		length=x;
 		height=y;
-		Dogs = DogList;
-		Sheeps = SheepList;
-		Powers = PowerUpList;
-		Obstacles = ObstacleList;
-		Cages = CageList;
+		this.level = (Level)level;
+		Dogs = this.level.getDogList();
+		Sheeps = this.level.getSheepList();
+		Powers = this.level.getPowerUpList();
+		Obstacles = this.level.getObstacleList();
+		Cages = this.level.getCageList();
+		PowerUpIcons = this.level.getPowerUpIconList();
 		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
 		this.menu = menu;
 	}
@@ -191,6 +195,7 @@ public class Collision implements ICollision{
 					   if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
 							if (entity instanceof IDog) {
 								int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
+								level.addPowerUpIcon(Sheeps.get(sheepPosInList).getPosX() + 8, Sheeps.get(sheepPosInList).getPosY() + 8, 4);
 								if (entity == Dogs.getFirst()) {
 									Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
 									Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
@@ -207,6 +212,7 @@ public class Collision implements ICollision{
 								System.out.println("Sheep -> SHEEP BEAM out");
 								for (IEntity sheep : Sheeps) {
 									if (sheep.isChained()) {
+										level.addPowerUpIcon(sheep.getPosX() + 8, sheep.getPosY() + 8, 4);
 										portSheep(sheep);
 										break;
 									}
@@ -218,6 +224,7 @@ public class Collision implements ICollision{
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_DEAF) {
 							if(entity instanceof IDog) {
 								System.out.println("Dog -> SUPERBARK");
+								level.addPowerUpIcon(entity.getPosX() + 8, entity.getPosY() + 8, 3);
 								if (entity == Dogs.getFirst()) {
 									menu.setGameBoard_PowerUpNamePlayer1Text("Super bellen");
 								} else {
@@ -228,6 +235,7 @@ public class Collision implements ICollision{
 								jukeBox.play();
 							}
 							else {
+								level.addPowerUpIcon(entity.getPosX() + 8, entity.getPosY() + 8, 2);
 								System.out.println("Sheep -> DEAF");
 								((ISheep) entity).deafy(true);
 								Powers.remove(i);
@@ -235,6 +243,7 @@ public class Collision implements ICollision{
 							}
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SPEED) {
+							level.addPowerUpIcon(entity.getPosX() + 8, entity.getPosY() + 8, 0);
 							if (entity == Dogs.getFirst()) {
 								menu.setGameBoard_PowerUpNamePlayer1Text("Schnelligkeit");
 							} else if (entity == Dogs.getLast()) {
@@ -246,6 +255,7 @@ public class Collision implements ICollision{
 							jukeBox.play();
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_SLOW) {
+							level.addPowerUpIcon(entity.getPosX() + 8, entity.getPosY() + 8, 1);
 							if (entity == Dogs.getFirst()) {
 								menu.setGameBoard_PowerUpNamePlayer1Text("Verlangsamung");
 							} else if (entity == Dogs.getLast()) {
@@ -258,6 +268,7 @@ public class Collision implements ICollision{
 
 						}
 						else if (Powers.get(i).getType() == Constants.POWERUP_TYPE_CONFUSION) {
+							level.addPowerUpIcon(entity.getPosX() + 8, entity.getPosY() + 8, 5);
 							if (entity == Dogs.getFirst()) {
 								menu.setGameBoard_PowerUpNamePlayer1Text("Verwirrung");
 							} else if (entity == Dogs.getLast()) {

@@ -30,6 +30,7 @@ public class GameBoard extends JPanel{
 	private static final String OBSTACLE = "/de/sepab/sheep/model/gfx/fence.png";
 	private static final String FLOOR = "/de/sepab/sheep/model/gfx/grass.png";
 	private static final String POWERUP = "/de/sepab/sheep/model/gfx/powerup.png";
+	private static final String POWERUPICON = "/de/sepab/sheep/model/gfx/powerUpImages.png";
 	
 	private static final String SINGLEPLAYERMAP11 = "/de/sepab/sheep/model/gfx/map11SinglePlayer.png";
 	private static final String SINGLEPLAYERMAP12 = "/de/sepab/sheep/model/gfx/map12SinglePlayer.png";
@@ -51,6 +52,7 @@ public class GameBoard extends JPanel{
 	private static final BufferedImage IMAGEOBSTACLE = optimize(load(OBSTACLE));
 	private static final BufferedImage IMAGEFLOOR = optimize(load(FLOOR));
 	private static final BufferedImage IMAGEPOWERUP = optimize(load(POWERUP));
+	private static final BufferedImage IMAGEPOWERUPICON = optimize(load(POWERUPICON));
 	
 	private static final BufferedImage[] IMAGESINGLEPLAYERMAP1 = {optimize(load(SINGLEPLAYERMAP11)), optimize(load(SINGLEPLAYERMAP12)), optimize(load(SINGLEPLAYERMAP13))};
 	private static final BufferedImage[] IMAGESINGLEPLAYERMAP2 = {optimize(load(SINGLEPLAYERMAP21)), optimize(load(SINGLEPLAYERMAP22)), optimize(load(SINGLEPLAYERMAP23))};
@@ -114,6 +116,12 @@ public class GameBoard extends JPanel{
 	};
 	private static final int COORDSFLOOR[][] = {{0,160},{32,160},{64,160}};
 	private static final int COORDSPOWERUP[][] = {{0,0}};
+	private static final int COORDSPOWERUPICON[][] = {{0,0},{0,16},{0,32},{0,48},{0,64},{0,80},{0,96},{0,112},{0,128},{0,144},
+													  {16,0},{16,16},{16,32},{16,48},{16,64},{16,80},{16,96},{16,112},{16,128},{16,144},
+													  {32,0},{32,16},{32,32},{32,48},{32,64},{32,80},{32,96},{32,112},{32,128},{32,144},
+													  {48,0},{48,16},{48,32},{48,48},{48,64},{48,80},{48,96},{48,112},{48,128},{48,144},
+													  {64,0},{64,16},{64,32},{64,48},{64,64},{64,80},{64,96},{64,112},{64,128},{64,144},
+													  {80,0},{80,16},{80,32},{80,48},{80,64},{80,80},{80,96},{80,112},{80,128},{80,144},};
 
 	
 	private static final int SHEEPCOLOR[][] = {{255,255,255}};
@@ -615,6 +623,7 @@ public class GameBoard extends JPanel{
     	paintSheep(g);
     	paintDog(g);
     	paintPowerUp(g);
+    	paintPowerUpIcons(g);
     }
     
     private void paintSheep(Graphics2D g) {
@@ -655,6 +664,16 @@ public class GameBoard extends JPanel{
     		}
 		}
     }
+    
+    private void paintPowerUpIcons(Graphics2D g) {
+    	if (level.getPowerUpIconList() != null) {
+    		for (IEntity powerUpIcon : level.getPowerUpIconList()) {
+				g.drawImage(IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[powerUpIcon.getSpritePos()][0], COORDSPOWERUPICON[powerUpIcon.getSpritePos()][1], textureLength/2, textureLength/2), powerUpIcon.getPosX(), powerUpIcon.getPosY(), textureLength/2, textureLength/2, null);
+//				g.drawImage(IMAGEPOWERUPICON.getSubimage(0, 0, 16, 16), powerUpIcon.getPosX(), powerUpIcon.getPosY(), 16, 16, null);
+    		}
+		}
+    }
+    
     
     private static BufferedImage load(String str) {
 

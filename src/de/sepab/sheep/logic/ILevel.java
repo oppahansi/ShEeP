@@ -21,6 +21,8 @@ public interface ILevel {
 	public LinkedList<IEntity> getObstacleList();
 	
 	public LinkedList<IEntity> getCageList();
+	
+	public LinkedList<IEntity> getPowerUpIconList();
 
 	public void resetLists();
 	
@@ -36,6 +38,8 @@ public interface ILevel {
 	
 	public void addCage(int x, int y, int x2, int y2);
 	
+	public void addPowerUpIcon(int x, int y, int type);
+	
 	public void removeDog(IEntity entity);
 	
 	public void removeSheep(IEntity entity);
@@ -45,6 +49,8 @@ public interface ILevel {
 	public void removeObstacle(IEntity entity);
 	
 	public void removeCage(IEntity entity);
+	
+	public void removePowerUpIcon(IEntity entity);
 
 	public void getReferences(AI ai, GameBoard gameBoard, ITimer timer,IInput input, ICollision collision, Menu menu, String name, GameModus gameModus);
 	

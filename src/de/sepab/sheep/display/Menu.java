@@ -42,7 +42,7 @@ public class Menu{
 
 	private IJukeBox jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/background.wav");
 
-	private  JFrame jFrame = new JFrame ("ShEeP version pre-pre-alpha 0.0.1"); // das Fenster
+	private  JFrame jFrame = new JFrame ("ShEeP version pre-pre-alpha 0.0.2"); // das Fenster
 	// alle menue screens
 	public  JPanel panelMainMenu = new JPanel(), 
 						 panelSinglePlayer = new JPanel(), 
@@ -248,7 +248,7 @@ public class Menu{
 			dog.setPowerUpLife(1);
 			sheep.setPowerUpLife(1);
 			sheep.setScareSpeed(4);
-			sheep.setSpeed(1);
+			sheep.setSpeed(2);
 			break;
 		case "Mittel":
 			ai.setIq(101);
@@ -258,17 +258,17 @@ public class Menu{
 			dog.setPowerUpLife(2);
 			sheep.setPowerUpLife(3);
 			sheep.setScareSpeed(2);
-			sheep.setSpeed(1);
+			sheep.setSpeed(2);
 			break;
 		case "Schwer":
 			ai.setIq(107);
 			ai.setScareLength(4);
 			dog.setBarkLength(50);
-			dog.setSpeed(2);
+			dog.setSpeed(4);
 			dog.setPowerUpLife(2);
 			sheep.setPowerUpLife(5);
 			sheep.setScareSpeed(2);
-			sheep.setSpeed(2);
+			sheep.setSpeed(4);
 			break;
 		default:
 			ai.setIq(97);

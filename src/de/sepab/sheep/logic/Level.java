@@ -27,6 +27,7 @@ public class Level implements ILevel, ActionListener{
 	private LinkedList<IEntity> powerUpList = new LinkedList<>();
 	private LinkedList<IEntity> obstacleList = new LinkedList<>();
 	private LinkedList<IEntity> cageList = new LinkedList<>();
+	private LinkedList<IEntity> PowerUpIconList = new LinkedList<>();
 
 
 	private GameModus gameModus = GameModus.ONTIME;
@@ -74,6 +75,12 @@ public class Level implements ILevel, ActionListener{
 	public LinkedList<IEntity> getCageList() {
 		return cageList;
 	}
+	
+	public LinkedList<IEntity> getPowerUpIconList() {
+		return this.PowerUpIconList;
+	}
+	
+	
 
 	public Level() {
 		entitySpawner = new EntitySpawner();
@@ -109,6 +116,14 @@ public class Level implements ILevel, ActionListener{
 	public void addCage(int x, int y, int x2, int y2) {
 		cageList.add(new Cage(x, y, x2, y2));
 	}
+	
+	public void addPowerUpIcon(int x, int y, int type) {
+		this.PowerUpIconList.add(new PowerUpIcon(x, y, type));
+	}
+	
+	
+	
+	
 
 	public void getGameBaord(GameBoard gameBoard){
 		this.gameBoard = gameBoard;
@@ -231,6 +246,7 @@ public class Level implements ILevel, ActionListener{
 		
 		this.reducePowerUpTime();
 		this.unscareSheeps();
+		this.UpdatePowerUpIcons();
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
@@ -247,13 +263,13 @@ public class Level implements ILevel, ActionListener{
 				 return i;
 	}
 
-	@Override
+
 	public void TimerStart() {
 		swingTimer.start();
 		timer.reset();
 	}
 
-	@Override
+
 	public void resetLists() {
 		this.dogList.clear();
 		this.sheepList.clear();
@@ -262,33 +278,50 @@ public class Level implements ILevel, ActionListener{
 		this.cageList.clear();
 	}
 
-	@Override
+
 	public void removeDog(IEntity entity) {
 		dogList.remove(entity);
 		
 	}
 
-	@Override
 	public void removeSheep(IEntity entity) {
 		sheepList.remove(entity);
 	}
 
-	@Override
 	public void removePowerUp(IEntity entity) {
 		powerUpList.remove(entity);
 	}
 
-	@Override
 	public void removeObstacle(IEntity entity) {
 		obstacleList.remove(entity);
 	}
 
-	@Override
 	public void removeCage(IEntity entity) {
 		cageList.remove(entity);
 	}
+	
+	public void removePowerUpIcon(IEntity entity) {
+		this.PowerUpIconList.remove(entity);
+	}
+	
+	private void UpdatePowerUpIcons() {
+		for (IEntity powerUpIcon: PowerUpIconList) {
+			((IPowerUpIcon)powerUpIcon).setLife(((IPowerUpIcon)powerUpIcon).getLife() - 1);
+		}
+		int temp = PowerUpIconList.size();
+		int count = 0;
+		for (int i = 0; i < temp; i++) {
+			if (((IPowerUpIcon)PowerUpIconList.get(i - count)).getLife() <= 3) {
+				count++;
+				PowerUpIconList.remove(PowerUpIconList.get(i));
+			}
+		}
+		for (IEntity powerUpIcon: PowerUpIconList) {
+			((IPowerUpIcon)powerUpIcon).calculateSprite();
+		}
+	}
 
-	@Override
+
 	public void resetLevel() {
 		this.resetLists();
 		this.swingTimer.restart();
@@ -296,5 +329,9 @@ public class Level implements ILevel, ActionListener{
 		this.timer.reset();
 	}
 }
+	
+
+	
+	
 
 
