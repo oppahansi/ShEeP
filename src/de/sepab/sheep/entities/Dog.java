@@ -34,7 +34,10 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+        					if (!((ISheep)i).isDeaf()) {
+        						((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+							}
+        					
         				}
         			}
         		}
@@ -47,7 +50,9 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j>y-barkLength; j--) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+        					if (!((ISheep)i).isDeaf()) {
+        						((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+							}
         				}
         			}
         		}
@@ -60,7 +65,9 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+        					if (!((ISheep)i).isDeaf()) {
+        						((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+							}
         				}
         			}
         		}
@@ -73,7 +80,9 @@ public class Dog extends Entity implements IDog {
         		for(int j=y; j<y+barkLength; j++) {
         			for(IEntity i : this.sheeps) {
         				if(i.getPosX()==k && i.getPosY()==j) {
-        					((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+        					if (!((ISheep)i).isDeaf()) {
+        						((ISheep)i).scare(true,this.getPosX(), this.getPosY());
+							}
         				}
         			}
         		}

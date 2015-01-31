@@ -109,6 +109,16 @@ public class Level implements ILevel, ActionListener{
         powerUpList.add(entitySpawner.createPowerUp(posX, posY));
     }
 	
+	public void spawnSheep() {
+		 int posX = RandomGenerator.getRandomNumber(0, menu.getWidth() - 32);
+	     int posY = RandomGenerator.getRandomNumber(0, menu.getHeight() - 32);
+	     if (!collision.isoccupied(posX, posY)) {
+	        spawnSheep();
+	        return;
+		}
+	   addSheep(posX, posY, menu.getSheep().getSpeed(), menu.getSheep().getPowerUpLife(), menu.getSheep().getScareSpeed());
+	}
+	
 	public void addObstacle(int x, int y, int sprite) {
 		obstacleList.add(new Obstacle(x, y, sprite));
 	}
@@ -182,10 +192,14 @@ public class Level implements ILevel, ActionListener{
 		switch (gameModus) {
 		case ONTIME:
 			menu.setGameBoardTime(this.time - timer.getTime());
-			menu.setGameBoardSheep1(this.collision.Count(this.cageList.getFirst().getPosX(),
+			int sheep = this.collision.Count(this.cageList.getFirst().getPosX(),
 					 this.cageList.getFirst().getPosY(),
 					 ((ICage) this.cageList.getFirst()).getPosX2(),
-					 ((ICage)this.cageList.getFirst()).getPosY2()));
+					 ((ICage)this.cageList.getFirst()).getPosY2());
+			menu.setGameBoardSheep1(sheep);
+			if (sheep >= sheepList.size()) {
+				spawnSheep();
+			}
 			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
 				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_TIME);
@@ -221,6 +235,9 @@ public class Level implements ILevel, ActionListener{
 					 ((ICage)this.cageList.getLast()).getPosY2());
 					 menu.setGameBoardSheep1(sheepCount/1000);
 					 menu.setGameBoardSheep2(sheepCount%1000);
+					 if ((sheepCount/1000 + sheepCount%1000 + 2) >= sheepList.size()) {
+							spawnSheep();
+						}
 			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
 				menu.getJukeBox().stop();
