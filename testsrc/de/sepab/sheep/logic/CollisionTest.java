@@ -12,7 +12,7 @@ public class CollisionTest {
 	Sheep sheep1 = new Sheep (80, 80, 1, 0, 1);
 	Sheep sheep2 = new Sheep (160,160, 1, 0, 1);
 	Sheep sheep3 = new Sheep (800, 800, 1, 0, 1);
-	Sheep sheep4 = new Sheep (300, 300, 1, 0, 1);
+	Sheep sheep4 = new Sheep (350, 350, 1, 0, 1);
 	Dog dog1 = new Dog (300, 300, 1, 0, null, 1);
 	Dog dog2 = new Dog (400, 400, 1, 0, null, 1);
 	LinkedList<IEntity> dogList = new LinkedList<IEntity>();
@@ -31,12 +31,12 @@ public class CollisionTest {
 		sheepList.add(sheep1);
 		sheepList.add(sheep2);
 		sheepList.add(sheep3);
-		int counted = c.Count(40,40, 400, 400);
+		int counted = c.Count(40, 40, 400, 400);
 		int expected = 2;
 		assertEquals ("Zwei Schafe im Gehege", expected, counted);
 		sheepList.add(sheep4);
 		expected = 3;
-		counted = c.Count(40,40, 400, 400);
+		counted = c.Count(40, 40, 400, 400);
 		assertEquals ("Drei Schafe im Gehege", expected, counted);
 	}
 	
