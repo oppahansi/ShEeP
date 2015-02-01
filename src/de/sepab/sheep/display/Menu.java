@@ -52,6 +52,7 @@ public class Menu{
 						 panelHelp = new JPanel();
 	
 	public  GameBoard gameBoard;
+	
 	//alle buttons
 	public  JButton mainMenuButton_SinglePlayer = new JButton("Einzelspieler"), //mm = mainmenu & b=button
 						  	mainMenuButton_MultiPlayer = new JButton("Mehrspieler"),
@@ -71,7 +72,8 @@ public class Menu{
 						 
 						  	creditsButton_Back = new JButton("Zurück"),
 						  	
-						  gameBoard_Back = new JButton("Zurück"),
+						  gameBoard_MultiplayerBack = new JButton("Zurück"),
+							gameBoard_SingleplayerBack = new JButton("Zurück"),
 						  	
 						  helpButton_Back = new JButton("Zurück");//h = help
 	
@@ -80,7 +82,7 @@ public class Menu{
 	//alle textfields
 	public  JTextField singlePlayerTextField_Singleplayer = new JTextField("Einzelspieler"),//tf = textfield
 							 	singlePlayerTextField_Map = new JTextField("Karte:"),
-							 	singlePlayerTextField_Difficulty = new JTextField("Schwierigkeit:"),
+							 	singlePlayerTextField_Difficulty = new JTextField("Level:"),
 							 	singlePlayerTextField_Name = new JTextField("Name:"),
 							 	singlePlayerTextField_NameField = new JTextField(),
 							 	singlePlayerTextField_Modus = new JTextField("Modus:"),
@@ -117,7 +119,8 @@ public class Menu{
 								gameBoard_PowerUpPlayer1 = new JTextField("letztes PowerUp:"),
 								gameBoard_PowerUpNamePlayer1 = new JTextField(),
 								gameBoard_PowerUpPlayer2 = new JTextField("letztes PowerUp:"),
-								gameBoard_PowerUpNamePlayer2 = new JTextField()
+								gameBoard_PowerUpNamePlayer2 = new JTextField(),
+								gameBoard_newHighscore = new JTextField()
 							;
 	//alle textareas
 	
@@ -147,20 +150,40 @@ public class Menu{
 	public  Font basicFont = new Font(Font.DIALOG, Font.PLAIN, 12),
 					   headingFont = new Font(Font.DIALOG, Font.BOLD, 24);
 	
-	public  String[] singlePlayerSelection_Map = {"Karte1","Karte2","Karte3"},
-						   		singlePlayerSelection_Difficulty ={"Einfach","Mittel","Schwer"},
+	public  String[] 	   singlePlayerSelection_Map = {"Karte1","Karte2","Karte3"},
+						   		singlePlayerSelection_Difficulty ={"Level 1","Level 2","Level 3"},
 						   		singlePlayerSelection_Modus = {"Auf Zeit", "Auf Anzahl"},
 						   
-						   multiPlayerSelection_Map = {"Karte1", "Karte2"};
+						   multiPlayerSelection_Map = {"Karte1", "Karte2"},
+						   
+						   levelTooltip = {"Beende eine Karte auf Level 1 um Level 2 freizuschalten.", 
+										   "Beende eine Karte auf Level 2 um Level 3 freizuschalten.", 
+										   "Alle Level freigeschaltet."},
+										   
+						   modusTooltip = {"In diesem Modus versucht der Spieler soviele Schafe wie möglich in einer gewissen Zeit einzufangen \r\n", 
+											 "In diesem Modus versucht der Spieler so schnell wie möglich eine gewisse Anzahl an schafen einzufangen \r\n"};
 	
 	public  ImageIcon[] singlePlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagesingleplayermap1(0)), 
 														 new ImageIcon(GameBoard.getImagesingleplayermap2(0)), 
 														 new ImageIcon(GameBoard.getImagesingleplayermap3(0))},
 														 
 						multiPlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagemultiplayermap1()), 
-														new ImageIcon(GameBoard.getImagemultiplayermap2())};
+														new ImageIcon(GameBoard.getImagemultiplayermap2())},
+														
+						powerUpImageIcons = {new ImageIcon(GameBoard.getImagePowerUpSpeed()),
+											 new ImageIcon(GameBoard.getImagePowerUpSlow()),
+											 new ImageIcon(GameBoard.getImagePowerUpDeaf()),
+											 new ImageIcon(GameBoard.getImagePowerUpSuperBark()),
+											 new ImageIcon(GameBoard.getImagePowerUpTeleport()),
+											 new ImageIcon(GameBoard.getImagePowerUpKonfusion())};
 	
 
+	public JLabel helpLabel_imageSpeed = new JLabel(powerUpImageIcons[0]),
+				  	helpLabel_imageSlow = new JLabel(powerUpImageIcons[1]),
+				  	helpLabel_imageDeaf = new JLabel(powerUpImageIcons[2]),
+				  	helpLabel_imageSuperBark = new JLabel(powerUpImageIcons[3]),
+				  	helpLabel_imageTeleport = new JLabel(powerUpImageIcons[4]),
+				  	helpLabel_imageKonfusion = new JLabel(powerUpImageIcons[5]);
 	
 
 	
@@ -172,6 +195,8 @@ public class Menu{
 								singlePlayerComboBox_Difficulty = new JComboBox(singlePlayerSelection_Difficulty),
 								singlePlayerComboBox_Modus = new JComboBox(singlePlayerSelection_Modus),
 							
+							highscoreComboBox_Map = new JComboBox(singlePlayerMapArray),	
+								
 							multiPlayerComboBox_Map = new JComboBox(multiPlayerMapArray);
 							
 							
@@ -194,6 +219,7 @@ public class Menu{
 	private Menu menu = this;
 	private Dog dog = new Dog(0, 0, 1, 1, null, 1);
 	private Sheep sheep = new Sheep(0, 0, 1, 1, 1);
+	private int map;
 
 	//Methode zum swtichen der screens
 	public  void setCurrentLabel(JPanel panel) {
@@ -240,7 +266,7 @@ public class Menu{
 	
 	public void setDifficulty(String difficulty) {
 		switch (difficulty) {
-		case "Einfach":
+		case "Level 1":
 			ai.setIq(97);
 			ai.setScareLength(1);
 			dog.setBarkLength(150);
@@ -250,7 +276,7 @@ public class Menu{
 			sheep.setScareSpeed(4);
 			sheep.setSpeed(2);
 			break;
-		case "Mittel":
+		case "Level 2":
 			ai.setIq(101);
 			ai.setScareLength(2);
 			dog.setBarkLength(100);
@@ -260,7 +286,7 @@ public class Menu{
 			sheep.setScareSpeed(2);
 			sheep.setSpeed(2);
 			break;
-		case "Schwer":
+		case "Level 3":
 			ai.setIq(107);
 			ai.setScareLength(4);
 			dog.setBarkLength(50);
@@ -283,28 +309,66 @@ public class Menu{
 		}
 	}
 	
+	
+	
 	public void setMultiPlayerEndScreen(String winner){
-		gameBoard_Back.setVisible(true);
 		gameBoard_Winner.setText(winner);
+		gameBoard_MultiplayerBack.setVisible(true);
+		gameBoard_Winner.setVisible(true);
+	}
+	
+	public void setSinglePlayerEndScreen(String winner, int count, String Modus, boolean newHighscore){
+	
+		if (newHighscore) {
+			gameBoard_newHighscore.setText("Neuer Highscore!");
+		} else {
+			gameBoard_newHighscore.setText("Kein Highscore.");
+		}
+		gameBoard_Winner.setText(winner + ": " + count + " " + Modus);
+		gameBoard_SingleplayerBack.setVisible(true);
+		gameBoard_newHighscore.setVisible(true);
 		gameBoard_Winner.setVisible(true);
 	}
 	
 	public  void setHighscore(){
+		int map = highscoreComboBox_Map.getSelectedIndex();
 		dataLoader.loadHighscore();
-		int[] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
-		String[] onTimeName = dataLoader.getTimeNames(), onCountName = dataLoader.getCountNames();
-		HighscoreTextField_OTplayer1points.setText(onTime[2] + " Punkte");
-		HighscoreTextField_OTplayer2points.setText(onTime[1] + " Punkte");
-		HighscoreTextField_OTplayer3points.setText(onTime[0] + " Punkte");
-		HighscoreTextField_OTplayer1.setText(onTimeName[2]);
-		HighscoreTextField_OTplayer2.setText(onTimeName[1]);
-		HighscoreTextField_OTplayer3.setText(onTimeName[0]);
-		HighscoreTextField_ONplayer1points.setText(onCount[2] + " Punkte");
-		HighscoreTextField_ONplayer2points.setText(onCount[1] + " Punkte");
-		HighscoreTextField_ONplayer3points.setText(onCount[0] + " Punkte");
-		HighscoreTextField_ONplayer1.setText(onCountName[2]);
-		HighscoreTextField_ONplayer2.setText(onCountName[1]);
-		HighscoreTextField_ONplayer3.setText(onCountName[0]);
+		int[][] onTime = dataLoader.getTimeHighscores(), onCount = dataLoader.getCountHighscores();
+		String[][] onTimeName = dataLoader.getTimeNames(), onCountName = dataLoader.getCountNames();
+		HighscoreTextField_OTplayer1points.setText(onTime[2][map] + " Schafe");
+		HighscoreTextField_OTplayer2points.setText(onTime[1][map] + " Schafe");
+		HighscoreTextField_OTplayer3points.setText(onTime[0][map] + " Schafe");
+		HighscoreTextField_OTplayer1.setText(onTimeName[2][map]);
+		HighscoreTextField_OTplayer2.setText(onTimeName[1][map]);
+		HighscoreTextField_OTplayer3.setText(onTimeName[0][map]);
+		HighscoreTextField_ONplayer1points.setText(onCount[2][map] + " Sekunden");
+		HighscoreTextField_ONplayer2points.setText(onCount[1][map] + " Sekunden");
+		HighscoreTextField_ONplayer3points.setText(onCount[0][map] + " Sekunden");
+		HighscoreTextField_ONplayer1.setText(onCountName[2][map]);
+		HighscoreTextField_ONplayer2.setText(onCountName[1][map]);
+		HighscoreTextField_ONplayer3.setText(onCountName[0][map]);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setDifficultyComboBoxValue() {
+		singlePlayerComboBox_Difficulty.removeAllItems();
+		switch (dataLoader.getLevel()) {
+		case 1:
+			singlePlayerComboBox_Difficulty.addItem("level 1");
+			break;
+		case 2:
+			singlePlayerComboBox_Difficulty.addItem("level 1");
+			singlePlayerComboBox_Difficulty.addItem("level 2");
+			break;
+		case 3:
+			singlePlayerComboBox_Difficulty.addItem("level 1");
+			singlePlayerComboBox_Difficulty.addItem("level 2");
+			singlePlayerComboBox_Difficulty.addItem("level 3");
+			break;
+		default:
+			System.out.print("fehler");
+			break;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -319,6 +383,17 @@ public class Menu{
 			ComboBoxRenderer multiPlayerMapRenderer = new ComboBoxRenderer(multiPlayerSelection_Map, multiPlayerSelection_MapIcon);
 			multiPlayerComboBox_Map.setRenderer(multiPlayerMapRenderer);
 			multiPlayerComboBox_Map.setMaximumRowCount(2);
+			
+			highscoreComboBox_Map.setRenderer(singlePlayerMapRenderer);
+			highscoreComboBox_Map.setMaximumRowCount(3);
+			
+			ComboBoxRendererDifficulty singelPlayerDifficultyRenderer = new ComboBoxRendererDifficulty(-1, 3, levelTooltip);
+			singlePlayerComboBox_Difficulty.setRenderer(singelPlayerDifficultyRenderer);
+			singlePlayerComboBox_Difficulty.setMaximumRowCount(3);
+			
+			ComboBoxRendererDifficulty singelPlayerModusRenderer = new ComboBoxRendererDifficulty(-1, 3, modusTooltip);
+			singlePlayerComboBox_Modus.setRenderer(singelPlayerModusRenderer);
+			singlePlayerComboBox_Modus.setMaximumRowCount(2);
 		}
 		
 		
@@ -361,7 +436,8 @@ public class Menu{
 			  	
 			  	creditsButton_Back.setFont(basicFont);
 			  	
-			  	gameBoard_Back.setFont(basicFont);
+			  	gameBoard_MultiplayerBack.setFont(basicFont);
+			  	gameBoard_SingleplayerBack.setFont(basicFont);
 			  	
 			  	helpButton_Back.setFont(basicFont);
 			}
@@ -407,6 +483,7 @@ public class Menu{
 				gameBoard_PowerUpNamePlayer2.setFont(basicFont);
 				gameBoard_PowerUpPlayer1.setFont(basicFont);
 				gameBoard_PowerUpPlayer2.setFont(basicFont);
+				gameBoard_newHighscore.setFont(basicFont);
 			}
 			
 			{//cb
@@ -415,7 +492,8 @@ public class Menu{
 				singlePlayerComboBox_Modus.setFont(basicFont);
 				
 				multiPlayerComboBox_Map.setFont(basicFont);
-				
+
+				highscoreComboBox_Map.setFont(basicFont);
 
 			}
 			
@@ -445,7 +523,8 @@ public class Menu{
 			  	
 			  	creditsButton_Back.setBounds((width)/2 - 50 ,350,100,20);
 			  	
-			  	gameBoard_Back.setBounds((width)/2 - 50 ,(height/2) + 50,100,20);
+			  	gameBoard_MultiplayerBack.setBounds((width)/2 - 50 ,(height/2) + 50,100,20);
+			  	gameBoard_SingleplayerBack.setBounds((width)/2 - 50 ,(height/2) + 50,100,20);
 			  	
 			  	helpButton_Back.setBounds((width/2) -50, 350, 100, 50);
 			}
@@ -479,18 +558,19 @@ public class Menu{
 			
 				creditsTextfield_Options.setBounds((width)/2 - 100,0,200,50);
 				
-				helpTextField_Help.setBounds((width)/2 - 100,0,200,50);
+				helpTextField_Help.setBounds((width)/2 -20,0,200,50);
 				
 				gameBoard_Sheeps1.setBounds(20,height,50, 20);
 				gameBoard_Sheepcounter1.setBounds(70,height,50, 20);
 				gameBoard_Time.setBounds(width/2 - 100,height,200, 20);
 				gameBoard_Sheeps2.setBounds(width - 120,height,50, 20);
 				gameBoard_Sheepcounter2.setBounds(width - 70,height,50, 20);
-				gameBoard_Winner.setBounds((width)/2 - 50 ,(height/2) - 50,100,20);
+				gameBoard_Winner.setBounds((width)/2 - 100 ,(height/2) - 50,200,20);
 				gameBoard_PowerUpNamePlayer1.setBounds(220,height,100, 20);
 				gameBoard_PowerUpNamePlayer2.setBounds(width - 220,height,100, 20);
 				gameBoard_PowerUpPlayer1.setBounds(120,height,100, 20);
 				gameBoard_PowerUpPlayer2.setBounds(width - 320,height,100, 20);
+				gameBoard_newHighscore.setBounds((width)/2 - 100 ,(height/2) - 100,200,20);
 		  	}
 		  	
 		  	{//cb
@@ -499,11 +579,23 @@ public class Menu{
 		  		singlePlayerComboBox_Modus.setBounds((width)/2 - 100, 250, 200, 20);
 		  		
 		  		multiPlayerComboBox_Map.setBounds((width)/2 - 100, 100, 200, 40);
+		  		
+		  		highscoreComboBox_Map.setBounds((width)/2 + 100, 90, 100, 40);
+		  		
 		  	}
 		  	
 		  	{//ta
 		  		helpTextArea_Help.setBounds((width)/2 - 200, 100, 400, 200);
 		  		creditsTextArea_Credits.setBounds((width)/2 - 200, 100, 400, 200);
+		  	}
+		  	
+		  	{//l
+		  		 helpLabel_imageSpeed.setBounds((width)/2 - 54, 302, 16, 16);
+		  		 helpLabel_imageSlow.setBounds((width)/2 - 36, 302, 16, 16);
+		  		 helpLabel_imageDeaf.setBounds((width)/2 - 18, 302, 16, 16);
+		  		 helpLabel_imageSuperBark.setBounds((width)/2 + 2, 302, 16, 16);
+		  		 helpLabel_imageTeleport.setBounds((width)/2 + 20, 302, 16, 16);
+		  		 helpLabel_imageKonfusion.setBounds((width)/2 + 38, 302, 16, 16);
 		  	}
 		}
 		
@@ -596,36 +688,34 @@ public class Menu{
 			gameBoard_PowerUpPlayer2.setEditable(false);
 			gameBoard_PowerUpPlayer2.setBorder(BorderFactory.createEmptyBorder());
 			gameBoard_PowerUpPlayer2.setBackground(Color.WHITE);
+			gameBoard_newHighscore.setEditable(false);
+			gameBoard_newHighscore.setBorder(BorderFactory.createEmptyBorder());
+			gameBoard_newHighscore.setBackground(Color.WHITE);
+			
 		}
 		
 		{
-			gameBoard_Back.setVisible(false);
+			gameBoard_MultiplayerBack.setVisible(false);
+			gameBoard_SingleplayerBack.setVisible(false);
 			gameBoard_Winner.setVisible(false);
+			gameBoard_newHighscore.setVisible(false);
+		}
+		
+		{
+			 helpLabel_imageSpeed.setToolTipText("Schnelligkeit: Verdoppelt die Geschwindigkeit des Benutzers.");
+	  		 helpLabel_imageSlow.setToolTipText("Verlangsamung: Halbiert die Geschwindigkeit des Benutzers.");
+	  		 helpLabel_imageDeaf.setToolTipText("Taubheit(nur Schaf): Gewährt Immunität gegen bellen.");
+	  		 helpLabel_imageSuperBark.setToolTipText("Super bellen(nur Hund). gewährt eine erhöhte Reichweite des bellens.");
+	  		 helpLabel_imageTeleport.setToolTipText("Teleportation:(bei Hund) Teleportiert ein zufälliges Schaf ins Gehege. (bei Schaf) Teleportiert ein Schaf aus dem Gehege.");
+	  		 helpLabel_imageKonfusion.setToolTipText("Verwirrung: Vertauscht die Eingabebefehle des Benutzers.");
 		}
 		
 		{//alle Button actionListener
 			{//mm
 				mainMenuButton_SinglePlayer.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent arg0) {
-						if (dataLoader.isLevelUnlocked(1)) {
-							singlePlayerComboBox_Difficulty.setMaximumRowCount(1);
-							singlePlayerComboBox_Difficulty.removeAllItems();
-							singlePlayerComboBox_Difficulty.addItem("Einfach");
-						}
-						if (dataLoader.isLevelUnlocked(2)) {
-							singlePlayerComboBox_Difficulty.setMaximumRowCount(2);
-							singlePlayerComboBox_Difficulty.removeAllItems();
-							singlePlayerComboBox_Difficulty.addItem("Einfach");
-							singlePlayerComboBox_Difficulty.addItem("Mittel");
-						}
-						if (dataLoader.isLevelUnlocked(3)) {
-							singlePlayerComboBox_Difficulty.setMaximumRowCount(3);
-							singlePlayerComboBox_Difficulty.removeAllItems();
-							singlePlayerComboBox_Difficulty.addItem("Einfach");
-							singlePlayerComboBox_Difficulty.addItem("Mittel");
-							singlePlayerComboBox_Difficulty.addItem("Schwer");
-						}
+					public void actionPerformed(ActionEvent arg0) {					
+						setDifficultyComboBoxValue();
 						setCurrentLabel(panelSinglePlayer);
 					}
 				});
@@ -662,11 +752,23 @@ public class Menu{
 				});
 			}
 			
+			{
+				highscoreComboBox_Map.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						setHighscore();
+					}
+				});
+			}
+			
 			{//sp
 					singlePlayerButton_Start.addActionListener(new ActionListener() {
 					
 						public void actionPerformed(ActionEvent arg0) {
 							input.flush();
+							map = singlePlayerComboBox_Map.getSelectedIndex();
 							gameBoard_Sheepcounter2.setVisible(false);
 							gameBoard_Sheeps2.setVisible(false);
 							gameBoard_PowerUpPlayer2.setVisible(false);
@@ -675,7 +777,7 @@ public class Menu{
 							setDifficulty((String)singlePlayerComboBox_Difficulty.getSelectedItem());
 							setGameModus((String)singlePlayerComboBox_Modus.getSelectedItem());
 							level.getReferences(ai, gameBoard, timer, input, collision, menu, singlePlayerTextField_NameField.getText(), getGameModus());
-							gameBoard.loadMap(singlePlayerComboBox_Map.getSelectedIndex(), singlePlayerComboBox_Modus.getSelectedIndex(), singlePlayerComboBox_Difficulty.getSelectedIndex());
+							gameBoard.loadMap(map, singlePlayerComboBox_Modus.getSelectedIndex(), singlePlayerComboBox_Difficulty.getSelectedIndex());
 							gameBoard.Update(level);
 							gameBoard.shuffle();
 							setCurrentLabel(gameBoard);
@@ -752,15 +854,28 @@ public class Menu{
 				});
 			}
 			
-			{
-				gameBoard_Back.addActionListener(new ActionListener() {
+			{//gb
+				gameBoard_MultiplayerBack.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						setCurrentLabel(panelMainMenu);
-						gameBoard_Back.setVisible(false);
+						gameBoard_MultiplayerBack.setVisible(false);
 						gameBoard_Winner.setVisible(false);
 						
+					}
+				});
+				
+				gameBoard_SingleplayerBack.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						
+						gameBoard_SingleplayerBack.setVisible(false);
+						gameBoard_Winner.setVisible(false);
+						gameBoard_newHighscore.setVisible(false);
+						selectMapInHighscore();
+						setCurrentLabel(menu.panelHighscore);
 					}
 				});
 			}
@@ -827,6 +942,7 @@ public class Menu{
 				panelHighscore.add(HighscoreTextField_ONplayer1points);
 				panelHighscore.add(HighscoreTextField_ONplayer2points);
 				panelHighscore.add(HighscoreTextField_ONplayer3points);
+				panelHighscore.add(highscoreComboBox_Map);
 				
 			}
 			
@@ -835,6 +951,13 @@ public class Menu{
 				
 				panelHelp.add(helpTextField_Help);
 				panelHelp.add(helpTextArea_Help);
+				
+				panelHelp.add(helpLabel_imageDeaf);
+				panelHelp.add(helpLabel_imageKonfusion);
+				panelHelp.add(helpLabel_imageSlow);
+				panelHelp.add(helpLabel_imageSpeed);
+				panelHelp.add(helpLabel_imageSuperBark);
+				panelHelp.add(helpLabel_imageTeleport);
 			}
 			
 			{//gb
@@ -843,12 +966,14 @@ public class Menu{
 				gameBoard.add(gameBoard_Sheepcounter2);
 				gameBoard.add(gameBoard_Sheeps1);
 				gameBoard.add(gameBoard_Sheeps2);
-				gameBoard.add(gameBoard_Back);
+				gameBoard.add(gameBoard_MultiplayerBack);
 				gameBoard.add(gameBoard_Winner);
 				gameBoard.add(gameBoard_PowerUpNamePlayer1);
 				gameBoard.add(gameBoard_PowerUpNamePlayer2);
 				gameBoard.add(gameBoard_PowerUpPlayer1);
 				gameBoard.add(gameBoard_PowerUpPlayer2);
+				gameBoard.add(gameBoard_SingleplayerBack);
+				gameBoard.add(gameBoard_newHighscore);
 			}
 			
 		}
@@ -1023,7 +1148,14 @@ public class Menu{
 			String powerUp) {
 		this.gameBoard_PowerUpNamePlayer2.setText(powerUp);
 	}
-
+	
+	public int getMap() {
+		return this.map;
+	}
+	
+	public void selectMapInHighscore() {
+		highscoreComboBox_Map.setSelectedIndex(map);
+	}
 
 
 	@SuppressWarnings({ "serial", "rawtypes" })
@@ -1078,6 +1210,41 @@ public class Menu{
 		  }
 	 }
 	
+	@SuppressWarnings({ "serial", "rawtypes" })
+	class ComboBoxRendererDifficulty extends JLabel
+    implements ListCellRenderer {
+		int min, max;
+		String[] stringArray;
+		public ComboBoxRendererDifficulty(int min, int max, String[] stringArray) {
+			setOpaque(true);
+			this.min = min;
+			this.max = max;
+			this.stringArray = stringArray;
+		}
+		
+		 public Component getListCellRendererComponent(JList list, Object value,
+			        int index, boolean isSelected, boolean cellHasFocus) {
+			      if (isSelected) {
+			        setBackground(list.getSelectionBackground());
+			        setForeground(list.getSelectionForeground());
+			        if (min < index && index < max) {
+			        	if (cellHasFocus) {
+							
+						}
+			          list.setToolTipText(stringArray[index]);
+			        } else {
+			        	list.setToolTipText(null);
+			        }
+			      } else {
+			        setBackground(list.getBackground());
+			        setForeground(list.getForeground());
+			      }
+			      setFont(list.getFont());
+			      setText((value == null) ? "" : value.toString());
+			      return this;
+			    }
+		
+	}
 	
 	
 }

@@ -170,6 +170,17 @@ public class Level implements ILevel, ActionListener{
 			this.locked_2 = false;
 		}
 	}
+	
+	
+	private void unlockLevel(){
+		if (menu.getDataLoader().getLevel() == 2) {
+			menu.getDataLoader().setLevel(3);
+		}
+		if (menu.getDataLoader().getLevel() == 1) {
+			menu.getDataLoader().setLevel(2);
+		}
+		System.out.println("" + menu.getDataLoader().getLevel());
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		//System.out.print("test");
@@ -178,7 +189,7 @@ public class Level implements ILevel, ActionListener{
 		
 
 
-		if ((timer.getTime()%5) == 0) {
+		if ((timer.getTime()%20) == 0) {
 			if (spwaned == false) {
 				this.addPowerUp();
 				spwaned = true;
@@ -202,10 +213,11 @@ public class Level implements ILevel, ActionListener{
 			}
 			if ((timer.getTime() - time) >= 0) {
 				swingTimer.stop();
-				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_TIME);
+				boolean newHighscore = menu.getDataLoader().addHighscore(name, sheep, Constants.SPLAYER_TIME, menu.getMap());
+				unlockLevel();
 				menu.getDataLoader().saveHighscore();
 				menu.getJukeBox().stop();
-				menu.setCurrentLabel(menu.panelHighscore);
+				menu.setSinglePlayerEndScreen(name, sheep, "Schafe", newHighscore);
 			}
 			break;
 		case ONCOUNT:
@@ -217,10 +229,11 @@ public class Level implements ILevel, ActionListener{
 			menu.setGameBoardSheep1(count);
 			if (count >= sheepList.size()) {
 				swingTimer.stop();
-				menu.getDataLoader().addHighscore(name, calcHighscore(), Constants.SPLAYER_COUNT);
+				boolean newHighscore = menu.getDataLoader().addHighscore(name, time, Constants.SPLAYER_COUNT, menu.getMap());
 				menu.getDataLoader().saveHighscore();
+				unlockLevel();
 				menu.getJukeBox().stop();
-				menu.setCurrentLabel(menu.panelHighscore);
+				menu.setSinglePlayerEndScreen(name, time, "Sekunden", newHighscore);
 			}
 			break;
 		case MULTIPLAYER:

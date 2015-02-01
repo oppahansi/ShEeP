@@ -734,5 +734,28 @@ public class GameBoard extends JPanel{
 		return IMAGEMULTIPLAYERMAP2;
 	}
     
+	public static BufferedImage getImagePowerUpSpeed() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[0][0], COORDSPOWERUPICON[0][1], 16, 16);
+	}
+	
+	public static BufferedImage getImagePowerUpSlow() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[10][0], COORDSPOWERUPICON[10][1], 16, 16);
+	}
+	
+	public static BufferedImage getImagePowerUpDeaf() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[20][0], COORDSPOWERUPICON[20][1], 16, 16);
+	}
+	
+	public static BufferedImage getImagePowerUpSuperBark() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[30][0], COORDSPOWERUPICON[30][1], 16, 16);
+	}
+	
+	public static BufferedImage getImagePowerUpTeleport() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[40][0], COORDSPOWERUPICON[40][1], 16, 16);
+	}
+	
+	public static BufferedImage getImagePowerUpKonfusion() {
+		return IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[50][0], COORDSPOWERUPICON[50][1], 16, 16);
+	}
    
 }

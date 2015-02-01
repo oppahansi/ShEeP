@@ -12,4 +12,5 @@ public class Constants {
 
     public static final int LEVEL_TWO_CAP = 10;
     public static final int LEVEL_THREE_CAP = 500;
+    
 }

@@ -16,9 +16,9 @@ public class DataLoader implements IDataLoader {
       loadHighscore();
    }
 
-   @Override
-   public void addHighscore(String name, int newHighscore, int gameMod) {
-      GAMEDATA.addHighscore(name, newHighscore, gameMod);
+
+   public boolean addHighscore(String name, int newHighscore, int gameMod, int map) {
+     return GAMEDATA.addHighscore(name, newHighscore, gameMod, map);
    }
 
    public void saveHighscore() {
@@ -58,41 +58,27 @@ public class DataLoader implements IDataLoader {
       saveHighscore();
    }
 
-   public int[] getCountHighscores() {
+   public int[][] getCountHighscores() {
       return GAMEDATA.getCountHighscores();
    }
 
-   public int[] getTimeHighscores() {
+   public int[][] getTimeHighscores() {
       return GAMEDATA.getTimeHighscores();
    }
 
-   public String[] getCountNames() {
+   public String[][] getCountNames() {
       return GAMEDATA.getCountNames();
    }
 
-   public String[] getTimeNames() {
+   public String[][] getTimeNames() {
       return GAMEDATA.getTimeNames();
    }
-
-   @Override
-   public boolean isLevelUnlocked(final int level) {
-      if (level == 1) {
-         return true;
-      }
-      else if (level == 2) {
-         if (GAMEDATA.getExp() >= Constants.LEVEL_TWO_CAP) {
-            return true;
-         }
-         return false;
-      }
-      else if (level == 3) {
-         if (GAMEDATA.getExp() >= Constants.LEVEL_THREE_CAP) {
-            return true;
-         }
-         return false;
-      }
-      else {
-         return false;
-      }
+   
+   public int getLevel() {
+	   return GAMEDATA.getLevel();
+   }
+  
+   public void setLevel(int level) {
+	   GAMEDATA.setLevel(level);
    }
 }
