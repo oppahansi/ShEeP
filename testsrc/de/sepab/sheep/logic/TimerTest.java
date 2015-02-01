@@ -12,14 +12,14 @@ public class TimerTest extends Thread {
 
         int expectedTime = 10;
 
+        timer.start();
         try {
-            timer.start();
             Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        int actualTime = timer.getTime();
+        timer.stop();
+        int actualTime = timer.getStoppedTime();
 
         assertEquals("Stopped time should be 10 seconds", expectedTime, actualTime);
     }
