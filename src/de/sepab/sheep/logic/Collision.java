@@ -2,21 +2,18 @@ package de.sepab.sheep.logic;
 
 import java.util.LinkedList;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-
 import de.sepab.sheep.display.Menu;
 import de.sepab.sheep.entities.ISheep;
 import de.sepab.sheep.entities.IDog;
 import de.sepab.sheep.entities.IEntity;
 import de.sepab.sheep.entities.ICage;
-import de.sepab.sheep.entities.PowerUpIcon;
 import de.sepab.sheep.handler.Constants;
 import de.sepab.sheep.handler.IJukeBox;
 import de.sepab.sheep.handler.JukeBox;
 
 public class Collision implements ICollision{
 
-	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages,PowerUpIcons;
+	private LinkedList<IEntity> Dogs,Powers,Sheeps,Obstacles,Cages;
 	private int length,height;
 	private IJukeBox jukeBox;
 	private Menu menu;
@@ -33,7 +30,6 @@ public class Collision implements ICollision{
 		Powers = this.level.getPowerUpList();
 		Obstacles = this.level.getObstacleList();
 		Cages = this.level.getCageList();
-		PowerUpIcons = this.level.getPowerUpIconList();
 		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
 		this.menu = menu;
 	}

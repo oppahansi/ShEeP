@@ -755,9 +755,7 @@ public class Menu{
 			{
 				highscoreComboBox_Map.addActionListener(new ActionListener() {
 					
-					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
 						setHighscore();
 					}
 				});
@@ -986,7 +984,6 @@ public class Menu{
 			panelHighscore.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			panelHelp.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight());
 			
-//			gb.setBounds(0, 0, jf.getWidth(), jf.getHeight());
 		}
 		
 		{//Labels einf�gen in das Fenster
@@ -1002,9 +999,7 @@ public class Menu{
 		//startLabel initialisieren
 		setCurrentLabel(panelMainMenu);
 		
-//		jFrame.addKeyListener((Input) input);
-//		jFrame.requestFocus();
-		 
+
 		 jFrame.setVisible(true);
 	}
 
@@ -1172,19 +1167,12 @@ public class Menu{
 			  this.images = images;
 		  }
 
-		  /*
-		   * This method finds the image and text corresponding
-		   * to the selected value and returns the label, set up
-		   * to display the text and image.
-		   */
 		  public Component getListCellRendererComponent(
                      JList list,
                      Object value,
                      int index,
                      boolean isSelected,
                      boolean cellHasFocus) {
-			  //Get the selected index. (The index param isn't
-			  //always valid, so just use the value.)
 			  
 			  int selectedIndex = ((Integer)value).intValue();
 			  
@@ -1196,7 +1184,7 @@ public class Menu{
 				  setForeground(list.getForeground());
 			  }
 
-			  //Set the icon and text.  If icon was null, say so.
+
 			  ImageIcon icon = images[selectedIndex];
 			  String pet = listString[selectedIndex];
 			  setIcon(icon);
@@ -1204,8 +1192,6 @@ public class Menu{
 				  setText(pet);
 				  setFont(list.getFont());
 			  } else {
-//				  setUhOhText(pet + " (no image available)",
-//    			  list.getFont());
 			  }return this;
 		  }
 	 }

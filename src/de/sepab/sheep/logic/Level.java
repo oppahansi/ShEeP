@@ -183,13 +183,11 @@ public class Level implements ILevel, ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		//System.out.print("test");
 		timer.start();
-		//System.out.print(timer.getTime() + "");
 		
 
 
-		if ((timer.getTime()%2) == 0) {
+		if ((timer.getTime()%20) == 0) {
 			if (spwaned == false) {
 				this.addPowerUp();
 				spwaned = true;
@@ -270,9 +268,7 @@ public class Level implements ILevel, ActionListener{
 			break;
 		}
 
-		//
-		//System.out.println(this.collision.Count(0, 0, 64, 64));
-		//
+
 		
 		this.reducePowerUpTime();
 		this.unscareSheeps();
@@ -280,9 +276,6 @@ public class Level implements ILevel, ActionListener{
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
-		
-//		count++;
-//		if(timer)
 	}
 	
 	public int calcHighscore(){

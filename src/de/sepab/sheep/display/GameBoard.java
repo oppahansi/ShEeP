@@ -88,11 +88,7 @@ public class GameBoard extends JPanel{
 			
 			
 			
-			
-//											  {{0,8}, {32,8}, {64, 8}, {96,8},
-//											   {0,96}, {32,96}, {64, 96}, {96,96},
-//											   {0,136}, {32,136}, {64, 136}, {96,136},
-//											   {0,224}, {32,224}, {64, 224}, {96,224},};
+	
 	
 	
 	
@@ -146,17 +142,12 @@ public class GameBoard extends JPanel{
 	private int textureLength = 32; //tl = texture length
 	private int x = 30, y=20;
 	private int[][] cages = new int[this.x][this.y];
-//	private int background[][][] = new int[x][y][2];
 	
 	
     public void paintComponent(Graphics gr) {
     	Graphics2D g = (Graphics2D) gr;
     	g.setColor(Color.WHITE);
     	g.fill(g.getClipBounds());
-//    	
-//    	g.drawImage(imgSheep, 0, 0, 640,480,null);
-    	
-//    	paintBackground(g);
     	if (imageBackground != null) {
     		g.drawImage(imageBackground,0,0, null);
 		}
@@ -191,7 +182,6 @@ public class GameBoard extends JPanel{
     	addObstaclesToBackground(g);
     		ImageIO.write(imageBackground, "png", new File("./Hintergrund.png"));
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
     }
     
@@ -615,16 +605,7 @@ public class GameBoard extends JPanel{
     }
     
     
-//    private void paintBackground(Graphics2D g) {
-//    	for (int x = 0; x < background.length; x++) {
-//			for (int y = 0; y < background[0].length; y++) {
-//				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
-//			}
-//		}
-//    }
-    
     private void paintEntities(Graphics2D g) {
-//    	paintObstacle(g);
     	paintSheep(g);
     	paintDog(g);
     	paintPowerUp(g);
@@ -635,14 +616,6 @@ public class GameBoard extends JPanel{
     	if (level.getSheepList() != null) {
     		for (IEntity sheep : level.getSheepList()) {
         		g.drawImage(IMAGESHEEP.getSubimage(COORDSSHEEP[sheep.getSpritePos()][0], COORDSSHEEP[sheep.getSpritePos()][1], textureLength, textureLength), sheep.getPosX(), sheep.getPosY(), textureLength, textureLength, null);
-    		}
-		}
-    }
-    
-    private void paintObstacle(Graphics2D g) {
-    	if (level.getObstacleList() != null) {
-    		for (IEntity obstacle : level.getObstacleList()) {
-        		g.drawImage(IMAGEOBSTACLE.getSubimage(COORDSOBSTACLE[obstacle.getSpritePos()][0], COORDSOBSTACLE[obstacle.getSpritePos()][1], textureLength, textureLength), obstacle.getPosX(), obstacle.getPosY(), textureLength, textureLength, null);
     		}
 		}
     }
@@ -679,7 +652,6 @@ public class GameBoard extends JPanel{
     	if (level.getPowerUpIconList() != null) {
     		for (IEntity powerUpIcon : level.getPowerUpIconList()) {
 				g.drawImage(IMAGEPOWERUPICON.getSubimage(COORDSPOWERUPICON[powerUpIcon.getSpritePos()][0], COORDSPOWERUPICON[powerUpIcon.getSpritePos()][1], textureLength/2, textureLength/2), powerUpIcon.getPosX(), powerUpIcon.getPosY(), textureLength/2, textureLength/2, null);
-//				g.drawImage(IMAGEPOWERUPICON.getSubimage(0, 0, 16, 16), powerUpIcon.getPosX(), powerUpIcon.getPosY(), 16, 16, null);
     		}
 		}
     }

@@ -21,7 +21,6 @@ public class Input implements KeyListener, IInput {
 	
     private IMovement movement;
     private LinkedList<IEntity> dogList;
-    private int key;
     private boolean dog1[] = new boolean[6], dog2[] = new boolean[6];
 	private IJukeBox jukeBox;
     
@@ -87,7 +86,6 @@ public class Input implements KeyListener, IInput {
 
 	@Override
     public void keyPressed(KeyEvent e) {
-    	key = e.getKeyCode();
 //    	switch (e.getKeyCode()) {
 //    	case (KeyEvent.VK_UP):
 //    		this.movement.move(this.dogList.getFirst(), 1);
