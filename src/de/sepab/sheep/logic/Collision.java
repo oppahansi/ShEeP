@@ -194,15 +194,15 @@ public class Collision implements ICollision{
 						//COLLISION
 					   if(Powers.get(i).getType() == Constants.POWERUP_TYPE_BEAM) {
 							if (entity instanceof IDog) {
-								int sheepPosInList = RandomGenerator.getRandomNumber(1, Sheeps.size() - 1);
+								int sheepPosInList = isSheepChained();
 								level.addPowerUpIcon(Sheeps.get(sheepPosInList).getPosX() + 8, Sheeps.get(sheepPosInList).getPosY() + 8, 4);
 								if (entity == Dogs.getFirst()) {
-									Sheeps.get(sheepPosInList).setPosX(Cages.getFirst().getPosX());
-									Sheeps.get(sheepPosInList).setPosY(Cages.getFirst().getPosY());
+									Sheeps.get(sheepPosInList).setPosX(RandomGenerator.getRandomNumber(Cages.getFirst().getPosX(), ((ICage)Cages.getFirst()).getPosX2()));
+									Sheeps.get(sheepPosInList).setPosY(RandomGenerator.getRandomNumber(Cages.getFirst().getPosY(), ((ICage)Cages.getFirst()).getPosY2()));
 									menu.setGameBoard_PowerUpNamePlayer1Text("Schaf teleport");
 								} else {
-									Sheeps.get(sheepPosInList).setPosX(Cages.getLast().getPosX());
-									Sheeps.get(sheepPosInList).setPosY(Cages.getLast().getPosY());
+									Sheeps.get(sheepPosInList).setPosX(RandomGenerator.getRandomNumber(Cages.getLast().getPosX(), ((ICage)Cages.getLast()).getPosX2()));
+									Sheeps.get(sheepPosInList).setPosY(RandomGenerator.getRandomNumber(Cages.getLast().getPosY(), ((ICage)Cages.getLast()).getPosY2()));
 									menu.setGameBoard_PowerUpNamePlayer2Text("Schaf teleport");
 								}
 								Powers.remove(i);
@@ -211,10 +211,21 @@ public class Collision implements ICollision{
 							else {
 								System.out.println("Sheep -> SHEEP BEAM out");
 								for (IEntity sheep : Sheeps) {
-									if (sheep.isChained()) {
+									if (((ICage)Cages.getFirst()).getPosX2() >= sheep.getPosX() && sheep.getPosX() >= Cages.getFirst().getPosX() &&
+										((ICage)Cages.getFirst()).getPosY2() >= sheep.getPosY() && sheep.getPosY() >= Cages.getFirst().getPosY()) {
 										level.addPowerUpIcon(sheep.getPosX() + 8, sheep.getPosY() + 8, 4);
 										portSheep(sheep);
 										break;
+									}
+								}
+								if (Dogs.size() > 1) {
+									for (IEntity sheep : Sheeps) {
+										if (((ICage)Cages.getLast()).getPosX2() >= sheep.getPosX() && sheep.getPosX() >= Cages.getLast().getPosX() &&
+											((ICage)Cages.getLast()).getPosY2() >= sheep.getPosY() && sheep.getPosY() >= Cages.getLast().getPosY()) {
+											level.addPowerUpIcon(sheep.getPosX() + 8, sheep.getPosY() + 8, 4);
+											portSheep(sheep);
+											break;
+										}
 									}
 								}
 								Powers.remove(i);
@@ -291,6 +302,15 @@ public class Collision implements ICollision{
 		return false;
 	}
 	
+	
+	public int isSheepChained () {
+		int sheepPosInList = RandomGenerator.getRandomNumber(0, Sheeps.size() - 1);
+		if (!Sheeps.get(sheepPosInList).isChained()) {
+			return sheepPosInList;
+		} else {
+			return isSheepChained();
+		}
+	}
 	
 	public void portSheep(IEntity entity) {
 		int x = RandomGenerator.getRandomNumber(0, this.length -32);

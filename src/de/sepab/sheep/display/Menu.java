@@ -532,7 +532,7 @@ public class Menu{
 		  	{//alle tf Positionen
 		  		singlePlayerTextField_Singleplayer.setBounds((width)/2 - 100,0,200,50);
 			 	singlePlayerTextField_Map.setBounds((width)/2 - 100 - 40,100,40,20);
-			 	singlePlayerTextField_Difficulty.setBounds((width)/2 - 100 - 85,150,85,20);
+			 	singlePlayerTextField_Difficulty.setBounds((width)/2 - 100 - 40,150,35,20);
 			 	singlePlayerTextField_Name.setBounds((width)/2 - 100 - 45,200,45,20);
 			 	singlePlayerTextField_NameField.setBounds((width)/2 - 100,200,200,20);
 			 	singlePlayerTextField_Modus.setBounds((width)/2 - 100 - 50,250,50,20);
