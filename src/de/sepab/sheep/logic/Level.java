@@ -223,13 +223,13 @@ public class Level implements ILevel, ActionListener{
 					 ((ICage) this.cageList.getFirst()).getPosX2(),
 					 ((ICage)this.cageList.getFirst()).getPosY2());
 			menu.setGameBoardSheep1(count);
-			if (count >= sheepList.size()) {
+			if (count >= this.sheepList.size()) {
 				swingTimer.stop();
-				boolean newHighscore = menu.getDataLoader().addHighscore(name, time, Constants.SPLAYER_COUNT, menu.getMap());
+				boolean newHighscore = menu.getDataLoader().addHighscore(name, timer.getTime(), Constants.SPLAYER_COUNT, menu.getMap());
 				menu.getDataLoader().saveHighscore();
 				unlockLevel();
 				menu.getJukeBox().stop();
-				menu.setSinglePlayerEndScreen(name, time, "Sekunden", newHighscore);
+				menu.setSinglePlayerEndScreen(name, timer.getTime(), "Sekunden", newHighscore);
 			}
 			break;
 		case MULTIPLAYER:
@@ -272,10 +272,7 @@ public class Level implements ILevel, ActionListener{
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
-<<<<<<< HEAD
-=======
 		menu.setGameBoardTime(timer.getTime());
->>>>>>> master
 	}
 	
 	public int calcHighscore(){

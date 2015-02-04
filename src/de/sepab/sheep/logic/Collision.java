@@ -33,6 +33,17 @@ public class Collision implements ICollision{
 		jukeBox = new JukeBox("/de/sepab/sheep/model/sfx/powerup.wav");
 		this.menu = menu;
 	}
+	// Test Constructor
+	public Collision(LinkedList<IEntity> dogs, LinkedList<IEntity> sheeps, LinkedList<IEntity> powers,
+					 LinkedList<IEntity> obstacles, LinkedList<IEntity> cages,  int length, int height) {
+		this.Dogs = dogs;
+		this.Sheeps = sheeps;
+		this.Powers = powers;
+		this.Obstacles = obstacles;
+		this.Cages = cages;
+		this.length = length;
+		this.height = height;
+	}
 
 	public int Count(int Ax, int Ay,int Bx,int By){
 		int R=0;

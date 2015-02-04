@@ -41,7 +41,7 @@ public class GameData implements Serializable {
          if (isNewCountHighscore(newHighscore, map)) {
             countHighscores[0][map] = newHighscore;
             countNames[0][map] = name;
-            sortHighscores(countNames, countHighscores, map);
+            sortCountHighscores(countNames, countHighscores, map);
             return true;
          } else {
         	 return false;
@@ -52,7 +52,7 @@ public class GameData implements Serializable {
          if (isNewTimeHighscore(newHighscore, map)) {
             timeHighscores[0][map] = newHighscore;
             timeNames[0][map] = name;
-            sortHighscores(timeNames, timeHighscores, map);
+            sortTimeHighscores(timeNames, timeHighscores, map);
             return true;
          } else {
         	 return false;
@@ -70,7 +70,7 @@ public class GameData implements Serializable {
       return newHighscore > timeHighscores[0][map];
    }
 
-   private void sortHighscores(String[][] names, int[][] highscores, int map) {
+   private void sortTimeHighscores(String[][] names, int[][] highscores, int map) {
       for (int i = 1; i < highscores.length; i++) {
          int index = highscores[i][map];
          String indexName = names[i][map];
@@ -82,6 +82,21 @@ public class GameData implements Serializable {
          }
          highscores[j][map] = index;
          names[j][map] = indexName;
+      }
+   }
+
+   private void sortCountHighscores(String[][] names, int[][] highscores, int map) {
+      for (int n = highscores.length; n>1; n--) {
+         for(int i=0; i<n-1; i++) {
+            if(highscores[i][map] < highscores[i+1][map]) {
+               int j = highscores[i][map];
+               String s = names[i][map];
+               highscores[i][map] = highscores[i+1][map];
+               names[i][map] = names[i+1][map];
+               highscores[i+1][map] = j;
+               names[i+1][map] = s;
+            }
+         }
       }
    }
 

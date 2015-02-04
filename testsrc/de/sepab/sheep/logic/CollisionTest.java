@@ -20,7 +20,6 @@ public class CollisionTest {
 	LinkedList<IEntity> powerUpList = new LinkedList<IEntity>();
 	LinkedList<IEntity> obstacleList = new LinkedList<IEntity>();
 	LinkedList<IEntity> sheepList = new LinkedList<IEntity>();
-
 	
 	Collision c = new Collision (dogList, sheepList, powerUpList, obstacleList, cageList, 1000, 1000);
 	
