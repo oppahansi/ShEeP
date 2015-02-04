@@ -287,7 +287,6 @@ public class Collision implements ICollision{
 							jukeBox.play();
 						}
 						return true;
-						//MAGICLE AUFRUF DES POWERUP KILLERS Magic(entity,Powers.get(i){oder einfach nur i als index des zu verarbeitenden power ups})
 					}
 				}
 			}

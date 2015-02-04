@@ -163,12 +163,8 @@ public class AI implements IAI{
 	}
 
 	private void calcNextSteps(ISheep sheep) {
-		//Do sane shit here
 		if(sheep.getThoughts()[0] == 0) {
-			//
-			//Power-Up greadyness
 			int tmp = RandomGenerator.getRandomNumber(1, 4);
-			//
 			for(int i=0; i<sheep.getThoughts().length; i++) {
 				sheep.getThoughts()[i] = tmp;
 			}

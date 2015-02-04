@@ -62,20 +62,20 @@ public class Menu{
 						  	mainMenuButton_Exit = new JButton("Beenden"),
 						  	
 						  multiPlayerButton_Start = new JButton("Start"), //sp = singleplayer
-							multiPlayerButton_Back = new JButton("Zurück"),
+							multiPlayerButton_Back = new JButton("Zurï¿½ck"),
 									  	
 						  singlePlayerButton_Start = new JButton("Start"), //sp = singleplayer
-						  	singlePlayerButton_Back = new JButton("Zurück"),
+						  	singlePlayerButton_Back = new JButton("Zurï¿½ck"),
 						  	
-						  highscoreButton_Back = new JButton("Zurück"), //hs = highscore
+						  highscoreButton_Back = new JButton("Zurï¿½ck"), //hs = highscore
 						  
 						 
-						  	creditsButton_Back = new JButton("Zurück"),
+						  	creditsButton_Back = new JButton("Zurï¿½ck"),
 						  	
-						  gameBoard_MultiplayerBack = new JButton("Zurück"),
-							gameBoard_SingleplayerBack = new JButton("Zurück"),
+						  gameBoard_MultiplayerBack = new JButton("Zurï¿½ck"),
+							gameBoard_SingleplayerBack = new JButton("Zurï¿½ck"),
 						  	
-						  helpButton_Back = new JButton("Zurück");//h = help
+						  helpButton_Back = new JButton("Zurï¿½ck");//h = help
 	
 	
 	
@@ -126,11 +126,11 @@ public class Menu{
 	
 	public  JTextArea helpTextArea_Help = new JTextArea(
 			"Auf Zeit: \r\n"
-			+ "In diesem Modus versucht der Spieler soviele Schafe wie möglich in \r\n"
+			+ "In diesem Modus versucht der Spieler soviele Schafe wie mï¿½glich in \r\n"
 			+ "einer gewissen Zeit einzufangen \r\n"
 			+ "\r\n"
 			+ "Auf Anzahl: \r\n"
-			+ "In diesem Modus versucht der Spieler so schnell wie möglich eine \r\n"
+			+ "In diesem Modus versucht der Spieler so schnell wie mï¿½glich eine \r\n"
 			+ "gewisse Anzahl an schafen einzufangen \r\n"
 			+ "\r\n"
 			+ "Spieler1 : laufen: w,a,s,d bellen: b \r\n"
@@ -160,8 +160,8 @@ public class Menu{
 										   "Beende eine Karte auf Level 2 um Level 3 freizuschalten.", 
 										   "Alle Level freigeschaltet."},
 										   
-						   modusTooltip = {"In diesem Modus versucht der Spieler soviele Schafe wie möglich in einer gewissen Zeit einzufangen \r\n", 
-											 "In diesem Modus versucht der Spieler so schnell wie möglich eine gewisse Anzahl an schafen einzufangen \r\n"};
+						   modusTooltip = {"In diesem Modus versucht der Spieler soviele Schafe wie mï¿½glich in einer gewissen Zeit einzufangen \r\n", 
+											 "In diesem Modus versucht der Spieler so schnell wie mï¿½glich eine gewisse Anzahl an schafen einzufangen \r\n"};
 	
 	public  ImageIcon[] singlePlayerSelection_MapIcon = {new ImageIcon(GameBoard.getImagesingleplayermap1(0)), 
 														 new ImageIcon(GameBoard.getImagesingleplayermap2(0)), 
@@ -704,9 +704,9 @@ public class Menu{
 		{
 			 helpLabel_imageSpeed.setToolTipText("Schnelligkeit: Verdoppelt die Geschwindigkeit des Benutzers.");
 	  		 helpLabel_imageSlow.setToolTipText("Verlangsamung: Halbiert die Geschwindigkeit des Benutzers.");
-	  		 helpLabel_imageDeaf.setToolTipText("Taubheit(nur Schaf): Gewährt Immunität gegen bellen.");
-	  		 helpLabel_imageSuperBark.setToolTipText("Super bellen(nur Hund). gewährt eine erhöhte Reichweite des bellens.");
-	  		 helpLabel_imageTeleport.setToolTipText("Teleportation:(bei Hund) Teleportiert ein zufälliges Schaf ins Gehege. (bei Schaf) Teleportiert ein Schaf aus dem Gehege.");
+	  		 helpLabel_imageDeaf.setToolTipText("Taubheit(nur Schaf): Gewï¿½hrt Immunitï¿½t gegen bellen.");
+	  		 helpLabel_imageSuperBark.setToolTipText("Super bellen(nur Hund). gewï¿½hrt eine erhï¿½hte Reichweite des bellens.");
+	  		 helpLabel_imageTeleport.setToolTipText("Teleportation:(bei Hund) Teleportiert ein zufï¿½lliges Schaf ins Gehege. (bei Schaf) Teleportiert ein Schaf aus dem Gehege.");
 	  		 helpLabel_imageKonfusion.setToolTipText("Verwirrung: Vertauscht die Eingabebefehle des Benutzers.");
 		}
 		
@@ -1184,15 +1184,14 @@ public class Menu{
 				  setForeground(list.getForeground());
 			  }
 
-
 			  ImageIcon icon = images[selectedIndex];
 			  String pet = listString[selectedIndex];
 			  setIcon(icon);
 			  if (icon != null) {
 				  setText(pet);
 				  setFont(list.getFont());
-			  } else {
-			  }return this;
+			  }
+			  return this;
 		  }
 	 }
 	

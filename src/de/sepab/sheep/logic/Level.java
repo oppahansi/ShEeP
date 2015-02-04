@@ -184,8 +184,6 @@ public class Level implements ILevel, ActionListener{
 
 	public void actionPerformed(ActionEvent arg0) {
 		timer.start();
-		
-
 
 		if ((timer.getTime()%20) == 0) {
 			if (spwaned == false) {
@@ -267,8 +265,6 @@ public class Level implements ILevel, ActionListener{
 		default:
 			break;
 		}
-
-
 		
 		this.reducePowerUpTime();
 		this.unscareSheeps();
@@ -276,6 +272,10 @@ public class Level implements ILevel, ActionListener{
 		input.makeTurn();
 		ai.makeTurns();
 		gameBoard.repaint();
+<<<<<<< HEAD
+=======
+		menu.setGameBoardTime(timer.getTime());
+>>>>>>> master
 	}
 	
 	public int calcHighscore(){

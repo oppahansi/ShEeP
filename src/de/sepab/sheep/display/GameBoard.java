@@ -604,7 +604,6 @@ public class GameBoard extends JPanel{
 			
     }
     
-    
     private void paintEntities(Graphics2D g) {
     	paintSheep(g);
     	paintDog(g);
