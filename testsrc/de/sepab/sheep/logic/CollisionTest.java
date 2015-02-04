@@ -84,5 +84,26 @@ public class CollisionTest {
 		actual = (sheep1.getPosX() != 80 || sheep1.getPosY() != 80);
 		assertEquals ("Schaf wurde teleportiert", expected, actual);
 	}
+	
+	
+	@Test
+	public void testIsoccupied() {
+		dogList.add(dog1);
+		dogList.add(dog2);
+		sheepList.add(sheep1);
+		sheepList.add(sheep2);
+		sheepList.add(sheep3);
+		boolean actual = c.isoccupied(800, 800);
+		boolean expected = false;
+		assertEquals ("Standort ist besetzt", actual, expected);
+		actual = c.isoccupied(500, 500);
+		expected = true;
+		assertEquals ("Standort ist frei", actual, expected);
+		actual = c.isoccupied(600, 600);
+		expected = true;
+		assertEquals ("Standort ist frei", actual, expected);
+	
+	}
+
 
 }

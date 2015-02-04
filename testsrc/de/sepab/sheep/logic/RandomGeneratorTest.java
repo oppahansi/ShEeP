@@ -38,11 +38,7 @@ public class RandomGeneratorTest {
 	}
 	
 	
-	
-	/*Testet die Methode 1000 mal mit Erwarungswert 100 und Varianz 5 und �berp�ft die Abweichung der Zufallswerte.
-	 * Dabei werden die Abweichungen um h�chstens 5, h�chstens 10 und gr��er als 10 gez�hlt.
-	 * Mindestens 60%  d�rfen maximal um 5 abweichen und h�chstens 10% d�rfen um mehr als 10 abweichen.
-	 */
+
 
 	@Test
 	public void generateRandomNumberDistributionTest() {
