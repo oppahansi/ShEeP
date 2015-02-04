@@ -566,18 +566,9 @@ public class GameBoard extends JPanel{
     	
 			
     }
-    
-    
-//    private void paintBackground(Graphics2D g) {
-//    	for (int x = 0; x < background.length; x++) {
-//			for (int y = 0; y < background[0].length; y++) {
-//				g.drawImage(IMAGEFLOOR.getSubimage(background[x][y][0], background[x][y][1], textureLength, textureLength), x*textureLength, y*textureLength, textureLength, textureLength, null);
-//			}
-//		}
-//    }
+
     
     private void paintEntities(Graphics2D g) {
-//    	paintObstacle(g);
     	paintSheep(g);
     	paintDog(g);
     	paintPowerUp(g);
