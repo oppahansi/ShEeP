@@ -1,3 +1,5 @@
-# README #
+# ShEeP - Spiel - Repository #
 
-BLA SEP!
+Code Repository für das ShEeP(Spiel) des SEP aus dem Wintersemester 14_15.
+
+Code ist nur für Lernzwecke geeignet.
